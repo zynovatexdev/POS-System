@@ -22,5 +22,10 @@ public class IconLocation {
     public String loginNormalIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/Login_Lable.png";
     public String updateAnimatedIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/update_Animated.gif";
     public String updateNormalIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/Update_Lable.png";
+    public String doneIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/doneIcon.png";
+    public String warningIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/warningIcon.png";
+    public String errorIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/errorIcon.png";
+    public String okWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/okWhite.png";
+    public String okPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/okPurple.png";
 
 }

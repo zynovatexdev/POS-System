@@ -7,9 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import com.zx.shopmanagementsystem.notifications.DialogBox;
 
 /**
  *
@@ -30,6 +28,7 @@ public class Login extends javax.swing.JFrame {
 
     JDBC DB = new JDBC();
     Func func = new Func();
+    DialogBox dialogBox = new DialogBox();
     IconLocation il = new IconLocation();
 
     /**
@@ -189,40 +188,45 @@ public class Login extends javax.swing.JFrame {
 
         if (username.equals("") && password.equals("")) {
             System.out.println("All Text Empty");
-            JOptionPane.showMessageDialog(rootPane, "All Text Empty", "Empty Text", JOptionPane.WARNING_MESSAGE);
+            dialogBox.showDialogBox("WARNING!!!", "All Text Empty", "2");
+
+            //JOptionPane.showMessageDialog(rootPane, "All Text Empty", "Empty Text", JOptionPane.WARNING_MESSAGE);
         } else if (username.equals("")) {
             System.out.println("Username Empty");
-            JOptionPane.showMessageDialog(rootPane, "Username Empty", "Empty Username", JOptionPane.WARNING_MESSAGE);
+            dialogBox.showDialogBox("WARNING!!!", "Username Empty", "2");
+            //JOptionPane.showMessageDialog(rootPane, "Username Empty", "Empty Username", JOptionPane.WARNING_MESSAGE);
         } else if (password.equals("")) {
             System.out.println("Password Empty");
-            JOptionPane.showMessageDialog(rootPane, "Password Empty", "Empty Password", JOptionPane.WARNING_MESSAGE);
+            dialogBox.showDialogBox("WARNING!!!", "Password Empty", "2");
+            //JOptionPane.showMessageDialog(rootPane, "Password Empty", "Empty Password", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
-                java.sql.ResultSet rs = DB.getdata("SELECT * FROM user");
-                while (rs.next()) {
-                    String dbUsername = rs.getString("user_name");
-                    String dbPassword = rs.getString("password");
-
-                    //System.out.println("User Name : "+dbUsername+" "+"Passeord : "+dbPassword);
-                    if (!(username.equals(dbUsername) || password.equals(dbPassword))) {
-                        System.out.println("User Not Found");
-                        JOptionPane.showMessageDialog(rootPane, "User Not Found", "ERROE!!!", JOptionPane.ERROR_MESSAGE);
-                    } else if (!(username.equals(dbUsername))) {
-                        System.out.println("Username Not Found");
-                        JOptionPane.showMessageDialog(rootPane, "Username Not Found", "ERROE!!!", JOptionPane.ERROR_MESSAGE);
-                    } else if (!(password.equals(dbPassword))) {
-                        System.out.println("User Not Match");
-                        JOptionPane.showMessageDialog(rootPane, "User Not Match", "ERROE!!!", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        System.out.println("User Match");
-                        Dashboard dashboard = new Dashboard();
-                        dashboard.setVisible(true);
-                        Login.this.dispose();
-
+                java.sql.ResultSet rs = DB.getdata("SELECT * FROM user WHERE user_name = '" + username + "' && password = '" + password + "' ");
+                if (rs.next()) {
+                    System.out.println("Result Set Not Empty : Login");
+                    while (true) {
+                        System.out.println("While Running");
+                        int userRoleId = rs.getInt("user_role_id");
+                        if (userRoleId == 1) {
+                            DashboardAdmin dashboardAdmin = new DashboardAdmin();
+                            dashboardAdmin.setVisible(true);
+                            Login.this.dispose();
+                            break;
+                        } else {
+                            DashboardUser dashboardUser = new DashboardUser();
+                            dashboardUser.setVisible(true);
+                            Login.this.dispose();
+                            break;
+                        }
                     }
+                } else {
+                    System.out.println("Result Set Empty : Login");
+                    dialogBox.showDialogBox("ERROR!!!", "User Not Found", "3");
+                    //JOptionPane.showMessageDialog(rootPane, "User Not Found", "WARNING!!!", JOptionPane.WARNING_MESSAGE);
                 }
+
             } catch (Exception ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("Result set try catch : Login" + ex);
             }
         }
     }

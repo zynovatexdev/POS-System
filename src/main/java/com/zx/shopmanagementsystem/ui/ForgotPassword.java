@@ -247,6 +247,7 @@ public class ForgotPassword extends javax.swing.JFrame {
             System.out.println("Password Matching");
             try {
                 DB.putdata("UPDATE user SET password = '" + newPassword + "' WHERE user_name = '" + Username + "';");
+                JOptionPane.showMessageDialog(rootPane, "Password Updated", "Done!!!", JOptionPane.PLAIN_MESSAGE);
                 usernameTxt.setText("");
                 usernameTxt.setEditable(true);
                 newPasswordTxt.setText("");

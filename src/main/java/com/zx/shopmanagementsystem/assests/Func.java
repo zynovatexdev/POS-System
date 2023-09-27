@@ -4,9 +4,10 @@
  */
 package com.zx.shopmanagementsystem.assests;
 
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -65,4 +66,19 @@ public class Func {
             }
         });
     }
+
+    public static boolean isValidMobileNumber(String number) {
+        // Define the regular expression pattern for Sri Lankan mobile numbers
+        String regex = "^(07)\\d{8}$"; // Sri Lankan mobile numbers start with 07 followed by 8 digits
+
+        // Compile the pattern
+        Pattern pattern = Pattern.compile(regex);
+
+        // Create a Matcher object
+        Matcher matcher = pattern.matcher(number);
+
+        // Check if the input matches the pattern
+        return matcher.matches();
+    }
+
 }
