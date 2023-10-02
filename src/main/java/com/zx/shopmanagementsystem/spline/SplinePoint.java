@@ -1,4 +1,4 @@
-package raven.spline;
+package com.zx.shopmanagementsystem.spline;
 
 public class SplinePoint {
 

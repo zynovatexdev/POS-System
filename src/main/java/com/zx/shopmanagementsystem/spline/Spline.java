@@ -1,4 +1,4 @@
-package raven.spline;
+package com.zx.shopmanagementsystem.spline;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.zx.shopmanagementsystem.assests;
+package com.zx.shopmanagementsystem.chart.blankchart;
 
 import java.awt.Color;
 import java.awt.FontMetrics;

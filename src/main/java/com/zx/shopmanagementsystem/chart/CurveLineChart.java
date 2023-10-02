@@ -1,4 +1,4 @@
-package com.zx.shopmanagementsystem.components;
+package com.zx.shopmanagementsystem.chart;
 
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
@@ -24,13 +24,10 @@ import org.jdesktop.animation.timing.Animator;
 import org.jdesktop.animation.timing.TimingTarget;
 import org.jdesktop.animation.timing.TimingTargetAdapter;
 import org.jdesktop.animation.timing.interpolation.PropertySetter;
-import com.zx.shopmanagementsystem.assests.BlankPlotChart;
-import com.zx.shopmanagementsystem.assests.BlankPlotChatRender;
-import com.zx.shopmanagementsystem.assests.LegendItem;
-import com.zx.shopmanagementsystem.assests.ModelChart;
-import com.zx.shopmanagementsystem.assests.ModelLegend;
-import raven.spline.Spline;
-import raven.spline.SplinePoint;
+import com.zx.shopmanagementsystem.chart.blankchart.BlankPlotChart;
+import com.zx.shopmanagementsystem.chart.blankchart.BlankPlotChatRender;
+import com.zx.shopmanagementsystem.spline.Spline;
+import com.zx.shopmanagementsystem.spline.SplinePoint;
 
 public class CurveLineChart extends JComponent {
 

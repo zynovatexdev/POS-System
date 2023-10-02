@@ -1,4 +1,4 @@
-package com.zx.shopmanagementsystem.assests;
+package com.zx.shopmanagementsystem.shadow;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

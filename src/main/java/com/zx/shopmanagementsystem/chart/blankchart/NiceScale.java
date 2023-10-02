@@ -1,4 +1,4 @@
-package com.zx.shopmanagementsystem.assests;
+package com.zx.shopmanagementsystem.chart.blankchart;
 
 public class NiceScale {
 

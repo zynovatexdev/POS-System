@@ -27,5 +27,10 @@ public class IconLocation {
     public String errorIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/errorIcon.png";
     public String okWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/okWhite.png";
     public String okPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/okPurple.png";
+    public String uploadPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/Upload_Purple.png";
+    public String uploadWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/Upload_White.png";
+    public String profileIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/UserIcon.png";
+    public String RegisterPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/RegisterPurpleIcon.png";
+    public String RegisterWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/RegisterWhiteIcon.png";
 
 }

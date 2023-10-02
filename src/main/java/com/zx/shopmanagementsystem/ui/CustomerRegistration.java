@@ -75,7 +75,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
         customerCategoryCombo.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 500, 330, 50));
 
-        updateBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\Update_Lable.png")); // NOI18N
+        updateBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\RegisterPurpleIcon.png")); // NOI18N
         updateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateBtnMouseClicked(evt);
@@ -117,12 +117,12 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
     private void updateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(updateBtn, il.updateAnimatedIcon);
+        func.iconSetter(updateBtn, il.RegisterPurpleIcon);
     }//GEN-LAST:event_updateBtnMouseEntered
 
     private void updateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseExited
         // TODO add your handling code here:
-        func.iconSetter(updateBtn, il.updateNormalIcon);
+        func.iconSetter(updateBtn, il.RegisterWhiteIcon);
     }//GEN-LAST:event_updateBtnMouseExited
 
     private void updateBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseClicked

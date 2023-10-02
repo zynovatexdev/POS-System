@@ -4,8 +4,10 @@
  */
 package com.zx.shopmanagementsystem;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.zx.shopmanagementsystem.chart.ModelChart;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import java.awt.Color;
+import java.sql.ResultSet;
 
 /**
  *
@@ -16,8 +18,13 @@ public class Test extends javax.swing.JFrame {
     /**
      * Creates new form Test
      */
+    JDBC DB = new JDBC();
+
     public Test() {
         initComponents();
+        chart.setTitle("Income");
+        chart.addLegend("Income", Color.decode("#7b4397"), Color.decode("#dc2430"));
+
         setData();
     }
 
@@ -30,21 +37,47 @@ public class Test extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelShadow1 = new com.zx.shopmanagementsystem.panel.PanelShadow();
+        chart = new com.zx.shopmanagementsystem.chart.CurveLineChart();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 600));
+
+        panelShadow1.setBackground(new java.awt.Color(16, 18, 42));
+        panelShadow1.setColorGradient(new java.awt.Color(153, 0, 153));
+
+        chart.setForeground(new java.awt.Color(255, 255, 255));
+        chart.setFillColor(true);
+
+        javax.swing.GroupLayout panelShadow1Layout = new javax.swing.GroupLayout(panelShadow1);
+        panelShadow1.setLayout(panelShadow1Layout);
+        panelShadow1Layout.setHorizontalGroup(
+            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelShadow1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        panelShadow1Layout.setVerticalGroup(
+            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelShadow1Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 831, Short.MAX_VALUE)
+            .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 631, Short.MAX_VALUE)
+            .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -83,8 +116,30 @@ public class Test extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.zx.shopmanagementsystem.chart.CurveLineChart chart;
+    private com.zx.shopmanagementsystem.panel.PanelShadow panelShadow1;
     // End of variables declaration//GEN-END:variables
-    private void setData() {
 
+    private void setData() {
+        chart.clear();
+        /*chart.addData(new ModelChart("January", new double[]{500}));
+        chart.addData(new ModelChart("February", new double[]{600}));
+        chart.addData(new ModelChart("March", new double[]{200}));
+        chart.addData(new ModelChart("April", new double[]{480}));
+        chart.addData(new ModelChart("May", new double[]{350}));
+        chart.addData(new ModelChart("June", new double[]{450}));*/
+        try {
+            ResultSet rs = DB.getdata("SELECT DATE_FORMAT(date, '%M - %d') AS Month, SUM(price) AS Income FROM shopdb.cash_payment WHERE date BETWEEN '2023-08-01' AND '2023-09-31' GROUP BY DATE_FORMAT(date, '%M - %d');");
+            while (rs.next()) {
+                String month = rs.getString("Month");
+                int income = rs.getInt("Income");
+
+                chart.addData(new ModelChart(month, new double[]{income}));
+
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        chart.start();
     }
 }
