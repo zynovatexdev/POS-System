@@ -56,5 +56,17 @@ public class IconLocation {
     public String supplierManagementWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SupplierManagementWhite.png";
     public String userManagementPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/UserManagementPurple.png";
     public String userManagementWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/UserManagementWhite.png";
+    public String addBarcodePurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddBarcodePurple.png";
+    public String addBarcodeWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddBarcodeWhite.png";
+    public String addDiscountPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddDiscountPurple.png";
+    public String addDiscountWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddDiscountWhite.png";
+    public String addProductCategoryPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddProductCategaryPurple.png";
+    public String addProductCategoryWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddProductCategaryWhite.png";
+    public String addProductPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddProductPurple.png";
+    public String addProductWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddProductWhite.png";
+    public String addProductTypePurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddProductTypePurple.png";
+    public String addProductTypeWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddProductTypeWhite.png";
+    public String addStoreLocationPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddStoreLocationPurple.png";
+    public String addStoreLocationWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddStoreLocationWhite.png";
 
 }
