@@ -6,6 +6,7 @@ package com.zx.shopmanagementsystem.components;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import java.awt.Color;
 import javax.swing.JFrame;
 
 /**
@@ -33,6 +34,10 @@ public class Head extends javax.swing.JPanel {
 
     public void setHeaderTitle(String title) {
         titleLbl.setText(title);
+    }
+
+    public void setHeaderTextColor(String color) {
+        titleLbl.setForeground(Color.decode(color));
     }
 
     /**

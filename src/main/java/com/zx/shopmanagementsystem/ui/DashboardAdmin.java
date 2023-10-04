@@ -4,6 +4,21 @@
  */
 package com.zx.shopmanagementsystem.ui;
 
+import com.zx.shopmanagementsystem.assests.Func;
+import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.forms.Analysis;
+import com.zx.shopmanagementsystem.forms.CustomerManagement;
+import com.zx.shopmanagementsystem.forms.DebtManagement;
+import com.zx.shopmanagementsystem.forms.Help;
+import com.zx.shopmanagementsystem.forms.Home;
+import com.zx.shopmanagementsystem.forms.InventoryManagement;
+import com.zx.shopmanagementsystem.forms.InvoiceCreation;
+import com.zx.shopmanagementsystem.forms.ProductManagement;
+import com.zx.shopmanagementsystem.forms.ReportGeneration;
+import com.zx.shopmanagementsystem.forms.SupplierManagement;
+import com.zx.shopmanagementsystem.forms.UserManagement;
+import java.awt.Color;
+
 /**
  *
  * @author User
@@ -13,11 +28,17 @@ public class DashboardAdmin extends javax.swing.JFrame {
     /**
      * Creates new form Dashboard
      */
+    IconLocation il = new IconLocation();
+    Func func = new Func();
+    
     public DashboardAdmin() {
         initComponents();
-        head1.setOpaque(false);
+        setBackground(new Color(255, 255, 255, 0));
+        head1.setOpaque(true);
         head1.setHeaderTitle("Dashboard Admin");
+        head1.setHeaderTextColor("#800080");
         head1.setFrame(DashboardAdmin.this);
+        func.setForm(mainPanal, new Home());
     }
 
     /**
@@ -30,27 +51,449 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void initComponents() {
 
         head1 = new com.zx.shopmanagementsystem.components.Head();
+        menu1 = new com.raven.component.Menu();
+        customerManagementBtnLbl = new javax.swing.JLabel();
+        dashboardBtnLbl = new javax.swing.JLabel();
+        userManagementBtnLbl = new javax.swing.JLabel();
+        debtManagementBtnLbl = new javax.swing.JLabel();
+        productManagementBtnLbl = new javax.swing.JLabel();
+        inventoryManagementBtnLbl = new javax.swing.JLabel();
+        invoiceCreationBtnLbl = new javax.swing.JLabel();
+        AnalysisBtnLbl = new javax.swing.JLabel();
+        reportGenerationBtnLbl = new javax.swing.JLabel();
+        supplierManagmentBtnLbl = new javax.swing.JLabel();
+        helpBtnLbl = new javax.swing.JLabel();
+        logoutBtnLbl = new javax.swing.JLabel();
+        mainPanal = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1366, 768));
+        setResizable(false);
+
+        customerManagementBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\CustomerManagementPurple.png")); // NOI18N
+        customerManagementBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customerManagementBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                customerManagementBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                customerManagementBtnLblMouseExited(evt);
+            }
+        });
+
+        dashboardBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\DashboardPurple.png")); // NOI18N
+        dashboardBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                dashboardBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                dashboardBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                dashboardBtnLblMouseExited(evt);
+            }
+        });
+
+        userManagementBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\UserManagementPurple.png")); // NOI18N
+        userManagementBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userManagementBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                userManagementBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                userManagementBtnLblMouseExited(evt);
+            }
+        });
+
+        debtManagementBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\DebtManagementPurple.png")); // NOI18N
+        debtManagementBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                debtManagementBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                debtManagementBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                debtManagementBtnLblMouseExited(evt);
+            }
+        });
+
+        productManagementBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\ProjectManagementPurple.png")); // NOI18N
+        productManagementBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productManagementBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                productManagementBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                productManagementBtnLblMouseExited(evt);
+            }
+        });
+
+        inventoryManagementBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\InventoryManagementPurple.png")); // NOI18N
+        inventoryManagementBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                inventoryManagementBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                inventoryManagementBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                inventoryManagementBtnLblMouseExited(evt);
+            }
+        });
+
+        invoiceCreationBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\InvoiceCreationPurple.png")); // NOI18N
+        invoiceCreationBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                invoiceCreationBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                invoiceCreationBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                invoiceCreationBtnLblMouseExited(evt);
+            }
+        });
+
+        AnalysisBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AnalysisPurple.png")); // NOI18N
+        AnalysisBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AnalysisBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                AnalysisBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                AnalysisBtnLblMouseExited(evt);
+            }
+        });
+
+        reportGenerationBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\ReportGenerationPurple.png")); // NOI18N
+        reportGenerationBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                reportGenerationBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                reportGenerationBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                reportGenerationBtnLblMouseExited(evt);
+            }
+        });
+
+        supplierManagmentBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SupplierManagementPurple.png")); // NOI18N
+        supplierManagmentBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                supplierManagmentBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                supplierManagmentBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                supplierManagmentBtnLblMouseExited(evt);
+            }
+        });
+
+        helpBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\HelpPurple.png")); // NOI18N
+        helpBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                helpBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                helpBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                helpBtnLblMouseExited(evt);
+            }
+        });
+
+        logoutBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\LogoutPurple.png")); // NOI18N
+        logoutBtnLbl.setPreferredSize(new java.awt.Dimension(146, 52));
+        logoutBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                logoutBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                logoutBtnLblMouseExited(evt);
+            }
+        });
+
+        javax.swing.GroupLayout menu1Layout = new javax.swing.GroupLayout(menu1);
+        menu1.setLayout(menu1Layout);
+        menu1Layout.setHorizontalGroup(
+            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menu1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(userManagementBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 339, Short.MAX_VALUE)
+                    .addComponent(customerManagementBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dashboardBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(debtManagementBtnLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inventoryManagementBtnLbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(supplierManagmentBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(productManagementBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(invoiceCreationBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(reportGenerationBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(AnalysisBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(helpBtnLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(menu1Layout.createSequentialGroup()
+                .addGap(99, 99, 99)
+                .addComponent(logoutBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        menu1Layout.setVerticalGroup(
+            menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(dashboardBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(userManagementBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(customerManagementBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(supplierManagmentBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(debtManagementBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(productManagementBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(inventoryManagementBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(invoiceCreationBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(reportGenerationBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(AnalysisBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(helpBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(logoutBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
+        );
+
+        mainPanal.setBackground(new java.awt.Color(255, 255, 255));
+        mainPanal.setPreferredSize(new java.awt.Dimension(1015, 738));
+        mainPanal.setLayout(new java.awt.BorderLayout());
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(head1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(head1, javax.swing.GroupLayout.PREFERRED_SIZE, 1009, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addComponent(mainPanal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(head1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 270, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(mainPanal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void dashboardBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(dashboardBtnLbl, il.dashboardWhiteIcon);
+    }//GEN-LAST:event_dashboardBtnLblMouseEntered
+    
+    private void dashboardBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(dashboardBtnLbl, il.dashboardPurpleIcon);
+    }//GEN-LAST:event_dashboardBtnLblMouseExited
+    
+    private void userManagementBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userManagementBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(userManagementBtnLbl, il.userManagementWhiteIcon);
+    }//GEN-LAST:event_userManagementBtnLblMouseEntered
+    
+    private void userManagementBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userManagementBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(userManagementBtnLbl, il.userManagementPurpleIcon);
+    }//GEN-LAST:event_userManagementBtnLblMouseExited
+    
+    private void customerManagementBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerManagementBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(customerManagementBtnLbl, il.customerManagementWhiteIcon);
+    }//GEN-LAST:event_customerManagementBtnLblMouseEntered
+    
+    private void customerManagementBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerManagementBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(customerManagementBtnLbl, il.customerManagementPurpleIcon);
+    }//GEN-LAST:event_customerManagementBtnLblMouseExited
+    
+    private void supplierManagmentBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierManagmentBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(supplierManagmentBtnLbl, il.supplierManagementWhiteIcon);
+    }//GEN-LAST:event_supplierManagmentBtnLblMouseEntered
+    
+    private void supplierManagmentBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierManagmentBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(supplierManagmentBtnLbl, il.supplierManagementPurpleIcon);
+    }//GEN-LAST:event_supplierManagmentBtnLblMouseExited
+    
+    private void debtManagementBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debtManagementBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(debtManagementBtnLbl, il.debtManagemetWhiteIcon);
+    }//GEN-LAST:event_debtManagementBtnLblMouseEntered
+    
+    private void debtManagementBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debtManagementBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(debtManagementBtnLbl, il.debtManagemetPurpleIcon);
+    }//GEN-LAST:event_debtManagementBtnLblMouseExited
+    
+    private void productManagementBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productManagementBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(productManagementBtnLbl, il.productManagementWhiteIcon);
+    }//GEN-LAST:event_productManagementBtnLblMouseEntered
+    
+    private void productManagementBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productManagementBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(productManagementBtnLbl, il.productManagementPurpleIcon);
+    }//GEN-LAST:event_productManagementBtnLblMouseExited
+    
+    private void inventoryManagementBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryManagementBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(inventoryManagementBtnLbl, il.inventoryManagementWhiteIcon);
+    }//GEN-LAST:event_inventoryManagementBtnLblMouseEntered
+    
+    private void inventoryManagementBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryManagementBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(inventoryManagementBtnLbl, il.inventoryManagementPurpleIcon);
+    }//GEN-LAST:event_inventoryManagementBtnLblMouseExited
+    
+    private void invoiceCreationBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCreationBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(invoiceCreationBtnLbl, il.invoiceCreationWhiteIcon);
+    }//GEN-LAST:event_invoiceCreationBtnLblMouseEntered
+    
+    private void invoiceCreationBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCreationBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(invoiceCreationBtnLbl, il.invoiceCreationPurpleIcon);
+    }//GEN-LAST:event_invoiceCreationBtnLblMouseExited
+    
+    private void reportGenerationBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportGenerationBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(reportGenerationBtnLbl, il.reportGenerationWhiteIcon);
+    }//GEN-LAST:event_reportGenerationBtnLblMouseEntered
+    
+    private void reportGenerationBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportGenerationBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(reportGenerationBtnLbl, il.reportGenerationPurpleIcon);
+    }//GEN-LAST:event_reportGenerationBtnLblMouseExited
+    
+    private void AnalysisBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnalysisBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(AnalysisBtnLbl, il.analysisWhiteIcon);
+    }//GEN-LAST:event_AnalysisBtnLblMouseEntered
+    
+    private void AnalysisBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnalysisBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(AnalysisBtnLbl, il.analysisPurpleIcon);
+    }//GEN-LAST:event_AnalysisBtnLblMouseExited
+    
+    private void helpBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(helpBtnLbl, il.helpWhiteIcon);
+    }//GEN-LAST:event_helpBtnLblMouseEntered
+    
+    private void helpBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(helpBtnLbl, il.helpPurpleIcon);
+    }//GEN-LAST:event_helpBtnLblMouseExited
+    
+    private void logoutBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(logoutBtnLbl, il.logoutWhiteIcon);
+    }//GEN-LAST:event_logoutBtnLblMouseEntered
+    
+    private void logoutBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(logoutBtnLbl, il.logoutPurpleIcon);
+    }//GEN-LAST:event_logoutBtnLblMouseExited
+    
+    private void dashboardBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new Home());
+        head1.setHeaderTitle("Admin Dashboard");
+    }//GEN-LAST:event_dashboardBtnLblMouseClicked
+    
+    private void userManagementBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userManagementBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new UserManagement());
+        head1.setHeaderTitle("User Management");
+    }//GEN-LAST:event_userManagementBtnLblMouseClicked
+    
+    private void customerManagementBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerManagementBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new CustomerManagement());
+        head1.setHeaderTitle("Customer Management");
+    }//GEN-LAST:event_customerManagementBtnLblMouseClicked
+    
+    private void supplierManagmentBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierManagmentBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new SupplierManagement());
+        head1.setHeaderTitle("Supplier Management");
+    }//GEN-LAST:event_supplierManagmentBtnLblMouseClicked
+    
+    private void debtManagementBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debtManagementBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new DebtManagement());
+        head1.setHeaderTitle("Debt Management");
+    }//GEN-LAST:event_debtManagementBtnLblMouseClicked
+    
+    private void productManagementBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productManagementBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new ProductManagement());
+        head1.setHeaderTitle("Product Management");
+    }//GEN-LAST:event_productManagementBtnLblMouseClicked
+    
+    private void inventoryManagementBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_inventoryManagementBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new InventoryManagement());
+        head1.setHeaderTitle("Inventory Management");
+    }//GEN-LAST:event_inventoryManagementBtnLblMouseClicked
+    
+    private void invoiceCreationBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCreationBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new InvoiceCreation());
+        head1.setHeaderTitle("Invoice Management");
+    }//GEN-LAST:event_invoiceCreationBtnLblMouseClicked
+    
+    private void reportGenerationBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportGenerationBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new ReportGeneration());
+        head1.setHeaderTitle("Report Generation");
+    }//GEN-LAST:event_reportGenerationBtnLblMouseClicked
+    
+    private void AnalysisBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AnalysisBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new Analysis());
+        head1.setHeaderTitle("Analysis");
+    }//GEN-LAST:event_AnalysisBtnLblMouseClicked
+    
+    private void helpBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_helpBtnLblMouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new Help());
+        head1.setHeaderTitle("Help and Documentation");
+    }//GEN-LAST:event_helpBtnLblMouseClicked
 
     /**
      * @param args the command line arguments
@@ -89,6 +532,20 @@ public class DashboardAdmin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AnalysisBtnLbl;
+    private javax.swing.JLabel customerManagementBtnLbl;
+    private javax.swing.JLabel dashboardBtnLbl;
+    private javax.swing.JLabel debtManagementBtnLbl;
     private com.zx.shopmanagementsystem.components.Head head1;
+    private javax.swing.JLabel helpBtnLbl;
+    private javax.swing.JLabel inventoryManagementBtnLbl;
+    private javax.swing.JLabel invoiceCreationBtnLbl;
+    private javax.swing.JLabel logoutBtnLbl;
+    private javax.swing.JPanel mainPanal;
+    private com.raven.component.Menu menu1;
+    private javax.swing.JLabel productManagementBtnLbl;
+    private javax.swing.JLabel reportGenerationBtnLbl;
+    private javax.swing.JLabel supplierManagmentBtnLbl;
+    private javax.swing.JLabel userManagementBtnLbl;
     // End of variables declaration//GEN-END:variables
 }

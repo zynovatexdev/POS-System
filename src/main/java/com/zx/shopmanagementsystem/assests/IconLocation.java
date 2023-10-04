@@ -32,5 +32,29 @@ public class IconLocation {
     public String profileIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/UserIcon.png";
     public String RegisterPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/RegisterPurpleIcon.png";
     public String RegisterWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/RegisterWhiteIcon.png";
+    public String analysisPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AnalysisPurple.png";
+    public String analysisWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AnalysisWhite.png";
+    public String customerManagementPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/CustomerManagementPurple.png";
+    public String customerManagementWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/CustomerManagementWhite.png";
+    public String dashboardPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/DashboardPurple.png";
+    public String dashboardWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/DashboardWhite.png";
+    public String debtManagemetPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/DebtManagementPurple.png";
+    public String debtManagemetWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/DebtManagementWhite.png";
+    public String helpPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/HelpPurple.png";
+    public String helpWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/HelpWhite.png";
+    public String inventoryManagementPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/InventoryManagementPurple.png";
+    public String inventoryManagementWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/InventoryManagementWhite.png";
+    public String invoiceCreationPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/InvoiceCreationPurple.png";
+    public String invoiceCreationWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/InvoiceCreationWhite.png";
+    public String logoutPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/LogoutPurple.png";
+    public String logoutWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/LogoutWhite.png";
+    public String productManagementPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/ProjectManagementPurple.png";
+    public String productManagementWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/ProductManagementWhite.png";
+    public String reportGenerationPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/ReportGenerationPurple.png";
+    public String reportGenerationWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/ReportGenerationWhite.png";
+    public String supplierManagementPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SupplierManagementPurple.png";
+    public String supplierManagementWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SupplierManagementWhite.png";
+    public String userManagementPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/UserManagementPurple.png";
+    public String userManagementWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/UserManagementWhite.png";
 
 }

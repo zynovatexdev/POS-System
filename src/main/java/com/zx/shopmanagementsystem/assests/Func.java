@@ -4,10 +4,12 @@
  */
 package com.zx.shopmanagementsystem.assests;
 
+import java.awt.Panel;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
@@ -79,6 +81,13 @@ public class Func {
 
         // Check if the input matches the pattern
         return matcher.matches();
+    }
+
+    public void setForm(JComponent panal, JComponent component) {
+        panal.removeAll();
+        panal.add(component);
+        panal.repaint();
+        panal.revalidate();
     }
 
 }
