@@ -4,6 +4,9 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
+import com.zx.shopmanagementsystem.assests.Func;
+import com.zx.shopmanagementsystem.assests.IconLocation;
+
 /**
  *
  * @author User
@@ -13,6 +16,9 @@ public class CustomerManagement extends javax.swing.JPanel {
     /**
      * Creates new form Home
      */
+    Func func = new Func();
+    IconLocation il = new IconLocation();
+
     public CustomerManagement() {
         initComponents();
     }
@@ -26,29 +32,64 @@ public class CustomerManagement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addCustomerCategoryBtnLbl = new javax.swing.JLabel();
+        addCustomerBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        addCustomerCategoryBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddCustomerCategoryPurpleIcon.png")); // NOI18N
+        addCustomerCategoryBtnLbl.setPreferredSize(new java.awt.Dimension(259, 36));
+        addCustomerCategoryBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addCustomerCategoryBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addCustomerCategoryBtnLblMouseExited(evt);
+            }
+        });
+        add(addCustomerCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 135, 259, 36));
+
+        addCustomerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddCustomerPurpleIcon.png")); // NOI18N
+        addCustomerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addCustomerBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addCustomerBtnLblMouseExited(evt);
+            }
+        });
+        add(addCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 136, 175, 36));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\CustomerManagement.png")); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(iconLbl)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(iconLbl)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
+        add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addCustomerBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(addCustomerBtnLbl, il.addCustomerWhiteIcon);
+    }//GEN-LAST:event_addCustomerBtnLblMouseEntered
+
+    private void addCustomerBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(addCustomerBtnLbl, il.addCustomerPurpleIcon);
+    }//GEN-LAST:event_addCustomerBtnLblMouseExited
+
+    private void addCustomerCategoryBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerCategoryBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(addCustomerCategoryBtnLbl, il.addCustomerCategoryWhiteIcon);
+    }//GEN-LAST:event_addCustomerCategoryBtnLblMouseEntered
+
+    private void addCustomerCategoryBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerCategoryBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(addCustomerCategoryBtnLbl, il.addCustomerCategoryPurpleIcon);
+    }//GEN-LAST:event_addCustomerCategoryBtnLblMouseExited
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addCustomerBtnLbl;
+    private javax.swing.JLabel addCustomerCategoryBtnLbl;
     private javax.swing.JLabel iconLbl;
     // End of variables declaration//GEN-END:variables
 }

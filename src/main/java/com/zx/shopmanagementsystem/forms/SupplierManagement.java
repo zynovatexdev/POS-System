@@ -4,6 +4,9 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
+import com.zx.shopmanagementsystem.assests.Func;
+import com.zx.shopmanagementsystem.assests.IconLocation;
+
 /**
  *
  * @author User
@@ -13,6 +16,9 @@ public class SupplierManagement extends javax.swing.JPanel {
     /**
      * Creates new form Home
      */
+    Func func = new Func();
+    IconLocation il = new IconLocation();
+
     public SupplierManagement() {
         initComponents();
     }
@@ -26,29 +32,41 @@ public class SupplierManagement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        addSupplierBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        addSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddSupplierPurpleIcon.png")); // NOI18N
+        addSupplierBtnLbl.setPreferredSize(new java.awt.Dimension(214, 36));
+        addSupplierBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addSupplierBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addSupplierBtnLblMouseExited(evt);
+            }
+        });
+        add(addSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\SupplierManagement.png")); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(iconLbl)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(iconLbl)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
+        add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addSupplierBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSupplierBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(addSupplierBtnLbl, il.addSupplierWhiteIcon);
+    }//GEN-LAST:event_addSupplierBtnLblMouseEntered
+
+    private void addSupplierBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSupplierBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(addSupplierBtnLbl, il.addSupplierPurpleIcon);
+    }//GEN-LAST:event_addSupplierBtnLblMouseExited
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addSupplierBtnLbl;
     private javax.swing.JLabel iconLbl;
     // End of variables declaration//GEN-END:variables
 }

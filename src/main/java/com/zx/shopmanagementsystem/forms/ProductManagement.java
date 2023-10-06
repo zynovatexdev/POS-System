@@ -45,7 +45,6 @@ public class ProductManagement extends javax.swing.JPanel {
 
         addProductTypeBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductTypePurple.png")); // NOI18N
         addProductTypeBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addProductTypeBtnLbl.setPreferredSize(new java.awt.Dimension(202, 90));
         addProductTypeBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addProductTypeBtnLblMouseEntered(evt);
@@ -58,7 +57,6 @@ public class ProductManagement extends javax.swing.JPanel {
 
         addProductBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductPurple.png")); // NOI18N
         addProductBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addProductBtnLbl.setPreferredSize(new java.awt.Dimension(202, 90));
         addProductBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addProductBtnLblMouseEntered(evt);
@@ -118,7 +116,7 @@ public class ProductManagement extends javax.swing.JPanel {
         add(addStoreLocationBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, -1, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ProductManagement.png")); // NOI18N
-        add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1015, 738));
     }// </editor-fold>//GEN-END:initComponents
 
     private void addProductBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseEntered
