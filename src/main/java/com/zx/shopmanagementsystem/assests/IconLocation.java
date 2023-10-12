@@ -76,5 +76,7 @@ public class IconLocation {
     public String addSupplierWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddSupplierWhiteIcon.png";
     public String addUserPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddUserPurpleIcon.png";
     public String addUserWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddUserWhiteIcon.png";
+    public String refreshPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/RefreshPurpleIcon.png";
+    public String refreshWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/RefreshWhiteIcon.png";
 
 }

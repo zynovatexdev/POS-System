@@ -6,6 +6,10 @@ package com.zx.shopmanagementsystem.forms;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.table.TableCustom;
+import com.zx.shopmanagementsystem.ui.CustomerRegistration;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,9 +22,13 @@ public class CustomerManagement extends javax.swing.JPanel {
      */
     Func func = new Func();
     IconLocation il = new IconLocation();
+    JDBC DB = new JDBC();
 
     public CustomerManagement() {
         initComponents();
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        tableDataClear();
+        tableDataLoader();
     }
 
     /**
@@ -34,13 +42,15 @@ public class CustomerManagement extends javax.swing.JPanel {
 
         addCustomerCategoryBtnLbl = new javax.swing.JLabel();
         addCustomerBtnLbl = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        customerTbl = new javax.swing.JTable();
+        refreshBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addCustomerCategoryBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddCustomerCategoryPurpleIcon.png")); // NOI18N
-        addCustomerCategoryBtnLbl.setPreferredSize(new java.awt.Dimension(259, 36));
         addCustomerCategoryBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addCustomerCategoryBtnLblMouseEntered(evt);
@@ -49,10 +59,13 @@ public class CustomerManagement extends javax.swing.JPanel {
                 addCustomerCategoryBtnLblMouseExited(evt);
             }
         });
-        add(addCustomerCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 135, 259, 36));
+        add(addCustomerCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 259, 36));
 
         addCustomerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddCustomerPurpleIcon.png")); // NOI18N
         addCustomerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addCustomerBtnLblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addCustomerBtnLblMouseEntered(evt);
             }
@@ -60,7 +73,42 @@ public class CustomerManagement extends javax.swing.JPanel {
                 addCustomerBtnLblMouseExited(evt);
             }
         });
-        add(addCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 136, 175, 36));
+        add(addCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 175, 36));
+
+        customerTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Customer ID", "Name", "Address", "Phone Number", "Category"
+            }
+        ));
+        customerTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customerTblMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(customerTbl);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 940, 480));
+
+        refreshBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\RefreshPurpleIcon.png")); // NOI18N
+        refreshBtnLbl.setPreferredSize(new java.awt.Dimension(40, 40));
+        refreshBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refreshBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                refreshBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                refreshBtnLblMouseExited(evt);
+            }
+        });
+        add(refreshBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 190, -1, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\CustomerManagement.png")); // NOI18N
         iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
@@ -87,9 +135,73 @@ public class CustomerManagement extends javax.swing.JPanel {
         func.iconSetter(addCustomerCategoryBtnLbl, il.addCustomerCategoryPurpleIcon);
     }//GEN-LAST:event_addCustomerCategoryBtnLblMouseExited
 
+    private void addCustomerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerBtnLblMouseClicked
+        // TODO add your handling code here:
+        CustomerRegistration cr = new CustomerRegistration();
+        cr.setVisible(true);
+    }//GEN-LAST:event_addCustomerBtnLblMouseClicked
+
+    private void customerTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTblMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_customerTblMouseClicked
+
+    private void refreshBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(refreshBtnLbl, il.refreshWhiteIcon);
+    }//GEN-LAST:event_refreshBtnLblMouseEntered
+
+    private void refreshBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(refreshBtnLbl, il.refreshPurpleIcon);
+    }//GEN-LAST:event_refreshBtnLblMouseExited
+
+    private void refreshBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseClicked
+        // TODO add your handling code here:
+        tableDataClear();
+        tableDataLoader();
+    }//GEN-LAST:event_refreshBtnLblMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addCustomerBtnLbl;
     private javax.swing.JLabel addCustomerCategoryBtnLbl;
+    private javax.swing.JTable customerTbl;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel refreshBtnLbl;
     // End of variables declaration//GEN-END:variables
+
+    private void tableDataLoader() {
+        try {
+            java.sql.ResultSet rs = DB.getdata("SELECT * FROM customer");
+            while (rs.next()) {
+                String customerId = String.valueOf(rs.getInt("customer_id"));
+                String customerName = String.valueOf(rs.getString("customer_name"));
+                String customerAddress = String.valueOf(rs.getString("customer_address"));
+                String customerPhone = String.valueOf(rs.getString("customer_phone"));
+                String customerCategoryId = String.valueOf(rs.getString("category_id"));
+
+//                System.out.println("User ID" + userId);
+//                System.out.println("User Name" + userName);
+//                System.out.println("Full Name" + fullName);
+                String table_data[] = {customerId, customerName, customerAddress, customerPhone, customerCategoryId};
+                DefaultTableModel table = (DefaultTableModel) customerTbl.getModel();
+                table.addRow(table_data);
+
+            }
+        } catch (Exception ex) {
+            System.out.println("User Management Table Data Loader : " + ex);
+        }
+    }
+
+    private void tableDataClear() {
+        try {
+            while (0 <= customerTbl.getRowCount()) {
+                DefaultTableModel table = (DefaultTableModel) customerTbl.getModel();
+                table.removeRow(customerTbl.getRowCount() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("User Management Table Data Clear : " + e);
+        }
+    }
 }

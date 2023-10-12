@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="undecorated" type="boolean" value="true"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="true"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="userRoleLbl" min="-2" pref="258" max="-2" attributes="0"/>
+                  <Component id="passwordLbl" min="-2" pref="258" max="-2" attributes="0"/>
+                  <Component id="profilePicLbl" min="-2" pref="250" max="-2" attributes="0"/>
+                  <Component id="fullNameLbl" min="-2" pref="258" max="-2" attributes="0"/>
+                  <Component id="userNameLbl" min="-2" pref="258" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="519" max="32767" attributes="0"/>
+          </Group>
+          <Component id="head1" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="head1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+              <Component id="userRoleLbl" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="userNameLbl" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="fullNameLbl" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="passwordLbl" min="-2" pref="40" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="profilePicLbl" min="-2" pref="250" max="-2" attributes="0"/>
+              <EmptySpace pref="25" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="userNameLbl">
+    </Component>
+    <Component class="javax.swing.JLabel" name="fullNameLbl">
+    </Component>
+    <Component class="javax.swing.JLabel" name="profilePicLbl">
+    </Component>
+    <Component class="javax.swing.JLabel" name="userRoleLbl">
+    </Component>
+    <Component class="javax.swing.JLabel" name="passwordLbl">
+    </Component>
+    <Component class="com.zx.shopmanagementsystem.components.Head" name="head1">
+      <Properties>
+        <Property name="headerTextColor" type="java.lang.String" value="#000000"/>
+        <Property name="headerTitle" type="java.lang.String" value="User Details"/>
+      </Properties>
+    </Component>
+  </SubComponents>
+</Form>

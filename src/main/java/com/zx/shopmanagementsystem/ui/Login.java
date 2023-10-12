@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.components.SplashPanal;
 import com.zx.shopmanagementsystem.notifications.DialogBox;
 
 /**
@@ -208,14 +209,16 @@ public class Login extends javax.swing.JFrame {
                         System.out.println("While Running");
                         int userRoleId = rs.getInt("user_role_id");
                         if (userRoleId == 1) {
+                            Login.this.dispose();
+                            new SplashPanal(null, true).setVisible(true);
                             DashboardAdmin dashboardAdmin = new DashboardAdmin();
                             dashboardAdmin.setVisible(true);
-                            Login.this.dispose();
                             break;
                         } else {
+                            Login.this.dispose();
+                            new SplashPanal(null, true).setVisible(true);
                             DashboardUser dashboardUser = new DashboardUser();
                             dashboardUser.setVisible(true);
-                            Login.this.dispose();
                             break;
                         }
                     }

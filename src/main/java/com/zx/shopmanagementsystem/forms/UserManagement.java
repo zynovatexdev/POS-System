@@ -6,6 +6,11 @@ package com.zx.shopmanagementsystem.forms;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.table.TableCustom;
+import com.zx.shopmanagementsystem.ui.UserDetails;
+import com.zx.shopmanagementsystem.ui.UserRegistration;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,9 +23,14 @@ public class UserManagement extends javax.swing.JPanel {
      */
     Func func = new Func();
     IconLocation il = new IconLocation();
+    UserRegistration ur = new UserRegistration();
+    JDBC DB = new JDBC();
 
     public UserManagement() {
         initComponents();
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        tableDataClear();
+        tableDataLoader();
     }
 
     /**
@@ -33,14 +43,19 @@ public class UserManagement extends javax.swing.JPanel {
     private void initComponents() {
 
         addUserBtnIcon = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        userTbl = new javax.swing.JTable();
+        refreshBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addUserBtnIcon.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddUserPurpleIcon.png")); // NOI18N
-        addUserBtnIcon.setPreferredSize(new java.awt.Dimension(214, 36));
         addUserBtnIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addUserBtnIconMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addUserBtnIconMouseEntered(evt);
             }
@@ -49,6 +64,40 @@ public class UserManagement extends javax.swing.JPanel {
             }
         });
         add(addUserBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+
+        userTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "User ID", "User Name", "Full Name"
+            }
+        ));
+        userTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userTblMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(userTbl);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 950, 480));
+
+        refreshBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\RefreshPurpleIcon.png")); // NOI18N
+        refreshBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                refreshBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                refreshBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                refreshBtnLblMouseExited(evt);
+            }
+        });
+        add(refreshBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 190, -1, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\UserManagement.png")); // NOI18N
         iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
@@ -65,8 +114,76 @@ public class UserManagement extends javax.swing.JPanel {
         func.iconSetter(addUserBtnIcon, il.addUserPurpleIcon);
     }//GEN-LAST:event_addUserBtnIconMouseExited
 
+    private void addUserBtnIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserBtnIconMouseClicked
+        // TODO add your handling code here:
+        ur.setVisible(true);
+    }//GEN-LAST:event_addUserBtnIconMouseClicked
+
+    private void refreshBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(refreshBtnLbl, il.refreshWhiteIcon);
+    }//GEN-LAST:event_refreshBtnLblMouseEntered
+
+    private void refreshBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(refreshBtnLbl, il.refreshPurpleIcon);
+    }//GEN-LAST:event_refreshBtnLblMouseExited
+
+    private void refreshBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseClicked
+        // TODO add your handling code here:
+        tableDataClear();
+        tableDataLoader();
+    }//GEN-LAST:event_refreshBtnLblMouseClicked
+
+    private void userTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTblMouseClicked
+        // TODO add your handling code here:
+        int row = userTbl.getSelectedRow();
+        int userID = Integer.parseInt((String) userTbl.getModel().getValueAt(row, 0));
+        UserDetails ud = new UserDetails();
+        ud.setVisible(true);
+        ud.dataLoad(userID);
+
+    }//GEN-LAST:event_userTblMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addUserBtnIcon;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel refreshBtnLbl;
+    private javax.swing.JTable userTbl;
     // End of variables declaration//GEN-END:variables
+
+    private void tableDataLoader() {
+        try {
+            java.sql.ResultSet rs = DB.getdata("SELECT * FROM user");
+            while (rs.next()) {
+                String userId = String.valueOf(rs.getInt("user_id"));
+                String userName = String.valueOf(rs.getString("user_name"));
+                String fullName = String.valueOf(rs.getString("full_name"));
+
+                System.out.println("User ID" + userId);
+                System.out.println("User Name" + userName);
+                System.out.println("Full Name" + fullName);
+
+                String table_data[] = {userId, userName, fullName};
+                DefaultTableModel table = (DefaultTableModel) userTbl.getModel();
+                table.addRow(table_data);
+
+            }
+        } catch (Exception ex) {
+            System.out.println("User Management Table Data Loader : " + ex);
+        }
+    }
+
+    private void tableDataClear() {
+        try {
+            while (0 <= userTbl.getRowCount()) {
+                DefaultTableModel table = (DefaultTableModel) userTbl.getModel();
+                table.removeRow(userTbl.getRowCount() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("User Management Table Data Clear : " + e);
+        }
+    }
+
 }

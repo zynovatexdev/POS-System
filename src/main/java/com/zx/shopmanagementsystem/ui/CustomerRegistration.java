@@ -106,7 +106,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
         customerIdLbl.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
         customerIdLbl.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(customerIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 65, 150, 30));
+        getContentPane().add(customerIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 68, 150, 30));
 
         iconLable.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Customer_Registration.png")); // NOI18N
         getContentPane().add(iconLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -117,12 +117,12 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
     private void updateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(updateBtn, il.RegisterPurpleIcon);
+        func.iconSetter(updateBtn, il.RegisterWhiteIcon);
     }//GEN-LAST:event_updateBtnMouseEntered
 
     private void updateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseExited
         // TODO add your handling code here:
-        func.iconSetter(updateBtn, il.RegisterWhiteIcon);
+        func.iconSetter(updateBtn, il.RegisterPurpleIcon);
     }//GEN-LAST:event_updateBtnMouseExited
 
     private void updateBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseClicked
@@ -237,7 +237,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
                     java.sql.ResultSet rs = DB.getdata("SELECT * FROM customer_category WHERE customer_type = '" + customerCategory + "'");
                     while (rs.next()) {
                         int customerCategoryId = rs.getInt("customer_category_id");
-                        DB.putdata("INSERT INTO customer (customer_id, customer_name, customer_address, customer_phone, customer_status) VALUES ('" + newCusId + "','" + customerName + "','" + customerAddress + "','" + customerNumber + "','" + customerCategoryId + "')");
+                        DB.putdata("INSERT INTO customer (customer_id, customer_name, customer_address, customer_phone, category_id) VALUES ('" + newCusId + "','" + customerName + "','" + customerAddress + "','" + customerNumber + "','" + customerCategoryId + "')");
                         System.out.println("Data Written");
                         JOptionPane.showMessageDialog(null, "Saved", "Saved Customer", JOptionPane.PLAIN_MESSAGE);
                         getMaxValue();
