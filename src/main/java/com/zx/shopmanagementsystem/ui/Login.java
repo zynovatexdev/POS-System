@@ -8,7 +8,7 @@ import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.components.SplashPanal;
-import com.zx.shopmanagementsystem.notifications.DialogBox;
+import com.zx.shopmanagementsystem.notifications.MessageDialog;
 
 /**
  *
@@ -29,7 +29,6 @@ public class Login extends javax.swing.JFrame {
 
     JDBC DB = new JDBC();
     Func func = new Func();
-    DialogBox dialogBox = new DialogBox();
     IconLocation il = new IconLocation();
 
     /**
@@ -41,11 +40,11 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        usernameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         showPasswordLbl = new javax.swing.JLabel();
-        passwordTxt = new com.zx.shopmanagementsystem.components.RoundedPassword();
         loginLbl = new javax.swing.JLabel();
         forgotPasswordLbl = new javax.swing.JLabel();
+        usernameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
+        passwordTxt = new com.zx.shopmanagementsystem.components.RoundedPassword();
         head1 = new com.zx.shopmanagementsystem.components.Head();
         iconLbl = new javax.swing.JLabel();
 
@@ -54,10 +53,6 @@ public class Login extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        usernameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        usernameTxt.setHintText("Enter your username\n");
-        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, 480, 50));
 
         showPasswordLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\HidePassword.png")); // NOI18N
         showPasswordLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -73,10 +68,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(showPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 410, -1, 30));
-
-        passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        passwordTxt.setHintText("Enter your password");
-        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, 480, 50));
 
         loginLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\Login_Lable.png")); // NOI18N
         loginLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -100,6 +91,16 @@ public class Login extends javax.swing.JFrame {
             }
         });
         getContentPane().add(forgotPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(577, 576, 190, 30));
+
+        usernameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        usernameTxt.setHintText("Enter Username");
+        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, 480, 50));
+
+        passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, 480, 50));
+
+        head1.setHeaderTextColor("#000000");
+        head1.setHeaderTitle("User Login");
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\User_Login.png")); // NOI18N
@@ -184,21 +185,22 @@ public class Login extends javax.swing.JFrame {
     }
 
     private void login() {
+        MessageDialog DialogBox = new MessageDialog(this);
         String username = usernameTxt.getText();
         String password = passwordTxt.getText();
 
         if (username.equals("") && password.equals("")) {
             System.out.println("All Text Empty");
-            dialogBox.showDialogBox("WARNING!!!", "All Text Empty", "2");
+            DialogBox.showMessage("WARNING!!!", "All Text Empty", 2);
 
             //JOptionPane.showMessageDialog(rootPane, "All Text Empty", "Empty Text", JOptionPane.WARNING_MESSAGE);
         } else if (username.equals("")) {
             System.out.println("Username Empty");
-            dialogBox.showDialogBox("WARNING!!!", "Username Empty", "2");
+            DialogBox.showMessage("WARNING!!!", "Username Empty", 2);
             //JOptionPane.showMessageDialog(rootPane, "Username Empty", "Empty Username", JOptionPane.WARNING_MESSAGE);
         } else if (password.equals("")) {
             System.out.println("Password Empty");
-            dialogBox.showDialogBox("WARNING!!!", "Password Empty", "2");
+            DialogBox.showMessage("WARNING!!!", "Password Empty", 2);
             //JOptionPane.showMessageDialog(rootPane, "Password Empty", "Empty Password", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
@@ -224,7 +226,7 @@ public class Login extends javax.swing.JFrame {
                     }
                 } else {
                     System.out.println("Result Set Empty : Login");
-                    dialogBox.showDialogBox("ERROR!!!", "User Not Found", "3");
+                    DialogBox.showMessage("ERROR!!!", "User Not Found", 3);
                     //JOptionPane.showMessageDialog(rootPane, "User Not Found", "WARNING!!!", JOptionPane.WARNING_MESSAGE);
                 }
 

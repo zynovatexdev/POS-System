@@ -4,6 +4,8 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
+import com.zx.shopmanagementsystem.table.TableCustom;
+
 /**
  *
  * @author User
@@ -15,6 +17,7 @@ public class Home extends javax.swing.JPanel {
      */
     public Home() {
         initComponents();
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
     }
 
     /**
@@ -29,36 +32,54 @@ public class Home extends javax.swing.JPanel {
         panal3 = new com.zx.shopmanagementsystem.components.PanelGlowingGradient();
         panal2 = new com.zx.shopmanagementsystem.components.PanelGlowingGradient();
         panal1 = new com.zx.shopmanagementsystem.components.PanelGlowingGradient();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        homeTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panal3.setBackground(new java.awt.Color(51, 204, 255));
-        panal3.setBackgroundLight(new java.awt.Color(0, 204, 255));
-        panal3.setGradientColor1(new java.awt.Color(255, 0, 100));
-        panal3.setGradientColor2(new java.awt.Color(131, 4, 159));
+        panal3.setBackground(new java.awt.Color(114, 179, 240));
+        panal3.setBackgroundLight(new java.awt.Color(114, 179, 240));
+        panal3.setGradientColor1(new java.awt.Color(107, 1, 145));
+        panal3.setGradientColor2(new java.awt.Color(255, 255, 255));
         add(panal3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 280, 200));
 
-        panal2.setBackground(new java.awt.Color(153, 102, 255));
-        panal2.setBackgroundLight(new java.awt.Color(153, 102, 255));
-        panal2.setGradientColor1(new java.awt.Color(201, 75, 75));
-        panal2.setGradientColor2(new java.awt.Color(75, 19, 79));
+        panal2.setBackground(new java.awt.Color(175, 93, 240));
+        panal2.setBackgroundLight(new java.awt.Color(175, 93, 240));
+        panal2.setGradientColor1(new java.awt.Color(107, 1, 145));
+        panal2.setGradientColor2(new java.awt.Color(255, 255, 255));
         add(panal2, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 130, 280, 200));
 
-        panal1.setBackground(new java.awt.Color(204, 102, 255));
-        panal1.setBackgroundLight(new java.awt.Color(204, 102, 255));
-        panal1.setGradientColor1(new java.awt.Color(0, 255, 0));
-        panal1.setGradientColor2(new java.awt.Color(255, 255, 0));
+        panal1.setBackground(new java.awt.Color(182, 58, 202));
+        panal1.setBackgroundLight(new java.awt.Color(182, 58, 202));
+        panal1.setGradientColor1(new java.awt.Color(107, 1, 145));
+        panal1.setGradientColor2(new java.awt.Color(255, 255, 255));
         add(panal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 280, 200));
 
+        homeTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(homeTbl);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 930, 320));
+
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Dashboard.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable homeTbl;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JScrollPane jScrollPane1;
     private com.zx.shopmanagementsystem.components.PanelGlowingGradient panal1;
     private com.zx.shopmanagementsystem.components.PanelGlowingGradient panal2;
     private com.zx.shopmanagementsystem.components.PanelGlowingGradient panal3;

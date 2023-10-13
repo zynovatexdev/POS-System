@@ -122,12 +122,12 @@ public class Test extends javax.swing.JFrame {
 
     private void setData() {
         chart.clear();
-        /*chart.addData(new ModelChart("January", new double[]{500}));
+        chart.addData(new ModelChart("January", new double[]{500}));
         chart.addData(new ModelChart("February", new double[]{600}));
         chart.addData(new ModelChart("March", new double[]{200}));
         chart.addData(new ModelChart("April", new double[]{480}));
         chart.addData(new ModelChart("May", new double[]{350}));
-        chart.addData(new ModelChart("June", new double[]{450}));*/
+        chart.addData(new ModelChart("June", new double[]{450}));
         try {
             ResultSet rs = DB.getdata("SELECT DATE_FORMAT(date, '%M - %d') AS Month, SUM(price) AS Income FROM shopdb.cash_payment WHERE date BETWEEN '2023-08-01' AND '2023-09-31' GROUP BY DATE_FORMAT(date, '%M - %d');");
             while (rs.next()) {

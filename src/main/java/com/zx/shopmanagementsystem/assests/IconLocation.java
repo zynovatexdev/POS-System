@@ -21,6 +21,7 @@ public class IconLocation {
     public String loginAnimationIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/Login_Animation.gif";
     public String loginNormalIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/Login_Lable.png";
     public String updateAnimatedIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/update_Animated.gif";
+    public String updateWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/UpdateWhiteIcon.png";
     public String updateNormalIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/Update_Lable.png";
     public String doneIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/doneIcon.png";
     public String warningIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/warningIcon.png";
@@ -78,5 +79,14 @@ public class IconLocation {
     public String addUserWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddUserWhiteIcon.png";
     public String refreshPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/RefreshPurpleIcon.png";
     public String refreshWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/RefreshWhiteIcon.png";
+    public String deleteWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/DeleteWhiteIcon.png";
+    public String deleteRedIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/DeleteRedIcon.png";
+    public String editImageIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/EditImageIcon.png";
+    public String editUserDetailsPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/EditUserDetailsPurpleIcon.png";
+    public String editUserDetailsWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/EditUserDetailsWhiteIcon.png";
+    public String userDetailsScreen = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/User_Details.png";
+    public String editUserScreen = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/UpdateUserDetails.png";
+    public String noIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/NoIcon.png";
+    public String yesIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/YesIcon.png";
 
 }

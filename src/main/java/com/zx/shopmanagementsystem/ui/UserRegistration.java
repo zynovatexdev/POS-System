@@ -7,7 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
-import com.zx.shopmanagementsystem.notifications.DialogBox;
+import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,18 +32,20 @@ public class UserRegistration extends javax.swing.JFrame {
     Func func = new Func();
     IconLocation il = new IconLocation();
     JDBC DB = new JDBC();
-    DialogBox notification = new DialogBox();
-
+    
     String path = il.profileIcon;
     File file = null;
     FileInputStream profilePicture = null;
     int userRoleId;
     int usernameExist = 0;
-
+    
     public UserRegistration() {
         initComponents();
         head1.setFrame(UserRegistration.this);
-        func.iconSetter(profileImageLbl, path);
+        ImageIcon image = new ImageIcon(path);
+        Image img = image.getImage();
+        ImageIcon icon = new ImageIcon(img);
+        imageAvatar.setIcon(icon);
         comboLoader();
     }
 
@@ -56,16 +58,16 @@ public class UserRegistration extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        fullNameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
-        usernameTxt1 = new com.zx.shopmanagementsystem.components.RoundedText();
         hidePasswordLblBtn = new javax.swing.JLabel();
-        passwordTxt = new com.zx.shopmanagementsystem.components.RoundedPassword();
         userRoleCombo = new javax.swing.JComboBox<>();
-        head1 = new com.zx.shopmanagementsystem.components.Head();
         jLabel1 = new javax.swing.JLabel();
         chooseProPicBtnLbl = new javax.swing.JLabel();
-        profileImageLbl = new javax.swing.JLabel();
         registerBtnLbl = new javax.swing.JLabel();
+        usernameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
+        passwordTxt = new com.zx.shopmanagementsystem.components.RoundedPassword();
+        fullNameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
+        head1 = new com.zx.shopmanagementsystem.components.Head();
+        imageAvatar = new com.zx.shopmanagementsystem.components.ImageAvatar();
         iconLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,35 +75,17 @@ public class UserRegistration extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        fullNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        fullNameTxt.setHintText("Enter your full name ");
-        getContentPane().add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 300, 480, 50));
-
-        usernameTxt1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        usernameTxt1.setHintText("Enter your username\n");
-        getContentPane().add(usernameTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 90, 480, 50));
-
         hidePasswordLblBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\HidePassword.png")); // NOI18N
         hidePasswordLblBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 hidePasswordLblBtnMouseClicked(evt);
             }
         });
-        getContentPane().add(hidePasswordLblBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1210, 210, 35, 30));
-
-        passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        passwordTxt.setHintText("Enter your password");
-        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 200, 480, 50));
+        getContentPane().add(hidePasswordLblBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 200, 35, 30));
 
         userRoleCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         userRoleCombo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getContentPane().add(userRoleCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 410, 310, 50));
-
-        head1.setToolTipText("");
-        head1.setHeaderTextColor("#FFFFFF");
-        head1.setHeaderTitle("User Registratrion");
-        head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
+        getContentPane().add(userRoleCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 410, 310, 50));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\upload_icon.png")); // NOI18N
         jLabel1.setPreferredSize(new java.awt.Dimension(32, 15));
@@ -123,7 +107,6 @@ public class UserRegistration extends javax.swing.JFrame {
             }
         });
         getContentPane().add(chooseProPicBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 540, 200, 40));
-        getContentPane().add(profileImageLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 510, 100, 120));
 
         registerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\RegisterPurpleIcon.png")); // NOI18N
         registerBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -140,6 +123,23 @@ public class UserRegistration extends javax.swing.JFrame {
         });
         getContentPane().add(registerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 650, 450, 58));
 
+        usernameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        usernameTxt.setHintText("Enter User Name");
+        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 90, 480, 50));
+
+        passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 190, 480, 50));
+
+        fullNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        fullNameTxt.setHintText("Enter Full Name");
+        getContentPane().add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 310, 480, 50));
+
+        head1.setFrame(null);
+        head1.setHeaderTitle("User Registration");
+        head1.setOpaque(false);
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
+        getContentPane().add(imageAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 500, 150, 150));
+
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\User_Registration.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         iconLbl.getAccessibleContext().setAccessibleDescription("");
@@ -151,19 +151,20 @@ public class UserRegistration extends javax.swing.JFrame {
         // TODO add your handling code here:
         func.iconSetter(chooseProPicBtnLbl, il.uploadWhiteIcon);
     }//GEN-LAST:event_chooseProPicBtnLblMouseEntered
-
+    
     private void chooseProPicBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseProPicBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(chooseProPicBtnLbl, il.uploadPurpleIcon);
     }//GEN-LAST:event_chooseProPicBtnLblMouseExited
-
+    
     private void chooseProPicBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseProPicBtnLblMouseClicked
         // TODO add your handling code here:
+        MessageDialog DialogBox = new MessageDialog(this);
         JFileChooser jFile = new JFileChooser();
         jFile.setCurrentDirectory(new File(System.getProperty("user.home")));
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Image", "jpg", "png");
         jFile.addChoosableFileFilter(filter);
-
+        
         int result = jFile.showSaveDialog(null);
         //System.out.println(result);
 
@@ -176,32 +177,35 @@ public class UserRegistration extends javax.swing.JFrame {
                 path = selectedFile.getAbsolutePath();
                 ImageIcon image = new ImageIcon(path);
                 Image img = image.getImage();
-                Image newImage = img.getScaledInstance(profileImageLbl.getWidth(), profileImageLbl.getHeight(), Image.SCALE_SMOOTH);
-                ImageIcon icon = new ImageIcon(newImage);
+                //Image newImage = img.getScaledInstance(profileImageLbl.getWidth(), profileImageLbl.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(img);
 
-                profileImageLbl.setIcon(icon);
+                //profileImageLbl.setIcon(icon);
+                imageAvatar.setIcon(icon);
+                imageAvatar.setVisible(false);
+                imageAvatar.setVisible(true);
             }
         } else {
-            notification.showDialogBox("ERROR !!!", "Please Select a Image File", "3");
+            DialogBox.showMessage("Error !!! ", "Please Select a Image File", 3);
         }
-
+        
     }//GEN-LAST:event_chooseProPicBtnLblMouseClicked
-
+    
     private void registerBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnLblMouseEntered
         // TODO add your handling code here:
         func.iconSetter(registerBtnLbl, il.RegisterWhiteIcon);
     }//GEN-LAST:event_registerBtnLblMouseEntered
-
+    
     private void registerBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(registerBtnLbl, il.RegisterPurpleIcon);
     }//GEN-LAST:event_registerBtnLblMouseExited
-
+    
     private void registerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnLblMouseClicked
         // TODO add your handling code here:
         addUser();
     }//GEN-LAST:event_registerBtnLblMouseClicked
-
+    
     private void hidePasswordLblBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hidePasswordLblBtnMouseClicked
         // TODO add your handling code here:
         func.mouseClicked(hidePasswordLblBtn, passwordTxt);
@@ -248,21 +252,22 @@ public class UserRegistration extends javax.swing.JFrame {
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel hidePasswordLblBtn;
     private javax.swing.JLabel iconLbl;
+    private com.zx.shopmanagementsystem.components.ImageAvatar imageAvatar;
     private javax.swing.JLabel jLabel1;
     private com.zx.shopmanagementsystem.components.RoundedPassword passwordTxt;
-    private javax.swing.JLabel profileImageLbl;
     private javax.swing.JLabel registerBtnLbl;
     private javax.swing.JComboBox<String> userRoleCombo;
-    private com.zx.shopmanagementsystem.components.RoundedText usernameTxt1;
+    private com.zx.shopmanagementsystem.components.RoundedText usernameTxt;
     // End of variables declaration//GEN-END:variables
 
     private void addUser() {
-        String Username = usernameTxt1.getText();
+        MessageDialog DialogBox = new MessageDialog(this);
+        String Username = usernameTxt.getText();
         String Password = passwordTxt.getText();
         String fullName = fullNameTxt.getText();
         String userRole = userRoleCombo.getSelectedItem().toString();
         usernameChecker(Username);
-
+        
         try {
             profilePicture = new FileInputStream(path);
         } catch (FileNotFoundException ex) {
@@ -270,19 +275,19 @@ public class UserRegistration extends javax.swing.JFrame {
         }
         if (Username.equals("")) {
             System.out.println("User Name Empty");
-            notification.showDialogBox("WARNING", "User Name Empty", "2");
+            DialogBox.showMessage("WARNING", "User Name Empty", 2);
         } else if (Password.equals("")) {
             System.out.println("Password Empty");
-            notification.showDialogBox("WARNING", "Password Empty", "2");
+            DialogBox.showMessage("WARNING", "Password Empty", 2);
         } else if (fullName.equals("")) {
             System.out.println("Full Name Empty");
-            notification.showDialogBox("WARNING", "Full Name Empty", "2");
+            DialogBox.showMessage("WARNING", "Full Name Empty", 2);
         } else if (userRole.equals("Select Role")) {
             System.out.println("Select User Role");
-            notification.showDialogBox("WARNING", "Select a User Role", "2");
+            DialogBox.showMessage("WARNING", "Select a User Role", 2);
         } else if (usernameExist == 1) {
             System.out.println("User name exsist");
-            notification.showDialogBox("ERROR", "User name exsist", "3");
+            DialogBox.showMessage("ERROR", "User name exsist", 3);
         } else {
             try {
                 ResultSet rs = DB.getdata("SELECT role_id FROM user_role WHERE role_name = '" + userRole + "'");
@@ -290,7 +295,7 @@ public class UserRegistration extends javax.swing.JFrame {
                     while (true) {
                         userRoleId = rs.getInt("role_id");
                         PreparedStatement pst = DB.con().prepareStatement("INSERT INTO user (user_name, password, full_name, profile_pic, user_role_id) VALUES (?,?,?,?,?)");
-
+                        
                         pst.setString(1, Username);
                         pst.setString(2, Password);
                         pst.setString(3, fullName);
@@ -298,7 +303,7 @@ public class UserRegistration extends javax.swing.JFrame {
                         pst.setInt(5, userRoleId);
                         pst.executeUpdate();
                         System.out.println("Data Written");
-                        notification.showDialogBox("Success", "User Successfully Saved", "1");
+                        DialogBox.showMessage("Success", "User Successfully Saved", 1);
                         clear();
                         break;
                     }
@@ -306,10 +311,10 @@ public class UserRegistration extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(UserRegistration.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+            
         }
     }
-
+    
     private void comboLoader() {
         userRoleCombo.addItem("Select Role");
         try {
@@ -322,7 +327,7 @@ public class UserRegistration extends javax.swing.JFrame {
             Logger.getLogger(CustomerRegistration.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     private void usernameChecker(String username) {
         String sql = "SELECT * FROM user WHERE user_name=?";
         try {
@@ -339,16 +344,21 @@ public class UserRegistration extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(UserRegistration.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        
     }
-
+    
     private void clear() {
-        usernameTxt1.setText("");
+        usernameTxt.setText("");
         passwordTxt.setText("");
         fullNameTxt.setText("");
         userRoleCombo.setSelectedIndex(0);
         path = il.profileIcon;
-        func.iconSetter(profileImageLbl, path);
+        ImageIcon image = new ImageIcon(path);
+        Image img = image.getImage();
+        ImageIcon icon = new ImageIcon(img);
+        imageAvatar.setIcon(icon);
+        imageAvatar.setVisible(false);
+        imageAvatar.setVisible(true);
     }
-
+    
 }

@@ -37,7 +37,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         setBackground(new Color(255, 255, 255, 0));
         head1.setOpaque(true);
         head1.setHeaderTitle("Dashboard Admin");
-        head1.setHeaderTextColor("#800080");
+        head1.setHeaderTextColor("#ffffff");
         head1.setFrame(DashboardAdmin.this);
         func.setForm(mainPanal, new Home());
     }
@@ -66,11 +66,16 @@ public class DashboardAdmin extends javax.swing.JFrame {
         helpBtnLbl = new javax.swing.JLabel();
         logoutBtnLbl = new javax.swing.JLabel();
         mainPanal = new javax.swing.JPanel();
+        panelBorder1 = new com.raven.swing.PanelBorder();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        head1.setHeaderTextColor("#FFFFFF");
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 1360, -1));
 
         customerManagementBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\CustomerManagementPurple.png")); // NOI18N
         customerManagementBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -264,7 +269,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         menu1Layout.setVerticalGroup(
             menu1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(230, Short.MAX_VALUE)
                 .addComponent(dashboardBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
                 .addComponent(userManagementBtnLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -291,29 +296,26 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 .addGap(30, 30, 30))
         );
 
+        getContentPane().add(menu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 768));
+
         mainPanal.setBackground(new java.awt.Color(255, 255, 255));
         mainPanal.setPreferredSize(new java.awt.Dimension(1015, 738));
         mainPanal.setLayout(new java.awt.BorderLayout());
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(0, 0, 0)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(mainPanal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(head1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1015, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(head1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(mainPanal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 738, Short.MAX_VALUE)
         );
+
+        mainPanal.add(panelBorder1, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(mainPanal, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 30, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -535,7 +537,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SplashPanal(null, true).setVisible(true);
+                //new SplashPanal(null, true).setVisible(true);
 
                 new DashboardAdmin().setVisible(true);
             }
@@ -554,6 +556,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel logoutBtnLbl;
     private javax.swing.JPanel mainPanal;
     private com.raven.component.Menu menu1;
+    private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JLabel productManagementBtnLbl;
     private javax.swing.JLabel reportGenerationBtnLbl;
     private javax.swing.JLabel supplierManagmentBtnLbl;

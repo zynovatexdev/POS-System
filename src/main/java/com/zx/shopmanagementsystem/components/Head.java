@@ -53,7 +53,7 @@ public class Head extends javax.swing.JPanel {
         closeLbl = new javax.swing.JLabel();
         minimiseLbl = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 153, 255));
+        setBackground(new java.awt.Color(111, 0, 150));
 
         titleLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         titleLbl.setForeground(new java.awt.Color(255, 255, 255));

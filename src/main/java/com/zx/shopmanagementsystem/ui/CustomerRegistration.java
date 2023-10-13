@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -26,6 +27,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
     JDBC DB = new JDBC();
     Func func = new Func();
     IconLocation il = new IconLocation();
+    MessageDialog dialogBox = new MessageDialog(this);
 
     public CustomerRegistration() {
         initComponents();
@@ -219,17 +221,21 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
         //System.out.println(newCusId + " " + customerName + " " + customerNumber + " " + customerAddress + " " + customerCategory);
         if (customerName.equals("")) {
+            dialogBox.showMessage("WARNING", "Customer Name Empty", 2);
             System.out.println("Customer Name Empty");
-            JOptionPane.showMessageDialog(null, "Customer Name Empty", "WARNING", JOptionPane.WARNING_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Customer Name Empty", "WARNING", JOptionPane.WARNING_MESSAGE);
         } else if (customerNumber.equals("")) {
             System.out.println("Customer Number Empty");
-            JOptionPane.showMessageDialog(null, "Customer Number Empty", "WARNING", JOptionPane.WARNING_MESSAGE);
+            dialogBox.showMessage("WARNING", "Customer Number Empty", 2);
+            //JOptionPane.showMessageDialog(null, "Customer Number Empty", "WARNING", JOptionPane.WARNING_MESSAGE);
         } else if (customerAddress.equals("")) {
             System.out.println("Customer Address Empty");
-            JOptionPane.showMessageDialog(null, "Customer Address Empty", "WARNING", JOptionPane.WARNING_MESSAGE);
+            dialogBox.showMessage("WARNING", "Customer Address Empty", 2);
+            //JOptionPane.showMessageDialog(null, "Customer Address Empty", "WARNING", JOptionPane.WARNING_MESSAGE);
         } else if (customerCategory.equals("Select Category")) {
+            dialogBox.showMessage("WARNING", "Select Customer Category", 2);
             System.out.println("Select Customer Category");
-            JOptionPane.showMessageDialog(null, "Select a Customer Category", "WARNING", JOptionPane.WARNING_MESSAGE);
+            //JOptionPane.showMessageDialog(null, "Select a Customer Category", "WARNING", JOptionPane.WARNING_MESSAGE);
         } else {
             if (Func.isValidMobileNumber(customerNumber)) {
                 System.out.println("number valid");
@@ -239,7 +245,8 @@ public class CustomerRegistration extends javax.swing.JFrame {
                         int customerCategoryId = rs.getInt("customer_category_id");
                         DB.putdata("INSERT INTO customer (customer_id, customer_name, customer_address, customer_phone, category_id) VALUES ('" + newCusId + "','" + customerName + "','" + customerAddress + "','" + customerNumber + "','" + customerCategoryId + "')");
                         System.out.println("Data Written");
-                        JOptionPane.showMessageDialog(null, "Saved", "Saved Customer", JOptionPane.PLAIN_MESSAGE);
+                        dialogBox.showMessage("Done", "Customer Saved", 1);
+                        //JOptionPane.showMessageDialog(null, "Saved", "Saved Customer", JOptionPane.PLAIN_MESSAGE);
                         getMaxValue();
                         //System.out.println(maxCusId);
                         clearText();
@@ -251,7 +258,8 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
             } else {
                 System.out.println("number not valid");
-                JOptionPane.showMessageDialog(null, "Number Not Valid", "WARNING", JOptionPane.ERROR_MESSAGE);
+                dialogBox.showMessage("WARNING", "Number Not Valid", 2);
+                //JOptionPane.showMessageDialog(null, "Number Not Valid", "WARNING", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
