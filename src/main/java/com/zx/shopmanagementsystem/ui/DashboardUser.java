@@ -12,6 +12,7 @@ import com.zx.shopmanagementsystem.forms.Help;
 import com.zx.shopmanagementsystem.forms.Home;
 import com.zx.shopmanagementsystem.forms.InvoiceCreation;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 /**
  *
@@ -27,6 +28,7 @@ public class DashboardUser extends javax.swing.JFrame {
 
     public DashboardUser() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         setBackground(new Color(255, 255, 255, 0));
         head1.setOpaque(true);
         head1.setHeaderTitle("Dashboard User");

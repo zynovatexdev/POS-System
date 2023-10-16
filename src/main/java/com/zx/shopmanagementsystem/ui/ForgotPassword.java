@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +19,13 @@ public class ForgotPassword extends javax.swing.JFrame {
     /**
      * Creates new form ForgotPassword
      */
+    IconLocation il = new IconLocation();
+    Func func = new Func();
+    JDBC DB = new JDBC();
+
     public ForgotPassword() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         newPasswordLbl.setEnabled(false);
         newPasswordTxt.setEnabled(false);
         confirmPasswordLbl.setEnabled(false);
@@ -29,10 +35,6 @@ public class ForgotPassword extends javax.swing.JFrame {
         head1.setHeaderTitle("Forget Password");
         head1.setFrame(ForgotPassword.this);
     }
-
-    Func func = new Func();
-    IconLocation ic = new IconLocation();
-    JDBC DB = new JDBC();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -151,12 +153,12 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     private void searchIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchIconMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(searchIcon, ic.searchIconAnimated);
+        func.iconSetter(searchIcon, il.searchIconAnimated);
     }//GEN-LAST:event_searchIconMouseEntered
 
     private void searchIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchIconMouseExited
         // TODO add your handling code here:
-        func.iconSetter(searchIcon, ic.searchIconNormal);
+        func.iconSetter(searchIcon, il.searchIconNormal);
     }//GEN-LAST:event_searchIconMouseExited
 
     private void confirmPasswordLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmPasswordLblMouseEntered
@@ -226,12 +228,12 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     private void updatePasswordLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePasswordLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(updatePasswordLbl, ic.updateAnimatedIcon);
+        func.iconSetter(updatePasswordLbl, il.updateAnimatedIcon);
     }//GEN-LAST:event_updatePasswordLblMouseEntered
 
     private void updatePasswordLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePasswordLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(updatePasswordLbl, ic.updateNormalIcon);
+        func.iconSetter(updatePasswordLbl, il.updateNormalIcon);
     }//GEN-LAST:event_updatePasswordLblMouseExited
 
     private void updatePasswordLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePasswordLblMouseClicked

@@ -8,9 +8,9 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,10 +27,11 @@ public class CustomerRegistration extends javax.swing.JFrame {
     JDBC DB = new JDBC();
     Func func = new Func();
     IconLocation il = new IconLocation();
-    MessageDialog dialogBox = new MessageDialog(this);
+    DashboardAdmin da = new DashboardAdmin();
 
     public CustomerRegistration() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(CustomerRegistration.this);
         getMaxValue();
         comboLoader();
@@ -130,6 +131,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
     private void updateBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseClicked
         // TODO add your handling code here:
         addCustomer();
+        da.customerPanalRefresh();
     }//GEN-LAST:event_updateBtnMouseClicked
 
     /**
@@ -214,6 +216,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void addCustomer() {
+        MessageDialog dialogBox = new MessageDialog(this);
         String customerName = customerNameTxt.getText();
         String customerNumber = customerNumberTxt.getText();
         String customerAddress = customerAddressTxt.getText();
@@ -262,6 +265,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
                 //JOptionPane.showMessageDialog(null, "Number Not Valid", "WARNING", JOptionPane.ERROR_MESSAGE);
             }
         }
+
     }
 
     private void clearText() {

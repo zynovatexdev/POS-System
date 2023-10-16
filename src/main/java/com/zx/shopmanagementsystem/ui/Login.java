@@ -9,6 +9,7 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.components.SplashPanal;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import java.awt.Toolkit;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setOpaque(false);
         head1.setHeaderTitle("Login");
         head1.setFrame(Login.this);
@@ -51,6 +53,7 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 

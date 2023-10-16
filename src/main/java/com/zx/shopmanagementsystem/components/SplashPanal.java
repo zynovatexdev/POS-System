@@ -18,10 +18,10 @@ public class SplashPanal extends javax.swing.JDialog {
     public SplashPanal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        getContentPane().setBackground(Color.decode("#6e6b6a"));
+        getContentPane().setBackground(Color.decode("#d28df0"));
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
-    
+
     public SplashPanal() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
@@ -49,7 +49,7 @@ public class SplashPanal extends javax.swing.JDialog {
         });
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\logo.png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\zxlogo.png")); // NOI18N
 
         statusLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         statusLbl.setForeground(new java.awt.Color(199, 199, 199));
@@ -61,23 +61,23 @@ public class SplashPanal extends javax.swing.JDialog {
         curvesPanel1Layout.setHorizontalGroup(
             curvesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(curvesPanel1Layout.createSequentialGroup()
-                .addContainerGap(283, Short.MAX_VALUE)
+                .addGap(134, 134, 134)
                 .addGroup(curvesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(pro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(statusLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(281, Short.MAX_VALUE))
+                    .addComponent(statusLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         curvesPanel1Layout.setVerticalGroup(
             curvesPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(curvesPanel1Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, curvesPanel1Layout.createSequentialGroup()
+                .addContainerGap(107, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(pro, javax.swing.GroupLayout.PREFERRED_SIZE, 5, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(statusLbl)
-                .addContainerGap(94, Short.MAX_VALUE))
+                .addGap(105, 105, 105))
         );
 
         getContentPane().add(curvesPanel1, "card2");
@@ -102,11 +102,11 @@ public class SplashPanal extends javax.swing.JDialog {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-                
+
             }
         }).start();
     }//GEN-LAST:event_formWindowOpened
-    
+
     private void doTask(String taskName, int progress) throws Exception {
         statusLbl.setText(taskName);
         Thread.sleep(1000);

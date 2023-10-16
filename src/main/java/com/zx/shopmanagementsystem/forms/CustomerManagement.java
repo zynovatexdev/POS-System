@@ -8,6 +8,8 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.table.TableCustom;
+import com.zx.shopmanagementsystem.ui.CustomerCategory;
+import com.zx.shopmanagementsystem.ui.CustomerDetails;
 import com.zx.shopmanagementsystem.ui.CustomerRegistration;
 import javax.swing.table.DefaultTableModel;
 
@@ -23,6 +25,7 @@ public class CustomerManagement extends javax.swing.JPanel {
     Func func = new Func();
     IconLocation il = new IconLocation();
     JDBC DB = new JDBC();
+    CustomerCategory cc = new CustomerCategory();
 
     public CustomerManagement() {
         initComponents();
@@ -52,6 +55,9 @@ public class CustomerManagement extends javax.swing.JPanel {
 
         addCustomerCategoryBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddCustomerCategoryPurpleIcon.png")); // NOI18N
         addCustomerCategoryBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addCustomerCategoryBtnLblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addCustomerCategoryBtnLblMouseEntered(evt);
             }
@@ -96,7 +102,6 @@ public class CustomerManagement extends javax.swing.JPanel {
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 940, 480));
 
         refreshBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\RefreshPurpleIcon.png")); // NOI18N
-        refreshBtnLbl.setPreferredSize(new java.awt.Dimension(40, 40));
         refreshBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 refreshBtnLblMouseClicked(evt);
@@ -143,7 +148,11 @@ public class CustomerManagement extends javax.swing.JPanel {
 
     private void customerTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTblMouseClicked
         // TODO add your handling code here:
-
+        int row = customerTbl.getSelectedRow();
+        int userID = Integer.parseInt((String) customerTbl.getModel().getValueAt(row, 0));
+        CustomerDetails cd = new CustomerDetails();
+        cd.setVisible(true);
+        cd.dataLoad(userID);
     }//GEN-LAST:event_customerTblMouseClicked
 
     private void refreshBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseEntered
@@ -158,9 +167,13 @@ public class CustomerManagement extends javax.swing.JPanel {
 
     private void refreshBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseClicked
         // TODO add your handling code here:
-        tableDataClear();
-        tableDataLoader();
+        panalRefresh();
     }//GEN-LAST:event_refreshBtnLblMouseClicked
+
+    private void addCustomerCategoryBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerCategoryBtnLblMouseClicked
+        // TODO add your handling code here:
+        cc.setVisible(true);
+    }//GEN-LAST:event_addCustomerCategoryBtnLblMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addCustomerBtnLbl;
@@ -203,5 +216,11 @@ public class CustomerManagement extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println("User Management Table Data Clear : " + e);
         }
+    }
+
+    public void panalRefresh() {
+        tableDataClear();
+        tableDataLoader();
+        System.out.println("Function Run");
     }
 }

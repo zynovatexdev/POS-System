@@ -85,8 +85,18 @@ public class IconLocation {
     public String editUserDetailsPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/EditUserDetailsPurpleIcon.png";
     public String editUserDetailsWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/EditUserDetailsWhiteIcon.png";
     public String userDetailsScreen = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/User_Details.png";
+    public String customerDetails = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/CustomerDetails.png";
+    public String updateCustomerDetails = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/UpdateCustomerDetails.png";
     public String editUserScreen = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/UpdateUserDetails.png";
     public String noIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/NoIcon.png";
     public String yesIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/YesIcon.png";
+    public String submitPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SubmitPurpleIcon.png";
+    public String submitWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SubmitWhiteIcon.png";
+    public String deleteCustomerRedIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/DeleteCustomerRedIcon.png";
+    public String deleteCustomerWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/DeleteCustomerWhiteIcon.png";
+    public String editDetailsPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/EditDetailsPurpleIcon.png";
+    public String editDetailsWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/EditDetailsWhiteIcon.png";
+    public String zxlogo = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/zxlogo.png";
+    public String logo = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/logo.png";
 
 }

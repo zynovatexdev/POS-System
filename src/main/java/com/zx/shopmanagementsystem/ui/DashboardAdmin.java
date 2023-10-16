@@ -4,9 +4,9 @@
  */
 package com.zx.shopmanagementsystem.ui;
 
+import com.sun.java.swing.plaf.windows.resources.windows;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
-import com.zx.shopmanagementsystem.components.SplashPanal;
 import com.zx.shopmanagementsystem.forms.Analysis;
 import com.zx.shopmanagementsystem.forms.CustomerManagement;
 import com.zx.shopmanagementsystem.forms.DebtManagement;
@@ -19,6 +19,7 @@ import com.zx.shopmanagementsystem.forms.ReportGeneration;
 import com.zx.shopmanagementsystem.forms.SupplierManagement;
 import com.zx.shopmanagementsystem.forms.UserManagement;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 /**
  *
@@ -34,12 +35,14 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     public DashboardAdmin() {
         initComponents();
+
         setBackground(new Color(255, 255, 255, 0));
         head1.setOpaque(true);
         head1.setHeaderTitle("Dashboard Admin");
         head1.setHeaderTextColor("#ffffff");
-        head1.setFrame(DashboardAdmin.this);
+        head1.setFrame(this);
         func.setForm(mainPanal, new Home());
+        setIcon();
     }
 
     /**
@@ -544,6 +547,14 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
     }
 
+    public void customerPanalRefresh() {
+        CustomerManagement cm = new CustomerManagement();
+        cm.panalRefresh();
+        //func.setForm(mainPanal, new CustomerManagement());
+        // head1.setHeaderTitle("Customer Management");
+        System.out.println("Panal Refreshed");
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel AnalysisBtnLbl;
     private javax.swing.JLabel customerManagementBtnLbl;
@@ -562,4 +573,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel supplierManagmentBtnLbl;
     private javax.swing.JLabel userManagementBtnLbl;
     // End of variables declaration//GEN-END:variables
+
+    private void setIcon() {
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
+    }
+
 }

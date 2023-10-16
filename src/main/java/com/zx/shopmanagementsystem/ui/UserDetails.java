@@ -10,6 +10,7 @@ import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -39,10 +40,10 @@ public class UserDetails extends javax.swing.JFrame {
     public int userID = 0;
     String path;
     FileInputStream profilePicture = null;
-    int usernameExist = 0;
 
     public UserDetails() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(UserDetails.this);
         updateBtnLbl.setVisible(false);
         imageAvatar.setBorderSize(5);
@@ -150,7 +151,6 @@ public class UserDetails extends javax.swing.JFrame {
 
         updateImageIconBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\EditImageIcon.png")); // NOI18N
         updateImageIconBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        updateImageIconBtn.setPreferredSize(new java.awt.Dimension(48, 48));
         updateImageIconBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateImageIconBtnMouseClicked(evt);
@@ -399,7 +399,7 @@ public class UserDetails extends javax.swing.JFrame {
     }
 
     private void formEnable() {
-        userNameTxt.setEditable(true);
+        //userNameTxt.setEditable(true);
         passwordTxt.setEditable(true);
         fullNameTxt.setEditable(true);
         roleCombo.setEnabled(true);
@@ -412,7 +412,6 @@ public class UserDetails extends javax.swing.JFrame {
         String password = passwordTxt.getText();
         String fullName = fullNameTxt.getText();
         int roleId = roleCombo.getSelectedIndex();
-        usernameChecker(userName);
 
         try {
             profilePicture = new FileInputStream(path);
@@ -432,9 +431,6 @@ public class UserDetails extends javax.swing.JFrame {
         } else if (roleId == 0) {
             System.out.println("Select User Role");
             DialogBox.showMessage("WARNING", "Select User Role", 2);
-        } else if (usernameExist == 1) {
-            System.out.println("User name exsist");
-            DialogBox.showMessage("ERROR", "User name exsist", 3);
         } else {
             try {
                 PreparedStatement pst = DB.con().prepareStatement("UPDATE user SET user_name = ?, password = ?, full_name = ?, profile_pic = ?, user_role_id = ? WHERE user_id = ?");
@@ -449,6 +445,9 @@ public class UserDetails extends javax.swing.JFrame {
                 pst.executeUpdate();
                 System.out.println("Data Updated");
                 DialogBox.showMessage("Done", "User Updated", 1);
+                File file = new File("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\DBProfileImages\\img" + userID + ".png");
+                System.out.println("user id : " + userID);
+                file.delete();
                 formDisable();
                 updateBtnLbl.setVisible(false);
                 editBtnLbl.setVisible(true);
@@ -458,25 +457,6 @@ public class UserDetails extends javax.swing.JFrame {
                 System.out.println("User Details Update Button : " + ex.getMessage());
             }
 
-        }
-
-    }
-
-    private void usernameChecker(String username) {
-        String sql = "SELECT * FROM user WHERE user_name=?";
-        try {
-            PreparedStatement pstmt = DB.con().prepareStatement(sql);
-            pstmt.setString(1, username);
-            ResultSet resultSet = pstmt.executeQuery();
-            if (resultSet.next()) {
-                System.out.println("Username is already taken.");
-                usernameExist = 1;
-            } else {
-                System.out.println("Username is available.");
-                usernameExist = 0;
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(UserRegistration.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

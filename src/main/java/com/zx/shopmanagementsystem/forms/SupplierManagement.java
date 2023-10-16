@@ -35,12 +35,15 @@ public class SupplierManagement extends javax.swing.JPanel {
         addSupplierBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
+        setMinimumSize(new java.awt.Dimension(1015, 738));
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddSupplierPurpleIcon.png")); // NOI18N
-        addSupplierBtnLbl.setPreferredSize(new java.awt.Dimension(214, 36));
         addSupplierBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addSupplierBtnLblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addSupplierBtnLblMouseEntered(evt);
             }
@@ -64,6 +67,10 @@ public class SupplierManagement extends javax.swing.JPanel {
         // TODO add your handling code here:
         func.iconSetter(addSupplierBtnLbl, il.addSupplierPurpleIcon);
     }//GEN-LAST:event_addSupplierBtnLblMouseExited
+
+    private void addSupplierBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSupplierBtnLblMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addSupplierBtnLblMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addSupplierBtnLbl;

@@ -9,6 +9,7 @@ import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -32,15 +33,16 @@ public class UserRegistration extends javax.swing.JFrame {
     Func func = new Func();
     IconLocation il = new IconLocation();
     JDBC DB = new JDBC();
-    
+
     String path = il.profileIcon;
     File file = null;
     FileInputStream profilePicture = null;
     int userRoleId;
     int usernameExist = 0;
-    
+
     public UserRegistration() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(UserRegistration.this);
         ImageIcon image = new ImageIcon(path);
         Image img = image.getImage();
@@ -151,12 +153,12 @@ public class UserRegistration extends javax.swing.JFrame {
         // TODO add your handling code here:
         func.iconSetter(chooseProPicBtnLbl, il.uploadWhiteIcon);
     }//GEN-LAST:event_chooseProPicBtnLblMouseEntered
-    
+
     private void chooseProPicBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseProPicBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(chooseProPicBtnLbl, il.uploadPurpleIcon);
     }//GEN-LAST:event_chooseProPicBtnLblMouseExited
-    
+
     private void chooseProPicBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseProPicBtnLblMouseClicked
         // TODO add your handling code here:
         MessageDialog DialogBox = new MessageDialog(this);
@@ -164,7 +166,7 @@ public class UserRegistration extends javax.swing.JFrame {
         jFile.setCurrentDirectory(new File(System.getProperty("user.home")));
         FileNameExtensionFilter filter = new FileNameExtensionFilter("*.Image", "jpg", "png");
         jFile.addChoosableFileFilter(filter);
-        
+
         int result = jFile.showSaveDialog(null);
         //System.out.println(result);
 
@@ -188,24 +190,24 @@ public class UserRegistration extends javax.swing.JFrame {
         } else {
             DialogBox.showMessage("Error !!! ", "Please Select a Image File", 3);
         }
-        
+
     }//GEN-LAST:event_chooseProPicBtnLblMouseClicked
-    
+
     private void registerBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnLblMouseEntered
         // TODO add your handling code here:
         func.iconSetter(registerBtnLbl, il.RegisterWhiteIcon);
     }//GEN-LAST:event_registerBtnLblMouseEntered
-    
+
     private void registerBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(registerBtnLbl, il.RegisterPurpleIcon);
     }//GEN-LAST:event_registerBtnLblMouseExited
-    
+
     private void registerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnLblMouseClicked
         // TODO add your handling code here:
         addUser();
     }//GEN-LAST:event_registerBtnLblMouseClicked
-    
+
     private void hidePasswordLblBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hidePasswordLblBtnMouseClicked
         // TODO add your handling code here:
         func.mouseClicked(hidePasswordLblBtn, passwordTxt);
@@ -267,7 +269,7 @@ public class UserRegistration extends javax.swing.JFrame {
         String fullName = fullNameTxt.getText();
         String userRole = userRoleCombo.getSelectedItem().toString();
         usernameChecker(Username);
-        
+
         try {
             profilePicture = new FileInputStream(path);
         } catch (FileNotFoundException ex) {
@@ -295,7 +297,7 @@ public class UserRegistration extends javax.swing.JFrame {
                     while (true) {
                         userRoleId = rs.getInt("role_id");
                         PreparedStatement pst = DB.con().prepareStatement("INSERT INTO user (user_name, password, full_name, profile_pic, user_role_id) VALUES (?,?,?,?,?)");
-                        
+
                         pst.setString(1, Username);
                         pst.setString(2, Password);
                         pst.setString(3, fullName);
@@ -311,10 +313,10 @@ public class UserRegistration extends javax.swing.JFrame {
             } catch (Exception ex) {
                 Logger.getLogger(UserRegistration.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }
-    
+
     private void comboLoader() {
         userRoleCombo.addItem("Select Role");
         try {
@@ -327,7 +329,7 @@ public class UserRegistration extends javax.swing.JFrame {
             Logger.getLogger(CustomerRegistration.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void usernameChecker(String username) {
         String sql = "SELECT * FROM user WHERE user_name=?";
         try {
@@ -344,9 +346,9 @@ public class UserRegistration extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(UserRegistration.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
-    
+
     private void clear() {
         usernameTxt.setText("");
         passwordTxt.setText("");
@@ -360,5 +362,5 @@ public class UserRegistration extends javax.swing.JFrame {
         imageAvatar.setVisible(false);
         imageAvatar.setVisible(true);
     }
-    
+
 }
