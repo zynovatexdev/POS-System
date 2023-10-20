@@ -4,9 +4,14 @@
  */
 package com.zx.shopmanagementsystem;
 
+import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.chart.ModelChart;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.ResultSet;
 
 /**
@@ -19,13 +24,17 @@ public class Test extends javax.swing.JFrame {
      * Creates new form Test
      */
     JDBC DB = new JDBC();
+    Func func = new Func();
+
+    public String codeValue = "Null";
 
     public Test() {
         initComponents();
-        chart.setTitle("Income");
-        chart.addLegend("Income", Color.decode("#7b4397"), Color.decode("#dc2430"));
 
-        setData();
+//        chart.setTitle("Income");
+//        chart.addLegend("Income", Color.decode("#7b4397"), Color.decode("#dc2430"));
+//
+//        setData();
     }
 
     /**
@@ -37,48 +46,66 @@ public class Test extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelShadow1 = new com.zx.shopmanagementsystem.panel.PanelShadow();
-        chart = new com.zx.shopmanagementsystem.chart.CurveLineChart();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panelShadow1.setBackground(new java.awt.Color(16, 18, 42));
-        panelShadow1.setColorGradient(new java.awt.Color(153, 0, 153));
-
-        chart.setForeground(new java.awt.Color(255, 255, 255));
-        chart.setFillColor(true);
-
-        javax.swing.GroupLayout panelShadow1Layout = new javax.swing.GroupLayout(panelShadow1);
-        panelShadow1.setLayout(panelShadow1Layout);
-        panelShadow1Layout.setHorizontalGroup(
-            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelShadow1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 624, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
-        );
-        panelShadow1Layout.setVerticalGroup(
-            panelShadow1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelShadow1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
-        );
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(292, 292, 292)
+                .addComponent(jButton1)
+                .addContainerGap(337, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelShadow1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(321, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(92, 92, 92))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        try {
+            String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abc.py";
+            Process process = Runtime.getRuntime().exec("python " + pythonScript);
+
+            // Read the output from the Python script
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            String prv = "";
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                if (line.equals(prv)) {
+                    System.out.println("Same Value");
+                } else if (line.equals("Done")) {
+                    System.out.println("Done");
+                } else {
+                    System.out.println("Barcode : " + line);
+                    prv = line;
+                }
+            }
+
+            process.waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,30 +143,29 @@ public class Test extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.zx.shopmanagementsystem.chart.CurveLineChart chart;
-    private com.zx.shopmanagementsystem.panel.PanelShadow panelShadow1;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 
-    private void setData() {
-        chart.clear();
-        chart.addData(new ModelChart("January", new double[]{500}));
-        chart.addData(new ModelChart("February", new double[]{600}));
-        chart.addData(new ModelChart("March", new double[]{200}));
-        chart.addData(new ModelChart("April", new double[]{480}));
-        chart.addData(new ModelChart("May", new double[]{350}));
-        chart.addData(new ModelChart("June", new double[]{450}));
-        try {
-            ResultSet rs = DB.getdata("SELECT DATE_FORMAT(date, '%M - %d') AS Month, SUM(price) AS Income FROM shopdb.cash_payment WHERE date BETWEEN '2023-08-01' AND '2023-09-31' GROUP BY DATE_FORMAT(date, '%M - %d');");
-            while (rs.next()) {
-                String month = rs.getString("Month");
-                int income = rs.getInt("Income");
-
-                chart.addData(new ModelChart(month, new double[]{income}));
-
-            }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-        chart.start();
-    }
+//    private void setData() {
+//        chart.clear();
+//        chart.addData(new ModelChart("January", new double[]{500}));
+//        chart.addData(new ModelChart("February", new double[]{600}));
+//        chart.addData(new ModelChart("March", new double[]{200}));
+//        chart.addData(new ModelChart("April", new double[]{480}));
+//        chart.addData(new ModelChart("May", new double[]{350}));
+//        chart.addData(new ModelChart("June", new double[]{450}));
+//        try {
+//            ResultSet rs = DB.getdata("SELECT DATE_FORMAT(date, '%M - %d') AS Month, SUM(price) AS Income FROM shopdb.cash_payment WHERE date BETWEEN '2023-08-01' AND '2023-09-31' GROUP BY DATE_FORMAT(date, '%M - %d');");
+//            while (rs.next()) {
+//                String month = rs.getString("Month");
+//                int income = rs.getInt("Income");
+//
+//                chart.addData(new ModelChart(month, new double[]{income}));
+//
+//            }
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//        }
+//        chart.start();
+//    }
 }

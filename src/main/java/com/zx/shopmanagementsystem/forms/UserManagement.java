@@ -23,7 +23,7 @@ public class UserManagement extends javax.swing.JPanel {
      */
     Func func = new Func();
     IconLocation il = new IconLocation();
-    UserRegistration ur = new UserRegistration();
+
     JDBC DB = new JDBC();
 
     public UserManagement() {
@@ -45,7 +45,6 @@ public class UserManagement extends javax.swing.JPanel {
         addUserBtnIcon = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         userTbl = new javax.swing.JTable();
-        refreshBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
@@ -70,6 +69,102 @@ public class UserManagement extends javax.swing.JPanel {
                 {null, null, null},
                 {null, null, null},
                 {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
                 {null, null, null}
             },
             new String [] {
@@ -84,20 +179,6 @@ public class UserManagement extends javax.swing.JPanel {
         jScrollPane1.setViewportView(userTbl);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 950, 480));
-
-        refreshBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\RefreshPurpleIcon.png")); // NOI18N
-        refreshBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                refreshBtnLblMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                refreshBtnLblMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                refreshBtnLblMouseExited(evt);
-            }
-        });
-        add(refreshBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 190, -1, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\UserManagement.png")); // NOI18N
         iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
@@ -116,30 +197,15 @@ public class UserManagement extends javax.swing.JPanel {
 
     private void addUserBtnIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserBtnIconMouseClicked
         // TODO add your handling code here:
+        UserRegistration ur = new UserRegistration(this);
         ur.setVisible(true);
     }//GEN-LAST:event_addUserBtnIconMouseClicked
-
-    private void refreshBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseEntered
-        // TODO add your handling code here:
-        func.iconSetter(refreshBtnLbl, il.refreshWhiteIcon);
-    }//GEN-LAST:event_refreshBtnLblMouseEntered
-
-    private void refreshBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseExited
-        // TODO add your handling code here:
-        func.iconSetter(refreshBtnLbl, il.refreshPurpleIcon);
-    }//GEN-LAST:event_refreshBtnLblMouseExited
-
-    private void refreshBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseClicked
-        // TODO add your handling code here:
-        tableDataClear();
-        tableDataLoader();
-    }//GEN-LAST:event_refreshBtnLblMouseClicked
 
     private void userTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTblMouseClicked
         // TODO add your handling code here:
         int row = userTbl.getSelectedRow();
         int userID = Integer.parseInt((String) userTbl.getModel().getValueAt(row, 0));
-        UserDetails ud = new UserDetails();
+        UserDetails ud = new UserDetails(this);
         ud.setVisible(true);
         ud.dataLoad(userID);
 
@@ -149,7 +215,6 @@ public class UserManagement extends javax.swing.JPanel {
     private javax.swing.JLabel addUserBtnIcon;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel refreshBtnLbl;
     private javax.swing.JTable userTbl;
     // End of variables declaration//GEN-END:variables
 
@@ -184,6 +249,11 @@ public class UserManagement extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println("User Management Table Data Clear : " + e);
         }
+    }
+
+    public void setTable() {
+        tableDataClear();
+        tableDataLoader();
     }
 
 }

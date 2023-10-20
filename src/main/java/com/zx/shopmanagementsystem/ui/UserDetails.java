@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.forms.UserManagement;
 import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Image;
@@ -40,8 +41,10 @@ public class UserDetails extends javax.swing.JFrame {
     public int userID = 0;
     String path;
     FileInputStream profilePicture = null;
+    private UserManagement um;
 
-    public UserDetails() {
+    public UserDetails(UserManagement um) {
+        this.um = um;
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(UserDetails.this);
@@ -224,6 +227,7 @@ public class UserDetails extends javax.swing.JFrame {
                 DB.putdata("DELETE FROM user WHERE user_id = '" + userID + "';");
                 System.out.println("Data Deleted");
                 DialogBox.showMessage("Deleted", "User Deleted", 1);
+                um.setTable();
                 this.dispose();
 
             } catch (Exception ex) {
@@ -238,6 +242,7 @@ public class UserDetails extends javax.swing.JFrame {
     private void updateBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnLblMouseClicked
         // TODO add your handling code here:
         updateUser();
+        um.setTable();
 
     }//GEN-LAST:event_updateBtnLblMouseClicked
 
@@ -312,9 +317,11 @@ public class UserDetails extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        UserManagement um = new UserManagement();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserDetails().setVisible(true);
+                UserDetails ud = new UserDetails(um);
+                ud.setVisible(true);
             }
         });
     }
@@ -450,9 +457,11 @@ public class UserDetails extends javax.swing.JFrame {
                 file.delete();
                 formDisable();
                 updateBtnLbl.setVisible(false);
+                updateImageIconBtn.setVisible(false);
                 editBtnLbl.setVisible(true);
                 deleteBtnLbl.setVisible(true);
                 func.iconSetter(iconLbl, il.userDetailsScreen);
+
             } catch (Exception ex) {
                 System.out.println("User Details Update Button : " + ex.getMessage());
             }

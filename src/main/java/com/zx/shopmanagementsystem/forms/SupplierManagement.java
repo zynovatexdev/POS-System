@@ -6,6 +6,11 @@ package com.zx.shopmanagementsystem.forms;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.table.TableCustom;
+import com.zx.shopmanagementsystem.ui.SupplierDetails;
+import com.zx.shopmanagementsystem.ui.SupplierRegistration;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,9 +23,13 @@ public class SupplierManagement extends javax.swing.JPanel {
      */
     Func func = new Func();
     IconLocation il = new IconLocation();
+    JDBC DB = new JDBC();
 
     public SupplierManagement() {
         initComponents();
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        tableDataClear();
+        tableDataLoader();
     }
 
     /**
@@ -33,6 +42,8 @@ public class SupplierManagement extends javax.swing.JPanel {
     private void initComponents() {
 
         addSupplierBtnLbl = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        supllierTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1015, 738));
@@ -53,6 +64,31 @@ public class SupplierManagement extends javax.swing.JPanel {
         });
         add(addSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
 
+        supllierTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Supplier ID", "Supplier Name", "Supplier Contact"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        supllierTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                supllierTblMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(supllierTbl);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 920, 480));
+
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\SupplierManagement.png")); // NOI18N
         iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -70,10 +106,60 @@ public class SupplierManagement extends javax.swing.JPanel {
 
     private void addSupplierBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addSupplierBtnLblMouseClicked
         // TODO add your handling code here:
+        SupplierRegistration sr = new SupplierRegistration(this);
+        sr.setVisible(true);
     }//GEN-LAST:event_addSupplierBtnLblMouseClicked
+
+    private void supllierTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supllierTblMouseClicked
+        // TODO add your handling code here:
+        int row = supllierTbl.getSelectedRow();
+        int supplierID = Integer.parseInt((String) supllierTbl.getModel().getValueAt(row, 0));
+        SupplierDetails sd = new SupplierDetails(this);
+        sd.setVisible(true);
+        sd.dataLoad(supplierID);
+    }//GEN-LAST:event_supllierTblMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addSupplierBtnLbl;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable supllierTbl;
     // End of variables declaration//GEN-END:variables
+    private void tableDataLoader() {
+        try {
+            java.sql.ResultSet rs = DB.getdata("SELECT * FROM supplier");
+            while (rs.next()) {
+                String supId = String.valueOf(rs.getInt("supplier_id"));
+                String supName = String.valueOf(rs.getString("supplier_name"));
+                String supContact = String.valueOf(rs.getString("supplier_contact"));
+
+                System.out.println("Supplier ID" + supId);
+                System.out.println("Supplier Name" + supName);
+                System.out.println("Supplier Contact" + supContact);
+
+                String table_data[] = {supId, supName, supContact};
+                DefaultTableModel table = (DefaultTableModel) supllierTbl.getModel();
+                table.addRow(table_data);
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Supplier Management Table Data Loader : " + ex);
+        }
+    }
+
+    private void tableDataClear() {
+        try {
+            while (0 <= supllierTbl.getRowCount()) {
+                DefaultTableModel table = (DefaultTableModel) supllierTbl.getModel();
+                table.removeRow(supllierTbl.getRowCount() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("Supplier Management Table Data Clear : " + e);
+        }
+    }
+
+    public void setTable() {
+        tableDataClear();
+        tableDataLoader();
+    }
 }

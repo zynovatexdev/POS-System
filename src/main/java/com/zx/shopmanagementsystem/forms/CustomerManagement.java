@@ -47,7 +47,6 @@ public class CustomerManagement extends javax.swing.JPanel {
         addCustomerBtnLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTbl = new javax.swing.JTable();
-        refreshBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
@@ -101,20 +100,6 @@ public class CustomerManagement extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 940, 480));
 
-        refreshBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\RefreshPurpleIcon.png")); // NOI18N
-        refreshBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                refreshBtnLblMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                refreshBtnLblMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                refreshBtnLblMouseExited(evt);
-            }
-        });
-        add(refreshBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 190, -1, -1));
-
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\CustomerManagement.png")); // NOI18N
         iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -142,7 +127,7 @@ public class CustomerManagement extends javax.swing.JPanel {
 
     private void addCustomerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerBtnLblMouseClicked
         // TODO add your handling code here:
-        CustomerRegistration cr = new CustomerRegistration();
+        CustomerRegistration cr = new CustomerRegistration(this);
         cr.setVisible(true);
     }//GEN-LAST:event_addCustomerBtnLblMouseClicked
 
@@ -150,25 +135,10 @@ public class CustomerManagement extends javax.swing.JPanel {
         // TODO add your handling code here:
         int row = customerTbl.getSelectedRow();
         int userID = Integer.parseInt((String) customerTbl.getModel().getValueAt(row, 0));
-        CustomerDetails cd = new CustomerDetails();
+        CustomerDetails cd = new CustomerDetails(this);
         cd.setVisible(true);
         cd.dataLoad(userID);
     }//GEN-LAST:event_customerTblMouseClicked
-
-    private void refreshBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseEntered
-        // TODO add your handling code here:
-        func.iconSetter(refreshBtnLbl, il.refreshWhiteIcon);
-    }//GEN-LAST:event_refreshBtnLblMouseEntered
-
-    private void refreshBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseExited
-        // TODO add your handling code here:
-        func.iconSetter(refreshBtnLbl, il.refreshPurpleIcon);
-    }//GEN-LAST:event_refreshBtnLblMouseExited
-
-    private void refreshBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshBtnLblMouseClicked
-        // TODO add your handling code here:
-        panalRefresh();
-    }//GEN-LAST:event_refreshBtnLblMouseClicked
 
     private void addCustomerCategoryBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerCategoryBtnLblMouseClicked
         // TODO add your handling code here:
@@ -181,7 +151,6 @@ public class CustomerManagement extends javax.swing.JPanel {
     private javax.swing.JTable customerTbl;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel refreshBtnLbl;
     // End of variables declaration//GEN-END:variables
 
     private void tableDataLoader() {
@@ -218,9 +187,8 @@ public class CustomerManagement extends javax.swing.JPanel {
         }
     }
 
-    public void panalRefresh() {
+    public void setTable() {
         tableDataClear();
         tableDataLoader();
-        System.out.println("Function Run");
     }
 }

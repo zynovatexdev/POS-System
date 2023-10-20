@@ -88,6 +88,8 @@ public class IconLocation {
     public String customerDetails = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/CustomerDetails.png";
     public String updateCustomerDetails = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/UpdateCustomerDetails.png";
     public String editUserScreen = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/UpdateUserDetails.png";
+    public String supplierDetails = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/SupplierDetails.png";
+    public String editSupplierDetils = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/images/EditSupplierDetils.png";
     public String noIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/NoIcon.png";
     public String yesIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/YesIcon.png";
     public String submitPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SubmitPurpleIcon.png";

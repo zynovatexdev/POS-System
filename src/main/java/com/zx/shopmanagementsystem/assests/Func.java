@@ -4,11 +4,13 @@
  */
 package com.zx.shopmanagementsystem.assests;
 
-import java.awt.Image;
-import java.awt.Panel;
-import java.awt.Toolkit;
+import com.zx.shopmanagementsystem.Test;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JComponent;
@@ -24,6 +26,8 @@ import javax.swing.JPasswordField;
 public class Func {
 
     IconLocation il = new IconLocation();
+
+    public String codeValue;
 
     public void iconSetter(JLabel lable, String url) {
         lable.setIcon(new javax.swing.ImageIcon(url));
@@ -100,6 +104,32 @@ public class Func {
         panal.add(component);
         panal.repaint();
         panal.revalidate();
+    }
+
+    String line;
+
+    public void barcodeDetect() {
+
+        try {
+            String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\scanner.py";
+            Process process = Runtime.getRuntime().exec("python " + pythonScript);
+
+            // Read the output from the Python script
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            while ((line = reader.readLine()) != null) {
+                codeValue = line;
+            }
+
+            process.waitFor();
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getCode() {
+        barcodeDetect();
+        return codeValue;
     }
 
 }

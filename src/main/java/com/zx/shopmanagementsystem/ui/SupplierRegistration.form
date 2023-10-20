@@ -28,9 +28,62 @@
   </Layout>
   <SubComponents>
     <Component class="com.zx.shopmanagementsystem.components.Head" name="head1">
+      <Properties>
+        <Property name="frame" type="javax.swing.JFrame" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="this" type="code"/>
+        </Property>
+        <Property name="headerTextColor" type="java.lang.String" value="#FFFFFF"/>
+        <Property name="headerTitle" type="java.lang.String" value="Supplier Registration"/>
+        <Property name="opaque" type="boolean" value="false"/>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="0" y="0" width="1366" height="-1"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="supplierNumberTxt">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="sansserif" size="14" style="1"/>
+        </Property>
+        <Property name="hintText" type="java.lang.String" value="Enter Supplier Contact Number"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="790" y="360" width="440" height="50"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="supplierNameTxt">
+      <Properties>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="sansserif" size="14" style="1"/>
+        </Property>
+        <Property name="hintText" type="java.lang.String" value="Enter Supplier Name"/>
+      </Properties>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="790" y="260" width="440" height="50"/>
+        </Constraint>
+      </Constraints>
+    </Component>
+    <Component class="javax.swing.JLabel" name="registerBtnLbl">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\ShopManagementSystem\src\main\java\com\zx\shopmanagementsystem\icons\RegisterPurpleIcon.png"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="registerBtnLblMouseClicked"/>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="registerBtnLblMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="registerBtnLblMouseExited"/>
+      </Events>
+      <Constraints>
+        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+          <AbsoluteConstraints x="788" y="470" width="-1" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.forms.CustomerManagement;
 import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
@@ -31,8 +32,10 @@ public class CustomerDetails extends javax.swing.JFrame {
     JDBC DB = new JDBC();
 
     int cusID;
+    private CustomerManagement customerManagement;
 
-    public CustomerDetails() {
+    public CustomerDetails(CustomerManagement customerManagement) {
+        this.customerManagement = customerManagement;
         initComponents();
         head1.setFrame(this);
         disableForm();
@@ -183,6 +186,7 @@ public class CustomerDetails extends javax.swing.JFrame {
                 DB.putdata("DELETE FROM customer WHERE customer_id = '" + cusID + "';");
                 System.out.println("Data Deleted");
                 DialogBox.showMessage("Deleted", "User Deleted", 1);
+                customerManagement.setTable();
                 this.dispose();
 
             } catch (Exception ex) {
@@ -196,6 +200,7 @@ public class CustomerDetails extends javax.swing.JFrame {
     private void updateCustomerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCustomerBtnLblMouseClicked
         // TODO add your handling code here:
         updateCustomer();
+        customerManagement.setTable();
     }//GEN-LAST:event_updateCustomerBtnLblMouseClicked
 
     /**
@@ -226,9 +231,11 @@ public class CustomerDetails extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        CustomerManagement cs = new CustomerManagement();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerDetails().setVisible(true);
+                CustomerDetails cd = new CustomerDetails(cs);
+                cd.setVisible(true);
             }
         });
     }
@@ -274,6 +281,7 @@ public class CustomerDetails extends javax.swing.JFrame {
         editCustomerBtnLbl.setVisible(true);
         deleteCustomerBtnLbl.setVisible(true);
         updateCustomerBtnLbl.setVisible(false);
+        func.iconSetter(iconLbl, il.customerDetails);
     }
 
     private void enebleForm() {
@@ -284,6 +292,7 @@ public class CustomerDetails extends javax.swing.JFrame {
         editCustomerBtnLbl.setVisible(false);
         deleteCustomerBtnLbl.setVisible(false);
         updateCustomerBtnLbl.setVisible(true);
+        func.iconSetter(iconLbl, il.updateCustomerDetails);
     }
 
     private void comboLoader(int index) {

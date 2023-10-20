@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.forms.CustomerManagement;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -23,13 +24,14 @@ public class CustomerRegistration extends javax.swing.JFrame {
      */
     int maxCusId;
     int newCusId;
+    private CustomerManagement cm;
 
     JDBC DB = new JDBC();
     Func func = new Func();
     IconLocation il = new IconLocation();
-    DashboardAdmin da = new DashboardAdmin();
 
-    public CustomerRegistration() {
+    public CustomerRegistration(CustomerManagement cm) {
+        this.cm = cm;
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(CustomerRegistration.this);
@@ -131,7 +133,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
     private void updateBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseClicked
         // TODO add your handling code here:
         addCustomer();
-        da.customerPanalRefresh();
+        cm.setTable();
     }//GEN-LAST:event_updateBtnMouseClicked
 
     /**
@@ -162,9 +164,11 @@ public class CustomerRegistration extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        CustomerManagement cm = new CustomerManagement();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerRegistration().setVisible(true);
+                CustomerRegistration cr = new CustomerRegistration(cm);
+                cr.setVisible(true);
             }
         });
     }

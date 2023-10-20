@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.forms.UserManagement;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -39,8 +40,10 @@ public class UserRegistration extends javax.swing.JFrame {
     FileInputStream profilePicture = null;
     int userRoleId;
     int usernameExist = 0;
+    private UserManagement um;
 
-    public UserRegistration() {
+    public UserRegistration(UserManagement um) {
+        this.um = um;
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(UserRegistration.this);
@@ -206,6 +209,7 @@ public class UserRegistration extends javax.swing.JFrame {
     private void registerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerBtnLblMouseClicked
         // TODO add your handling code here:
         addUser();
+        um.setTable();
     }//GEN-LAST:event_registerBtnLblMouseClicked
 
     private void hidePasswordLblBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hidePasswordLblBtnMouseClicked
@@ -241,9 +245,12 @@ public class UserRegistration extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        UserManagement um = new UserManagement();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UserRegistration().setVisible(true);
+                UserRegistration ur = new UserRegistration(um);
+                ur.setVisible(true);
+
             }
         });
     }
