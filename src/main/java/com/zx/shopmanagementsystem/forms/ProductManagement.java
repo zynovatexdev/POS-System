@@ -6,6 +6,11 @@ package com.zx.shopmanagementsystem.forms;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.ui.AddBarcode;
+import com.zx.shopmanagementsystem.ui.AddDiscount;
+import com.zx.shopmanagementsystem.ui.AddProductCategory;
+import com.zx.shopmanagementsystem.ui.AddProductType;
+import com.zx.shopmanagementsystem.ui.AddStoreLocation;
 
 /**
  *
@@ -18,7 +23,7 @@ public class ProductManagement extends javax.swing.JPanel {
      */
     Func func = new Func();
     IconLocation il = new IconLocation();
-
+    
     public ProductManagement() {
         initComponents();
     }
@@ -46,6 +51,9 @@ public class ProductManagement extends javax.swing.JPanel {
         addProductTypeBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductTypePurple.png")); // NOI18N
         addProductTypeBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addProductTypeBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addProductTypeBtnLblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addProductTypeBtnLblMouseEntered(evt);
             }
@@ -70,6 +78,9 @@ public class ProductManagement extends javax.swing.JPanel {
         addProductCategoryBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductCategaryPurple.png")); // NOI18N
         addProductCategoryBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addProductCategoryBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addProductCategoryBtnLblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addProductCategoryBtnLblMouseEntered(evt);
             }
@@ -82,6 +93,9 @@ public class ProductManagement extends javax.swing.JPanel {
         addBarcodeBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddBarcodePurple.png")); // NOI18N
         addBarcodeBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addBarcodeBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addBarcodeBtnLblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addBarcodeBtnLblMouseEntered(evt);
             }
@@ -94,6 +108,9 @@ public class ProductManagement extends javax.swing.JPanel {
         addDiscountBrnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddDiscountPurple.png")); // NOI18N
         addDiscountBrnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addDiscountBrnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addDiscountBrnLblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addDiscountBrnLblMouseEntered(evt);
             }
@@ -106,6 +123,9 @@ public class ProductManagement extends javax.swing.JPanel {
         addStoreLocationBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddStoreLocationPurple.png")); // NOI18N
         addStoreLocationBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addStoreLocationBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addStoreLocationBtnLblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addStoreLocationBtnLblMouseEntered(evt);
             }
@@ -123,61 +143,91 @@ public class ProductManagement extends javax.swing.JPanel {
         // TODO add your handling code here:
         func.iconSetter(addProductBtnLbl, il.addProductWhiteIcon);
     }//GEN-LAST:event_addProductBtnLblMouseEntered
-
+    
     private void addProductBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(addProductBtnLbl, il.addProductPurpleIcon);
     }//GEN-LAST:event_addProductBtnLblMouseExited
-
+    
     private void addProductCategoryBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductCategoryBtnLblMouseEntered
         // TODO add your handling code here:
         func.iconSetter(addProductCategoryBtnLbl, il.addProductCategoryWhiteIcon);
     }//GEN-LAST:event_addProductCategoryBtnLblMouseEntered
-
+    
     private void addProductCategoryBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductCategoryBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(addProductCategoryBtnLbl, il.addProductCategoryPurpleIcon);
     }//GEN-LAST:event_addProductCategoryBtnLblMouseExited
-
+    
     private void addProductTypeBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductTypeBtnLblMouseEntered
         // TODO add your handling code here:
         func.iconSetter(addProductTypeBtnLbl, il.addProductTypeWhiteIcon);
     }//GEN-LAST:event_addProductTypeBtnLblMouseEntered
-
+    
     private void addProductTypeBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductTypeBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(addProductTypeBtnLbl, il.addProductTypePurpleIcon);
     }//GEN-LAST:event_addProductTypeBtnLblMouseExited
-
+    
     private void addDiscountBrnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDiscountBrnLblMouseEntered
         // TODO add your handling code here:
         func.iconSetter(addDiscountBrnLbl, il.addDiscountWhiteIcon);
     }//GEN-LAST:event_addDiscountBrnLblMouseEntered
-
+    
     private void addDiscountBrnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDiscountBrnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(addDiscountBrnLbl, il.addDiscountPurpleIcon);
     }//GEN-LAST:event_addDiscountBrnLblMouseExited
-
+    
     private void addBarcodeBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBarcodeBtnLblMouseEntered
         // TODO add your handling code here:
         func.iconSetter(addBarcodeBtnLbl, il.addBarcodeWhiteIcon);
     }//GEN-LAST:event_addBarcodeBtnLblMouseEntered
-
+    
     private void addBarcodeBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBarcodeBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(addBarcodeBtnLbl, il.addBarcodePurpleIcon);
     }//GEN-LAST:event_addBarcodeBtnLblMouseExited
-
+    
     private void addStoreLocationBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreLocationBtnLblMouseEntered
         // TODO add your handling code here:
         func.iconSetter(addStoreLocationBtnLbl, il.addStoreLocationWhiteIcon);
     }//GEN-LAST:event_addStoreLocationBtnLblMouseEntered
-
+    
     private void addStoreLocationBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreLocationBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(addStoreLocationBtnLbl, il.addStoreLocationPurpleIcon);
     }//GEN-LAST:event_addStoreLocationBtnLblMouseExited
+    
+    private void addBarcodeBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBarcodeBtnLblMouseClicked
+        // TODO add your handling code here:
+        AddBarcode addbarcode = new AddBarcode();
+        addbarcode.setVisible(true);
+    }//GEN-LAST:event_addBarcodeBtnLblMouseClicked
+    
+    private void addDiscountBrnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDiscountBrnLblMouseClicked
+        // TODO add your handling code here:
+        AddDiscount ad = new AddDiscount();
+        ad.setVisible(true);
+    }//GEN-LAST:event_addDiscountBrnLblMouseClicked
+    
+    private void addProductCategoryBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductCategoryBtnLblMouseClicked
+        // TODO add your handling code here:
+        AddProductCategory apc = new AddProductCategory();
+        apc.setVisible(true);
+    }//GEN-LAST:event_addProductCategoryBtnLblMouseClicked
+    
+    private void addProductTypeBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductTypeBtnLblMouseClicked
+        // TODO add your handling code here:
+        AddProductType apt = new AddProductType();
+        apt.setVisible(true);
+    }//GEN-LAST:event_addProductTypeBtnLblMouseClicked
+    
+    private void addStoreLocationBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreLocationBtnLblMouseClicked
+        // TODO add your handling code here:
+        AddStoreLocation asl = new AddStoreLocation();
+        asl.setVisible(true);
+    }//GEN-LAST:event_addStoreLocationBtnLblMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addBarcodeBtnLbl;

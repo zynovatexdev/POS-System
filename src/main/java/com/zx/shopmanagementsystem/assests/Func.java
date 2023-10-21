@@ -4,13 +4,18 @@
  */
 package com.zx.shopmanagementsystem.assests;
 
-import com.zx.shopmanagementsystem.Test;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JComponent;
@@ -26,6 +31,9 @@ import javax.swing.JPasswordField;
 public class Func {
 
     IconLocation il = new IconLocation();
+    JDBC DB = new JDBC();
+
+    int barcodeExist;
 
     public String codeValue;
 
@@ -132,4 +140,49 @@ public class Func {
         return codeValue;
     }
 
+    public int barcodeChecker(String barcode) {
+        String sql = "SELECT * FROM barcode WHERE barcode_value=?";
+        try {
+            PreparedStatement pstmt = DB.con().prepareStatement(sql);
+            pstmt.setString(1, barcode);
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                System.out.println("Barcode is already taken.");
+                barcodeExist = 1;
+            } else {
+                System.out.println("Barcode is available.");
+                barcodeExist = 0;
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage() + "Barcode Checker");
+        }
+        return barcodeExist;
+    }
+
+    public int dateValidator(String date) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        int isValid = 0;
+        try {
+            // Create a Date object for the selected date (replace the string with your selected date)
+            Date selectedDate = dateFormat.parse(date);
+
+            // Get the current date
+            Date currentDate = new Date();
+
+            // Compare the two dates
+            if (selectedDate.after(currentDate)) {
+                System.out.println("Selected date is greater than the current date.");
+                isValid = 1;
+            } else if (selectedDate.before(currentDate)) {
+                System.out.println("Selected date is less than the current date.");
+                isValid = 2;
+            } else {
+                System.out.println("Selected date is equal to the current date.");
+                isValid = 3;
+            }
+        } catch (ParseException e) {
+            System.out.println("Invalid date format. Please use 'dd-MM-yyyy' format.");
+        }
+        return isValid;
+    }
 }

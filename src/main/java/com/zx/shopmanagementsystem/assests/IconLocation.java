@@ -100,5 +100,11 @@ public class IconLocation {
     public String editDetailsWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/EditDetailsWhiteIcon.png";
     public String zxlogo = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/zxlogo.png";
     public String logo = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/logo.png";
+    public String addPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddPurpleIcon.png";
+    public String addWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddWhiteIcon.png";
+    public String searchBardcodeIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SearchBardcodeIcon.png";
+    public String calenderIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/CalenderIcon.png";
+    public String addProductPurpleIcon2 = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddProductPurpleIcon.png";
+    public String addProductWhiteIcon2 = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddProductWhiteIcon.png";
 
 }

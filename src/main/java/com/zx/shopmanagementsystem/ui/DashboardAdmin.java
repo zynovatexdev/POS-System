@@ -266,6 +266,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         getContentPane().add(mainPanal, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void dashboardBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnLblMouseEntered

@@ -150,6 +150,7 @@ public class UserRegistration extends javax.swing.JFrame {
         iconLbl.getAccessibleContext().setAccessibleDescription("");
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void chooseProPicBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chooseProPicBtnLblMouseEntered
