@@ -73,6 +73,7 @@ public class AddDiscount extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -83,7 +84,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 endPopLblMouseClicked(evt);
             }
         });
-        getContentPane().add(endPopLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 288, -1, -1));
+        getContentPane().add(endPopLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 280, -1, -1));
 
         startPopLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\CalenderIcon.png")); // NOI18N
         startPopLbl.setPreferredSize(new java.awt.Dimension(33, 33));
@@ -92,12 +93,12 @@ public class AddDiscount extends javax.swing.JFrame {
                 startPopLblMouseClicked(evt);
             }
         });
-        getContentPane().add(startPopLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 187, -1, -1));
+        getContentPane().add(startPopLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 180, -1, -1));
 
         head1.setHeaderTextColor("#000000");
-        head1.setHeaderTitle("Add Discount");
+        head1.setHeaderTitle("");
         head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         addDiscountBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
         addDiscountBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -111,7 +112,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 addDiscountBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addDiscountBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 460, -1, -1));
+        getContentPane().add(addDiscountBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 460, -1, -1));
 
         endDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         endDateTxt.setHintText("Enter End Date");
@@ -121,7 +122,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 endDateTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(endDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 280, 460, 50));
+        getContentPane().add(endDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 270, 460, 50));
 
         stratDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         stratDateTxt.setHintText("Enter Strat Date");
@@ -131,7 +132,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 stratDateTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(stratDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 180, 460, 50));
+        getContentPane().add(stratDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 170, 460, 50));
 
         discountTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         discountTxt.setHintText("Enter End Date");
@@ -141,7 +142,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 discountTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(discountTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 380, 460, 50));
+        getContentPane().add(discountTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 370, 460, 50));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Discount.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

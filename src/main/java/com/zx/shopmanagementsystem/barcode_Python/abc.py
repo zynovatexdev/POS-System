@@ -3,8 +3,12 @@ import cv2
 import sys
 from pyzbar.pyzbar import decode, ZBarSymbol
 
-# Initialize the webcam
+# Initialize the webcam with a smaller frame size
 cap = cv2.VideoCapture(0)  # 0 represents the default webcam
+
+# Set the frame width and height
+cap.set(3, 300)  # Set the width to 640 pixels
+cap.set(4, 300)  # Set the height to 480 pixels
 
 # Define the code types you want to detect
 code_types = [ZBarSymbol.EAN13, ZBarSymbol.UPCA, ZBarSymbol.DATABAR, ZBarSymbol.CODE128, ZBarSymbol.QRCODE]

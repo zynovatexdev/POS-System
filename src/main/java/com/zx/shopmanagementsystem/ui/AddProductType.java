@@ -59,13 +59,14 @@ public class AddProductType extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         head1.setHeaderTextColor("#000000");
-        head1.setHeaderTitle("Add Barcode");
+        head1.setHeaderTitle("");
         head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         addProcuctTypeBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
         addProcuctTypeBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -79,19 +80,19 @@ public class AddProductType extends javax.swing.JFrame {
                 addProcuctTypeBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addProcuctTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 480, -1, -1));
+        getContentPane().add(addProcuctTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, -1, -1));
 
         productTypeTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         productTypeTxt.setHintText("Enter Product Type");
         productTypeTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        getContentPane().add(productTypeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 230, 480, -1));
+        getContentPane().add(productTypeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 480, -1));
 
         productDescriptionTxt.setColumns(20);
         productDescriptionTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productDescriptionTxt.setRows(5);
         jScrollPane1.setViewportView(productDescriptionTxt);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 330, 460, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 310, 460, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Product_Type.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

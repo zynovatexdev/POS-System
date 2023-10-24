@@ -6,6 +6,18 @@ package com.zx.shopmanagementsystem.ui;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,9 +30,57 @@ public class AddProduct extends javax.swing.JFrame {
      */
     Func func = new Func();
     IconLocation il = new IconLocation();
+    JDBC DB = new JDBC();
 
     public AddProduct() {
         initComponents();
+        Thread dataUpdateThread = new Thread(() -> {
+            try {
+                ServerSocket serverSocket = new ServerSocket(12345);  // Use an available port
+                MessageDialog DialogBox = new MessageDialog(this);
+                while (true) {
+                    Socket socket = serverSocket.accept();
+                    InputStream inputStream = socket.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                    String line;
+                    String prv = "";
+
+                    while ((line = reader.readLine()) != null) {
+                        if (line.equals(prv)) {
+                            System.out.println("Same Value");
+                        } else if (line.equals("Done")) {
+                            System.out.println("Done");
+                        } else if (line.startsWith("QRCODE")) {
+                            System.out.println("it is a QR");
+                            //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
+                        } else {
+                            System.out.println("it is not a QR");
+
+                            if (barcodeChecker(line)) {
+                                barcodeCombo.setSelectedItem(line);
+                            } else {
+                                System.out.println("Barcode Not Found : Add Product");
+                                DialogBox.showMessage("ERROR!!!", "Barcode Not Found in System", 3);
+                            }
+                        }
+                        prv = line;
+                    }
+
+                    socket.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        dataUpdateThread.start();
+        supplierComboLoader();
+        categoryComboLoader();
+        discountComboLoader();
+        barcodeComboLoader();
+        productTypeComboLoader();
+        productLocationComboLoader();
+        head1.setFrame(this);
     }
 
     /**
@@ -32,27 +92,37 @@ public class AddProduct extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        date1 = new com.zx.shopmanagementsystem.dateChooser.DateChooser();
+        date2 = new com.zx.shopmanagementsystem.dateChooser.DateChooser();
         addProductBtnLbl = new javax.swing.JLabel();
         head1 = new com.zx.shopmanagementsystem.components.Head();
         jLabel1 = new javax.swing.JLabel();
         sellingPriceTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         dimentionTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         stockQuantityTxt = new com.zx.shopmanagementsystem.components.RoundedText();
-        barcodeIdTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         productNameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         brandTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         manufactureDateTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         expireDateTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         recivingPriceTxt = new com.zx.shopmanagementsystem.components.RoundedText();
-        jLabel2 = new javax.swing.JLabel();
-        productLocationIdCombo = new javax.swing.JComboBox<>();
-        supplierIdCombo = new javax.swing.JComboBox<>();
-        categoryIdCombo = new javax.swing.JComboBox<>();
-        productTypeIdCombo = new javax.swing.JComboBox<>();
-        discountIdCombo = new javax.swing.JComboBox<>();
+        barcodeScannerBtnLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         productDescriptionTxt = new javax.swing.JTextArea();
+        productLocationIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        productTypeIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        discountIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        categoryIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        supplierIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        barcodeCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         iconLbl = new javax.swing.JLabel();
+
+        date1.setForeground(new java.awt.Color(204, 0, 255));
+        date1.setDateFormat("yyyy-MM-dd");
+        date1.setTextRefernce(manufactureDateTxt);
+
+        date2.setForeground(new java.awt.Color(204, 0, 255));
+        date2.setDateFormat("yyyy-MM-dd");
+        date2.setTextRefernce(expireDateTxt);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -97,10 +167,6 @@ public class AddProduct extends javax.swing.JFrame {
         stockQuantityTxt.setPreferredSize(new java.awt.Dimension(139, 50));
         getContentPane().add(stockQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 590, 200, -1));
 
-        barcodeIdTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        barcodeIdTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(barcodeIdTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 360, 210, -1));
-
         productNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         productNameTxt.setPreferredSize(new java.awt.Dimension(139, 50));
         getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 340, -1));
@@ -121,34 +187,44 @@ public class AddProduct extends javax.swing.JFrame {
         recivingPriceTxt.setPreferredSize(new java.awt.Dimension(139, 50));
         getContentPane().add(recivingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 200, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 370, 40, 40));
-
-        productLocationIdCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Location", "In Shop", "Store Room 1", "Store Room 2" }));
-        productLocationIdCombo.setPreferredSize(new java.awt.Dimension(72, 50));
-        getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 590, 200, -1));
-
-        supplierIdCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Supplier", "CBL", "Atlas", "Maliban", " " }));
-        supplierIdCombo.setPreferredSize(new java.awt.Dimension(72, 50));
-        getContentPane().add(supplierIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(712, 370, 200, -1));
-
-        categoryIdCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Category", "Shamop", "Cracker", "Milk ", " " }));
-        categoryIdCombo.setPreferredSize(new java.awt.Dimension(72, 50));
-        getContentPane().add(categoryIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 480, 200, -1));
-
-        productTypeIdCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Type", "Solid", "Powder" }));
-        productTypeIdCombo.setPreferredSize(new java.awt.Dimension(72, 50));
-        getContentPane().add(productTypeIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 480, 200, -1));
-
-        discountIdCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10%", "15%" }));
-        discountIdCombo.setPreferredSize(new java.awt.Dimension(72, 50));
-        getContentPane().add(discountIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 590, 200, -1));
+        barcodeScannerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
+        barcodeScannerBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        barcodeScannerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                barcodeScannerBtnLblMouseClicked(evt);
+            }
+        });
+        getContentPane().add(barcodeScannerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 380, 40, 40));
 
         productDescriptionTxt.setColumns(20);
         productDescriptionTxt.setRows(5);
         jScrollPane1.setViewportView(productDescriptionTxt);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 330, 130));
+
+        productLocationIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        productLocationIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
+        getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 600, 190, -1));
+
+        productTypeIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        productTypeIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
+        getContentPane().add(productTypeIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 490, 190, -1));
+
+        discountIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        discountIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
+        getContentPane().add(discountIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 600, 190, -1));
+
+        categoryIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        categoryIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
+        getContentPane().add(categoryIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 490, 190, -1));
+
+        supplierIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        supplierIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
+        getContentPane().add(supplierIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 370, 190, -1));
+
+        barcodeCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        barcodeCombo.setPreferredSize(new java.awt.Dimension(139, 50));
+        getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 370, 190, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_new_Product.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -159,6 +235,7 @@ public class AddProduct extends javax.swing.JFrame {
 
     private void addProductBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseClicked
         // TODO add your handling code here:
+
     }//GEN-LAST:event_addProductBtnLblMouseClicked
 
     private void addProductBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseEntered
@@ -170,6 +247,16 @@ public class AddProduct extends javax.swing.JFrame {
         // TODO add your handling code here:
         func.iconSetter(addProductBtnLbl, il.addProductPurpleIcon2);
     }//GEN-LAST:event_addProductBtnLblMouseExited
+
+    private void barcodeScannerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barcodeScannerBtnLblMouseClicked
+        // TODO add your handling code here:
+        String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abc.py";
+        try {
+            Runtime.getRuntime().exec("python " + pythonScript);
+        } catch (IOException ex) {
+            System.out.println("Barcode Detector Btn : " + ex.getMessage());
+        }
+    }//GEN-LAST:event_barcodeScannerBtnLblMouseClicked
 
     /**
      * @param args the command line arguments
@@ -208,25 +295,119 @@ public class AddProduct extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addProductBtnLbl;
-    private com.zx.shopmanagementsystem.components.RoundedText barcodeIdTxt;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion barcodeCombo;
+    private javax.swing.JLabel barcodeScannerBtnLbl;
     private com.zx.shopmanagementsystem.components.RoundedText brandTxt;
-    private javax.swing.JComboBox<String> categoryIdCombo;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion categoryIdCombo;
+    private com.zx.shopmanagementsystem.dateChooser.DateChooser date1;
+    private com.zx.shopmanagementsystem.dateChooser.DateChooser date2;
     private com.zx.shopmanagementsystem.components.RoundedText dimentionTxt;
-    private javax.swing.JComboBox<String> discountIdCombo;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion discountIdCombo;
     private com.zx.shopmanagementsystem.components.RoundedText expireDateTxt;
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private com.zx.shopmanagementsystem.components.RoundedText manufactureDateTxt;
     private javax.swing.JTextArea productDescriptionTxt;
-    private javax.swing.JComboBox<String> productLocationIdCombo;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion productLocationIdCombo;
     private com.zx.shopmanagementsystem.components.RoundedText productNameTxt;
-    private javax.swing.JComboBox<String> productTypeIdCombo;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion productTypeIdCombo;
     private com.zx.shopmanagementsystem.components.RoundedText recivingPriceTxt;
     private com.zx.shopmanagementsystem.components.RoundedText sellingPriceTxt;
     private com.zx.shopmanagementsystem.components.RoundedText stockQuantityTxt;
-    private javax.swing.JComboBox<String> supplierIdCombo;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion supplierIdCombo;
     // End of variables declaration//GEN-END:variables
+
+    private void supplierComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM supplier");
+            while (rs.next()) {
+                String supplierName = rs.getString("supplier_name");
+                supplierIdCombo.addItem(supplierName);
+            }
+        } catch (Exception ex) {
+            System.out.println("Supplier Combo Loader : " + ex);
+        }
+    }
+
+    private void categoryComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM product_category");
+            while (rs.next()) {
+                String supplierName = rs.getString("category_name");
+                categoryIdCombo.addItem(supplierName);
+            }
+        } catch (Exception ex) {
+            System.out.println("Product Category Combo Loader : " + ex);
+        }
+    }
+
+    private void discountComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM discont");
+            while (rs.next()) {
+                String supplierName = rs.getString("discount_presentage");
+                discountIdCombo.addItem(supplierName + "%");
+            }
+        } catch (Exception ex) {
+            System.out.println("Discount Combo Loader : " + ex);
+        }
+    }
+
+    private void barcodeComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM barcode");
+            while (rs.next()) {
+                String barcodeValue = rs.getString("barcode_value");
+                barcodeCombo.addItem(barcodeValue);
+            }
+        } catch (Exception ex) {
+            System.out.println("Barcode Combo Loader : " + ex);
+        }
+    }
+
+    private void productTypeComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM product_type");
+            while (rs.next()) {
+                String productType = rs.getString("product_type");
+                productTypeIdCombo.addItem(productType);
+            }
+        } catch (Exception ex) {
+            System.out.println("Product Type Combo Loader : " + ex);
+        }
+    }
+
+    private void productLocationComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM store_location");
+            while (rs.next()) {
+                String storeLocation = rs.getString("store_location_name");
+                productLocationIdCombo.addItem(storeLocation);
+            }
+        } catch (Exception ex) {
+            System.out.println("Product Type Combo Loader : " + ex);
+        }
+    }
+
+    private boolean barcodeChecker(String barcode) {
+        String sql = "SELECT * FROM barcode WHERE barcode_value=?";
+        boolean Exist = false;
+        try {
+            PreparedStatement pstmt = DB.con().prepareStatement(sql);
+            pstmt.setString(1, barcode);
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                System.out.println("Barcode Found.");
+                Exist = true;
+            } else {
+                System.out.println("Barcode Not Found.");
+                Exist = false;
+            }
+        } catch (Exception ex) {
+            System.out.println("Barcode Checker : " + ex.getMessage());
+        }
+        return Exist;
+    }
 }

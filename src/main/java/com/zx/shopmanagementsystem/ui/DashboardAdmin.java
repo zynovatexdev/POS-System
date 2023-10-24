@@ -6,6 +6,7 @@ package com.zx.shopmanagementsystem.ui;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.forms.Analysis;
 import com.zx.shopmanagementsystem.forms.CustomerManagement;
 import com.zx.shopmanagementsystem.forms.DebtManagement;
@@ -18,7 +19,13 @@ import com.zx.shopmanagementsystem.forms.ReportGeneration;
 import com.zx.shopmanagementsystem.forms.SupplierManagement;
 import com.zx.shopmanagementsystem.forms.UserManagement;
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.sql.ResultSet;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -32,6 +39,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
     IconLocation il = new IconLocation();
     Func func = new Func();
 
+    int UserID;
+    String path;
+
     public DashboardAdmin() {
         initComponents();
 
@@ -42,6 +52,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         head1.setFrame(this);
         func.setForm(mainPanal, new Home());
         setIcon();
+        System.out.println("Dashboard : " + UserID);
     }
 
     /**
@@ -66,6 +77,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         reportGenerationBtnLbl = new javax.swing.JLabel();
         supplierManagmentBtnLbl = new javax.swing.JLabel();
         helpBtnLbl = new javax.swing.JLabel();
+        imageAvatar = new com.zx.shopmanagementsystem.components.ImageAvatar();
         logoutBtnLbl = new javax.swing.JLabel();
         mainPanal = new javax.swing.JPanel();
 
@@ -245,6 +257,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             }
         });
         menu1.add(helpBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 630, 339, 39));
+        menu1.add(imageAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 160, 150));
 
         logoutBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\LogoutPurple.png")); // NOI18N
         logoutBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -272,6 +285,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void dashboardBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnLblMouseEntered
         // TODO add your handling code here:
         func.iconSetter(dashboardBtnLbl, il.dashboardWhiteIcon);
+        System.out.println("Dashbaord : " + UserID);
     }//GEN-LAST:event_dashboardBtnLblMouseEntered
 
     private void dashboardBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnLblMouseExited
@@ -507,6 +521,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel debtManagementBtnLbl;
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel helpBtnLbl;
+    private com.zx.shopmanagementsystem.components.ImageAvatar imageAvatar;
     private javax.swing.JLabel inventoryManagementBtnLbl;
     private javax.swing.JLabel invoiceCreationBtnLbl;
     private javax.swing.JLabel logoutBtnLbl;
@@ -520,6 +535,41 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     private void setIcon() {
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
+    }
+
+    public void getUserId(int UserID) {
+        this.UserID = UserID;
+        JDBC DB = new JDBC();
+
+        InputStream input;
+        FileOutputStream output;
+        System.out.println("Data Load UserID : " + UserID);
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM user WHERE user_id = " + UserID + ";");
+            while (rs.next()) {
+
+                File file = new File("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\DBProfileImages\\img" + UserID + "_Dash_" + ".png");
+                output = new FileOutputStream(file);
+                input = rs.getBinaryStream("profile_pic");
+                byte buffer[] = new byte[1024];
+                while (input.read(buffer) > 0) {
+                    output.write(buffer);
+                }
+                path = file.getAbsolutePath();
+                System.out.println("Path : " + path);
+                ImageIcon image = new ImageIcon(path);
+                Image img = image.getImage();
+                ImageIcon imageIcon = new ImageIcon(img);
+                imageAvatar.setIcon(imageIcon);
+                imageAvatar.setVisible(false);
+                imageAvatar.setVisible(true);
+
+                break;
+            }
+        } catch (Exception ex) {
+            System.out.println("Data Load Function (User Details): " + ex.getMessage());
+        }
     }
 
 }

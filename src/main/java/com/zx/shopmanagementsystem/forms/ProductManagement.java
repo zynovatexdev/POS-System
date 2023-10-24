@@ -8,6 +8,7 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.ui.AddBarcode;
 import com.zx.shopmanagementsystem.ui.AddDiscount;
+import com.zx.shopmanagementsystem.ui.AddProduct;
 import com.zx.shopmanagementsystem.ui.AddProductCategory;
 import com.zx.shopmanagementsystem.ui.AddProductType;
 import com.zx.shopmanagementsystem.ui.AddStoreLocation;
@@ -66,6 +67,9 @@ public class ProductManagement extends javax.swing.JPanel {
         addProductBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductPurple.png")); // NOI18N
         addProductBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addProductBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addProductBtnLblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 addProductBtnLblMouseEntered(evt);
             }
@@ -228,6 +232,12 @@ public class ProductManagement extends javax.swing.JPanel {
         AddStoreLocation asl = new AddStoreLocation();
         asl.setVisible(true);
     }//GEN-LAST:event_addStoreLocationBtnLblMouseClicked
+    
+    private void addProductBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseClicked
+        // TODO add your handling code here:
+        AddProduct ap = new AddProduct();
+        ap.setVisible(true);
+    }//GEN-LAST:event_addProductBtnLblMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addBarcodeBtnLbl;

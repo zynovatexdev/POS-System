@@ -94,13 +94,14 @@ public class AddBarcode extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         head1.setHeaderTextColor("#000000");
-        head1.setHeaderTitle("Add Barcode");
+        head1.setHeaderTitle("");
         head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         addBarcodeBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
         addBarcodeBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -114,11 +115,11 @@ public class AddBarcode extends javax.swing.JFrame {
                 addBarcodeBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addBarcodeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 440, -1, -1));
+        getContentPane().add(addBarcodeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 440, -1, -1));
 
         barcodeIdLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         barcodeIdLbl.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(barcodeIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 250, 70, 20));
+        getContentPane().add(barcodeIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 220, 70, 20));
 
         barcodeDetectorBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
         barcodeDetectorBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -127,12 +128,12 @@ public class AddBarcode extends javax.swing.JFrame {
                 barcodeDetectorBtnLblMouseClicked(evt);
             }
         });
-        getContentPane().add(barcodeDetectorBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1240, 310, -1, -1));
+        getContentPane().add(barcodeDetectorBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 310, -1, -1));
 
         barcodeValueTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         barcodeValueTxt.setHintText("Enter Barcode Value");
         barcodeValueTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        getContentPane().add(barcodeValueTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 299, 340, 50));
+        getContentPane().add(barcodeValueTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 300, 280, 50));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Barcode.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

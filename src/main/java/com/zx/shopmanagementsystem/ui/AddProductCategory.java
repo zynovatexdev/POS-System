@@ -58,13 +58,14 @@ public class AddProductCategory extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         head1.setHeaderTextColor("#FFFFFF");
-        head1.setHeaderTitle("Add Barcode");
+        head1.setHeaderTitle("");
         head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         addProCatBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
         addProCatBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -78,12 +79,12 @@ public class AddProductCategory extends javax.swing.JFrame {
                 addProCatBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addProCatBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 440, -1, -1));
+        getContentPane().add(addProCatBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 430, -1, -1));
 
         catIdLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         catIdLbl.setForeground(new java.awt.Color(255, 255, 255));
         catIdLbl.setText("0");
-        getContentPane().add(catIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 232, 290, 20));
+        getContentPane().add(catIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 217, 290, 20));
 
         cateNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         cateNameTxt.setHintText("Enter Category Name");
@@ -93,7 +94,7 @@ public class AddProductCategory extends javax.swing.JFrame {
                 cateNameTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(cateNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, 460, -1));
+        getContentPane().add(cateNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 340, 460, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Product_Category.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

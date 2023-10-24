@@ -42,9 +42,12 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="pro" max="32767" attributes="0"/>
                       <Component id="jLabel1" max="32767" attributes="0"/>
-                      <Component id="statusLbl" min="-2" pref="128" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="138" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="statusLbl" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -10,6 +10,8 @@ import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.forms.SupplierManagement;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -165,6 +167,9 @@ public class SupplierRegistration extends javax.swing.JFrame {
         if (supplierName.equals("")) {
             System.out.println("Supplier Name Empty");
             DialogBox.showMessage("WARNING", "Supplier Name Empty", 2);
+        } else if (supplierNameChecker(supplierName)) {
+            System.out.println("Supplier Name Exsist");
+            DialogBox.showMessage("WARNING", "Supplier Name Already Exsist", 2);
         } else if (supplierNumber.equals("")) {
             System.out.println("Supplier Number Empty");
             DialogBox.showMessage("WARNING", "Supplier Number Empty", 2);
@@ -176,6 +181,7 @@ public class SupplierRegistration extends javax.swing.JFrame {
                     System.out.println("Data Saved");
                     DialogBox.showMessage("Done", "Supplier Successfully Saved", 1);
                     clear();
+                    getMaxValue();
                     //System.out.println("New Id : " + newSupId);
                 } catch (Exception ex) {
                     System.out.println("Register Supplier Function (SupplierRegistration) -> " + ex.getMessage());
@@ -214,5 +220,26 @@ public class SupplierRegistration extends javax.swing.JFrame {
     private void clear() {
         supplierNameTxt.setText("");
         supplierNumberTxt.setText("");
+    }
+
+    private boolean supplierNameChecker(String supplierName) {
+        JDBC DB = new JDBC();
+        String sql = "SELECT * FROM supplier WHERE supplier_name=?";
+        boolean Exist = false;
+        try {
+            PreparedStatement pstmt = DB.con().prepareStatement(sql);
+            pstmt.setString(1, supplierName);
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                System.out.println("Supplier Name is already taken.");
+                Exist = true;
+            } else {
+                System.out.println("Supplier Name is available.");
+                Exist = false;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(UserRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Exist;
     }
 }

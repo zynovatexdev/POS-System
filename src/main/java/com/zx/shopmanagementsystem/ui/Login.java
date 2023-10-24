@@ -213,11 +213,15 @@ public class Login extends javax.swing.JFrame {
                     while (true) {
                         System.out.println("While Running");
                         int userRoleId = rs.getInt("user_role_id");
+                        int userID = rs.getInt("user_id");
+
                         if (userRoleId == 1) {
                             Login.this.dispose();
                             new SplashPanal(null, true).setVisible(true);
                             DashboardAdmin dashboardAdmin = new DashboardAdmin();
+                            //dashboardAdmin.getUserId(userID);
                             dashboardAdmin.setVisible(true);
+                            dashboardAdmin.getUserId(userID);
                             break;
                         } else {
                             Login.this.dispose();

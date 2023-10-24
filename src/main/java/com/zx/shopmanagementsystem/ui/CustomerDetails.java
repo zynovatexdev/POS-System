@@ -55,11 +55,11 @@ public class CustomerDetails extends javax.swing.JFrame {
         head1 = new com.zx.shopmanagementsystem.components.Head();
         customerNameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         customerAddressTxt = new com.zx.shopmanagementsystem.components.RoundedText();
-        customerCategoryCombo = new javax.swing.JComboBox<>();
         customerNumberTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         deleteCustomerBtnLbl = new javax.swing.JLabel();
         editCustomerBtnLbl = new javax.swing.JLabel();
         updateCustomerBtnLbl = new javax.swing.JLabel();
+        customerCategoryCombo = new com.zx.shopmanagementsystem.components.Combobox();
         iconLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -80,9 +80,6 @@ public class CustomerDetails extends javax.swing.JFrame {
         customerAddressTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerAddressTxt.setHintText("Enter Customer Address");
         getContentPane().add(customerAddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 320, 310, 50));
-
-        customerCategoryCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 400, 290, 50));
 
         customerNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerNumberTxt.setHintText("Enter Customer Number");
@@ -130,6 +127,10 @@ public class CustomerDetails extends javax.swing.JFrame {
             }
         });
         getContentPane().add(updateCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 630, -1, -1));
+
+        customerCategoryCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        customerCategoryCombo.setLabeText("Select Category");
+        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 405, 300, 50));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\CustomerDetails.png")); // NOI18N
         iconLbl.setText("jLabel1");
@@ -242,7 +243,7 @@ public class CustomerDetails extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.zx.shopmanagementsystem.components.RoundedText customerAddressTxt;
-    private javax.swing.JComboBox<String> customerCategoryCombo;
+    private com.zx.shopmanagementsystem.components.Combobox customerCategoryCombo;
     private com.zx.shopmanagementsystem.components.RoundedText customerNameTxt;
     private com.zx.shopmanagementsystem.components.RoundedText customerNumberTxt;
     private javax.swing.JLabel deleteCustomerBtnLbl;

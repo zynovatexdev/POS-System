@@ -83,7 +83,8 @@ public class UserDetails extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         head1.setHeaderTextColor("#000000");
-        head1.setHeaderTitle("User Details");
+        head1.setHeaderTitle("");
+        head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
 
         fullNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N

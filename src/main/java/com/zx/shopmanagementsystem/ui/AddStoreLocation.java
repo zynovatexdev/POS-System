@@ -53,13 +53,14 @@ public class AddStoreLocation extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         head1.setHeaderTextColor("#000000");
         head1.setHeaderTitle("Add Barcode");
         head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         addStoreLocation.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
         addStoreLocation.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -73,19 +74,19 @@ public class AddStoreLocation extends javax.swing.JFrame {
                 addStoreLocationMouseExited(evt);
             }
         });
-        getContentPane().add(addStoreLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 480, -1, -1));
+        getContentPane().add(addStoreLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 470, -1, -1));
 
         storeLocationTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         storeLocationTxt.setHintText("Enter Product Type");
         storeLocationTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        getContentPane().add(storeLocationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 230, 480, -1));
+        getContentPane().add(storeLocationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 480, -1));
 
         storeLocationDescription.setColumns(20);
         storeLocationDescription.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         storeLocationDescription.setRows(5);
         jScrollPane1.setViewportView(storeLocationDescription);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 330, 460, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 320, 460, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Store_Location.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

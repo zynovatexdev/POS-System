@@ -33,7 +33,8 @@
     <Component class="com.zx.shopmanagementsystem.components.Head" name="head1">
       <Properties>
         <Property name="headerTextColor" type="java.lang.String" value="#000000"/>
-        <Property name="headerTitle" type="java.lang.String" value="User Details"/>
+        <Property name="headerTitle" type="java.lang.String" value=""/>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
