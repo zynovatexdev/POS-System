@@ -61,19 +61,19 @@ public class SupplierRegistration extends javax.swing.JFrame {
 
         head1.setFrame(this);
         head1.setHeaderTextColor("#FFFFFF");
-        head1.setHeaderTitle("Supplier Registration");
+        head1.setHeaderTitle("");
         head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1366, -1));
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         supplierNumberTxt.setToolTipText("");
         supplierNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         supplierNumberTxt.setHintText("Enter Supplier Contact Number");
-        getContentPane().add(supplierNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 440, 50));
+        getContentPane().add(supplierNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 340, 440, 50));
 
         supplierNameTxt.setToolTipText("");
         supplierNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         supplierNameTxt.setHintText("Enter Supplier Name");
-        getContentPane().add(supplierNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 260, 440, 50));
+        getContentPane().add(supplierNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, 440, 50));
 
         registerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\RegisterPurpleIcon.png")); // NOI18N
         registerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,7 +87,7 @@ public class SupplierRegistration extends javax.swing.JFrame {
                 registerBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(registerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(788, 470, -1, -1));
+        getContentPane().add(registerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 430, -1, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\SupplierRegistration.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

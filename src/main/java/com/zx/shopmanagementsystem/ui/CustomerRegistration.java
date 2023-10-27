@@ -51,34 +51,32 @@ public class CustomerRegistration extends javax.swing.JFrame {
         head1 = new com.zx.shopmanagementsystem.components.Head();
         customerNameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         customerNumberTxt = new com.zx.shopmanagementsystem.components.RoundedText();
-        customerCategoryCombo = new javax.swing.JComboBox<>();
         updateBtn = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerAddressTxt = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         customerIdLbl = new javax.swing.JLabel();
+        customerCategoryCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         iconLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         head1.setFrame(null);
-        head1.setHeaderTitle("Customer Registration");
+        head1.setHeaderTitle("");
         head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1360, -1));
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         customerNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerNameTxt.setHintText("Enter Customer Name");
-        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 140, 480, 50));
+        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 140, 480, 50));
 
         customerNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerNumberTxt.setHintText("Enter Customer Number");
-        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 250, 480, 50));
-
-        customerCategoryCombo.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 500, 330, 50));
+        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, 480, 50));
 
         updateBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\RegisterPurpleIcon.png")); // NOI18N
         updateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -92,7 +90,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
                 updateBtnMouseExited(evt);
             }
         });
-        getContentPane().add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 600, -1, 70));
+        getContentPane().add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 570, -1, 70));
 
         customerAddressTxt.setColumns(20);
         customerAddressTxt.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
@@ -102,16 +100,20 @@ public class CustomerRegistration extends javax.swing.JFrame {
         customerAddressTxt.getAccessibleContext().setAccessibleName("");
         customerAddressTxt.getAccessibleContext().setAccessibleDescription("");
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 350, 480, 100));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 320, 480, 100));
 
         jLabel1.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("New Customer ID");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 70, 150, 30));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 70, 150, 30));
 
         customerIdLbl.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
         customerIdLbl.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(customerIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 68, 150, 30));
+        getContentPane().add(customerIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 70, 150, 30));
+
+        customerCategoryCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        customerCategoryCombo.setPreferredSize(new java.awt.Dimension(163, 50));
+        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, 480, -1));
 
         iconLable.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Customer_Registration.png")); // NOI18N
         getContentPane().add(iconLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -208,7 +210,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea customerAddressTxt;
-    private javax.swing.JComboBox<String> customerCategoryCombo;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion customerCategoryCombo;
     private javax.swing.JLabel customerIdLbl;
     private com.zx.shopmanagementsystem.components.RoundedText customerNameTxt;
     private com.zx.shopmanagementsystem.components.RoundedText customerNumberTxt;

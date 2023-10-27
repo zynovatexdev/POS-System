@@ -59,33 +59,32 @@ public class CustomerDetails extends javax.swing.JFrame {
         deleteCustomerBtnLbl = new javax.swing.JLabel();
         editCustomerBtnLbl = new javax.swing.JLabel();
         updateCustomerBtnLbl = new javax.swing.JLabel();
-        customerCategoryCombo = new com.zx.shopmanagementsystem.components.Combobox();
+        customerCategoryCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         iconLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         head1.setHeaderTextColor("#000000");
-        head1.setHeaderTitle("Customer Details");
+        head1.setHeaderTitle("");
         head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         customerNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerNameTxt.setHintText("Enter Customer Name");
-        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 170, 310, 50));
+        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 160, 310, 50));
 
         customerAddressTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerAddressTxt.setHintText("Enter Customer Address");
-        getContentPane().add(customerAddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 320, 310, 50));
+        getContentPane().add(customerAddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 300, 310, 50));
 
         customerNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerNumberTxt.setHintText("Enter Customer Number");
-        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 240, 310, 50));
+        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 225, 310, 50));
 
-        deleteCustomerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\DeleteCustomerRedIcon.png")); // NOI18N
+        deleteCustomerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\DeleteRedIcon.png")); // NOI18N
         deleteCustomerBtnLbl.setPreferredSize(new java.awt.Dimension(183, 54));
         deleteCustomerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -98,9 +97,9 @@ public class CustomerDetails extends javax.swing.JFrame {
                 deleteCustomerBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(deleteCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 630, 210, -1));
+        getContentPane().add(deleteCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 550, 160, 50));
 
-        editCustomerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\EditDetailsPurpleIcon.png")); // NOI18N
+        editCustomerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\EditPurpleIcon.png")); // NOI18N
         editCustomerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 editCustomerBtnLblMouseClicked(evt);
@@ -112,9 +111,9 @@ public class CustomerDetails extends javax.swing.JFrame {
                 editCustomerBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(editCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 630, -1, -1));
+        getContentPane().add(editCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 550, -1, -1));
 
-        updateCustomerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\Update_Lable.png")); // NOI18N
+        updateCustomerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\UpdatePurpleIcon.png")); // NOI18N
         updateCustomerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateCustomerBtnLblMouseClicked(evt);
@@ -126,15 +125,15 @@ public class CustomerDetails extends javax.swing.JFrame {
                 updateCustomerBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(updateCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 630, -1, -1));
+        getContentPane().add(updateCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 540, -1, -1));
 
         customerCategoryCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        customerCategoryCombo.setLabeText("Select Category");
-        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 405, 300, 50));
+        customerCategoryCombo.setPreferredSize(new java.awt.Dimension(163, 50));
+        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 380, 310, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\CustomerDetails.png")); // NOI18N
         iconLbl.setText("jLabel1");
-        iconLbl.setPreferredSize(new java.awt.Dimension(1366, 768));
+        iconLbl.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -153,12 +152,12 @@ public class CustomerDetails extends javax.swing.JFrame {
 
     private void deleteCustomerBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteCustomerBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(deleteCustomerBtnLbl, il.deleteCustomerWhiteIcon);
+        func.iconSetter(deleteCustomerBtnLbl, il.deleteWhiteIcon);
     }//GEN-LAST:event_deleteCustomerBtnLblMouseEntered
 
     private void deleteCustomerBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteCustomerBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(deleteCustomerBtnLbl, il.deleteCustomerRedIcon);
+        func.iconSetter(deleteCustomerBtnLbl, il.deleteRedIcon);
     }//GEN-LAST:event_deleteCustomerBtnLblMouseExited
 
     private void updateCustomerBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCustomerBtnLblMouseEntered
@@ -168,7 +167,7 @@ public class CustomerDetails extends javax.swing.JFrame {
 
     private void updateCustomerBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateCustomerBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(updateCustomerBtnLbl, il.updateNormalIcon);
+        func.iconSetter(updateCustomerBtnLbl, il.UpdatePurpleIcon);
     }//GEN-LAST:event_updateCustomerBtnLblMouseExited
 
     private void editCustomerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editCustomerBtnLblMouseClicked
@@ -243,7 +242,7 @@ public class CustomerDetails extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.zx.shopmanagementsystem.components.RoundedText customerAddressTxt;
-    private com.zx.shopmanagementsystem.components.Combobox customerCategoryCombo;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion customerCategoryCombo;
     private com.zx.shopmanagementsystem.components.RoundedText customerNameTxt;
     private com.zx.shopmanagementsystem.components.RoundedText customerNumberTxt;
     private javax.swing.JLabel deleteCustomerBtnLbl;

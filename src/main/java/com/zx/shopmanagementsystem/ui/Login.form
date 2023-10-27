@@ -56,7 +56,7 @@
     <Component class="javax.swing.JLabel" name="loginLbl">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\ShopManagementSystem\src\main\java\com\zx\shopmanagementsystem\icons\Login_Lable.png"/>
+          <Image iconType="2" name="C:\ShopManagementSystem\src\main\java\com\zx\shopmanagementsystem\icons\LoginPurpleIcon.png"/>
         </Property>
         <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
           <Color id="Hand Cursor"/>
@@ -115,8 +115,9 @@
     </Component>
     <Component class="com.zx.shopmanagementsystem.components.Head" name="head1">
       <Properties>
-        <Property name="headerTextColor" type="java.lang.String" value="#000000"/>
-        <Property name="headerTitle" type="java.lang.String" value="User Login"/>
+        <Property name="headerTextColor" type="java.lang.String" value="#FFFFFF"/>
+        <Property name="headerTitle" type="java.lang.String" value=""/>
+        <Property name="opaque" type="boolean" value="false"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

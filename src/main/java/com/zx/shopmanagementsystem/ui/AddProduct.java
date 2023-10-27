@@ -16,6 +16,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,8 +36,19 @@ public class AddProduct extends javax.swing.JFrame {
     IconLocation il = new IconLocation();
     JDBC DB = new JDBC();
 
+    ArrayList<Integer> discountIdArray = new ArrayList<>();
+    ArrayList<Integer> supplierIdArray = new ArrayList<>();
+    ArrayList<Integer> categoryIdArray = new ArrayList<>();
+    ArrayList<Integer> barcodeIdArray = new ArrayList<>();
+    ArrayList<Integer> productTypeIdArray = new ArrayList<>();
+    ArrayList<Integer> productLoactionIdArray = new ArrayList<>();
+    int maxId;
+    int newId;
+
     public AddProduct() {
         initComponents();
+
+        getMaxValue();
         Thread dataUpdateThread = new Thread(() -> {
             try {
                 ServerSocket serverSocket = new ServerSocket(12345);  // Use an available port
@@ -80,6 +95,7 @@ public class AddProduct extends javax.swing.JFrame {
         barcodeComboLoader();
         productTypeComboLoader();
         productLocationComboLoader();
+        clear();
         head1.setFrame(this);
     }
 
@@ -96,7 +112,7 @@ public class AddProduct extends javax.swing.JFrame {
         date2 = new com.zx.shopmanagementsystem.dateChooser.DateChooser();
         addProductBtnLbl = new javax.swing.JLabel();
         head1 = new com.zx.shopmanagementsystem.components.Head();
-        jLabel1 = new javax.swing.JLabel();
+        productIdLbl = new javax.swing.JLabel();
         sellingPriceTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         dimentionTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         stockQuantityTxt = new com.zx.shopmanagementsystem.components.RoundedText();
@@ -126,7 +142,6 @@ public class AddProduct extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -143,49 +158,49 @@ public class AddProduct extends javax.swing.JFrame {
                 addProductBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 670, -1, -1));
+        getContentPane().add(addProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 630, -1, -1));
 
         head1.setHeaderTextColor("#000000");
         head1.setHeaderTitle("");
         head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("0");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 240, 20));
+        productIdLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        productIdLbl.setForeground(new java.awt.Color(255, 255, 255));
+        productIdLbl.setText("0");
+        getContentPane().add(productIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 102, 240, 20));
 
         sellingPriceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         sellingPriceTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(sellingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 480, 200, -1));
+        getContentPane().add(sellingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 450, 190, -1));
 
         dimentionTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         dimentionTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(dimentionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 140, 390, -1));
+        getContentPane().add(dimentionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 390, -1));
 
         stockQuantityTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         stockQuantityTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(stockQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 590, 200, -1));
+        getContentPane().add(stockQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 550, 190, -1));
 
         productNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         productNameTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 190, 340, -1));
+        getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 340, -1));
 
         brandTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         brandTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(brandTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 590, 200, -1));
+        getContentPane().add(brandTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 180, -1));
 
         manufactureDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         manufactureDateTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(manufactureDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 250, 200, -1));
+        getContentPane().add(manufactureDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, 190, -1));
 
         expireDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         expireDateTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(expireDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 250, 200, -1));
+        getContentPane().add(expireDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 230, 200, -1));
 
         recivingPriceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         recivingPriceTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(recivingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 480, 200, -1));
+        getContentPane().add(recivingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 180, -1));
 
         barcodeScannerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
         barcodeScannerBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -194,37 +209,37 @@ public class AddProduct extends javax.swing.JFrame {
                 barcodeScannerBtnLblMouseClicked(evt);
             }
         });
-        getContentPane().add(barcodeScannerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1170, 380, 40, 40));
+        getContentPane().add(barcodeScannerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 350, 40, 40));
 
         productDescriptionTxt.setColumns(20);
         productDescriptionTxt.setRows(5);
         jScrollPane1.setViewportView(productDescriptionTxt);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 330, 130));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 330, 130));
 
         productLocationIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productLocationIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 600, 190, -1));
+        getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 560, 190, -1));
 
         productTypeIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productTypeIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productTypeIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 490, 190, -1));
+        getContentPane().add(productTypeIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 450, 190, -1));
 
         discountIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         discountIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(discountIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 600, 190, -1));
+        getContentPane().add(discountIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 560, 190, -1));
 
         categoryIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         categoryIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(categoryIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 490, 190, -1));
+        getContentPane().add(categoryIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 450, 190, -1));
 
         supplierIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         supplierIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(supplierIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 370, 190, -1));
+        getContentPane().add(supplierIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 190, -1));
 
         barcodeCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         barcodeCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(960, 370, 190, -1));
+        getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 340, 190, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_new_Product.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -235,7 +250,8 @@ public class AddProduct extends javax.swing.JFrame {
 
     private void addProductBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseClicked
         // TODO add your handling code here:
-
+        //System.out.println(dynamicArray.get(discountIdCombo.getSelectedIndex()));
+        addProduct();
     }//GEN-LAST:event_addProductBtnLblMouseClicked
 
     private void addProductBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseEntered
@@ -306,10 +322,10 @@ public class AddProduct extends javax.swing.JFrame {
     private com.zx.shopmanagementsystem.components.RoundedText expireDateTxt;
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel iconLbl;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.zx.shopmanagementsystem.components.RoundedText manufactureDateTxt;
     private javax.swing.JTextArea productDescriptionTxt;
+    private javax.swing.JLabel productIdLbl;
     private com.zx.shopmanagementsystem.components.ComboBoxSuggestion productLocationIdCombo;
     private com.zx.shopmanagementsystem.components.RoundedText productNameTxt;
     private com.zx.shopmanagementsystem.components.ComboBoxSuggestion productTypeIdCombo;
@@ -324,7 +340,9 @@ public class AddProduct extends javax.swing.JFrame {
             ResultSet rs = DB.getdata("SELECT * FROM supplier");
             while (rs.next()) {
                 String supplierName = rs.getString("supplier_name");
+                int supplierId = rs.getInt("supplier_id");
                 supplierIdCombo.addItem(supplierName);
+                supplierIdArray.add(supplierId);
             }
         } catch (Exception ex) {
             System.out.println("Supplier Combo Loader : " + ex);
@@ -336,7 +354,9 @@ public class AddProduct extends javax.swing.JFrame {
             ResultSet rs = DB.getdata("SELECT * FROM product_category");
             while (rs.next()) {
                 String supplierName = rs.getString("category_name");
+                int categoryId = rs.getInt("category_id");
                 categoryIdCombo.addItem(supplierName);
+                categoryIdArray.add(categoryId);
             }
         } catch (Exception ex) {
             System.out.println("Product Category Combo Loader : " + ex);
@@ -348,7 +368,16 @@ public class AddProduct extends javax.swing.JFrame {
             ResultSet rs = DB.getdata("SELECT * FROM discont");
             while (rs.next()) {
                 String supplierName = rs.getString("discount_presentage");
-                discountIdCombo.addItem(supplierName + "%");
+                String endDate = rs.getString("end_date");
+                int disId = rs.getInt("discount_id");
+                System.out.println(endDate);
+                if (func.dateValidator(endDate) == 1) {
+                    discountIdCombo.addItem(supplierName + "%");
+                    discountIdArray.add(disId);
+                } else {
+                    System.out.println("Day Before");
+                }
+
             }
         } catch (Exception ex) {
             System.out.println("Discount Combo Loader : " + ex);
@@ -360,7 +389,9 @@ public class AddProduct extends javax.swing.JFrame {
             ResultSet rs = DB.getdata("SELECT * FROM barcode");
             while (rs.next()) {
                 String barcodeValue = rs.getString("barcode_value");
+                int barcodeId = rs.getInt("barcode_id");
                 barcodeCombo.addItem(barcodeValue);
+                barcodeIdArray.add(barcodeId);
             }
         } catch (Exception ex) {
             System.out.println("Barcode Combo Loader : " + ex);
@@ -372,7 +403,9 @@ public class AddProduct extends javax.swing.JFrame {
             ResultSet rs = DB.getdata("SELECT * FROM product_type");
             while (rs.next()) {
                 String productType = rs.getString("product_type");
+                int typeId = rs.getInt("product_type_id");
                 productTypeIdCombo.addItem(productType);
+                productTypeIdArray.add(typeId);
             }
         } catch (Exception ex) {
             System.out.println("Product Type Combo Loader : " + ex);
@@ -384,7 +417,9 @@ public class AddProduct extends javax.swing.JFrame {
             ResultSet rs = DB.getdata("SELECT * FROM store_location");
             while (rs.next()) {
                 String storeLocation = rs.getString("store_location_name");
+                int locationId = rs.getInt("store_location_id");
                 productLocationIdCombo.addItem(storeLocation);
+                productLoactionIdArray.add(locationId);
             }
         } catch (Exception ex) {
             System.out.println("Product Type Combo Loader : " + ex);
@@ -410,4 +445,156 @@ public class AddProduct extends javax.swing.JFrame {
         }
         return Exist;
     }
+
+    private void getMaxValue() {
+        try {
+            java.sql.ResultSet rs1 = DB.getdata("SELECT MAX(product_id) FROM product");
+            if (rs1.next()) {
+                //System.out.println("Table not empty");
+                maxId = rs1.getInt("max(product_id)");
+                //System.out.println(maxCusId);
+                //customerIdLbl.setText(String.valueOf(maxDisId + 1));
+                newId(maxId);
+            } else {
+                System.out.println("Table Empty");
+            }
+        } catch (Exception ex) {
+            System.out.println("Get max Value : " + ex.getMessage());
+        }
+    }
+
+    private void newId(int maxValue) {
+        newId = maxValue + 1;
+        productIdLbl.setText(String.valueOf(newId));
+    }
+
+    private void addProduct() {
+        MessageDialog DialogBox = new MessageDialog(this);
+        String productName = productNameTxt.getText();
+        String recivingPrice = recivingPriceTxt.getText();
+        String sellingPrice = sellingPriceTxt.getText();
+        String stockQuantity = stockQuantityTxt.getText();
+        String description = productDescriptionTxt.getText();
+        String brand = brandTxt.getText();
+        String dimention = dimentionTxt.getText();
+        String manufactureDate = manufactureDateTxt.getText();
+        String expDate = expireDateTxt.getText();
+        int supplierId = supplierIdArray.get(supplierIdCombo.getSelectedIndex());
+        int barcodeId = barcodeIdArray.get(barcodeCombo.getSelectedIndex());
+        int categoryId = categoryIdArray.get(categoryIdCombo.getSelectedIndex());
+        int typeId = productTypeIdArray.get(productTypeIdCombo.getSelectedIndex());
+        int discoundId = discountIdArray.get(discountIdCombo.getSelectedIndex());
+        int locationId = productLoactionIdArray.get(productLocationIdCombo.getSelectedIndex());
+
+        if (productName.equals("")) {
+            System.out.println("Product Name Empty");
+            DialogBox.showMessage("WARNING!!!", "Product Name Empty", 2);
+        } else if (recivingPrice.equals("")) {
+            System.out.println("Reciving Price Empty");
+            DialogBox.showMessage("WARNING!!!", "Reciving Price Empty", 2);
+        } else if (sellingPrice.equals("")) {
+            System.out.println("Selling Price Empty");
+            DialogBox.showMessage("WARNING!!!", "Selling Price Empty", 2);
+        } else if (stockQuantity.equals("")) {
+            System.out.println("Stock Quantity Empty");
+            DialogBox.showMessage("WARNING!!!", "Stock Quantity Empty", 2);
+        } else {
+            if (manufactureDate.equals("") || expDate.equals("")) {
+                System.out.println("Date Empty");
+                try {
+                    DB.putdata("INSERT INTO product (product_id, product_name, reciving_price, selling_price, stock_quantity, description, brand, dimensions, manufacturing_date, expiry_date, supplier_id, barcode_id, category_id, product_type_id, discount_id, store_location_id) VALUES('" + newId + "','" + productName + "','" + recivingPrice + "','" + sellingPrice + "','" + stockQuantity + "','" + description + "','" + brand + "','" + dimention + "','" + manufactureDate + "','" + expDate + "','" + supplierId + "','" + barcodeId + "','" + categoryId + "','" + typeId + "','" + discoundId + "','" + locationId + "')");
+                    System.out.println("Data saved");
+                    String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
+                    func.QRGenerator(code, productName);
+                    DialogBox.showMessage("Saved", "Product Saved\nBarcode Created.", 1);
+                    getMaxValue();
+                    clear();
+                } catch (Exception ex) {
+                    System.out.println("Data Save Without Date : " + ex.getMessage());
+                }
+            } else {
+                if ((manufacDateVali(manufactureDate))) {
+                    System.out.println("Manufacture Date Not Valid");
+                    DialogBox.showMessage("WARNING!!!", "Manufacture Date Not Valid", 2);
+                } else {
+                    if (expDateVali(manufactureDate, expDate)) {
+                        System.out.println("Date Valid");
+                        try {
+                            DB.putdata("INSERT INTO product (product_id, product_name, reciving_price, selling_price, stock_quantity, description, brand, dimensions, manufacturing_date, expiry_date, supplier_id, barcode_id, category_id, product_type_id, discount_id, store_location_id) VALUES('" + newId + "','" + productName + "','" + recivingPrice + "','" + sellingPrice + "','" + stockQuantity + "','" + description + "','" + brand + "','" + dimention + "','" + manufactureDate + "','" + expDate + "','" + supplierId + "','" + barcodeId + "','" + categoryId + "','" + typeId + "','" + discoundId + "','" + locationId + "')");
+                            System.out.println("Data saved");
+                            String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
+                            func.QRGenerator(code, productName);
+                            DialogBox.showMessage("Saved", "Product Saved\nBarcode Created.", 1);
+                            getMaxValue();
+                            clear();
+                        } catch (Exception ex) {
+                            System.out.println("Data Save With Date : " + ex.getMessage());
+                        }
+
+                    } else {
+                        System.out.println("Expire Date Not Valid");
+                        DialogBox.showMessage("WARNING!!!", "Expire Date Not Valid", 2);
+                    }
+                }
+            }
+
+        }
+    }
+
+    private void clear() {
+        productNameTxt.setText("");
+        recivingPriceTxt.setText("");
+        sellingPriceTxt.setText("");
+        stockQuantityTxt.setText("");
+        productDescriptionTxt.setText("");
+        brandTxt.setText("");
+        dimentionTxt.setText("");
+        manufactureDateTxt.setText("");
+        expireDateTxt.setText("");
+        supplierIdCombo.setSelectedIndex(0);
+        barcodeCombo.setSelectedIndex(0);
+        categoryIdCombo.setSelectedIndex(0);
+        productTypeIdCombo.setSelectedIndex(0);
+        discountIdCombo.setSelectedIndex(0);
+        productLocationIdCombo.setSelectedIndex(0);
+    }
+
+    private boolean manufacDateVali(String manuDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date(); // Current date
+        String manufactureDateStr = manuDate;
+        boolean date = false;
+        try {
+            Date manufactureDate = sdf.parse(manufactureDateStr);
+            Date validStartDate = currentDate;
+
+            date = !manufactureDate.before(validStartDate);
+            //System.out.println("Manufacture date is valid.");
+            //System.out.println("Manufacture date is not valid.");
+        } catch (ParseException ex) {
+            System.out.println("Manu date validator : " + ex.getMessage());
+        }
+        return date;
+    }
+
+    private boolean expDateVali(String manuDate, String expireDateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date(); // Current date
+        String manufactureDateStr = manuDate;
+        String expirationDateStr = expireDateStr;
+        boolean date = false;
+        try {
+            Date manufactureDate = sdf.parse(manufactureDateStr);
+            Date expirationDate = sdf.parse(expirationDateStr);
+            Date validStartDate = currentDate;
+
+            date = expirationDate.after(manufactureDate) && expirationDate.after(validStartDate);
+            //System.out.println("Expiration date is valid.");
+            //System.out.println("Expiration date is not valid.");
+        } catch (ParseException ex) {
+            System.out.println("Exp date validator : " + ex.getMessage());
+        }
+        return date;
+    }
+
 }

@@ -153,7 +153,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
         menu1.add(debtManagementBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 390, 339, 39));
 
-        productManagementBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\ProjectManagementPurple.png")); // NOI18N
+        productManagementBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\ProductManagementPurple.png")); // NOI18N
         productManagementBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         productManagementBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -166,7 +166,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 productManagementBtnLblMouseExited(evt);
             }
         });
-        menu1.add(productManagementBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 310, 339, 39));
+        menu1.add(productManagementBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 350, 339, 39));
 
         inventoryManagementBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\InventoryManagementPurple.png")); // NOI18N
         inventoryManagementBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -181,7 +181,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 inventoryManagementBtnLblMouseExited(evt);
             }
         });
-        menu1.add(inventoryManagementBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 350, 339, 39));
+        menu1.add(inventoryManagementBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 310, 339, 39));
 
         invoiceCreationBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\InvoiceCreationPurple.png")); // NOI18N
         invoiceCreationBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -271,7 +271,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
         menu1.add(logoutBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 686, -1, -1));
 
-        getContentPane().add(menu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 8, 350, 760));
+        getContentPane().add(menu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 350, 770));
 
         mainPanal.setBackground(new java.awt.Color(255, 255, 255));
         mainPanal.setPreferredSize(new java.awt.Dimension(1015, 738));

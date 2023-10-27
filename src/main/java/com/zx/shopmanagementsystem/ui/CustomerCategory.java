@@ -54,20 +54,21 @@ public class CustomerCategory extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         typeTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         typeTxt.setHintText("Enter Customer Category Type");
-        getContentPane().add(typeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 250, 440, 50));
+        getContentPane().add(typeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, 440, 50));
 
         descriptionTxt.setColumns(20);
         descriptionTxt.setRows(5);
         jScrollPane1.setViewportView(descriptionTxt);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 360, 420, 150));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 330, 420, 150));
 
-        submitBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SubmitPurpleIcon.png")); // NOI18N
+        submitBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
         submitBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         submitBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -80,11 +81,12 @@ public class CustomerCategory extends javax.swing.JFrame {
                 submitBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(submitBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 540, -1, -1));
+        getContentPane().add(submitBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 510, -1, -1));
 
         head1.setHeaderTextColor("#FFFFFF");
-        head1.setHeaderTitle("Add Customer Category");
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
+        head1.setHeaderTitle("");
+        head1.setOpaque(false);
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\CustomerCategory.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

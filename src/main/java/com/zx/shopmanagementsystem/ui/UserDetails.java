@@ -66,30 +66,29 @@ public class UserDetails extends javax.swing.JFrame {
         head1 = new com.zx.shopmanagementsystem.components.Head();
         fullNameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         hidePasswordLblBtn = new javax.swing.JLabel();
-        passwordTxt = new com.zx.shopmanagementsystem.components.RoundedPassword();
         userNameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
-        roleCombo = new javax.swing.JComboBox<>();
         deleteBtnLbl = new javax.swing.JLabel();
         editBtnLbl = new javax.swing.JLabel();
         updateBtnLbl = new javax.swing.JLabel();
+        passwordTxt = new com.zx.shopmanagementsystem.components.RoundedPassword();
         imageAvatar = new com.zx.shopmanagementsystem.components.ImageAvatar();
         updateImageIconBtn = new javax.swing.JLabel();
+        roleCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         iconLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         head1.setHeaderTextColor("#000000");
         head1.setHeaderTitle("");
         head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         fullNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         fullNameTxt.setHintText("Full Name");
-        getContentPane().add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 475, 310, 50));
+        getContentPane().add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 430, 310, 50));
 
         hidePasswordLblBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\HidePassword.png")); // NOI18N
         hidePasswordLblBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,17 +96,11 @@ public class UserDetails extends javax.swing.JFrame {
                 hidePasswordLblBtnMouseClicked(evt);
             }
         });
-        getContentPane().add(hidePasswordLblBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1190, 420, 35, 30));
-
-        passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 412, 310, 50));
+        getContentPane().add(hidePasswordLblBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 380, 35, 30));
 
         userNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         userNameTxt.setHintText("User Name");
-        getContentPane().add(userNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 350, 310, 50));
-
-        roleCombo.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        getContentPane().add(roleCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 540, 300, 50));
+        getContentPane().add(userNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 310, 310, 50));
 
         deleteBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\DeleteRedIcon.png")); // NOI18N
         deleteBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -121,9 +114,9 @@ public class UserDetails extends javax.swing.JFrame {
                 deleteBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(deleteBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 650, 183, 54));
+        getContentPane().add(deleteBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 610, -1, 54));
 
-        editBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\EditUserDetailsPurpleIcon.png")); // NOI18N
+        editBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\EditPurpleIcon.png")); // NOI18N
         editBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 editBtnLblMouseClicked(evt);
@@ -135,9 +128,9 @@ public class UserDetails extends javax.swing.JFrame {
                 editBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(editBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 650, 183, 54));
+        getContentPane().add(editBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 610, 170, 54));
 
-        updateBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\Update_Lable.png")); // NOI18N
+        updateBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\UpdatePurpleIcon.png")); // NOI18N
         updateBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateBtnLblMouseClicked(evt);
@@ -149,21 +142,29 @@ public class UserDetails extends javax.swing.JFrame {
                 updateBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(updateBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 650, -1, -1));
+        getContentPane().add(updateBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 600, -1, -1));
 
-        imageAvatar.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddBarcodeWhite.png")); // NOI18N
+        passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        passwordTxt.setPreferredSize(new java.awt.Dimension(157, 50));
+        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 370, 310, -1));
+
+        imageAvatar.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Pictures\\image.jpg")); // NOI18N
 
         updateImageIconBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\EditImageIcon.png")); // NOI18N
-        updateImageIconBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateImageIconBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateImageIconBtnMouseClicked(evt);
             }
         });
         imageAvatar.add(updateImageIconBtn);
-        updateImageIconBtn.setBounds(160, 200, 48, 48);
+        updateImageIconBtn.setBounds(150, 150, 50, 50);
 
-        getContentPane().add(imageAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 50, 250, 240));
+        getContentPane().add(imageAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 70, 200, 200));
+
+        roleCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        roleCombo.setMinimumSize(new java.awt.Dimension(163, 50));
+        roleCombo.setPreferredSize(new java.awt.Dimension(163, 50));
+        getContentPane().add(roleCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 490, 310, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\User_Details.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -174,12 +175,12 @@ public class UserDetails extends javax.swing.JFrame {
 
     private void editBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(editBtnLbl, il.editUserDetailsWhiteIcon);
+        func.iconSetter(editBtnLbl, il.editDetailsWhiteIcon);
     }//GEN-LAST:event_editBtnLblMouseEntered
 
     private void editBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(editBtnLbl, il.editUserDetailsPurpleIcon);
+        func.iconSetter(editBtnLbl, il.editDetailsPurpleIcon);
     }//GEN-LAST:event_editBtnLblMouseExited
 
     private void deleteBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBtnLblMouseEntered
@@ -199,7 +200,7 @@ public class UserDetails extends javax.swing.JFrame {
 
     private void updateBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(updateBtnLbl, il.updateNormalIcon);
+        func.iconSetter(updateBtnLbl, il.UpdatePurpleIcon);
     }//GEN-LAST:event_updateBtnLblMouseExited
 
     private void editBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtnLblMouseClicked
@@ -336,7 +337,7 @@ public class UserDetails extends javax.swing.JFrame {
     private javax.swing.JLabel iconLbl;
     private com.zx.shopmanagementsystem.components.ImageAvatar imageAvatar;
     private com.zx.shopmanagementsystem.components.RoundedPassword passwordTxt;
-    private javax.swing.JComboBox<String> roleCombo;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion roleCombo;
     private javax.swing.JLabel updateBtnLbl;
     private javax.swing.JLabel updateImageIconBtn;
     private com.zx.shopmanagementsystem.components.RoundedText userNameTxt;

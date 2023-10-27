@@ -119,7 +119,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         newPasswordTxt.setHintText("New Password");
         getContentPane().add(newPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, 470, 50));
 
-        updatePasswordLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\Update_Lable.png")); // NOI18N
+        updatePasswordLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\UpdatePurpleIcon.png")); // NOI18N
         updatePasswordLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updatePasswordLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -142,6 +142,8 @@ public class ForgotPassword extends javax.swing.JFrame {
             }
         });
         getContentPane().add(backButtonLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 50, 50));
+
+        head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Forgot_Password.png")); // NOI18N
@@ -228,12 +230,12 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     private void updatePasswordLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePasswordLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(updatePasswordLbl, il.updateAnimatedIcon);
+        func.iconSetter(updatePasswordLbl, il.updateWhiteIcon);
     }//GEN-LAST:event_updatePasswordLblMouseEntered
 
     private void updatePasswordLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePasswordLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(updatePasswordLbl, il.updateNormalIcon);
+        func.iconSetter(updatePasswordLbl, il.UpdatePurpleIcon);
     }//GEN-LAST:event_updatePasswordLblMouseExited
 
     private void updatePasswordLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePasswordLblMouseClicked

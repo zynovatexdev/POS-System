@@ -72,7 +72,7 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(showPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 410, -1, 30));
 
-        loginLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\Login_Lable.png")); // NOI18N
+        loginLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\LoginPurpleIcon.png")); // NOI18N
         loginLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -102,8 +102,9 @@ public class Login extends javax.swing.JFrame {
         passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, 480, 50));
 
-        head1.setHeaderTextColor("#000000");
-        head1.setHeaderTitle("User Login");
+        head1.setHeaderTextColor("#FFFFFF");
+        head1.setHeaderTitle("");
+        head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\User_Login.png")); // NOI18N
@@ -115,12 +116,12 @@ public class Login extends javax.swing.JFrame {
 
     private void loginLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(loginLbl, il.loginAnimationIcon);
+        func.iconSetter(loginLbl, il.LoginWhiteIcon);
     }//GEN-LAST:event_loginLblMouseEntered
 
     private void loginLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(loginLbl, il.loginNormalIcon);
+        func.iconSetter(loginLbl, il.LoginPurpleIcon);
     }//GEN-LAST:event_loginLblMouseExited
 
     private void forgotPasswordLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotPasswordLblMouseClicked

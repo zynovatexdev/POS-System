@@ -73,7 +73,6 @@ public class AddDiscount extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -112,7 +111,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 addDiscountBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addDiscountBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 460, -1, -1));
+        getContentPane().add(addDiscountBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(735, 460, -1, -1));
 
         endDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         endDateTxt.setHintText("Enter End Date");
@@ -255,10 +254,10 @@ public class AddDiscount extends javax.swing.JFrame {
             //System.out.println("Start : " + startDate + " End Date : " + endDate);
             if (func.dateValidator(startDate) == 2) {
                 System.out.println("Please Select a Valid Date");
-                DialogBox.showMessage("ERROR", "Select Start Date :\n" + LocalDate.now().plusDays(1) + " or After.", 1);
+                DialogBox.showMessage("ERROR", "Select Start Date :\n" + LocalDate.now().plusDays(1) + " or After.", 2);
             } else if (func.dateValidator(endDate) == 2) {
                 System.out.println("Please Select a Valid Date");
-                DialogBox.showMessage("ERROR", "Select End Date :\n" + LocalDate.now().plusDays(1) + " or After.", 1);
+                DialogBox.showMessage("ERROR", "Select End Date :\n" + LocalDate.now().plusDays(2) + " or After.", 2);
             } else if (dateRange(startDate, endDate)) {
                 System.out.println("Date Range Not Valid");
                 DialogBox.showMessage("ERROR", "End date is before the start date. \nInvalid date range.", 3);

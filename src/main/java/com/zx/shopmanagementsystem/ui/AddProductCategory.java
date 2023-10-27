@@ -58,7 +58,6 @@ public class AddProductCategory extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -79,7 +78,7 @@ public class AddProductCategory extends javax.swing.JFrame {
                 addProCatBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addProCatBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 430, -1, -1));
+        getContentPane().add(addProCatBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 430, -1, -1));
 
         catIdLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         catIdLbl.setForeground(new java.awt.Color(255, 255, 255));

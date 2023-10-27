@@ -171,6 +171,7 @@ public class UserManagement extends javax.swing.JPanel {
                 "User ID", "User Name", "Full Name"
             }
         ));
+        userTbl.setOpaque(false);
         userTbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 userTblMouseClicked(evt);

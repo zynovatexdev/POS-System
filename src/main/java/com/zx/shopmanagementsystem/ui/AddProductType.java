@@ -59,7 +59,6 @@ public class AddProductType extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -80,7 +79,7 @@ public class AddProductType extends javax.swing.JFrame {
                 addProcuctTypeBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addProcuctTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 460, -1, -1));
+        getContentPane().add(addProcuctTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 460, -1, -1));
 
         productTypeTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         productTypeTxt.setHintText("Enter Product Type");

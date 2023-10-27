@@ -8,9 +8,12 @@ import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.ParseException;
@@ -23,6 +26,8 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
+import net.glxn.qrgen.QRCode;
+import net.glxn.qrgen.image.ImageType;
 
 /**
  *
@@ -176,13 +181,45 @@ public class Func {
             } else if (selectedDate.before(currentDate)) {
                 System.out.println("Selected date is less than the current date.");
                 isValid = 2;
-            } else {
-                System.out.println("Selected date is equal to the current date.");
-                isValid = 3;
             }
         } catch (ParseException e) {
-            System.out.println("Invalid date format. Please use 'dd-MM-yyyy' format.");
+            System.out.println("Invalid date format. Please use 'yyyy-MM-dd' format.");
         }
         return isValid;
+    }
+
+    public void QRGenerator(String data, String name) {
+        // Adjust the size as needed
+        int qrCodeSize = 250;
+
+        // Define the target folder path
+        String targetFolderPath = System.getProperty("user.home") + "/Pictures/POS System QR";
+
+        // Create the target folder if it doesn't exist
+        File targetFolder = new File(targetFolderPath);
+        if (!targetFolder.exists()) {
+            boolean folderCreated = targetFolder.mkdirs();
+            if (!folderCreated) {
+                System.err.println("Failed to create the target folder.");
+                return;
+            }
+        }
+
+        try {
+            ByteArrayOutputStream out = QRCode.from(data)
+                    .withSize(qrCodeSize, qrCodeSize)
+                    .to(ImageType.PNG)
+                    .stream();
+
+            // Create the file for the QR code image
+            File qrCodeFile = new File(targetFolderPath, name + "_product_qr_code.png");
+
+            // Write the QR code image to the file
+            Files.write(qrCodeFile.toPath(), out.toByteArray());
+
+            System.out.println("QR code generated and saved successfully to " + qrCodeFile.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
