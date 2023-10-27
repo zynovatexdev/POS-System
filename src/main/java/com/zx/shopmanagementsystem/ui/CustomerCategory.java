@@ -32,6 +32,7 @@ public class CustomerCategory extends javax.swing.JFrame {
 
     public CustomerCategory() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(CustomerCategory.this);
         setIcon();
     }

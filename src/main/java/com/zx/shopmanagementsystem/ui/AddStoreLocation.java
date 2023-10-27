@@ -8,6 +8,7 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
@@ -31,6 +32,7 @@ public class AddStoreLocation extends javax.swing.JFrame {
 
     public AddStoreLocation() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         getMaxValue();
         head1.setFrame(this);
     }

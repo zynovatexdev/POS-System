@@ -37,6 +37,7 @@ public class CustomerDetails extends javax.swing.JFrame {
     public CustomerDetails(CustomerManagement customerManagement) {
         this.customerManagement = customerManagement;
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(this);
         disableForm();
         setIcon();

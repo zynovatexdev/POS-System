@@ -8,6 +8,7 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +38,7 @@ public class AddBarcode extends javax.swing.JFrame {
 
     public AddBarcode() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         getMaxValue();
         Thread dataUpdateThread = new Thread(() -> {
             try {

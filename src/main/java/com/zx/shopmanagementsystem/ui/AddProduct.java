@@ -8,6 +8,7 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -95,8 +96,10 @@ public class AddProduct extends javax.swing.JFrame {
         barcodeComboLoader();
         productTypeComboLoader();
         productLocationComboLoader();
-        clear();
+        manufactureDateTxt.setText("");
+        expireDateTxt.setText("");
         head1.setFrame(this);
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
     }
 
     /**
@@ -480,7 +483,7 @@ public class AddProduct extends javax.swing.JFrame {
         String manufactureDate = manufactureDateTxt.getText();
         String expDate = expireDateTxt.getText();
         int supplierId = supplierIdArray.get(supplierIdCombo.getSelectedIndex());
-        int barcodeId = barcodeIdArray.get(barcodeCombo.getSelectedIndex());
+        int barcodeValue = barcodeIdArray.get(barcodeCombo.getSelectedIndex());
         int categoryId = categoryIdArray.get(categoryIdCombo.getSelectedIndex());
         int typeId = productTypeIdArray.get(productTypeIdCombo.getSelectedIndex());
         int discoundId = discountIdArray.get(discountIdCombo.getSelectedIndex());
@@ -502,7 +505,7 @@ public class AddProduct extends javax.swing.JFrame {
             if (manufactureDate.equals("") || expDate.equals("")) {
                 System.out.println("Date Empty");
                 try {
-                    DB.putdata("INSERT INTO product (product_id, product_name, reciving_price, selling_price, stock_quantity, description, brand, dimensions, manufacturing_date, expiry_date, supplier_id, barcode_id, category_id, product_type_id, discount_id, store_location_id) VALUES('" + newId + "','" + productName + "','" + recivingPrice + "','" + sellingPrice + "','" + stockQuantity + "','" + description + "','" + brand + "','" + dimention + "','" + manufactureDate + "','" + expDate + "','" + supplierId + "','" + barcodeId + "','" + categoryId + "','" + typeId + "','" + discoundId + "','" + locationId + "')");
+                    DB.putdata("INSERT INTO product (product_id, product_name, reciving_price, selling_price, stock_quantity, description, brand, dimensions, manufacturing_date, expiry_date, supplier_id, barcode_id, category_id, product_type_id, discount_id, store_location_id) VALUES('" + newId + "','" + productName + "','" + recivingPrice + "','" + sellingPrice + "','" + stockQuantity + "','" + description + "','" + brand + "','" + dimention + "','" + manufactureDate + "','" + expDate + "','" + supplierId + "','" + barcodeValue + "','" + categoryId + "','" + typeId + "','" + discoundId + "','" + locationId + "')");
                     System.out.println("Data saved");
                     String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
                     func.QRGenerator(code, productName);
@@ -520,7 +523,7 @@ public class AddProduct extends javax.swing.JFrame {
                     if (expDateVali(manufactureDate, expDate)) {
                         System.out.println("Date Valid");
                         try {
-                            DB.putdata("INSERT INTO product (product_id, product_name, reciving_price, selling_price, stock_quantity, description, brand, dimensions, manufacturing_date, expiry_date, supplier_id, barcode_id, category_id, product_type_id, discount_id, store_location_id) VALUES('" + newId + "','" + productName + "','" + recivingPrice + "','" + sellingPrice + "','" + stockQuantity + "','" + description + "','" + brand + "','" + dimention + "','" + manufactureDate + "','" + expDate + "','" + supplierId + "','" + barcodeId + "','" + categoryId + "','" + typeId + "','" + discoundId + "','" + locationId + "')");
+                            DB.putdata("INSERT INTO product (product_id, product_name, reciving_price, selling_price, stock_quantity, description, brand, dimensions, manufacturing_date, expiry_date, supplier_id, barcode_id, category_id, product_type_id, discount_id, store_location_id) VALUES('" + newId + "','" + productName + "','" + recivingPrice + "','" + sellingPrice + "','" + stockQuantity + "','" + description + "','" + brand + "','" + dimention + "','" + manufactureDate + "','" + expDate + "','" + supplierId + "','" + barcodeValue + "','" + categoryId + "','" + typeId + "','" + discoundId + "','" + locationId + "')");
                             System.out.println("Data saved");
                             String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
                             func.QRGenerator(code, productName);
