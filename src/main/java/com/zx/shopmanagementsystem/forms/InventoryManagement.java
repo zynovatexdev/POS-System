@@ -167,7 +167,7 @@ public class InventoryManagement extends javax.swing.JPanel {
         // TODO add your handling code here:
         //System.out.println(inventoryTbl.getSelectedRow());
         //System.out.println(productIdArray.get(inventoryTbl.getSelectedRow()));
-        productDetails pd = new productDetails();
+        productDetails pd = new productDetails(this);
         pd.setVisible(true);
         pd.dataLoad(productIdArray.get(inventoryTbl.getSelectedRow()));
     }//GEN-LAST:event_inventoryTblMouseClicked
@@ -305,6 +305,11 @@ public class InventoryManagement extends javax.swing.JPanel {
             Logger.getLogger(InventoryManagement.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void setTable() {
+        tableDataClear();
+        tableDataLoader();
     }
 
 }

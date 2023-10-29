@@ -2,6 +2,7 @@ package com.zx.shopmanagementsystem.table;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -18,6 +19,10 @@ public class TableCustomCellRender extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component com = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         setBorder(new EmptyBorder(10, 10, 10, 10));
+
+        Font boldFont = com.getFont().deriveFont(Font.BOLD);
+        com.setFont(boldFont);
+
         if (isSelected) {
             com.setBackground(table.getSelectionBackground());
         } else {
@@ -31,6 +36,7 @@ public class TableCustomCellRender extends DefaultTableCellRenderer {
                 }
             }
         }
+
         return com;
     }
 }

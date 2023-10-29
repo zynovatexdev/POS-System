@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.forms.InventoryManagement;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -37,12 +38,66 @@ public class productDetails extends javax.swing.JFrame {
     IconLocation il = new IconLocation();
     JDBC DB = new JDBC();
 
+    private InventoryManagement im;
     int ProductID;
+    ArrayList<Integer> discountIdArray = new ArrayList<>();
+    ArrayList<Integer> supplierIdArray = new ArrayList<>();
+    ArrayList<Integer> categoryIdArray = new ArrayList<>();
+    ArrayList<Integer> barcodeIdArray = new ArrayList<>();
+    ArrayList<Integer> productTypeIdArray = new ArrayList<>();
+    ArrayList<Integer> productLoactionIdArray = new ArrayList<>();
 
-    public productDetails() {
+    public productDetails(InventoryManagement im) {
+        this.im = im;
         initComponents();
+        Thread dataUpdateThread = new Thread(() -> {
+            try {
+                ServerSocket serverSocket = new ServerSocket(12345);  // Use an available port
+                MessageDialog DialogBox = new MessageDialog(this);
+                while (true) {
+                    Socket socket = serverSocket.accept();
+                    InputStream inputStream = socket.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                    String line;
+                    String prv = "";
+
+                    while ((line = reader.readLine()) != null) {
+                        if (line.equals(prv)) {
+                            System.out.println("Same Value");
+                        } else if (line.equals("Done")) {
+                            System.out.println("Done");
+                        } else if (line.startsWith("QRCODE")) {
+                            System.out.println("it is a QR");
+                            //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
+                        } else {
+                            System.out.println("it is not a QR");
+
+                            if (barcodeChecker(line)) {
+                                barcodeCombo.setSelectedItem(line);
+                            } else {
+                                System.out.println("Barcode Not Found : Add Product");
+                                DialogBox.showMessage("ERROR!!!", "Barcode Not Found in System\n Add Barcode First", 3);
+                            }
+                        }
+                        prv = line;
+                    }
+
+                    socket.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        dataUpdateThread.start();
         head1.setFrame(this);
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
+        supplierComboLoader();
+        categoryComboLoader();
+        discountComboLoader();
+        barcodeComboLoader();
+        productTypeComboLoader();
+        productLocationComboLoader();
     }
 
     /**
@@ -75,6 +130,7 @@ public class productDetails extends javax.swing.JFrame {
         categoryIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         supplierIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         barcodeCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        barcodeScannerLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         date1.setForeground(new java.awt.Color(204, 0, 255));
@@ -177,7 +233,10 @@ public class productDetails extends javax.swing.JFrame {
         barcodeCombo.setPreferredSize(new java.awt.Dimension(139, 50));
         getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 340, 190, -1));
 
-        iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_new_Product.png")); // NOI18N
+        barcodeScannerLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
+        getContentPane().add(barcodeScannerLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 350, 40, 40));
+
+        iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\EditProduct.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -187,6 +246,7 @@ public class productDetails extends javax.swing.JFrame {
     private void updateProductBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProductBtnLblMouseClicked
         // TODO add your handling code here:
         updateProduct();
+        im.setTable();
     }//GEN-LAST:event_updateProductBtnLblMouseClicked
 
     private void updateProductBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProductBtnLblMouseEntered
@@ -228,15 +288,18 @@ public class productDetails extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        InventoryManagement im = new InventoryManagement();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new productDetails().setVisible(true);
+                productDetails pd = new productDetails(im);
+                pd.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.zx.shopmanagementsystem.components.ComboBoxSuggestion barcodeCombo;
+    private javax.swing.JLabel barcodeScannerLbl;
     private com.zx.shopmanagementsystem.components.RoundedText brandTxt;
     private com.zx.shopmanagementsystem.components.ComboBoxSuggestion categoryIdCombo;
     private com.zx.shopmanagementsystem.dateChooser.DateChooser date1;
@@ -261,7 +324,122 @@ public class productDetails extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void updateProduct() {
+        MessageDialog DialogBox = new MessageDialog(this);
+        String productName = productNameTxt.getText();
+        String recivingPrice = recivingPriceTxt.getText();
+        String sellingPrice = sellingPriceTxt.getText();
+        String stockQuantity = stockQuantityTxt.getText();
+        String description = productDescriptionTxt.getText();
+        String brand = brandTxt.getText();
+        String dimention = dimentionTxt.getText();
+        String manufactureDate = manufactureDateTxt.getText();
+        String expDate = expireDateTxt.getText();
+        int supplierId = supplierIdArray.get(supplierIdCombo.getSelectedIndex());
+        int barcodeValue = barcodeIdArray.get(barcodeCombo.getSelectedIndex());
+        int categoryId = categoryIdArray.get(categoryIdCombo.getSelectedIndex());
+        int typeId = productTypeIdArray.get(productTypeIdCombo.getSelectedIndex());
+        int discoundId = discountIdArray.get(discountIdCombo.getSelectedIndex());
+        int locationId = productLoactionIdArray.get(productLocationIdCombo.getSelectedIndex());
 
+        if (productName.equals("")) {
+            System.out.println("Product Name Empty");
+            DialogBox.showMessage("WARNING!!!", "Product Name Empty", 2);
+        } else if (recivingPrice.equals("")) {
+            System.out.println("Reciving Price Empty");
+            DialogBox.showMessage("WARNING!!!", "Reciving Price Empty", 2);
+        } else if (sellingPrice.equals("")) {
+            System.out.println("Selling Price Empty");
+            DialogBox.showMessage("WARNING!!!", "Selling Price Empty", 2);
+        } else if (stockQuantity.equals("")) {
+            System.out.println("Stock Quantity Empty");
+            DialogBox.showMessage("WARNING!!!", "Stock Quantity Empty", 2);
+        } else {
+            if (manufactureDate.equals("") || expDate.equals("")) {
+                System.out.println("Date Empty");
+                try {
+                    PreparedStatement pst = DB.con().prepareStatement("UPDATE product SET product_name = ?, reciving_price = ?, selling_price = ?, stock_quantity = ?, description = ?, brand = ?, dimensions = ?, manufacturing_date = ?, expiry_date = ?, supplier_id = ?, barcode_id = ?, category_id = ?, product_type_id = ?, discount_id = ?, store_location_id = ? WHERE product_id = ?");
+                    pst.setString(1, productName);
+                    pst.setString(2, recivingPrice);
+                    pst.setString(3, sellingPrice);
+                    pst.setString(4, stockQuantity);
+                    pst.setString(5, description);
+                    pst.setString(6, brand);
+                    pst.setString(7, dimention);
+                    pst.setString(8, manufactureDate);
+                    pst.setString(9, expDate);
+                    pst.setInt(10, supplierId);
+                    pst.setInt(11, barcodeValue);
+                    pst.setInt(12, categoryId);
+                    pst.setInt(13, typeId);
+                    pst.setInt(14, discoundId);
+                    pst.setInt(15, locationId);
+                    pst.setInt(16, ProductID); // Set the ProductID as the last parameter
+                    // Execute the update query
+                    int rowsUpdated = pst.executeUpdate();
+
+                    if (rowsUpdated > 0) {
+                        System.out.println("Update successful");
+                        String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
+                        func.QRGenerator(code, productName);
+                        DialogBox.showMessage("Saved", "Update successful\nQR Code Updated.", 1);
+                        DB.con().close();
+                    } else {
+                        System.out.println("Update failed");
+                    }
+
+                } catch (Exception ex) {
+                    System.out.println("Data Save Without Date : " + ex.getMessage());
+                }
+            } else {
+                if ((manufacDateVali(manufactureDate))) {
+                    System.out.println("Manufacture Date Not Valid");
+                    DialogBox.showMessage("WARNING!!!", "Manufacture Date Not Valid", 2);
+                } else {
+                    if (expDateVali(manufactureDate, expDate)) {
+                        System.out.println("Date Valid");
+                        try {
+                            PreparedStatement pst = DB.con().prepareStatement("UPDATE product SET product_name = ?, reciving_price = ?, selling_price = ?, stock_quantity = ?, description = ?, brand = ?, dimensions = ?, manufacturing_date = ?, expiry_date = ?, supplier_id = ?, barcode_id = ?, category_id = ?, product_type_id = ?, discount_id = ?, store_location_id = ? WHERE product_id = ?");
+                            pst.setString(1, productName);
+                            pst.setString(2, recivingPrice);
+                            pst.setString(3, sellingPrice);
+                            pst.setString(4, stockQuantity);
+                            pst.setString(5, description);
+                            pst.setString(6, brand);
+                            pst.setString(7, dimention);
+                            pst.setString(8, manufactureDate);
+                            pst.setString(9, expDate);
+                            pst.setInt(10, supplierId);
+                            pst.setInt(11, barcodeValue);
+                            pst.setInt(12, categoryId);
+                            pst.setInt(13, typeId);
+                            pst.setInt(14, discoundId);
+                            pst.setInt(15, locationId);
+                            pst.setInt(16, ProductID); // Set the ProductID as the last parameter
+                            // Execute the update query
+                            int rowsUpdated = pst.executeUpdate();
+
+                            if (rowsUpdated > 0) {
+                                System.out.println("Update successful");
+                                String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
+                                func.QRGenerator(code, productName);
+                                DialogBox.showMessage("Saved", "Update successful\nQR Code Updated.", 1);
+                                DB.con().close();
+                            } else {
+                                System.out.println("Update failed");
+                            }
+
+                        } catch (Exception ex) {
+                            System.out.println("Data Save With Date : " + ex.getMessage());
+                        }
+
+                    } else {
+                        System.out.println("Expire Date Not Valid");
+                        DialogBox.showMessage("WARNING!!!", "Expire Date Not Valid", 2);
+                    }
+                }
+            }
+
+        }
     }
 
     public void dataLoad(int productId) {
@@ -277,19 +455,184 @@ public class productDetails extends javax.swing.JFrame {
                 String manuDate = (rs.getString("manufacturing_date"));
                 String expDate = (rs.getString("expiry_date"));
                 int locationId = (rs.getInt("store_location_id"));
+                String description = (rs.getString("description"));
+                String brand = (rs.getString("brand"));
+                String dimentions = (rs.getString("dimensions"));
+                int supId = (rs.getInt("supplier_id"));
+                int barcodeId = (rs.getInt("barcode_id"));
+                int caregoryId = (rs.getInt("category_id"));
+                int Typeid = (rs.getInt("product_type_id"));
+                int discountid = (rs.getInt("discount_id"));
 
-                System.out.println("Product : " + productId);
-                System.out.println("Product : " + productName);
-                System.out.println("Product : " + recivingPrice);
-                System.out.println("Product : " + sellingPrice);
-                System.out.println("Product : " + stockQuantitiy);
-                System.out.println("Product : " + manuDate);
-                System.out.println("Product : " + expDate);
-                System.out.println("Product : " + locationId);
+                productIdLbl.setText(String.valueOf(productId));
+                productNameTxt.setText(productName);
+                productDescriptionTxt.setText(description);
+                recivingPriceTxt.setText(recivingPrice);
+                sellingPriceTxt.setText(sellingPrice);
+                brandTxt.setText(brand);
+                stockQuantityTxt.setText(stockQuantitiy);
+                dimentionTxt.setText(dimentions);
+                manufactureDateTxt.setText(manuDate);
+                expireDateTxt.setText(expDate);
+                supplierIdCombo.setSelectedIndex(supplierIdArray.indexOf(supId));
+                barcodeCombo.setSelectedIndex(barcodeIdArray.indexOf(barcodeId));
+                categoryIdCombo.setSelectedIndex(categoryIdArray.indexOf(caregoryId));
+                productTypeIdCombo.setSelectedIndex(productTypeIdArray.indexOf(Typeid));
+                discountIdCombo.setSelectedIndex(discountIdArray.indexOf(discountid));
+                productLocationIdCombo.setSelectedIndex(productLoactionIdArray.indexOf(locationId));
             }
 
         } catch (Exception ex) {
             System.out.println("Product Details -> DataLoad : " + ex.getMessage());
         }
+    }
+
+    private void supplierComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM supplier");
+            while (rs.next()) {
+                String supplierName = rs.getString("supplier_name");
+                int supplierId = rs.getInt("supplier_id");
+                supplierIdCombo.addItem(supplierName);
+                supplierIdArray.add(supplierId);
+            }
+        } catch (Exception ex) {
+            System.out.println("Supplier Combo Loader : " + ex);
+        }
+    }
+
+    private void categoryComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM product_category");
+            while (rs.next()) {
+                String supplierName = rs.getString("category_name");
+                int categoryId = rs.getInt("category_id");
+                categoryIdCombo.addItem(supplierName);
+                categoryIdArray.add(categoryId);
+            }
+        } catch (Exception ex) {
+            System.out.println("Product Category Combo Loader : " + ex);
+        }
+    }
+
+    private void discountComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM discont");
+            while (rs.next()) {
+                String supplierName = rs.getString("discount_presentage");
+                String endDate = rs.getString("end_date");
+                int disId = rs.getInt("discount_id");
+                System.out.println(endDate);
+                if (func.dateValidator(endDate) == 1) {
+                    discountIdCombo.addItem(supplierName + "%");
+                    discountIdArray.add(disId);
+                } else {
+                    System.out.println("Day Before");
+                }
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Discount Combo Loader : " + ex);
+        }
+    }
+
+    private void barcodeComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM barcode");
+            while (rs.next()) {
+                String barcodeValue = rs.getString("barcode_value");
+                int barcodeId = rs.getInt("barcode_id");
+                barcodeCombo.addItem(barcodeValue);
+                barcodeIdArray.add(barcodeId);
+            }
+        } catch (Exception ex) {
+            System.out.println("Barcode Combo Loader : " + ex);
+        }
+    }
+
+    private void productTypeComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM product_type");
+            while (rs.next()) {
+                String productType = rs.getString("product_type");
+                int typeId = rs.getInt("product_type_id");
+                productTypeIdCombo.addItem(productType);
+                productTypeIdArray.add(typeId);
+            }
+        } catch (Exception ex) {
+            System.out.println("Product Type Combo Loader : " + ex);
+        }
+    }
+
+    private void productLocationComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM store_location");
+            while (rs.next()) {
+                String storeLocation = rs.getString("store_location_name");
+                int locationId = rs.getInt("store_location_id");
+                productLocationIdCombo.addItem(storeLocation);
+                productLoactionIdArray.add(locationId);
+            }
+        } catch (Exception ex) {
+            System.out.println("Product Type Combo Loader : " + ex);
+        }
+    }
+
+    private boolean barcodeChecker(String barcode) {
+        String sql = "SELECT * FROM barcode WHERE barcode_value=?";
+        boolean Exist = false;
+        try {
+            PreparedStatement pstmt = DB.con().prepareStatement(sql);
+            pstmt.setString(1, barcode);
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                System.out.println("Barcode Found.");
+                Exist = true;
+            } else {
+                System.out.println("Barcode Not Found.");
+                Exist = false;
+            }
+        } catch (Exception ex) {
+            System.out.println("Barcode Checker : " + ex.getMessage());
+        }
+        return Exist;
+    }
+
+    private boolean manufacDateVali(String manuDate) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date(); // Current date
+        String manufactureDateStr = manuDate;
+        boolean date = false;
+        try {
+            Date manufactureDate = sdf.parse(manufactureDateStr);
+            Date validStartDate = currentDate;
+
+            date = !manufactureDate.before(validStartDate);
+            //System.out.println("Manufacture date is valid.");
+            //System.out.println("Manufacture date is not valid.");
+        } catch (ParseException ex) {
+            System.out.println("Manu date validator : " + ex.getMessage());
+        }
+        return date;
+    }
+
+    private boolean expDateVali(String manuDate, String expireDateStr) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date currentDate = new Date(); // Current date
+        String manufactureDateStr = manuDate;
+        String expirationDateStr = expireDateStr;
+        boolean date = false;
+        try {
+            Date manufactureDate = sdf.parse(manufactureDateStr);
+            Date expirationDate = sdf.parse(expirationDateStr);
+            Date validStartDate = currentDate;
+
+            date = expirationDate.after(manufactureDate) && expirationDate.after(validStartDate);
+            //System.out.println("Expiration date is valid.");
+            //System.out.println("Expiration date is not valid.");
+        } catch (ParseException ex) {
+            System.out.println("Exp date validator : " + ex.getMessage());
+        }
+        return date;
     }
 }

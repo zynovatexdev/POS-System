@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.forms.InventoryManagement;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -509,7 +510,7 @@ public class AddProduct extends javax.swing.JFrame {
                     System.out.println("Data saved");
                     String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
                     func.QRGenerator(code, productName);
-                    DialogBox.showMessage("Saved", "Product Saved\nBarcode Created.", 1);
+                    DialogBox.showMessage("Saved", "Product Saved\nQR Code Created.", 1);
                     getMaxValue();
                     clear();
                 } catch (Exception ex) {
@@ -527,7 +528,7 @@ public class AddProduct extends javax.swing.JFrame {
                             System.out.println("Data saved");
                             String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
                             func.QRGenerator(code, productName);
-                            DialogBox.showMessage("Saved", "Product Saved\nBarcode Created.", 1);
+                            DialogBox.showMessage("Saved", "Product Saved\nQR Code Created.", 1);
                             getMaxValue();
                             clear();
                         } catch (Exception ex) {

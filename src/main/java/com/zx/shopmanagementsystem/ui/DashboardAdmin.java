@@ -262,6 +262,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
         logoutBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\LogoutPurple.png")); // NOI18N
         logoutBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logoutBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                logoutBtnLblMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 logoutBtnLblMouseEntered(evt);
             }
@@ -468,6 +471,13 @@ public class DashboardAdmin extends javax.swing.JFrame {
         func.setForm(mainPanal, new Help());
         head1.setHeaderTitle("Help and Documentation");
     }//GEN-LAST:event_helpBtnLblMouseClicked
+
+    private void logoutBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_logoutBtnLblMouseClicked
+        // TODO add your handling code here:
+        LogOut logout = new LogOut();
+        this.dispose();
+        logout.setVisible(true);
+    }//GEN-LAST:event_logoutBtnLblMouseClicked
 
     /**
      * @param args the command line arguments
