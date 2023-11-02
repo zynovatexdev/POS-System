@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -123,13 +124,20 @@ public class AddProductCategory extends javax.swing.JFrame {
         } else if (categoryChecker(cateNameTxt.getText())) {
             DialogBox.showMessage("WARNING", "Category is already taken.", 2);
         } else {
-            try {
-                DB.putdata("INSERT INTO product_category (category_id, category_name) VALUES ('" + newId + "', '" + cateNameTxt.getText() + "')");
-                DialogBox.showMessage("Done!!!", "Product Category Saved", 1);
-                getMaxValue();
-                cateNameTxt.setText("");
-            } catch (Exception ex) {
-                System.out.println("Add Category Btn : " + ex.getMessage());
+            ConfirmDialog confrim = new ConfirmDialog(this);
+            confrim.showMessage("Save", "Do you want to Add ?");
+            if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                System.out.println("Yes");
+                try {
+                    DB.putdata("INSERT INTO product_category (category_id, category_name) VALUES ('" + newId + "', '" + cateNameTxt.getText() + "')");
+                    DialogBox.showMessage("Done!!!", "Product Category Saved", 1);
+                    getMaxValue();
+                    cateNameTxt.setText("");
+                } catch (Exception ex) {
+                    System.out.println("Add Category Btn : " + ex.getMessage());
+                }
+            } else {
+                System.out.println("No");
             }
         }
     }//GEN-LAST:event_addProCatBtnLblMouseClicked

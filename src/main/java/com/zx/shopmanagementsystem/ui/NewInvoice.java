@@ -4,12 +4,39 @@
  */
 package com.zx.shopmanagementsystem.ui;
 
+import com.zx.shopmanagementsystem.assests.Func;
+import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import com.zx.shopmanagementsystem.notifications.Payment;
 import com.zx.shopmanagementsystem.table.DeleteButtonEditorRenderer;
 import com.zx.shopmanagementsystem.table.TableCustom;
+import java.awt.Toolkit;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.PlainDocument;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  *
@@ -21,20 +48,65 @@ public class NewInvoice extends javax.swing.JFrame {
      * Creates new form NewInvoice
      */
     JDBC DB = new JDBC();
+    IconLocation il = new IconLocation();
+    Func func = new Func();
 
     ArrayList<Integer> productIdArray = new ArrayList<>();
-    int specificRow = 0;
-    int specificColumn = 2;
+    double payment = 0;
 
     public NewInvoice() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
+        productComboLoader();
+        customerComboLoader();
+        onlyNumbers(priceTxt);
+        onlyNumbers(quantityTxt);
+        Thread dataUpdateThread = new Thread(() -> {
+            try {
+                ServerSocket serverSocket = new ServerSocket(12345);  // Use an available port
+                MessageDialog DialogBox = new MessageDialog(this);
+                while (true) {
+                    Socket socket = serverSocket.accept();
+                    InputStream inputStream = socket.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+
+                    String line;
+                    String prv = "";
+
+                    while ((line = reader.readLine()) != null) {
+                        if (line.equals(prv)) {
+                            System.out.println("Same Value");
+                        } else if (line.equals("Done")) {
+                            System.out.println("Done");
+                        } else if (line.startsWith("QRCODE")) {
+                            System.out.println("it is a QR");
+                            //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
+                        } else {
+                            System.out.println("it is not a QR");
+
+                            if (barcodeChecker(line)) {
+                                System.out.println("Barcode Found");
+                                getItemDetails();
+                            } else {
+                                System.out.println("Barcode Not Found : New Invoice");
+                                DialogBox.showMessage("ERROR!!!", "Barcode Not Found in System", 3);
+                            }
+                        }
+                        prv = line;
+                    }
+
+                    socket.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        dataUpdateThread.start();
         head1.setFrame(this);
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
-        customerComboLoader();
-        productComboLoader();
+
         clear();
         tableDataClear();
-        tableDataLoader();
         invoiceTbl.getColumnModel().getColumn(4).setCellRenderer(new DeleteButtonEditorRenderer());
         invoiceTbl.getColumnModel().getColumn(4).setCellEditor(new DeleteButtonEditorRenderer());
     }
@@ -48,6 +120,7 @@ public class NewInvoice extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        batcodeIconLbl = new javax.swing.JLabel();
         productNameCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         customerCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         quantityTxt = new com.zx.shopmanagementsystem.components.RoundedText();
@@ -62,7 +135,8 @@ public class NewInvoice extends javax.swing.JFrame {
         clearBtn = new javax.swing.JLabel();
         priceLbl = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        editPriceLbl = new javax.swing.JLabel();
+        selectBtnIcon = new javax.swing.JLabel();
         imageLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -70,8 +144,37 @@ public class NewInvoice extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        batcodeIconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
+        batcodeIconLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        batcodeIconLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                batcodeIconLblMouseClicked(evt);
+            }
+        });
+        getContentPane().add(batcodeIconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 40, 40));
+
         productNameCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productNameCombo.setPreferredSize(new java.awt.Dimension(163, 50));
+        productNameCombo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                productNameComboItemStateChanged(evt);
+            }
+        });
+        productNameCombo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                productNameComboMouseClicked(evt);
+            }
+        });
+        productNameCombo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                productNameComboPropertyChange(evt);
+            }
+        });
+        productNameCombo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                productNameComboKeyPressed(evt);
+            }
+        });
         getContentPane().add(productNameCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 300, -1));
 
         customerCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -130,6 +233,17 @@ public class NewInvoice extends javax.swing.JFrame {
 
         paymentBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\paymentIcon.png")); // NOI18N
         paymentBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        paymentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paymentBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                paymentBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                paymentBtnMouseExited(evt);
+            }
+        });
         getContentPane().add(paymentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 640, -1, -1));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
@@ -192,6 +306,12 @@ public class NewInvoice extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addInvoiceBtnMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addInvoiceBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addInvoiceBtnMouseExited(evt);
+            }
         });
         getContentPane().add(addInvoiceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 640, -1, -1));
 
@@ -200,6 +320,12 @@ public class NewInvoice extends javax.swing.JFrame {
         clearBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 clearBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                clearBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                clearBtnMouseExited(evt);
             }
         });
         getContentPane().add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 640, -1, -1));
@@ -215,10 +341,23 @@ public class NewInvoice extends javax.swing.JFrame {
         jLabel2.setText("Total Price");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 580, 100, 40));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Edit Price");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 623, 70, -1));
+        editPriceLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editPriceLbl.setForeground(new java.awt.Color(255, 255, 255));
+        editPriceLbl.setText("Edit Price");
+        editPriceLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editPriceLblMouseClicked(evt);
+            }
+        });
+        getContentPane().add(editPriceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 623, 70, -1));
+
+        selectBtnIcon.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SelectIcon.png")); // NOI18N
+        selectBtnIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selectBtnIconMouseClicked(evt);
+            }
+        });
+        getContentPane().add(selectBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, 30));
 
         imageLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\AddNewInvoiceScreen.png")); // NOI18N
         imageLbl.setPreferredSize(new java.awt.Dimension(1280, 720));
@@ -259,7 +398,8 @@ public class NewInvoice extends javax.swing.JFrame {
 
     private void clearBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseClicked
         // TODO add your handling code here:
-        clear();
+        //clear();
+
     }//GEN-LAST:event_clearBtnMouseClicked
 
     private void invoiceTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceTblMouseClicked
@@ -272,14 +412,147 @@ public class NewInvoice extends javax.swing.JFrame {
             model.removeRow(selectedRow);
             updateIndexNumbers(model); // Update the index numbers
             model.fireTableDataChanged();
-// Remove the row from the model
+            updatePriceLabel();
         }
     }//GEN-LAST:event_invoiceTblMouseClicked
 
     private void addInvoiceBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addInvoiceBtnMouseClicked
         // TODO add your handling code here:
-        tableDataLoader();
+        MessageDialog DialogBox = new MessageDialog(this);
+        DefaultTableModel model = (DefaultTableModel) invoiceTbl.getModel();
+        if (quantityTxt.getText().equals("")) {
+            System.out.println("Quantitiy Empty");
+            DialogBox.showMessage("WARNING", "Enter Quantitiy", 2);
+        } else if (priceTxt.getText().equals("")) {
+            System.out.println("Price Empty");
+            DialogBox.showMessage("ERROR!!!", "Please !!! Enter Price", 3);
+        } else {
+            double quantity = Double.parseDouble(quantityTxt.getText());
+            double price = Double.parseDouble(priceTxt.getText());
+            String name = (String) productNameCombo.getSelectedItem();
+            if (model.getRowCount() == 0) {
+                if (getAvailableQuantityFromDatabase(name) < quantity) {
+                    System.out.println("High");
+                    DialogBox.showMessage("Error", "Quantity for product " + name + " \nexceeds available quantity.", 3);
+                } else {
+                    tableDataLoader(name, String.valueOf(quantity), String.valueOf(price * quantity));
+                    updatePriceLabel();
+                }
+            } else {
+                if (checkQuantities()) {
+                    DialogBox.showMessage("Error", "Quantity for product " + name + " \nexceeds available quantity.", 3);
+                } else {
+                    tableDataLoader(name, String.valueOf(quantity), String.valueOf(price * quantity));
+                    updatePriceLabel();
+                }
+
+            }
+
+        }
     }//GEN-LAST:event_addInvoiceBtnMouseClicked
+
+    private void batcodeIconLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_batcodeIconLblMouseClicked
+        // TODO add your handling code here:
+        String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abc.py";
+        try {
+            Runtime.getRuntime().exec("python " + pythonScript);
+        } catch (IOException ex) {
+            System.out.println("Barcode Detector Btn : " + ex.getMessage());
+        }
+    }//GEN-LAST:event_batcodeIconLblMouseClicked
+
+    private void productNameComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productNameComboMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_productNameComboMouseClicked
+
+    private void productNameComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_productNameComboItemStateChanged
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_productNameComboItemStateChanged
+
+    private void productNameComboPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_productNameComboPropertyChange
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_productNameComboPropertyChange
+
+    private void productNameComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productNameComboKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_productNameComboKeyPressed
+
+    private void selectBtnIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectBtnIconMouseClicked
+        // TODO add your handling code here:
+        getItemDetails();
+    }//GEN-LAST:event_selectBtnIconMouseClicked
+
+    private void editPriceLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editPriceLblMouseClicked
+        // TODO add your handling code here:
+        priceTxt.setEditable(true);
+    }//GEN-LAST:event_editPriceLblMouseClicked
+
+    private void addInvoiceBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addInvoiceBtnMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(addInvoiceBtn, il.AddInvoice2Icon);
+    }//GEN-LAST:event_addInvoiceBtnMouseEntered
+
+    private void addInvoiceBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addInvoiceBtnMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(addInvoiceBtn, il.AddInvoice1Icon);
+    }//GEN-LAST:event_addInvoiceBtnMouseExited
+
+    private void clearBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(clearBtn, il.ClearDetails2Icon);
+    }//GEN-LAST:event_clearBtnMouseEntered
+
+    private void clearBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(clearBtn, il.ClearDetails1Icon);
+    }//GEN-LAST:event_clearBtnMouseExited
+
+    private void paymentBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentBtnMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(paymentBtn, il.Payment2CheckOutIcon);
+    }//GEN-LAST:event_paymentBtnMouseEntered
+
+    private void paymentBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentBtnMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(paymentBtn, il.Payment1CheckOutIcon);
+    }//GEN-LAST:event_paymentBtnMouseExited
+
+    private void paymentBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentBtnMouseClicked
+        // TODO add your handling code here:
+        // Get the JSON data
+        MessageDialog DialogBox = new MessageDialog(this);
+
+        JSONObject invoiceData = collectInvoiceData();
+        String totalPriceStr = invoiceData.getString("TotalPrice");
+
+        // Clean the TotalPrice string to remove non-numeric characters
+        totalPriceStr = totalPriceStr.replaceAll("[^\\d.]", "");
+
+        double totalPrice = Double.parseDouble(totalPriceStr);
+
+        Payment pay = new Payment(this);
+        pay.showMessage(totalPrice);
+        payment = Double.parseDouble(pay.getPaymentValue());
+        if (pay.getMessageType() == Payment.MessageType.YES) {
+            System.out.println("Yes");
+            if (totalPrice > payment) {
+                System.out.println("Not Enough");
+                DialogBox.showMessage("ERROR !!!", "Payment Not Enough For Pay", 3);
+            } else {
+                double balance = payment - totalPrice;
+                String balancePrice = String.format("%.2f", balance);
+                generateInvoiceBill(invoiceData, balancePrice);
+                DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\nGive Balance : " + balancePrice, 1);
+                clear();
+                tableDataClear();
+            }
+        } else {
+            System.out.println("No");
+        }
+    }//GEN-LAST:event_paymentBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -317,22 +590,21 @@ public class NewInvoice extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new NewInvoice().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new NewInvoice().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addInvoiceBtn;
+    private javax.swing.JLabel batcodeIconLbl;
     private javax.swing.JLabel clearBtn;
     private com.zx.shopmanagementsystem.components.ComboBoxSuggestion customerCombo;
     private com.zx.shopmanagementsystem.components.Spinner discountSpinner;
+    private javax.swing.JLabel editPriceLbl;
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JTable invoiceTbl;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private com.raven.swing.PanelBorder panelBorder1;
@@ -341,6 +613,7 @@ public class NewInvoice extends javax.swing.JFrame {
     private com.zx.shopmanagementsystem.components.RoundedText priceTxt;
     private com.zx.shopmanagementsystem.components.ComboBoxSuggestion productNameCombo;
     private com.zx.shopmanagementsystem.components.RoundedText quantityTxt;
+    private javax.swing.JLabel selectBtnIcon;
     // End of variables declaration//GEN-END:variables
 
     private void customerComboLoader() {
@@ -360,6 +633,7 @@ public class NewInvoice extends javax.swing.JFrame {
     private void productComboLoader() {
         try {
             ResultSet rs = DB.getdata("SELECT * FROM product");
+            productIdArray.clear(); // Clear the array before adding new elements
             while (rs.next()) {
                 String customerName = rs.getString("product_name");
                 int productId = rs.getInt("product_id");
@@ -367,7 +641,7 @@ public class NewInvoice extends javax.swing.JFrame {
                 productIdArray.add(productId);
             }
         } catch (Exception ex) {
-            System.out.println("Product Type Combo Loader : " + ex);
+            System.out.println("Product Type Combo Loader: " + ex);
         }
     }
 
@@ -378,11 +652,22 @@ public class NewInvoice extends javax.swing.JFrame {
         discountSpinner.setLabelText("0");
         priceTxt.setText("");
         priceTxt.setEditable(false);
+        priceLbl.setText("0.00/=");
     }
 
-    private void tableDataLoader() {
+    private void tableDataLoader(String name, String quantity, String price) {
         DefaultTableModel model = (DefaultTableModel) invoiceTbl.getModel();
-        model.addRow(new Object[]{model.getRowCount() + 1, "Name", "Quantity", "Price"}); // Add a new row with the updated index number
+        int discount = (int) (discountSpinner.getValue());
+
+        double discountedPrice;
+        if (discount == 0) {
+            discountedPrice = Double.parseDouble(price);
+        } else {
+            double discountAmount = (discount / 100.0) * Double.parseDouble(price);
+            discountedPrice = Double.parseDouble(price) - discountAmount;
+        }
+
+        model.addRow(new Object[]{model.getRowCount() + 1, name, quantity, discountedPrice}); // Add a new row with the updated index number
         updateIndexNumbers(model); // Update the index numbers
         model.fireTableDataChanged();
 
@@ -404,6 +689,233 @@ public class NewInvoice extends javax.swing.JFrame {
         for (int row = 0; row < model.getRowCount(); row++) {
             model.setValueAt(row + 1, row, 0); // Update the first column with the new index number
         }
+    }
+
+    private boolean barcodeChecker(String barcode) {
+        String sql = "SELECT p.* "
+                + "FROM product p "
+                + "JOIN barcode b ON p.barcode_id = b.barcode_id "
+                + "WHERE b.barcode_value = ?";
+        boolean Exist = false;
+        try {
+            PreparedStatement pstmt = JDBC.con().prepareStatement(sql);
+            pstmt.setString(1, barcode);
+            ResultSet resultSet = pstmt.executeQuery();
+            if (resultSet.next()) {
+                //System.out.println("Barcode Found.");
+                Exist = true;
+                productNameCombo.setSelectedItem(resultSet.getString("product_name"));
+            } else {
+                //System.out.println("Barcode Not Found.");
+                Exist = false;
+            }
+        } catch (Exception ex) {
+            System.out.println("Barcode Checker : " + ex.getMessage());
+        }
+        return Exist;
+    }
+
+    private void getItemDetails() {
+        int id = productIdArray.get(productNameCombo.getSelectedIndex());
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM product WHERE product_id = '" + id + "'");
+            if (rs.next()) {
+                priceTxt.setText(rs.getString("selling_price"));
+
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(NewInvoice.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void onlyNumbers(com.zx.shopmanagementsystem.components.RoundedText text) {
+        PlainDocument doc = (PlainDocument) text.getDocument();
+        doc.setDocumentFilter(new DocumentFilter() {
+            private final Pattern pattern = Pattern.compile("\\d*");
+
+            @Override
+            public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                Matcher matcher = pattern.matcher(string);
+                if (!matcher.matches()) {
+                    return;
+                }
+                super.insertString(fb, offset, string, attr);
+            }
+
+            @Override
+            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                Matcher matcher = pattern.matcher(text);
+                if (!matcher.matches()) {
+                    return;
+                }
+                super.replace(fb, offset, length, text, attrs);
+            }
+        });
+    }
+
+    private Map<String, Double> calculateTotalQuantities(DefaultTableModel model) {
+        Map<String, Double> totalQuantities = new HashMap<>();
+        for (int row = 0; row < model.getRowCount(); row++) {
+            String productName = model.getValueAt(row, 1).toString(); // Assuming the product name is in the second column
+            double quantity = Double.parseDouble(model.getValueAt(row, 2).toString()); // Assuming the quantity is in the third column
+
+            if (totalQuantities.containsKey(productName)) {
+                double currentTotal = totalQuantities.get(productName);
+                totalQuantities.put(productName, currentTotal + quantity);
+            } else {
+                totalQuantities.put(productName, quantity);
+            }
+        }
+        return totalQuantities;
+    }
+
+    private boolean checkQuantities() {
+        boolean value = false;
+        DefaultTableModel model = (DefaultTableModel) invoiceTbl.getModel();
+        Map<String, Double> totalQuantities = calculateTotalQuantities(model);
+
+        for (Map.Entry<String, Double> entry : totalQuantities.entrySet()) {
+            String productName = entry.getKey();
+            double totalQuantity = entry.getValue();
+
+            // Query the database to get the available quantity for this product
+            int availableQuantity = getAvailableQuantityFromDatabase(productName);
+
+            if (totalQuantity > availableQuantity) {
+                // Show an error message indicating that the quantity exceeds the available quantity
+                // You can use a MessageDialog or any other method you prefer.
+                value = true;
+            } else {
+                value = availableQuantity - totalQuantity < Double.parseDouble(quantityTxt.getText());
+            }
+        }
+        return value;
+    }
+
+    private int getAvailableQuantityFromDatabase(String productName) {
+        int availableQuantity = 0;
+        try {
+
+            // Query the database to get the available quantity for the product with the given name
+            // Set the result to the availableQuantity variable
+            // You can use your JDBC class to execute this query and retrieve the value from the database.
+            // Example:
+            ResultSet rs = DB.getdata("SELECT stock_quantity FROM product WHERE product_name = '" + productName + "'");
+            if (rs.next()) {
+                availableQuantity = rs.getInt("stock_quantity");
+
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(NewInvoice.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return availableQuantity;
+    }
+
+    private void updatePriceLabel() {
+        DefaultTableModel model = (DefaultTableModel) invoiceTbl.getModel();
+        double totalPrice = 0.0;
+
+        for (int row = 0; row < model.getRowCount(); row++) {
+            double quantity = Double.parseDouble(model.getValueAt(row, 2).toString());
+            double price = Double.parseDouble(model.getValueAt(row, 3).toString());
+            totalPrice += (quantity * price);
+        }
+
+        priceLbl.setText(String.format("%.2f/=", totalPrice));
+    }
+
+    private JSONObject collectInvoiceData() {
+        DefaultTableModel model = (DefaultTableModel) invoiceTbl.getModel();
+        JSONArray invoiceItems = new JSONArray();
+
+        for (int row = 0; row < model.getRowCount(); row++) {
+            String productName = (String) model.getValueAt(row, 1);
+            String quantity = (String) model.getValueAt(row, 2);
+            Double priceValue = (Double) model.getValueAt(row, 3);
+            String price = priceValue.toString();
+
+            JSONObject item = new JSONObject();
+            item.put("ProductName", productName);
+            item.put("Quantity", quantity);
+            item.put("Price", price);
+
+            invoiceItems.put(item);
+        }
+
+        JSONObject invoiceData = new JSONObject();
+        invoiceData.put("Customer Name", customerCombo.getSelectedItem());
+        invoiceData.put("InvoiceItems", invoiceItems);
+        invoiceData.put("TotalPrice", priceLbl.getText());
+        // Add the current date and time
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+        invoiceData.put("Date", dateFormat.format(currentDate));
+        invoiceData.put("Time", timeFormat.format(currentDate));
+
+        return invoiceData;
+    }
+
+    public void generateInvoiceBill(JSONObject invoiceData, String balance) {
+        try {
+            // Extract customer name, time, and date
+            String customerName = invoiceData.getString("Customer Name");
+            String time = invoiceData.getString("Time");
+            String date = invoiceData.getString("Date");
+
+            // Extract invoice items
+            JSONArray invoiceItems = invoiceData.getJSONArray("InvoiceItems");
+
+            // Calculate the width of columns
+            int productNameColumnWidth = 20;
+            int quantityColumnWidth = 5;
+            int priceColumnWidth = 12;
+
+            // Create a bill header
+            System.out.println("----------------------------------------");
+            System.out.println("                Invoice");
+            System.out.println("----------------------------------------");
+            System.out.printf("Date: %16s\n", date);
+            System.out.printf("Time: %16s\n", time);
+            System.out.printf("Customer: %12s\n", customerName);
+            System.out.println("----------------------------------------");
+
+            // Create column headers
+            System.out.printf("%-" + productNameColumnWidth + "s %" + quantityColumnWidth + "s %" + priceColumnWidth + "s\n",
+                    "Product", "Qty", "Price");
+            System.out.println("----------------------------------------");
+
+            // Extract and display invoice items
+            for (int i = 0; i < invoiceItems.length(); i++) {
+                JSONObject item = invoiceItems.getJSONObject(i);
+                String productName = item.getString("ProductName");
+                String quantity = item.getString("Quantity");
+                String price = item.getString("Price");
+
+                System.out.printf("%-" + productNameColumnWidth + "s %" + quantityColumnWidth + "s %" + priceColumnWidth + "s\n",
+                        productName, quantity, price + "0/=");
+            }
+
+            // Extract and display the total price
+            String totalPrice = invoiceData.getString("TotalPrice");
+            System.out.println("----------------------------------------");
+            System.out.printf("Total Price: %25s\n", totalPrice);
+            System.out.printf("Payment: %29s\n", payment + "0/=");
+            System.out.printf("Balance Price: %23s\n", balance + "/=");
+            System.out.println("----------------------------------------");
+            System.out.println("             Thank You");
+            System.out.println("             Come Again");
+            System.out.println("----------------------------------------");
+
+        } catch (JSONException e) {
+            System.out.println("generateInvoiceBill: " + e.getMessage());
+        }
+    }
+
+    public void setPayment(double payment) {
+        this.payment = payment;
     }
 
 }

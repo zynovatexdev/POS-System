@@ -345,13 +345,20 @@ public class CustomerDetails extends javax.swing.JFrame {
         } else {
             if (func.isValidMobileNumber(cusNumber)) {
                 System.out.println("Valid Number");
-                try {
-                    DB.putdata("UPDATE customer SET customer_name = '" + cusName + "', customer_address = '" + cusAddress + "', customer_phone = '" + cusNumber + "', category_id = '" + customerCategoryId + "' WHERE customer_id = '" + cusID + "'");
-                    System.out.println("Data Updated");
-                    DialogBox.showMessage("Done", "Customer Updated", 1);
-                    disableForm();
-                } catch (Exception ex) {
-                    System.out.println("Update Customer -> Update Query Runs : " + ex.getMessage());
+                ConfirmDialog confrim = new ConfirmDialog(this);
+                confrim.showMessage("Update", "Do you want to Update ?");
+                if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                    System.out.println("Yes");
+                    try {
+                        DB.putdata("UPDATE customer SET customer_name = '" + cusName + "', customer_address = '" + cusAddress + "', customer_phone = '" + cusNumber + "', category_id = '" + customerCategoryId + "' WHERE customer_id = '" + cusID + "'");
+                        System.out.println("Data Updated");
+                        DialogBox.showMessage("Done", "Customer Updated", 1);
+                        disableForm();
+                    } catch (Exception ex) {
+                        System.out.println("Update Customer -> Update Query Runs : " + ex.getMessage());
+                    }
+                } else {
+                    System.out.println("No");
                 }
             } else {
                 System.out.println("Not Valid Number");

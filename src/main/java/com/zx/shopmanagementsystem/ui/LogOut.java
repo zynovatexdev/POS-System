@@ -48,7 +48,6 @@ public class LogOut extends javax.swing.JFrame {
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\LogoutScreen.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(956, 537));
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();

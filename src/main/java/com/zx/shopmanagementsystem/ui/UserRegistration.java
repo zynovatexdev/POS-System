@@ -8,6 +8,7 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.forms.UserManagement;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -300,27 +301,34 @@ public class UserRegistration extends javax.swing.JFrame {
             System.out.println("User name exsist");
             DialogBox.showMessage("ERROR", "User name exsist", 3);
         } else {
-            try {
-                ResultSet rs = DB.getdata("SELECT role_id FROM user_role WHERE role_name = '" + userRole + "'");
-                if (rs.next()) {
-                    while (true) {
-                        userRoleId = rs.getInt("role_id");
-                        PreparedStatement pst = DB.con().prepareStatement("INSERT INTO user (user_name, password, full_name, profile_pic, user_role_id) VALUES (?,?,?,?,?)");
+            ConfirmDialog confrim = new ConfirmDialog(this);
+            confrim.showMessage("Register", "Do you want to Register ?");
+            if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                System.out.println("Yes");
+                try {
+                    ResultSet rs = DB.getdata("SELECT role_id FROM user_role WHERE role_name = '" + userRole + "'");
+                    if (rs.next()) {
+                        while (true) {
+                            userRoleId = rs.getInt("role_id");
+                            PreparedStatement pst = DB.con().prepareStatement("INSERT INTO user (user_name, password, full_name, profile_pic, user_role_id) VALUES (?,?,?,?,?)");
 
-                        pst.setString(1, Username);
-                        pst.setString(2, Password);
-                        pst.setString(3, fullName);
-                        pst.setBinaryStream(4, profilePicture);
-                        pst.setInt(5, userRoleId);
-                        pst.executeUpdate();
-                        System.out.println("Data Written");
-                        DialogBox.showMessage("Success", "User Successfully Saved", 1);
-                        clear();
-                        break;
+                            pst.setString(1, Username);
+                            pst.setString(2, Password);
+                            pst.setString(3, fullName);
+                            pst.setBinaryStream(4, profilePicture);
+                            pst.setInt(5, userRoleId);
+                            pst.executeUpdate();
+                            System.out.println("Data Written");
+                            DialogBox.showMessage("Success", "User Successfully Saved", 1);
+                            clear();
+                            break;
+                        }
                     }
+                } catch (Exception ex) {
+                    Logger.getLogger(UserRegistration.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            } catch (Exception ex) {
-                Logger.getLogger(UserRegistration.class.getName()).log(Level.SEVERE, null, ex);
+            } else {
+                System.out.println("No");
             }
 
         }

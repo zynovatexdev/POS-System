@@ -35,7 +35,7 @@ public class DeleteButtonEditorRenderer extends AbstractCellEditor implements Ta
                 }
             }
         });
-        deleteButton.setBackground(Color.red);
+        deleteButton.setBackground(Color.decode("#C92F0D"));
     }
     
     @Override

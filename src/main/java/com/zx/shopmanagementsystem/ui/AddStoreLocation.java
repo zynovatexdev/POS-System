@@ -6,7 +6,9 @@ package com.zx.shopmanagementsystem.ui;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.components.ScrollBarCustom;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
@@ -32,6 +34,7 @@ public class AddStoreLocation extends javax.swing.JFrame {
 
     public AddStoreLocation() {
         initComponents();
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         getMaxValue();
         head1.setFrame(this);
@@ -49,6 +52,7 @@ public class AddStoreLocation extends javax.swing.JFrame {
         head1 = new com.zx.shopmanagementsystem.components.Head();
         addStoreLocation = new javax.swing.JLabel();
         storeLocationTxt = new com.zx.shopmanagementsystem.components.RoundedText();
+        panelBorder1 = new com.raven.swing.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
         storeLocationDescription = new javax.swing.JTextArea();
         iconLbl = new javax.swing.JLabel();
@@ -82,12 +86,35 @@ public class AddStoreLocation extends javax.swing.JFrame {
         storeLocationTxt.setPreferredSize(new java.awt.Dimension(129, 50));
         getContentPane().add(storeLocationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 480, -1));
 
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+
         storeLocationDescription.setColumns(20);
         storeLocationDescription.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         storeLocationDescription.setRows(5);
         jScrollPane1.setViewportView(storeLocationDescription);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 320, 460, -1));
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 472, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 140, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelBorder1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 300, 470, 140));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Store_Location.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -117,14 +144,21 @@ public class AddStoreLocation extends javax.swing.JFrame {
             if (locationChecker(storeLocationTxt.getText())) {
                 DialogBox.showMessage("ERROR!!!", "Store Location is already have.", 3);
             } else {
-                try {
-                    DB.putdata("INSERT INTO store_location (store_location_id, store_location_name, store_location_description) VALUES ('" + newId + "', '" + storeLocationTxt.getText() + "', '" + storeLocationDescription.getText() + "')");
-                    DialogBox.showMessage("Done!!!", "Store Location Saved!!!", 1);
-                    storeLocationTxt.setText("");
-                    storeLocationDescription.setText("");
-                    getMaxValue();
-                } catch (Exception ex) {
-                    Logger.getLogger(AddStoreLocation.class.getName()).log(Level.SEVERE, null, ex);
+                ConfirmDialog confrim = new ConfirmDialog(this);
+                confrim.showMessage("Save", "Do you want to Add ?");
+                if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                    System.out.println("Yes");
+                    try {
+                        DB.putdata("INSERT INTO store_location (store_location_id, store_location_name, store_location_description) VALUES ('" + newId + "', '" + storeLocationTxt.getText() + "', '" + storeLocationDescription.getText() + "')");
+                        DialogBox.showMessage("Done!!!", "Store Location Saved!!!", 1);
+                        storeLocationTxt.setText("");
+                        storeLocationDescription.setText("");
+                        getMaxValue();
+                    } catch (Exception ex) {
+                        Logger.getLogger(AddStoreLocation.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else {
+                    System.out.println("No");
                 }
             }
 
@@ -175,6 +209,7 @@ public class AddStoreLocation extends javax.swing.JFrame {
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JTextArea storeLocationDescription;
     private com.zx.shopmanagementsystem.components.RoundedText storeLocationTxt;
     // End of variables declaration//GEN-END:variables

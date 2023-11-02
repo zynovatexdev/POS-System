@@ -441,31 +441,38 @@ public class UserDetails extends javax.swing.JFrame {
             System.out.println("Select User Role");
             DialogBox.showMessage("WARNING", "Select User Role", 2);
         } else {
-            try {
-                PreparedStatement pst = DB.con().prepareStatement("UPDATE user SET user_name = ?, password = ?, full_name = ?, profile_pic = ?, user_role_id = ? WHERE user_id = ?");
+            ConfirmDialog confrim = new ConfirmDialog(this);
+            confrim.showMessage("Update", "Do you want to Update ?");
+            if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                System.out.println("Yes");
+                try {
+                    PreparedStatement pst = DB.con().prepareStatement("UPDATE user SET user_name = ?, password = ?, full_name = ?, profile_pic = ?, user_role_id = ? WHERE user_id = ?");
 
-                pst.setString(1, userName);
-                pst.setString(2, password);
-                pst.setString(3, fullName);
-                pst.setBinaryStream(4, profilePicture);
-                pst.setInt(5, roleId);
-                pst.setInt(6, userID); // Assuming you have a variable 'userId' for specifying which user to update
+                    pst.setString(1, userName);
+                    pst.setString(2, password);
+                    pst.setString(3, fullName);
+                    pst.setBinaryStream(4, profilePicture);
+                    pst.setInt(5, roleId);
+                    pst.setInt(6, userID); // Assuming you have a variable 'userId' for specifying which user to update
 
-                pst.executeUpdate();
-                System.out.println("Data Updated");
-                DialogBox.showMessage("Done", "User Updated", 1);
-                File file = new File("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\DBProfileImages\\img" + userID + ".png");
-                System.out.println("user id : " + userID);
-                file.delete();
-                formDisable();
-                updateBtnLbl.setVisible(false);
-                updateImageIconBtn.setVisible(false);
-                editBtnLbl.setVisible(true);
-                deleteBtnLbl.setVisible(true);
-                func.iconSetter(iconLbl, il.userDetailsScreen);
+                    pst.executeUpdate();
+                    System.out.println("Data Updated");
+                    DialogBox.showMessage("Done", "User Updated", 1);
+                    File file = new File("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\DBProfileImages\\img" + userID + ".png");
+                    System.out.println("user id : " + userID);
+                    file.delete();
+                    formDisable();
+                    updateBtnLbl.setVisible(false);
+                    updateImageIconBtn.setVisible(false);
+                    editBtnLbl.setVisible(true);
+                    deleteBtnLbl.setVisible(true);
+                    func.iconSetter(iconLbl, il.userDetailsScreen);
 
-            } catch (Exception ex) {
-                System.out.println("User Details Update Button : " + ex.getMessage());
+                } catch (Exception ex) {
+                    System.out.println("User Details Update Button : " + ex.getMessage());
+                }
+            } else {
+                System.out.println("No");
             }
 
         }

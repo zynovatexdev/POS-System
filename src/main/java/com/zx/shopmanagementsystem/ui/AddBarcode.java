@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -165,15 +166,22 @@ public class AddBarcode extends javax.swing.JFrame {
             if (func.barcodeChecker(barcodeValueTxt.getText()) == 1) {
                 System.out.println("barcode have");
             } else {
-                try {
-                    DB.putdata("INSERT INTO barcode (barcode_id, barcode_value) VALUES ('" + newBarId + "','" + barcodeValueTxt.getText() + "')");
-                    DialogBox.showMessage("Done", "Barcode Succussfully Added", 1);
-                    barcodeValueTxt.setText("");
-                    getMaxValue();
-                    System.out.println(newBarId);
-                    DB.con().close();
-                } catch (Exception ex) {
-                    Logger.getLogger(AddBarcode.class.getName()).log(Level.SEVERE, null, ex);
+                ConfirmDialog confrim = new ConfirmDialog(this);
+                confrim.showMessage("Save", "Do you want to Add ?");
+                if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                    System.out.println("Yes");
+                    try {
+                        DB.putdata("INSERT INTO barcode (barcode_id, barcode_value) VALUES ('" + newBarId + "','" + barcodeValueTxt.getText() + "')");
+                        DialogBox.showMessage("Done", "Barcode Succussfully Added", 1);
+                        barcodeValueTxt.setText("");
+                        getMaxValue();
+                        System.out.println(newBarId);
+                        DB.con().close();
+                    } catch (Exception ex) {
+                        System.out.println("Add Barcode : " + ex.getMessage());
+                    }
+                } else {
+                    System.out.println("No");
                 }
             }
         }

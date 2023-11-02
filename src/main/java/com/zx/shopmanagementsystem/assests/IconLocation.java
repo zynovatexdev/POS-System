@@ -106,5 +106,13 @@ public class IconLocation {
     public String calenderIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/CalenderIcon.png";
     public String addProductPurpleIcon2 = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddProductPurpleIcon.png";
     public String addProductWhiteIcon2 = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddProductWhiteIcon.png";
+    public String AddInvoice1Icon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/addInvoiceIcon.png";
+    public String AddInvoice2Icon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddInvoice2.png";
+    public String ClearDetails1Icon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/clearIcon.png";
+    public String ClearDetails2Icon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/ClearDetails2.png";
+    public String Payment1CheckOutIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/paymentIcon.png";
+    public String Payment2CheckOutIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/PaymentCheckout2.png";
+    public String PayNow = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/PayNow.png";
+    public String PayNowShadow = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/PayNowShadow.png";
 
 }

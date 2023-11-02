@@ -7,6 +7,8 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
+import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
@@ -143,6 +145,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         });
         getContentPane().add(backButtonLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 50, 50));
 
+        head1.setHeaderTitle("");
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
 
@@ -202,16 +205,19 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     private void searchIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchIconMouseClicked
         // TODO add your handling code here:
+        MessageDialog DialogBox = new MessageDialog(this);
         String username = usernameTxt.getText();
         if (username.equals("")) {
             System.out.println("Username Empty");
-            JOptionPane.showMessageDialog(null, "Username is Empty", "WARNING", JOptionPane.WARNING_MESSAGE);
+            DialogBox.showMessage("WARNING!!!", "User Name Empty", 2);
+            //JOptionPane.showMessageDialog(null, "Username is Empty", "WARNING", JOptionPane.WARNING_MESSAGE);
         } else {
             try {
                 java.sql.ResultSet rs = DB.getdata("SELECT * FROM user WHERE user_name = '" + username + "'");
                 if (rs.next()) {
                     System.out.println("User Found");
-                    JOptionPane.showMessageDialog(null, "User Found", "Done", JOptionPane.PLAIN_MESSAGE);
+                    DialogBox.showMessage("Done!!!", "User Found", 1);
+                    //JOptionPane.showMessageDialog(null, "User Found", "Done", JOptionPane.PLAIN_MESSAGE);
                     newPasswordLbl.setEnabled(true);
                     newPasswordTxt.setEnabled(true);
                     confirmPasswordLbl.setEnabled(true);
@@ -220,7 +226,8 @@ public class ForgotPassword extends javax.swing.JFrame {
                     usernameTxt.setEditable(false);
                 } else {
                     System.out.println("User Not Found");
-                    JOptionPane.showMessageDialog(rootPane, "User Not Found", "WARNING!!!", JOptionPane.WARNING_MESSAGE);
+                    DialogBox.showMessage("ERROR!!!", "User Not Found", 3);
+                    //JOptionPane.showMessageDialog(rootPane, "User Not Found", "WARNING!!!", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (Exception e) {
                 System.out.println("Error | Forgot Password : " + e.getMessage());
@@ -240,33 +247,44 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     private void updatePasswordLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updatePasswordLblMouseClicked
         // TODO add your handling code here:
+        MessageDialog DialogBox = new MessageDialog(this);
         String Username = usernameTxt.getText();
         String newPassword = newPasswordTxt.getText();
         String confrimPassword = confirmPasswordTxt.getText();
 
         if (newPassword.equals("") || confrimPassword.equals("")) {
             System.out.println("Password Fields Empty");
-            JOptionPane.showMessageDialog(rootPane, "Password Fields Empty", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
+            DialogBox.showMessage("ERROR!!!", "Password Empty", 2);
+            //JOptionPane.showMessageDialog(rootPane, "Password Fields Empty", "ERROR!!!", JOptionPane.ERROR_MESSAGE);
         } else if (newPassword.equals(confrimPassword)) {
             System.out.println("Password Matching");
-            try {
-                DB.putdata("UPDATE user SET password = '" + newPassword + "' WHERE user_name = '" + Username + "';");
-                JOptionPane.showMessageDialog(rootPane, "Password Updated", "Done!!!", JOptionPane.PLAIN_MESSAGE);
-                usernameTxt.setText("");
-                usernameTxt.setEditable(true);
-                newPasswordTxt.setText("");
-                confirmPasswordTxt.setText("");
-                newPasswordTxt.setEnabled(false);
-                confirmPasswordTxt.setEnabled(false);
-                updatePasswordLbl.setEnabled(false);
-                newPasswordLbl.setEnabled(false);
-                confirmPasswordLbl.setEnabled(false);
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, ex.getMessage());
+            ConfirmDialog confrim = new ConfirmDialog(this);
+            confrim.showMessage("Delete", "Do you want to Delete ?");
+            if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                System.out.println("Yes");
+                try {
+                    DB.putdata("UPDATE user SET password = '" + newPassword + "' WHERE user_name = '" + Username + "';");
+                    DialogBox.showMessage("Done!!!", "Password Updated", 1);
+                    //JOptionPane.showMessageDialog(rootPane, "Password Updated", "Done!!!", JOptionPane.PLAIN_MESSAGE);
+                    usernameTxt.setText("");
+                    usernameTxt.setEditable(true);
+                    newPasswordTxt.setText("");
+                    confirmPasswordTxt.setText("");
+                    newPasswordTxt.setEnabled(false);
+                    confirmPasswordTxt.setEnabled(false);
+                    updatePasswordLbl.setEnabled(false);
+                    newPasswordLbl.setEnabled(false);
+                    confirmPasswordLbl.setEnabled(false);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage());
+                }
+            } else {
+                System.out.println("No");
             }
         } else {
             System.out.println("Password Not Match");
-            JOptionPane.showMessageDialog(rootPane, "Password Not Match", "Warning!!!", JOptionPane.WARNING_MESSAGE);
+            DialogBox.showMessage("WARNING!!!", "Password Niot Match", 2);
+            //JOptionPane.showMessageDialog(rootPane, "Password Not Match", "Warning!!!", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_updatePasswordLblMouseClicked
 

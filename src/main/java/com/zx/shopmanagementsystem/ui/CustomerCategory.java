@@ -6,7 +6,9 @@ package com.zx.shopmanagementsystem.ui;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.components.ScrollBarCustom;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.sql.ResultSet;
@@ -32,6 +34,7 @@ public class CustomerCategory extends javax.swing.JFrame {
 
     public CustomerCategory() {
         initComponents();
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(CustomerCategory.this);
         setIcon();
@@ -47,6 +50,7 @@ public class CustomerCategory extends javax.swing.JFrame {
     private void initComponents() {
 
         typeTxt = new com.zx.shopmanagementsystem.components.RoundedText();
+        panelBorder1 = new com.raven.swing.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
         descriptionTxt = new javax.swing.JTextArea();
         submitBtnLbl = new javax.swing.JLabel();
@@ -55,7 +59,6 @@ public class CustomerCategory extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -63,11 +66,31 @@ public class CustomerCategory extends javax.swing.JFrame {
         typeTxt.setHintText("Enter Customer Category Type");
         getContentPane().add(typeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, 440, 50));
 
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+
         descriptionTxt.setColumns(20);
+        descriptionTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         descriptionTxt.setRows(5);
         jScrollPane1.setViewportView(descriptionTxt);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 330, 420, 150));
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 330, -1, 160));
 
         submitBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
         submitBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -151,6 +174,7 @@ public class CustomerCategory extends javax.swing.JFrame {
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JLabel submitBtnLbl;
     private com.zx.shopmanagementsystem.components.RoundedText typeTxt;
     // End of variables declaration//GEN-END:variables
@@ -190,13 +214,20 @@ public class CustomerCategory extends javax.swing.JFrame {
         } else if (exsit) {
             DialogBox.showMessage("ERROR !!!", "Categoey Already Exsist", 3);
         } else {
-            try {
-                DB.putdata("INSERT INTO customer_category (customer_type, customer_category_description) VALUES ('" + type + "','" + description + "');");
-                DialogBox.showMessage("Done !!!", "Category Saved!", 1);
-                clear();
-                DB.con().close();
-            } catch (Exception ex) {
-                System.out.println("Add Category : " + ex.getMessage());
+            ConfirmDialog confrim = new ConfirmDialog(this);
+            confrim.showMessage("Save", "Do you want to Add ?");
+            if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                System.out.println("Yes");
+                try {
+                    DB.putdata("INSERT INTO customer_category (customer_type, customer_category_description) VALUES ('" + type + "','" + description + "');");
+                    DialogBox.showMessage("Done !!!", "Category Saved!", 1);
+                    clear();
+                    DB.con().close();
+                } catch (Exception ex) {
+                    System.out.println("Add Category : " + ex.getMessage());
+                }
+            } else {
+                System.out.println("No");
             }
 
         }

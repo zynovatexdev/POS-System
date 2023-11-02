@@ -286,16 +286,23 @@ public class SupplierDetails extends javax.swing.JFrame {
             DialogBox.showMessage("WARNING", "Supplier Number Empty", 2);
         } else {
             if (func.isValidMobileNumber(supplierNumber)) {
-                try {
-                    //System.out.println("Valid Mobile Number");
-                    DB.putdata("UPDATE supplier SET supplier_name = '" + supplierName + "', supplier_contact = '" + supplierNumber + "' WHERE supplier_id = '" + supID + "'");
-                    System.out.println("Data Updated");
-                    DialogBox.showMessage("Done", "Supplier Updated", 1);
-                    disableForm();
-                    SupplierManagement sm = new SupplierManagement();
-                    sm.setTable();
-                } catch (Exception ex) {
-                    System.out.println("Supplier Details -> Update Function " + ex.getMessage());
+                ConfirmDialog confrim = new ConfirmDialog(this);
+                confrim.showMessage("Update", "Do you want to Update ?");
+                if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                    System.out.println("Yes");
+                    try {
+                        //System.out.println("Valid Mobile Number");
+                        DB.putdata("UPDATE supplier SET supplier_name = '" + supplierName + "', supplier_contact = '" + supplierNumber + "' WHERE supplier_id = '" + supID + "'");
+                        System.out.println("Data Updated");
+                        DialogBox.showMessage("Done", "Supplier Updated", 1);
+                        disableForm();
+                        SupplierManagement sm = new SupplierManagement();
+                        sm.setTable();
+                    } catch (Exception ex) {
+                        System.out.println("Supplier Details -> Update Function " + ex.getMessage());
+                    }
+                } else {
+                    System.out.println("No");
                 }
             } else {
                 System.out.println("Not Valid Number");

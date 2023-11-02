@@ -6,8 +6,10 @@ package com.zx.shopmanagementsystem.ui;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.components.ScrollBarCustom;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.forms.CustomerManagement;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.util.logging.Level;
@@ -33,6 +35,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
     public CustomerRegistration(CustomerManagement cm) {
         this.cm = cm;
         initComponents();
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(CustomerRegistration.this);
         getMaxValue();
@@ -52,16 +55,16 @@ public class CustomerRegistration extends javax.swing.JFrame {
         customerNameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         customerNumberTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         updateBtn = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        customerAddressTxt = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         customerIdLbl = new javax.swing.JLabel();
         customerCategoryCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        panelBorder1 = new com.raven.swing.PanelBorder();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        customerAddressTxt = new javax.swing.JTextArea();
         iconLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -92,16 +95,6 @@ public class CustomerRegistration extends javax.swing.JFrame {
         });
         getContentPane().add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 570, -1, 70));
 
-        customerAddressTxt.setColumns(20);
-        customerAddressTxt.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
-        customerAddressTxt.setRows(5);
-        customerAddressTxt.setSelectionColor(new java.awt.Color(80, 199, 255));
-        jScrollPane1.setViewportView(customerAddressTxt);
-        customerAddressTxt.getAccessibleContext().setAccessibleName("");
-        customerAddressTxt.getAccessibleContext().setAccessibleDescription("");
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 320, 480, 100));
-
         jLabel1.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("New Customer ID");
@@ -114,6 +107,35 @@ public class CustomerRegistration extends javax.swing.JFrame {
         customerCategoryCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         customerCategoryCombo.setPreferredSize(new java.awt.Dimension(163, 50));
         getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, 480, -1));
+
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+
+        customerAddressTxt.setColumns(20);
+        customerAddressTxt.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        customerAddressTxt.setRows(5);
+        customerAddressTxt.setSelectionColor(new java.awt.Color(80, 199, 255));
+        jScrollPane1.setViewportView(customerAddressTxt);
+        customerAddressTxt.getAccessibleContext().setAccessibleName("");
+        customerAddressTxt.getAccessibleContext().setAccessibleDescription("");
+
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 320, 480, 110));
 
         iconLable.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Customer_Registration.png")); // NOI18N
         getContentPane().add(iconLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -218,6 +240,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
     private javax.swing.JLabel iconLable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JLabel updateBtn;
     // End of variables declaration//GEN-END:variables
 
@@ -248,21 +271,28 @@ public class CustomerRegistration extends javax.swing.JFrame {
         } else {
             if (Func.isValidMobileNumber(customerNumber)) {
                 System.out.println("number valid");
-                try {
-                    java.sql.ResultSet rs = DB.getdata("SELECT * FROM customer_category WHERE customer_type = '" + customerCategory + "'");
-                    while (rs.next()) {
-                        int customerCategoryId = rs.getInt("customer_category_id");
-                        DB.putdata("INSERT INTO customer (customer_id, customer_name, customer_address, customer_phone, category_id) VALUES ('" + newCusId + "','" + customerName + "','" + customerAddress + "','" + customerNumber + "','" + customerCategoryId + "')");
-                        System.out.println("Data Written");
-                        dialogBox.showMessage("Done", "Customer Saved", 1);
-                        //JOptionPane.showMessageDialog(null, "Saved", "Saved Customer", JOptionPane.PLAIN_MESSAGE);
-                        getMaxValue();
-                        //System.out.println(maxCusId);
-                        clearText();
+                ConfirmDialog confrim = new ConfirmDialog(this);
+                confrim.showMessage("Register", "Do you want to Register ?");
+                if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                    System.out.println("Yes");
+                    try {
+                        java.sql.ResultSet rs = DB.getdata("SELECT * FROM customer_category WHERE customer_type = '" + customerCategory + "'");
+                        while (rs.next()) {
+                            int customerCategoryId = rs.getInt("customer_category_id");
+                            DB.putdata("INSERT INTO customer (customer_id, customer_name, customer_address, customer_phone, category_id) VALUES ('" + newCusId + "','" + customerName + "','" + customerAddress + "','" + customerNumber + "','" + customerCategoryId + "')");
+                            System.out.println("Data Written");
+                            dialogBox.showMessage("Done", "Customer Saved", 1);
+                            //JOptionPane.showMessageDialog(null, "Saved", "Saved Customer", JOptionPane.PLAIN_MESSAGE);
+                            getMaxValue();
+                            //System.out.println(maxCusId);
+                            clearText();
 
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Customer Registration Add Customer Function" + e);
                     }
-                } catch (Exception e) {
-                    System.out.println("Customer Registration Add Customer Function" + e);
+                } else {
+                    System.out.println("No");
                 }
 
             } else {

@@ -8,6 +8,7 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dateChooser.SelectedDate;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -123,7 +124,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 endDateTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(endDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 270, 460, 50));
+        getContentPane().add(endDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 265, 460, 50));
 
         stratDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         stratDateTxt.setHintText("Enter Strat Date");
@@ -136,14 +137,14 @@ public class AddDiscount extends javax.swing.JFrame {
         getContentPane().add(stratDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 170, 460, 50));
 
         discountTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        discountTxt.setHintText("Enter End Date");
+        discountTxt.setHintText("Discount Presentage");
         discountTxt.setPreferredSize(new java.awt.Dimension(129, 40));
         discountTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 discountTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(discountTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 370, 460, 50));
+        getContentPane().add(discountTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 365, 460, 50));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Discount.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -264,16 +265,23 @@ public class AddDiscount extends javax.swing.JFrame {
                 System.out.println("Date Range Not Valid");
                 DialogBox.showMessage("ERROR", "End date is before the start date. \nInvalid date range.", 3);
             } else {
-                try {
-                    DB.putdata("INSERT INTO discont (discount_id, start_date, end_date, discount_presentage) VALUES ('" + newDisId + "', '" + startDate + "', '" + endDate + "', '" + presentage + "')");
-                    getMaxValue();
-                } catch (Exception ex) {
-                    System.out.println("Add discount : " + ex.getMessage());
+                ConfirmDialog confrim = new ConfirmDialog(this);
+                confrim.showMessage("Save", "Do you want to Add ?");
+                if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                    System.out.println("Yes");
+                    try {
+                        DB.putdata("INSERT INTO discont (discount_id, start_date, end_date, discount_presentage) VALUES ('" + newDisId + "', '" + startDate + "', '" + endDate + "', '" + presentage + "')");
+                        getMaxValue();
+                    } catch (Exception ex) {
+                        System.out.println("Add discount : " + ex.getMessage());
+                    }
+                    DialogBox.showMessage("Done", "Discount Added", 1);
+                    stratDateTxt.setText("");
+                    endDateTxt.setText("");
+                    discountTxt.setText("");
+                } else {
+                    System.out.println("No");
                 }
-                DialogBox.showMessage("Done", "Discount Added", 1);
-                stratDateTxt.setText("");
-                endDateTxt.setText("");
-                discountTxt.setText("");
             }
 
         }

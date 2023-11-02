@@ -43,7 +43,6 @@ public class MessageDialog extends javax.swing.JDialog {
         okBtnLbl = new javax.swing.JLabel();
         titleLbl = new javax.swing.JLabel();
         icon = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         messageLbl = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -52,7 +51,7 @@ public class MessageDialog extends javax.swing.JDialog {
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
-        okBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\YesIcon.png")); // NOI18N
+        okBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\okPurple.png")); // NOI18N
         okBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         okBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -68,10 +67,10 @@ public class MessageDialog extends javax.swing.JDialog {
         messageLbl.setBackground(new java.awt.Color(255, 255, 255));
         messageLbl.setColumns(20);
         messageLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        messageLbl.setRows(5);
+        messageLbl.setRows(3);
         messageLbl.setBorder(null);
         messageLbl.setOpaque(false);
-        jScrollPane1.setViewportView(messageLbl);
+        messageLbl.setPreferredSize(new java.awt.Dimension(250, 60));
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -83,11 +82,12 @@ public class MessageDialog extends javax.swing.JDialog {
                     .addComponent(titleLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
                         .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(messageLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(138, 138, 138)
+                .addGap(126, 126, 126)
                 .addComponent(okBtnLbl)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -97,13 +97,14 @@ public class MessageDialog extends javax.swing.JDialog {
                 .addComponent(titleLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(okBtnLbl)
-                .addGap(8, 8, 8))
+                        .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
+                        .addGap(54, 54, 54))
+                    .addGroup(panelBorder1Layout.createSequentialGroup()
+                        .addComponent(messageLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(okBtnLbl)
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,7 +133,6 @@ public class MessageDialog extends javax.swing.JDialog {
      */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel icon;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea messageLbl;
     private javax.swing.JLabel okBtnLbl;
     private com.raven.swing.PanelBorder panelBorder1;

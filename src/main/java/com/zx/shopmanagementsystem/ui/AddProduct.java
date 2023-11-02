@@ -6,8 +6,10 @@ package com.zx.shopmanagementsystem.ui;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.components.ScrollBarCustom;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.forms.InventoryManagement;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
@@ -49,7 +51,7 @@ public class AddProduct extends javax.swing.JFrame {
 
     public AddProduct() {
         initComponents();
-
+        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         getMaxValue();
         Thread dataUpdateThread = new Thread(() -> {
             try {
@@ -126,14 +128,15 @@ public class AddProduct extends javax.swing.JFrame {
         expireDateTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         recivingPriceTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         barcodeScannerBtnLbl = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        productDescriptionTxt = new javax.swing.JTextArea();
         productLocationIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         productTypeIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         discountIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         categoryIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         supplierIdCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         barcodeCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        panelBorder1 = new com.raven.swing.PanelBorder();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        productDescriptionTxt = new javax.swing.JTextArea();
         iconLbl = new javax.swing.JLabel();
 
         date1.setForeground(new java.awt.Color(204, 0, 255));
@@ -188,7 +191,7 @@ public class AddProduct extends javax.swing.JFrame {
 
         productNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         productNameTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 340, -1));
+        getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 360, -1));
 
         brandTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         brandTxt.setPreferredSize(new java.awt.Dimension(139, 50));
@@ -215,12 +218,6 @@ public class AddProduct extends javax.swing.JFrame {
         });
         getContentPane().add(barcodeScannerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 350, 40, 40));
 
-        productDescriptionTxt.setColumns(20);
-        productDescriptionTxt.setRows(5);
-        jScrollPane1.setViewportView(productDescriptionTxt);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 330, 130));
-
         productLocationIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productLocationIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
         getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 560, 190, -1));
@@ -244,6 +241,33 @@ public class AddProduct extends javax.swing.JFrame {
         barcodeCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         barcodeCombo.setPreferredSize(new java.awt.Dimension(139, 50));
         getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 340, 190, -1));
+
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+
+        productDescriptionTxt.setColumns(20);
+        productDescriptionTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        productDescriptionTxt.setRows(5);
+        productDescriptionTxt.setBorder(null);
+        jScrollPane1.setViewportView(productDescriptionTxt);
+
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 360, 120));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_new_Product.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -328,6 +352,7 @@ public class AddProduct extends javax.swing.JFrame {
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
     private com.zx.shopmanagementsystem.components.RoundedText manufactureDateTxt;
+    private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JTextArea productDescriptionTxt;
     private javax.swing.JLabel productIdLbl;
     private com.zx.shopmanagementsystem.components.ComboBoxSuggestion productLocationIdCombo;
@@ -503,43 +528,50 @@ public class AddProduct extends javax.swing.JFrame {
             System.out.println("Stock Quantity Empty");
             DialogBox.showMessage("WARNING!!!", "Stock Quantity Empty", 2);
         } else {
-            if (manufactureDate.equals("") || expDate.equals("")) {
-                System.out.println("Date Empty");
-                try {
-                    DB.putdata("INSERT INTO product (product_id, product_name, reciving_price, selling_price, stock_quantity, description, brand, dimensions, manufacturing_date, expiry_date, supplier_id, barcode_id, category_id, product_type_id, discount_id, store_location_id) VALUES('" + newId + "','" + productName + "','" + recivingPrice + "','" + sellingPrice + "','" + stockQuantity + "','" + description + "','" + brand + "','" + dimention + "','" + manufactureDate + "','" + expDate + "','" + supplierId + "','" + barcodeValue + "','" + categoryId + "','" + typeId + "','" + discoundId + "','" + locationId + "')");
-                    System.out.println("Data saved");
-                    String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
-                    func.QRGenerator(code, productName);
-                    DialogBox.showMessage("Saved", "Product Saved\nQR Code Created.", 1);
-                    getMaxValue();
-                    clear();
-                } catch (Exception ex) {
-                    System.out.println("Data Save Without Date : " + ex.getMessage());
-                }
-            } else {
-                if ((manufacDateVali(manufactureDate))) {
-                    System.out.println("Manufacture Date Not Valid");
-                    DialogBox.showMessage("WARNING!!!", "Manufacture Date Not Valid", 2);
+            ConfirmDialog confrim = new ConfirmDialog(this);
+            confrim.showMessage("Save", "Do you want to Add ?");
+            if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                System.out.println("Yes");
+                if (manufactureDate.equals("") || expDate.equals("")) {
+                    System.out.println("Date Empty");
+                    try {
+                        DB.putdata("INSERT INTO product (product_id, product_name, reciving_price, selling_price, stock_quantity, description, brand, dimensions, manufacturing_date, expiry_date, supplier_id, barcode_id, category_id, product_type_id, discount_id, store_location_id) VALUES('" + newId + "','" + productName + "','" + recivingPrice + "','" + sellingPrice + "','" + stockQuantity + "','" + description + "','" + brand + "','" + dimention + "','" + manufactureDate + "','" + expDate + "','" + supplierId + "','" + barcodeValue + "','" + categoryId + "','" + typeId + "','" + discoundId + "','" + locationId + "')");
+                        System.out.println("Data saved");
+                        String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
+                        func.QRGenerator(code, productName);
+                        DialogBox.showMessage("Saved", "Product Saved\nQR Code Created.", 1);
+                        getMaxValue();
+                        clear();
+                    } catch (Exception ex) {
+                        System.out.println("Data Save Without Date : " + ex.getMessage());
+                    }
                 } else {
-                    if (expDateVali(manufactureDate, expDate)) {
-                        System.out.println("Date Valid");
-                        try {
-                            DB.putdata("INSERT INTO product (product_id, product_name, reciving_price, selling_price, stock_quantity, description, brand, dimensions, manufacturing_date, expiry_date, supplier_id, barcode_id, category_id, product_type_id, discount_id, store_location_id) VALUES('" + newId + "','" + productName + "','" + recivingPrice + "','" + sellingPrice + "','" + stockQuantity + "','" + description + "','" + brand + "','" + dimention + "','" + manufactureDate + "','" + expDate + "','" + supplierId + "','" + barcodeValue + "','" + categoryId + "','" + typeId + "','" + discoundId + "','" + locationId + "')");
-                            System.out.println("Data saved");
-                            String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
-                            func.QRGenerator(code, productName);
-                            DialogBox.showMessage("Saved", "Product Saved\nQR Code Created.", 1);
-                            getMaxValue();
-                            clear();
-                        } catch (Exception ex) {
-                            System.out.println("Data Save With Date : " + ex.getMessage());
-                        }
-
+                    if ((manufacDateVali(manufactureDate))) {
+                        System.out.println("Manufacture Date Not Valid");
+                        DialogBox.showMessage("WARNING!!!", "Manufacture Date Not Valid", 2);
                     } else {
-                        System.out.println("Expire Date Not Valid");
-                        DialogBox.showMessage("WARNING!!!", "Expire Date Not Valid", 2);
+                        if (expDateVali(manufactureDate, expDate)) {
+                            System.out.println("Date Valid");
+                            try {
+                                DB.putdata("INSERT INTO product (product_id, product_name, reciving_price, selling_price, stock_quantity, description, brand, dimensions, manufacturing_date, expiry_date, supplier_id, barcode_id, category_id, product_type_id, discount_id, store_location_id) VALUES('" + newId + "','" + productName + "','" + recivingPrice + "','" + sellingPrice + "','" + stockQuantity + "','" + description + "','" + brand + "','" + dimention + "','" + manufactureDate + "','" + expDate + "','" + supplierId + "','" + barcodeValue + "','" + categoryId + "','" + typeId + "','" + discoundId + "','" + locationId + "')");
+                                System.out.println("Data saved");
+                                String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
+                                func.QRGenerator(code, productName);
+                                DialogBox.showMessage("Saved", "Product Saved\nQR Code Created.", 1);
+                                getMaxValue();
+                                clear();
+                            } catch (Exception ex) {
+                                System.out.println("Data Save With Date : " + ex.getMessage());
+                            }
+
+                        } else {
+                            System.out.println("Expire Date Not Valid");
+                            DialogBox.showMessage("WARNING!!!", "Expire Date Not Valid", 2);
+                        }
                     }
                 }
+            } else {
+                System.out.println("No");
             }
 
         }

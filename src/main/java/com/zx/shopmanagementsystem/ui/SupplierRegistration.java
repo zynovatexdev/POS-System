@@ -8,6 +8,7 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.forms.SupplierManagement;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
@@ -175,16 +176,23 @@ public class SupplierRegistration extends javax.swing.JFrame {
             DialogBox.showMessage("WARNING", "Supplier Number Empty", 2);
         } else {
             if (func.isValidMobileNumber(supplierNumber)) {
-                System.out.println("Valid Mobile Number");
-                try {
-                    DB.putdata("INSERT INTO supplier (supplier_id, supplier_name, supplier_contact) VALUES ('" + newSupId + "', '" + supplierName + "', '" + supplierNumber + "')");
-                    System.out.println("Data Saved");
-                    DialogBox.showMessage("Done", "Supplier Successfully Saved", 1);
-                    clear();
-                    getMaxValue();
-                    //System.out.println("New Id : " + newSupId);
-                } catch (Exception ex) {
-                    System.out.println("Register Supplier Function (SupplierRegistration) -> " + ex.getMessage());
+                ConfirmDialog confrim = new ConfirmDialog(this);
+                confrim.showMessage("Register", "Do you want to Register ?");
+                if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                    System.out.println("Yes");
+                    System.out.println("Valid Mobile Number");
+                    try {
+                        DB.putdata("INSERT INTO supplier (supplier_id, supplier_name, supplier_contact) VALUES ('" + newSupId + "', '" + supplierName + "', '" + supplierNumber + "')");
+                        System.out.println("Data Saved");
+                        DialogBox.showMessage("Done", "Supplier Successfully Saved", 1);
+                        clear();
+                        getMaxValue();
+                        //System.out.println("New Id : " + newSupId);
+                    } catch (Exception ex) {
+                        System.out.println("Register Supplier Function (SupplierRegistration) -> " + ex.getMessage());
+                    }
+                } else {
+                    System.out.println("No");
                 }
             } else {
                 System.out.println("Not Valid Mobile Number");
