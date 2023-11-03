@@ -13,6 +13,7 @@ import com.zx.shopmanagementsystem.table.DeleteButtonEditorRenderer;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -53,9 +54,14 @@ public class NewInvoice extends javax.swing.JFrame {
 
     ArrayList<Integer> productIdArray = new ArrayList<>();
     double payment = 0;
+    double totalProfit;
+    int UserID;
+    String time;
+    String date;
 
     public NewInvoice() {
         initComponents();
+        readUserIdFromFile();
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         productComboLoader();
         customerComboLoader();
@@ -138,6 +144,7 @@ public class NewInvoice extends javax.swing.JFrame {
         editPriceLbl = new javax.swing.JLabel();
         selectBtnIcon = new javax.swing.JLabel();
         imageLbl = new javax.swing.JLabel();
+        idLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -363,6 +370,9 @@ public class NewInvoice extends javax.swing.JFrame {
         imageLbl.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(imageLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        idLbl.setText("jLabel1");
+        getContentPane().add(idLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 610, -1, -1));
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -524,6 +534,7 @@ public class NewInvoice extends javax.swing.JFrame {
         // TODO add your handling code here:
         // Get the JSON data
         MessageDialog DialogBox = new MessageDialog(this);
+        DefaultTableModel model = (DefaultTableModel) invoiceTbl.getModel();
 
         JSONObject invoiceData = collectInvoiceData();
         String totalPriceStr = invoiceData.getString("TotalPrice");
@@ -547,7 +558,9 @@ public class NewInvoice extends javax.swing.JFrame {
                 generateInvoiceBill(invoiceData, balancePrice);
                 DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\nGive Balance : " + balancePrice, 1);
                 clear();
+                updateStockAndCalculateProfit(model);
                 tableDataClear();
+
             }
         } else {
             System.out.println("No");
@@ -603,6 +616,7 @@ public class NewInvoice extends javax.swing.JFrame {
     private com.zx.shopmanagementsystem.components.Spinner discountSpinner;
     private javax.swing.JLabel editPriceLbl;
     private com.zx.shopmanagementsystem.components.Head head1;
+    private javax.swing.JLabel idLbl;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JTable invoiceTbl;
     private javax.swing.JLabel jLabel2;
@@ -862,8 +876,8 @@ public class NewInvoice extends javax.swing.JFrame {
         try {
             // Extract customer name, time, and date
             String customerName = invoiceData.getString("Customer Name");
-            String time = invoiceData.getString("Time");
-            String date = invoiceData.getString("Date");
+            time = invoiceData.getString("Time");
+            date = invoiceData.getString("Date");
 
             // Extract invoice items
             JSONArray invoiceItems = invoiceData.getJSONArray("InvoiceItems");
@@ -916,6 +930,96 @@ public class NewInvoice extends javax.swing.JFrame {
 
     public void setPayment(double payment) {
         this.payment = payment;
+    }
+
+    public void updateProductStock(String productName, double quantity) {
+        try {
+            // Update stock quantity in the database.
+            // Replace this with your database update code.
+
+            ResultSet rs = DB.getdata("SELECT stock_quantity FROM product WHERE product_name = '" + productName + "'");
+            if (rs.next()) {
+                double dbQuantity = Double.parseDouble(rs.getString("stock_quantity"));
+                String newQuantity = String.valueOf(dbQuantity - quantity);
+                DB.putdata("UPDATE product SET stock_quantity = '" + newQuantity + "' WHERE product_name = '" + productName + "'");
+            } else {
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Update Product Stock : " + ex.getMessage());
+        }
+    }
+
+    public void updateStockAndCalculateProfit(DefaultTableModel model) {
+        String productName;
+        double quantity;
+        double soldPrice = 0;
+        double costPrice;
+        double profit;
+        for (int row = 0; row < model.getRowCount(); row++) {
+            productName = model.getValueAt(row, 1).toString();
+            quantity = Double.parseDouble(model.getValueAt(row, 2).toString());
+            soldPrice = Double.parseDouble(model.getValueAt(row, 3).toString());
+
+            costPrice = getProductCostPrice(productName);
+            profit = (soldPrice - costPrice) * quantity;
+            totalProfit = totalProfit + profit;
+            System.out.println("Sold : " + soldPrice);
+            System.out.println("Cost : " + costPrice);
+            System.out.println("Profit : " + profit);
+
+            // Update stock quantity and calculate profit in the database
+            updateProductStock(productName, quantity);
+        }
+
+        System.out.println("Total Profit : " + totalProfit);
+
+        if (UserID != -1) {
+            updateUserProfile(date, time, String.valueOf(totalProfit), String.valueOf(soldPrice), UserID);
+        }
+    }
+
+    public double getProductCostPrice(String productName) {
+        double costPrice = 0.0;
+        try {
+            // Query the database to get the cost price for the product.
+            // Replace this with your database query.
+            ResultSet rs = DB.getdata("SELECT reciving_price FROM product WHERE product_name = '" + productName + "'");
+            if (rs.next()) {
+                costPrice = Double.parseDouble(rs.getString("reciving_price"));
+            }
+        } catch (Exception ex) {
+            System.out.println("Get Product Cost Price : " + ex.getMessage());
+        }
+
+        return costPrice;
+    }
+
+    public void updateUserProfile(String date, String time, String profit, String sale, int userId) {
+        try {
+            DB.putdata("INSERT INTO user_profile (date, time, sale, profit, user_id) VALUES ('" + date + "','" + time + "','" + sale + "','" + profit + "','" + userId + "')");
+        } catch (Exception ex) {
+            System.out.println("updateUserProfile : " + ex.getMessage());
+        }
+    }
+
+    public void readUserIdFromFile() {
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("C:\\ShopManagementSystem\\userId.txt"));
+            String line = reader.readLine();
+            if (line != null) {
+                UserID = Integer.parseInt(line);
+                reader.close();
+            } else {
+                reader.close();
+                UserID = -1;
+                // Return -1 if the file is empty or doesn't exist.
+            }
+        } catch (IOException e) {
+            System.err.println("Error reading UserID from the file: " + e.getMessage());
+            // Return -1 on error.
+            UserID = -1;
+        }
     }
 
 }

@@ -395,11 +395,14 @@ public class AddProduct extends javax.swing.JFrame {
     private void discountComboLoader() {
         try {
             ResultSet rs = DB.getdata("SELECT * FROM discont");
+            discountIdCombo.addItem("0" + "%");
+            discountIdArray.add(0);
             while (rs.next()) {
                 String supplierName = rs.getString("discount_presentage");
                 String endDate = rs.getString("end_date");
                 int disId = rs.getInt("discount_id");
                 System.out.println(endDate);
+
                 if (func.dateValidator(endDate) == 1) {
                     discountIdCombo.addItem(supplierName + "%");
                     discountIdArray.add(disId);

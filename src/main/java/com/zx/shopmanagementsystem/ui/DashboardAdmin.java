@@ -23,6 +23,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import javax.swing.ImageIcon;
@@ -39,7 +41,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     IconLocation il = new IconLocation();
     Func func = new Func();
 
-    int UserID;
+    public int UseriD;
     String path;
 
     public DashboardAdmin() {
@@ -52,7 +54,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
         head1.setFrame(this);
         func.setForm(mainPanal, new Home());
         setIcon();
-        System.out.println("Dashboard : " + UserID);
     }
 
     /**
@@ -288,7 +289,6 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void dashboardBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnLblMouseEntered
         // TODO add your handling code here:
         func.iconSetter(dashboardBtnLbl, il.dashboardWhiteIcon);
-        System.out.println("Dashbaord : " + UserID);
     }//GEN-LAST:event_dashboardBtnLblMouseEntered
 
     private void dashboardBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnLblMouseExited
@@ -364,6 +364,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void invoiceCreationBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCreationBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(invoiceCreationBtnLbl, il.invoiceCreationPurpleIcon);
+
     }//GEN-LAST:event_invoiceCreationBtnLblMouseExited
 
     private void reportGenerationBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportGenerationBtnLblMouseEntered
@@ -452,6 +453,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         func.setForm(mainPanal, new InvoiceCreation());
         head1.setHeaderTitle("Invoice Management");
+        System.out.println("DB ID : " + UseriD);
+        InvoiceCreation ic = new InvoiceCreation();
+        ic.uid = UseriD;
     }//GEN-LAST:event_invoiceCreationBtnLblMouseClicked
 
     private void reportGenerationBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_reportGenerationBtnLblMouseClicked
@@ -548,13 +552,19 @@ public class DashboardAdmin extends javax.swing.JFrame {
     }
 
     public void getUserId(int UserID) {
-        this.UserID = UserID;
+        this.UseriD = UserID;
         JDBC DB = new JDBC();
-
         InputStream input;
         FileOutputStream output;
         System.out.println("Data Load UserID : " + UserID);
-
+        try {
+            FileWriter writer = new FileWriter("C:\\ShopManagementSystem\\userId.txt");
+            writer.write(Integer.toString(UserID));
+            writer.close();
+            System.out.println("UserID written to the file.");
+        } catch (IOException e) {
+            System.err.println("Error writing UserID to the file: " + e.getMessage());
+        }
         try {
             ResultSet rs = DB.getdata("SELECT * FROM user WHERE user_id = " + UserID + ";");
             while (rs.next()) {
