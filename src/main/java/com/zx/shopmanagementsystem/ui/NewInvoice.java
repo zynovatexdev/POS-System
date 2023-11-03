@@ -54,7 +54,7 @@ public class NewInvoice extends javax.swing.JFrame {
 
     ArrayList<Integer> productIdArray = new ArrayList<>();
     double payment = 0;
-    double totalProfit;
+
     int UserID;
     String time;
     String date;
@@ -832,9 +832,9 @@ public class NewInvoice extends javax.swing.JFrame {
         double totalPrice = 0.0;
 
         for (int row = 0; row < model.getRowCount(); row++) {
-            double quantity = Double.parseDouble(model.getValueAt(row, 2).toString());
+            //double quantity = Double.parseDouble(model.getValueAt(row, 2).toString());
             double price = Double.parseDouble(model.getValueAt(row, 3).toString());
-            totalPrice += (quantity * price);
+            totalPrice += (price);
         }
 
         priceLbl.setText(String.format("%.2f/=", totalPrice));
@@ -956,14 +956,17 @@ public class NewInvoice extends javax.swing.JFrame {
         double soldPrice = 0;
         double costPrice;
         double profit;
+        double totalProfit = 0;
+        double totalsold = 0;
         for (int row = 0; row < model.getRowCount(); row++) {
             productName = model.getValueAt(row, 1).toString();
             quantity = Double.parseDouble(model.getValueAt(row, 2).toString());
             soldPrice = Double.parseDouble(model.getValueAt(row, 3).toString());
 
-            costPrice = getProductCostPrice(productName);
-            profit = (soldPrice - costPrice) * quantity;
-            totalProfit = totalProfit + profit;
+            costPrice = getProductCostPrice(productName) * quantity;
+            profit = (soldPrice - costPrice);
+            totalProfit += profit;
+            totalsold += soldPrice;
             System.out.println("Sold : " + soldPrice);
             System.out.println("Cost : " + costPrice);
             System.out.println("Profit : " + profit);
@@ -973,9 +976,10 @@ public class NewInvoice extends javax.swing.JFrame {
         }
 
         System.out.println("Total Profit : " + totalProfit);
+        System.out.println("Total Sold : " + totalsold);
 
         if (UserID != -1) {
-            updateUserProfile(date, time, String.valueOf(totalProfit), String.valueOf(soldPrice), UserID);
+            updateUserProfile(date, time, String.valueOf(totalProfit), String.valueOf(totalsold), UserID);
         }
     }
 
