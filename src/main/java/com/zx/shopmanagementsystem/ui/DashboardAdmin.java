@@ -6,7 +6,9 @@ package com.zx.shopmanagementsystem.ui;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.assests.backUp;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.dbconnection.JFBC;
 import com.zx.shopmanagementsystem.forms.Analysis;
 import com.zx.shopmanagementsystem.forms.CustomerManagement;
 import com.zx.shopmanagementsystem.forms.DebtManagement;
@@ -28,6 +30,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import javax.swing.ImageIcon;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -40,13 +44,17 @@ public class DashboardAdmin extends javax.swing.JFrame {
      */
     IconLocation il = new IconLocation();
     Func func = new Func();
+    backUp backup = new backUp();
+    JFBC FB = new JFBC();
 
     public int UseriD;
     String path;
 
     public DashboardAdmin() {
         initComponents();
-
+        FB.connectFirebase();
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new MyTask(), 0, 600000);
         setBackground(new Color(255, 255, 255, 0));
         head1.setOpaque(true);
         head1.setHeaderTitle("Dashboard Admin");
@@ -515,10 +523,20 @@ public class DashboardAdmin extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 //new SplashPanal(null, true).setVisible(true);
-
                 new DashboardAdmin().setVisible(true);
             }
         });
+    }
+
+    private class MyTask extends TimerTask {
+
+        @Override
+        public void run() {
+            // Place your code here to execute every 10 minutes
+            System.out.println("Task executed at: " + System.currentTimeMillis());
+
+            backup.backupAll();
+        }
     }
 
     public void customerPanalRefresh() {
