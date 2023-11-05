@@ -5,13 +5,14 @@
 package com.zx.shopmanagementsystem.assests;
 
 import com.google.api.core.ApiFuture;
-import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.cloud.FirestoreClient;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import java.sql.Blob;
 import java.sql.ResultSet;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,8 +21,6 @@ import java.util.Map;
  * @author User
  */
 public class backUp {
-
-    CollectionReference reference;
 
     static Firestore FB;
     JDBC DB = new JDBC();
@@ -206,14 +205,434 @@ public class backUp {
         System.out.println("Customer BackUp Run");
     }
 
+    public void backUpDiscount() {
+        Map<String, Object> data = new HashMap<>();
+        int discountId;
+        String stratDate;
+        String endDate;
+        String discountPresentage;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM discont");
+            while (rs.next()) {
+                discountId = rs.getInt("discount_id");
+                stratDate = rs.getString("start_date");
+                endDate = rs.getString("end_date");
+                discountPresentage = rs.getString("discount_presentage");
+
+                data.put("discount_id", discountId);
+                data.put("start_date", stratDate);
+                data.put("end_date", endDate);
+                data.put("discount_presentage", discountPresentage);
+
+                backUp("Discount", String.valueOf(discountId), data);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Discount : " + e.getMessage());
+        }
+        System.out.println("Discount BackUp Run");
+    }
+
+    public void backUpProductCategory() {
+        Map<String, Object> data = new HashMap<>();
+        int categoryId;
+        String categoryName;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM product_category");
+            while (rs.next()) {
+                categoryId = rs.getInt("category_id");
+                categoryName = rs.getString("category_id");
+
+                data.put("discount_id", categoryId);
+                data.put("start_date", categoryName);
+
+                backUp("Product Category", String.valueOf(categoryId), data);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Product Category : " + e.getMessage());
+        }
+        System.out.println("Product Category BackUp Run");
+    }
+
+    public void backUpProductType() {
+        Map<String, Object> data = new HashMap<>();
+        int typeId;
+        String type;
+        String description;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM product_type");
+            while (rs.next()) {
+                typeId = rs.getInt("product_type_id");
+                type = rs.getString("product_type");
+                description = rs.getString("product_type_description");
+
+                data.put("product_type_id", typeId);
+                data.put("product_type", type);
+                data.put("product_type_description", description);
+
+                backUp("Product Type", String.valueOf(typeId), data);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Product Type : " + e.getMessage());
+        }
+        System.out.println("Product Type BackUp Run");
+    }
+
+    public void backUpCustomerCategory() {
+        Map<String, Object> data = new HashMap<>();
+        int categoryId;
+        String type;
+        String description;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM customer_category");
+            while (rs.next()) {
+                categoryId = rs.getInt("customer_category_id");
+                type = rs.getString("customer_type");
+                description = rs.getString("customer_category_description");
+
+                data.put("customer_category_id", categoryId);
+                data.put("customer_type", type);
+                data.put("customer_category_description", description);
+
+                backUp("Customer Category", String.valueOf(categoryId), data);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Customer Category : " + e.getMessage());
+        }
+        System.out.println("Customer Category BackUp Run");
+    }
+
+    public void backUpDebt() {
+        Map<String, Object> data = new HashMap<>();
+        int debtId;
+        int paymentMethod;
+        int customerId;
+        String totalAmount;
+        String installmentPayment;
+        String outstandingAmount;
+        String lastPayAmount;
+        String stratDate;
+        String nextDate;
+        String lastPayDate;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM debt");
+            while (rs.next()) {
+                debtId = rs.getInt("debt_id");
+                paymentMethod = rs.getInt("payment_method");
+                customerId = rs.getInt("customer_id");
+                totalAmount = rs.getString("total_amount");
+                installmentPayment = rs.getString("installment_payment");
+                outstandingAmount = rs.getString("outstanding_amount");
+                lastPayAmount = rs.getString("last_pay_amount");
+                stratDate = rs.getString("start_date");
+                nextDate = rs.getString("next_date");
+                lastPayDate = rs.getString("last_pay_date");
+
+                data.put("debt_id", debtId);
+                data.put("payment_method", paymentMethod);
+                data.put("customer_id", customerId);
+                data.put("total_amount", totalAmount);
+                data.put("installment_payment", installmentPayment);
+                data.put("outstanding_amount", outstandingAmount);
+                data.put("last_pay_amount", lastPayAmount);
+                data.put("start_date", stratDate);
+                data.put("next_date", nextDate);
+                data.put("last_pay_date", lastPayDate);
+
+                backUp("Debt", String.valueOf(debtId), data);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Debt : " + e.getMessage());
+        }
+        System.out.println("Debt BackUp Run");
+    }
+
+    public void backUpDebtInvoice() {
+        Map<String, Object> data = new HashMap<>();
+        int invoiceId;
+        int debtId;
+        int invoiceCategoryId;
+        String dateAndTime;
+        String note;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM debt_invoice");
+            while (rs.next()) {
+                invoiceId = rs.getInt("invoice_id");
+                debtId = rs.getInt("debt_id");
+                invoiceCategoryId = rs.getInt("invoice_category_id");
+                dateAndTime = rs.getString("date_and_time");
+                note = rs.getString("note");
+
+                data.put("invoice_id", invoiceId);
+                data.put("debt_id", debtId);
+                data.put("invoice_category_id", invoiceCategoryId);
+                data.put("date_and_time", dateAndTime);
+                data.put("note", note);
+
+                backUp("Debt Invoice", String.valueOf(invoiceId), data);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Debt Invoice : " + e.getMessage());
+        }
+        System.out.println("Debt Invoice BackUp Run");
+    }
+
+    public void backUpInvoiceCategory() {
+        Map<String, Object> data = new HashMap<>();
+        int invoiceCategoryId;
+        String invoiceCategoryType;
+        String invoiceCategoryDescription;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM invoice_catergory");
+            while (rs.next()) {
+                invoiceCategoryId = rs.getInt("invoice_category_id");
+                invoiceCategoryType = rs.getString("invoice_category_type");
+                invoiceCategoryDescription = rs.getString("invoice_category_description");
+
+                data.put("invoice_category_id", invoiceCategoryId);
+                data.put("invoice_category_type", invoiceCategoryType);
+                data.put("invoice_category_description", invoiceCategoryDescription);
+
+                backUp("Invoice Category", String.valueOf(invoiceCategoryId), data);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Invoice Category : " + e.getMessage());
+        }
+        System.out.println("Invoice Category BackUp Run");
+    }
+
+    public void backUpPaymentMethod() {
+        Map<String, Object> data = new HashMap<>();
+        int id;
+        String type;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM payment_method");
+            while (rs.next()) {
+                id = rs.getInt("payment_method_id");
+                type = rs.getString("payment_method_type");
+
+                data.put("payment_method_id", id);
+                data.put("payment_method_type", type);
+
+                backUp("Payment Method", String.valueOf(id), data);
+
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Invoice Category : " + e.getMessage());
+        }
+        System.out.println("Invoice Category BackUp Run");
+    }
+
+    public void backupReceipt() {
+        Map<String, Object> data = new HashMap<>();
+        int receiptId;
+        String date;
+        String time;
+        int invoiceId;
+        int debtInvoiceId;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM receipt");
+            while (rs.next()) {
+                receiptId = rs.getInt("receipt_id");
+                date = rs.getString("date");
+                time = rs.getString("time");
+                invoiceId = rs.getInt("invoice_id");
+                debtInvoiceId = rs.getInt("debt_invoice_id");
+
+                data.put("receipt_id", receiptId);
+                data.put("date", date);
+                data.put("time", time);
+                data.put("invoice_id", invoiceId);
+                data.put("debt_invoice_id", debtInvoiceId);
+
+                backUp("Receipt", String.valueOf(receiptId), data);
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Receipt: " + e.getMessage());
+        }
+        System.out.println("Receipt Backup Run");
+    }
+
+    public void backupReturnInvoice() {
+        Map<String, Object> data = new HashMap<>();
+        int returnId;
+        String returnTime;
+        String returnDate;
+        String returnAmount;
+        String preAmount;
+        String currentAmount;
+        String returnBalance;
+        int invoiceId;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM return_invoice");
+            while (rs.next()) {
+                returnId = rs.getInt("return_id");
+                returnTime = rs.getString("return_time");
+                returnDate = rs.getString("return_date");
+                returnAmount = rs.getString("return_amount");
+                preAmount = rs.getString("pre_amount");
+                currentAmount = rs.getString("current_amount");
+                returnBalance = rs.getString("return_balance");
+                invoiceId = rs.getInt("invoice_id");
+
+                data.put("return_id", returnId);
+                data.put("return_time", returnTime);
+                data.put("return_date", returnDate);
+                data.put("return_amount", returnAmount);
+                data.put("pre_amount", preAmount);
+                data.put("current_amount", currentAmount);
+                data.put("return_balance", returnBalance);
+                data.put("invoice_id", invoiceId);
+
+                backUp("Return Invoice", String.valueOf(returnId), data);
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Return Invoice: " + e.getMessage());
+        }
+        System.out.println("Return Invoice Backup Run");
+    }
+
+    public void backupSupplier() {
+        Map<String, Object> data = new HashMap<>();
+        int supplierId;
+        String supplierName;
+        String supplierContact;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM supplier");
+            while (rs.next()) {
+                supplierId = rs.getInt("supplier_id");
+                supplierName = rs.getString("supplier_name");
+                supplierContact = rs.getString("supplier_contact");
+
+                data.put("supplier_id", supplierId);
+                data.put("supplier_name", supplierName);
+                data.put("supplier_contact", supplierContact);
+
+                backUp("Supplier", String.valueOf(supplierId), data);
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Supplier: " + e.getMessage());
+        }
+        System.out.println("Supplier Backup Run");
+    }
+
+    public void backupUser() {
+        Map<String, Object> data = new HashMap<>();
+        int userId;
+        String userName;
+        String password;
+        String fullName;
+        String profilePicBase64; // Store the profile picture as a Base64 encoded string
+        int userRoleId;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM user");
+            while (rs.next()) {
+                userId = rs.getInt("user_id");
+                userName = rs.getString("user_name");
+                password = rs.getString("password");
+                fullName = rs.getString("full_name");
+
+                // Read the image as a byte array
+                Blob profilePic = rs.getBlob("profile_pic");
+                if (profilePic != null) {
+                    byte[] profilePicBytes = profilePic.getBytes(1, (int) profilePic.length());
+                    profilePicBase64 = Base64.getEncoder().encodeToString(profilePicBytes);
+                } else {
+                    profilePicBase64 = ""; // Handle the case when no image is available
+                }
+
+                userRoleId = rs.getInt("user_role_id");
+
+                data.put("user_id", userId);
+                data.put("user_name", userName);
+                data.put("password", password);
+                data.put("full_name", fullName);
+
+                // Store the profile picture as a Base64 encoded string
+                data.put("profile_pic", profilePicBase64);
+
+                data.put("user_role_id", userRoleId);
+
+                backUp("User", String.valueOf(userId), data);
+            }
+        } catch (Exception e) {
+            System.out.println("Backup User: " + e.getMessage());
+        }
+        System.out.println("User Backup Run");
+    }
+
+    public void backupUserProfile() {
+        Map<String, Object> data = new HashMap<>();
+        int userProfileId;
+        String date;
+        String time;
+        String sale;
+        String profit;
+        int userId;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM user_profile");
+            while (rs.next()) {
+                userProfileId = rs.getInt("user_profile_id");
+                date = rs.getString("date");
+                time = rs.getString("time");
+                sale = rs.getString("sale");
+                profit = rs.getString("profit");
+                userId = rs.getInt("user_id");
+
+                data.put("user_profile_id", userProfileId);
+                data.put("date", date);
+                data.put("time", time);
+                data.put("sale", sale);
+                data.put("profit", profit);
+                data.put("user_id", userId);
+
+                backUp("User Profile", String.valueOf(userProfileId), data);
+            }
+        } catch (Exception e) {
+            System.out.println("Backup User Profile: " + e.getMessage());
+        }
+        System.out.println("User Profile Backup Run");
+    }
+
     public void backupAll() {
-        backUpProduct();
         backUpUserRole();
         backUpBarcode();
         backUpCashPayment();
         backUpCustomer();
+        backUpDiscount();
+        backUpProduct();
+        backUpProductCategory();
+        backUpProductType();
+        backUpCustomerCategory();
+        backUpDebt();
+        backUpDebtInvoice();
+        backUpInvoiceCategory();
+        backUpPaymentMethod();
+        backupReceipt();
+        backupReturnInvoice();
+        backupSupplier();
+        backupUser();
+        backupUserProfile();
         System.out.println("Backup All Runs");
-
     }
 
     public boolean backUp(String collection, String document, Map<String, Object> data) {
