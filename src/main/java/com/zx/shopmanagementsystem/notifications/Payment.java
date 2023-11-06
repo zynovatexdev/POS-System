@@ -6,12 +6,11 @@ package com.zx.shopmanagementsystem.notifications;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
-import com.zx.shopmanagementsystem.ui.NewInvoice;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.swing.JFrame;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 /**
  *
@@ -22,16 +21,19 @@ public class Payment extends javax.swing.JDialog {
     /**
      * Creates new form ConfirmDialog
      */
+    JDBC DB = new JDBC();
     private final JFrame fram;
     private MessageType messageType = MessageType.CANCEL;
-    
+    ArrayList<Integer> paymentMethodId = new ArrayList<>();
+
     Func func = new Func();
     IconLocation il = new IconLocation();
-    
+
     public Payment(JFrame fram) {
         super(fram, true);
         this.fram = fram;
         initComponents();
+        paymentMethodComboLoader();
         setBackground(new Color(255, 255, 255, 0));
     }
 
@@ -51,6 +53,8 @@ public class Payment extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         yesLbl = new javax.swing.JLabel();
         noLbl = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        paymentMethodCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         iconLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -63,22 +67,22 @@ public class Payment extends javax.swing.JDialog {
 
         priceLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         priceLbl.setForeground(new java.awt.Color(153, 0, 153));
-        panelBorder1.add(priceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 90, 110, 30));
+        panelBorder1.add(priceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 110, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 0, 153));
         jLabel3.setText("Total Price");
-        panelBorder1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 110, 30));
+        panelBorder1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 60, 110, 30));
 
         paymentTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         paymentTxt.setHintText("Enter Price...");
         paymentTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        panelBorder1.add(paymentTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 130, 160, -1));
+        panelBorder1.add(paymentTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 170, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 0, 153));
-        jLabel4.setText("Payment");
-        panelBorder1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 110, 30));
+        jLabel4.setText("Payment Method");
+        panelBorder1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 160, 170, 30));
 
         yesLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\PayNow.png")); // NOI18N
         yesLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -86,7 +90,7 @@ public class Payment extends javax.swing.JDialog {
                 yesLblMouseClicked(evt);
             }
         });
-        panelBorder1.add(yesLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 130, 30));
+        panelBorder1.add(yesLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 130, 30));
 
         noLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\NoIcon.png")); // NOI18N
         noLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -94,7 +98,16 @@ public class Payment extends javax.swing.JDialog {
                 noLblMouseClicked(evt);
             }
         });
-        panelBorder1.add(noLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 215, 120, 40));
+        panelBorder1.add(noLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 120, 40));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(153, 0, 153));
+        jLabel5.setText("Payment");
+        panelBorder1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 90, 30));
+
+        paymentMethodCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        paymentMethodCombo.setPreferredSize(new java.awt.Dimension(163, 50));
+        panelBorder1.add(paymentMethodCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 160, 170, 40));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\PayScreen.png")); // NOI18N
         panelBorder1.add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -110,7 +123,7 @@ public class Payment extends javax.swing.JDialog {
         messageType = MessageType.YES;
         Payment.this.dispose();
     }//GEN-LAST:event_yesLblMouseClicked
-    
+
     private void noLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noLblMouseClicked
         // TODO add your handling code here:
         messageType = MessageType.CANCEL;
@@ -123,7 +136,7 @@ public class Payment extends javax.swing.JDialog {
     public Payment.MessageType getMessageType() {
         return messageType;
     }
-    
+
     public static enum MessageType {
         CANCEL, YES
     }
@@ -131,8 +144,10 @@ public class Payment extends javax.swing.JDialog {
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel noLbl;
     private com.raven.swing.PanelBorder panelBorder1;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion paymentMethodCombo;
     private com.zx.shopmanagementsystem.components.RoundedText paymentTxt;
     private javax.swing.JLabel priceLbl;
     private javax.swing.JLabel yesLbl;
@@ -141,11 +156,29 @@ public class Payment extends javax.swing.JDialog {
     public void showMessage(double totalPrice) {
         priceLbl.setText(String.valueOf(totalPrice));
         setVisible(true);
-        
+
     }
-    
+
     public String getPaymentValue() {
         return paymentTxt.getText();
     }
-    
+
+    public Integer getPaymentMethodId() {
+        return paymentMethodId.get(paymentMethodCombo.getSelectedIndex());
+    }
+
+    private void paymentMethodComboLoader() {
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM payment_method");
+            while (rs.next()) {
+                String customerName = rs.getString("payment_method_type");
+                int methodId = rs.getInt("payment_method_id");
+                paymentMethodCombo.addItem(customerName);
+                paymentMethodId.add(methodId);
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Product Type Combo Loader : " + ex);
+        }
+    }
 }

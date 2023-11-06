@@ -4,27 +4,27 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
-import com.zx.shopmanagementsystem.chart.ModelChart;
+import com.zx.shopmanagementsystem.barchart.ModelChart;
 import com.zx.shopmanagementsystem.chart.ModelData;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
  *
  * @author User
  */
-public class Analysis extends javax.swing.JPanel {
+public class HomeAdmin extends javax.swing.JPanel {
 
     /**
      * Creates new form Home
      */
     JDBC DB = new JDBC();
 
-    public Analysis() {
+    public HomeAdmin() {
         initComponents();
         setChart();
         setData();
@@ -39,16 +39,38 @@ public class Analysis extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panal3 = new com.zx.shopmanagementsystem.components.PanelGlowingGradient();
+        panal2 = new com.zx.shopmanagementsystem.components.PanelGlowingGradient();
+        panal1 = new com.zx.shopmanagementsystem.components.PanelGlowingGradient();
         panelBorder1 = new com.raven.swing.PanelBorder();
-        chart = new com.zx.shopmanagementsystem.chart.CurveLineChart();
+        chart = new com.zx.shopmanagementsystem.barchart.Chart();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        panal3.setBackground(new java.awt.Color(114, 179, 240));
+        panal3.setBackgroundLight(new java.awt.Color(114, 179, 240));
+        panal3.setGradientColor1(new java.awt.Color(107, 1, 145));
+        panal3.setGradientColor2(new java.awt.Color(255, 255, 255));
+        add(panal3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 280, 200));
+
+        panal2.setBackground(new java.awt.Color(175, 93, 240));
+        panal2.setBackgroundLight(new java.awt.Color(175, 93, 240));
+        panal2.setGradientColor1(new java.awt.Color(107, 1, 145));
+        panal2.setGradientColor2(new java.awt.Color(255, 255, 255));
+        add(panal2, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 130, 280, 200));
+
+        panal1.setBackground(new java.awt.Color(182, 58, 202));
+        panal1.setBackgroundLight(new java.awt.Color(182, 58, 202));
+        panal1.setGradientColor1(new java.awt.Color(107, 1, 145));
+        panal1.setGradientColor2(new java.awt.Color(255, 255, 255));
+        add(panal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 280, 200));
+
         panelBorder1.setBackground(new java.awt.Color(153, 0, 153));
 
-        chart.setForeground(new java.awt.Color(255, 255, 255));
+        chart.setBackground(new java.awt.Color(153, 0, 153));
+        chart.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -63,51 +85,51 @@ public class Analysis extends javax.swing.JPanel {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 920, 560));
+        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 920, 320));
 
-        iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Analysis.png")); // NOI18N
+        iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Dashboard.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.zx.shopmanagementsystem.chart.CurveLineChart chart;
+    private com.zx.shopmanagementsystem.barchart.Chart chart;
     private javax.swing.JLabel iconLbl;
+    private com.zx.shopmanagementsystem.components.PanelGlowingGradient panal1;
+    private com.zx.shopmanagementsystem.components.PanelGlowingGradient panal2;
+    private com.zx.shopmanagementsystem.components.PanelGlowingGradient panal3;
     private com.raven.swing.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
+
+    private void setChart() {
+        chart.addLegend("Sales", Color.decode("#f56942"));
+        chart.addLegend("Profit", Color.decode("#00fa21"));
+    }
 
     private void setData() {
         try {
             List<ModelData> list = new ArrayList<>();
-            ResultSet rs = DB.getdata("SELECT DATE_FORMAT(date, '%M-%Y') AS formatted_date, SUM(sale) AS sum_sale, SUM(profit) AS sum_profit\n"
+            ResultSet rs = DB.getdata("SELECT *, DAYNAME(date) AS formatted_date\n"
                     + "FROM shopdb.user_profile\n"
-                    + "WHERE DATE_FORMAT(date, '%Y-%m') BETWEEN DATE_FORMAT(DATE_SUB(CURRENT_DATE, INTERVAL 7 MONTH), '%Y-%m') AND DATE_FORMAT(CURRENT_DATE, '%Y-%m')\n"
-                    + "GROUP BY formatted_date\n"
-                    + "ORDER BY STR_TO_DATE(formatted_date, '%M-%Y') DESC;"); // Convert to date for sorting
+                    + "WHERE date > DATE_SUB(CURDATE(), INTERVAL 7 DAY);");
             while (rs.next()) {
                 String date = rs.getString("formatted_date");
-                double sale = Double.parseDouble(rs.getString("sum_sale"));
-                double profit = Double.parseDouble(rs.getString("sum_profit"));
+                double sale = Double.parseDouble(rs.getString("sale"));
+                double profit = Double.parseDouble(rs.getString("profit"));
                 list.add(new ModelData(date, sale, profit));
             }
             rs.close();
 
             for (ModelData d : list) {
-                chart.addData(new ModelChart(d.getDate(), new double[]{d.getProfit(), d.getSale()}));
+                chart.addData(new ModelChart(d.getDate(), new double[]{d.getSale(), d.getProfit()}));
             }
             chart.start();
         } catch (Exception ex) {
             System.err.println("Analisis SetData : " + ex.getMessage());
         }
-    }
-
-    private void setChart() {
-        chart.setTitle("Sales and Profit");
-        chart.addLegend("Profit", Color.decode("#f56942"), Color.decode("#fafa00"));
-        chart.addLegend("Sales", Color.decode("#00fa21"), Color.decode("#0021fa"));
     }
 
 }

@@ -114,5 +114,7 @@ public class IconLocation {
     public String Payment2CheckOutIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/PaymentCheckout2.png";
     public String PayNow = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/PayNow.png";
     public String PayNowShadow = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/PayNowShadow.png";
+    public String CreateInvoicePurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/CreateInvoicePurpleIcon.png";
+    public String CreateInvoiceWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/CreateInvoiceWhiteIcon.png";
 
 }

@@ -4,6 +4,8 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
+import com.zx.shopmanagementsystem.assests.Func;
+import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.ui.DashboardAdmin;
 import com.zx.shopmanagementsystem.ui.NewInvoice;
 
@@ -17,6 +19,8 @@ public class InvoiceCreation extends javax.swing.JPanel {
      * Creates new form Home
      */
     public int uid;
+    Func func = new Func();
+    IconLocation il = new IconLocation();
 
     public InvoiceCreation() {
         initComponents();
@@ -38,13 +42,19 @@ public class InvoiceCreation extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        createNewInvoice.setText("Create New Invoice");
+        createNewInvoice.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\CreateInvoicePurpleIcon.png")); // NOI18N
         createNewInvoice.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 createNewInvoiceMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                createNewInvoiceMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                createNewInvoiceMouseExited(evt);
+            }
         });
-        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 190, 150, 30));
+        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 310, 50));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\InvoiceCreation.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -56,6 +66,16 @@ public class InvoiceCreation extends javax.swing.JPanel {
         ni.setVisible(true);
         System.out.println("ID : " + uid);
     }//GEN-LAST:event_createNewInvoiceMouseClicked
+
+    private void createNewInvoiceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createNewInvoiceMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(createNewInvoice, il.CreateInvoiceWhiteIcon);
+    }//GEN-LAST:event_createNewInvoiceMouseEntered
+
+    private void createNewInvoiceMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createNewInvoiceMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(createNewInvoice, il.CreateInvoicePurpleIcon);
+    }//GEN-LAST:event_createNewInvoiceMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel createNewInvoice;

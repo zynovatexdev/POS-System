@@ -14,6 +14,7 @@ import com.zx.shopmanagementsystem.forms.CustomerManagement;
 import com.zx.shopmanagementsystem.forms.DebtManagement;
 import com.zx.shopmanagementsystem.forms.Help;
 import com.zx.shopmanagementsystem.forms.Home;
+import com.zx.shopmanagementsystem.forms.HomeAdmin;
 import com.zx.shopmanagementsystem.forms.InventoryManagement;
 import com.zx.shopmanagementsystem.forms.InvoiceCreation;
 import com.zx.shopmanagementsystem.forms.ProductManagement;
@@ -60,7 +61,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         head1.setHeaderTitle("Dashboard Admin");
         head1.setHeaderTextColor("#ffffff");
         head1.setFrame(this);
-        func.setForm(mainPanal, new Home());
+        func.setForm(mainPanal, new HomeAdmin());
         setIcon();
     }
 
@@ -417,7 +418,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     private void dashboardBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardBtnLblMouseClicked
         // TODO add your handling code here:
-        func.setForm(mainPanal, new Home());
+        func.setForm(mainPanal, new HomeAdmin());
         head1.setHeaderTitle("Admin Dashboard");
     }//GEN-LAST:event_dashboardBtnLblMouseClicked
 

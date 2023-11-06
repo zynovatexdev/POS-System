@@ -53,7 +53,9 @@ public class NewInvoice extends javax.swing.JFrame {
     Func func = new Func();
 
     ArrayList<Integer> productIdArray = new ArrayList<>();
+    ArrayList<Integer> customerIdArray = new ArrayList<>();
     double payment = 0;
+    int paymentMethodId = 0;
 
     int UserID;
     String time;
@@ -546,9 +548,18 @@ public class NewInvoice extends javax.swing.JFrame {
 
         Payment pay = new Payment(this);
         pay.showMessage(totalPrice);
-        payment = Double.parseDouble(pay.getPaymentValue());
+
         if (pay.getMessageType() == Payment.MessageType.YES) {
             System.out.println("Yes");
+            try {
+                payment = Double.parseDouble(pay.getPaymentValue());
+                paymentMethodId = pay.getPaymentMethodId();
+                System.out.println("payid : " + paymentMethodId);
+                System.out.println("pay : " + payment);
+            } catch (NumberFormatException e) {
+                System.err.println("Invalid number format: " + e.getMessage());
+            }
+
             if (totalPrice > payment) {
                 System.out.println("Not Enough");
                 DialogBox.showMessage("ERROR !!!", "Payment Not Enough For Pay", 3);
@@ -557,8 +568,8 @@ public class NewInvoice extends javax.swing.JFrame {
                 String balancePrice = String.format("%.2f", balance);
                 generateInvoiceBill(invoiceData, balancePrice);
                 DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\nGive Balance : " + balancePrice, 1);
-                clear();
                 updateStockAndCalculateProfit(model);
+                clear();
                 tableDataClear();
 
             }
@@ -635,12 +646,13 @@ public class NewInvoice extends javax.swing.JFrame {
             ResultSet rs = DB.getdata("SELECT * FROM customer");
             while (rs.next()) {
                 String customerName = rs.getString("customer_name");
-                //int locationId = rs.getInt("store_location_id");
+                int customerId = rs.getInt("customer_id");
+                System.out.println("Customer ID : " + customerId);
                 customerCombo.addItem(customerName);
-                //productLoactionIdArray.add(locationId);
+                customerIdArray.add(customerId);
             }
         } catch (Exception ex) {
-            System.out.println("Product Type Combo Loader : " + ex);
+            System.out.println("Customer Combo Loader : " + ex);
         }
     }
 
@@ -655,7 +667,7 @@ public class NewInvoice extends javax.swing.JFrame {
                 productIdArray.add(productId);
             }
         } catch (Exception ex) {
-            System.out.println("Product Type Combo Loader: " + ex);
+            System.out.println("Product Combo Loader: " + ex);
         }
     }
 
@@ -980,14 +992,14 @@ public class NewInvoice extends javax.swing.JFrame {
 
         if (UserID != -1) {
             updateUserProfile(date, time, String.valueOf(totalProfit), String.valueOf(totalsold), UserID);
+            updateCashPayment(date, String.valueOf(totalsold), paymentMethodId, customerIdArray.get(customerCombo.getSelectedIndex()), 1);
+
         }
     }
 
     public double getProductCostPrice(String productName) {
         double costPrice = 0.0;
         try {
-            // Query the database to get the cost price for the product.
-            // Replace this with your database query.
             ResultSet rs = DB.getdata("SELECT reciving_price FROM product WHERE product_name = '" + productName + "'");
             if (rs.next()) {
                 costPrice = Double.parseDouble(rs.getString("reciving_price"));
@@ -1002,6 +1014,14 @@ public class NewInvoice extends javax.swing.JFrame {
     public void updateUserProfile(String date, String time, String profit, String sale, int userId) {
         try {
             DB.putdata("INSERT INTO user_profile (date, time, sale, profit, user_id) VALUES ('" + date + "','" + time + "','" + sale + "','" + profit + "','" + userId + "')");
+        } catch (Exception ex) {
+            System.out.println("updateUserProfile : " + ex.getMessage());
+        }
+    }
+
+    public void updateCashPayment(String date, String price, int payment_method_id, int customer_id, int invoice_category_id) {
+        try {
+            DB.putdata("INSERT INTO cash_payment (date, price, payment_method_id, customer_id, invoice_category_id) VALUES ('" + date + "','" + price + "','" + payment_method_id + "','" + customer_id + "','" + invoice_category_id + "')");
         } catch (Exception ex) {
             System.out.println("updateUserProfile : " + ex.getMessage());
         }
