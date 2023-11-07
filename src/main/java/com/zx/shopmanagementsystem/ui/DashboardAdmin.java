@@ -13,7 +13,6 @@ import com.zx.shopmanagementsystem.forms.Analysis;
 import com.zx.shopmanagementsystem.forms.CustomerManagement;
 import com.zx.shopmanagementsystem.forms.DebtManagement;
 import com.zx.shopmanagementsystem.forms.Help;
-import com.zx.shopmanagementsystem.forms.Home;
 import com.zx.shopmanagementsystem.forms.HomeAdmin;
 import com.zx.shopmanagementsystem.forms.InventoryManagement;
 import com.zx.shopmanagementsystem.forms.InvoiceCreation;
@@ -536,7 +535,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             // Place your code here to execute every 10 minutes
             System.out.println("Task executed at: " + System.currentTimeMillis());
 
-            backup.backupAll();
+            //backup.backupAll();
         }
     }
 
