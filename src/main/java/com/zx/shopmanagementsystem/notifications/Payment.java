@@ -90,7 +90,7 @@ public class Payment extends javax.swing.JDialog {
                 yesLblMouseClicked(evt);
             }
         });
-        panelBorder1.add(yesLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 130, 30));
+        panelBorder1.add(yesLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 209, 113, 40));
 
         noLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\NoIcon.png")); // NOI18N
         noLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -98,7 +98,7 @@ public class Payment extends javax.swing.JDialog {
                 noLblMouseClicked(evt);
             }
         });
-        panelBorder1.add(noLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 120, 40));
+        panelBorder1.add(noLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 209, 120, 40));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(153, 0, 153));

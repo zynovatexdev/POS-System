@@ -116,5 +116,13 @@ public class IconLocation {
     public String PayNowShadow = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/PayNowShadow.png";
     public String CreateInvoicePurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/CreateInvoicePurpleIcon.png";
     public String CreateInvoiceWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/CreateInvoiceWhiteIcon.png";
+    public String InvoiceCategoryPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/InvoiceCategoryPurpleIcon.png";
+    public String InvoiceCategoryWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/InvoiceCategoryWhiteIcon.png";
+    public String PaymentMethodPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/PaymentMethodPurpleIcon.png";
+    public String PaymentMethodWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/PaymentMethodWhiteIcon.png";
+    public String SavePurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SavePurpleIcon.png";
+    public String SaveWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SaveWhiteIcon.png";
+    public String SettingsMenuPurpleBtn = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SettingsMenuPurpleBtn.png";
+    public String SettingsMenuWhiteBtn = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SettingsMenuWhiteBtn.png";
 
 }

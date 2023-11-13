@@ -13,6 +13,7 @@ import com.zx.shopmanagementsystem.table.DeleteButtonEditorRenderer;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
 import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
@@ -963,8 +965,8 @@ public class NewInvoice extends javax.swing.JFrame {
     }
 
     public void updateStockAndCalculateProfit(DefaultTableModel model) {
-        String productName;
-        double quantity;
+        String productName = "";
+        double quantity = 0.0;
         double soldPrice = 0;
         double costPrice;
         double profit;
@@ -982,9 +984,10 @@ public class NewInvoice extends javax.swing.JFrame {
             System.out.println("Sold : " + soldPrice);
             System.out.println("Cost : " + costPrice);
             System.out.println("Profit : " + profit);
-
+            updateSoldItem(date, time, soldPrice, String.valueOf(quantity), productName, UserID, customerIdArray.get(customerCombo.getSelectedIndex()));
             // Update stock quantity and calculate profit in the database
             updateProductStock(productName, quantity);
+
         }
 
         System.out.println("Total Profit : " + totalProfit);
@@ -1028,21 +1031,45 @@ public class NewInvoice extends javax.swing.JFrame {
     }
 
     public void readUserIdFromFile() {
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("C:\\ShopManagementSystem\\userId.txt"));
-            String line = reader.readLine();
-            if (line != null) {
-                UserID = Integer.parseInt(line);
-                reader.close();
+        Properties properties = new Properties();
+
+        // Load properties from the file
+        try (FileInputStream fileInputStream = new FileInputStream("user.properties")) {
+            properties.load(fileInputStream);
+            System.out.println("user loaded successfully.");
+
+            // Access individual properties
+            String userIdString = properties.getProperty("UserID");
+            if (userIdString != null) {
+                UserID = Integer.parseInt(userIdString);
+                System.out.println("User ID -> New Invoice: " + UserID);
             } else {
-                reader.close();
                 UserID = -1;
-                // Return -1 if the file is empty or doesn't exist.
+                System.out.println("User ID -> New Invoice: " + UserID);
             }
+
         } catch (IOException e) {
-            System.err.println("Error reading UserID from the file: " + e.getMessage());
-            // Return -1 on error.
-            UserID = -1;
+            System.err.println("New Invoice readUserIdFromFile : " + e);
+        }
+    }
+
+    private void updateSoldItem(String Date, String Time, double soldPrice, String quantity, String productName, int userID, int customerId) {
+        int productId = 0;
+        String sql = "SELECT product_id FROM product WHERE product_name = '" + productName + "'";
+
+        try {
+            ResultSet rs = DB.getdata(sql);
+            if (rs.next()) {
+                productId = rs.getInt("product_id");
+
+            }
+        } catch (Exception ex) {
+            System.out.println("updateSoldItem(Get Product Id) -> New Invoice : " + ex.getMessage());
+        }
+        try {
+            DB.putdata("INSERT INTO sold_items (date, time, price, quantity, product_id, user_id, customer_id) VALUES ('" + Date + "','" + Time + "','" + soldPrice + "','" + quantity + "','" + productId + "','" + userID + "','" + customerId + "')");
+        } catch (Exception ex) {
+            System.out.println("updateSoldItem(Save Data) -> New Invoice : " + ex.getMessage());
         }
     }
 

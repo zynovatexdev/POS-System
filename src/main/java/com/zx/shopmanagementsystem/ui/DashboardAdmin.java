@@ -18,17 +18,20 @@ import com.zx.shopmanagementsystem.forms.InventoryManagement;
 import com.zx.shopmanagementsystem.forms.InvoiceCreation;
 import com.zx.shopmanagementsystem.forms.ProductManagement;
 import com.zx.shopmanagementsystem.forms.ReportGeneration;
+import com.zx.shopmanagementsystem.forms.Settings;
 import com.zx.shopmanagementsystem.forms.SupplierManagement;
 import com.zx.shopmanagementsystem.forms.UserManagement;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
+import java.util.Properties;
 import javax.swing.ImageIcon;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -49,12 +52,14 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     public int UseriD;
     String path;
+    long backuptime;
 
     public DashboardAdmin() {
         initComponents();
+        jsonRead();
         FB.connectFirebase();
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new MyTask(), 0, 600000);
+        timer.scheduleAtFixedRate(new MyTask(), 0, backuptime);
         setBackground(new Color(255, 255, 255, 0));
         head1.setOpaque(true);
         head1.setHeaderTitle("Dashboard Admin");
@@ -85,6 +90,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         AnalysisBtnLbl = new javax.swing.JLabel();
         reportGenerationBtnLbl = new javax.swing.JLabel();
         supplierManagmentBtnLbl = new javax.swing.JLabel();
+        settingBtnLbl1 = new javax.swing.JLabel();
         helpBtnLbl = new javax.swing.JLabel();
         imageAvatar = new com.zx.shopmanagementsystem.components.ImageAvatar();
         logoutBtnLbl = new javax.swing.JLabel();
@@ -252,6 +258,21 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
         menu1.add(supplierManagmentBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 510, 339, 39));
 
+        settingBtnLbl1.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SettingsMenuPurpleBtn.png")); // NOI18N
+        settingBtnLbl1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        settingBtnLbl1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                settingBtnLbl1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                settingBtnLbl1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                settingBtnLbl1MouseExited(evt);
+            }
+        });
+        menu1.add(settingBtnLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 670, 350, 39));
+
         helpBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\HelpPurple.png")); // NOI18N
         helpBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         helpBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -281,7 +302,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 logoutBtnLblMouseExited(evt);
             }
         });
-        menu1.add(logoutBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(99, 686, -1, -1));
+        menu1.add(logoutBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 710, -1, -1));
 
         getContentPane().add(menu1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -2, 350, 770));
 
@@ -491,6 +512,22 @@ public class DashboardAdmin extends javax.swing.JFrame {
         logout.setVisible(true);
     }//GEN-LAST:event_logoutBtnLblMouseClicked
 
+    private void settingBtnLbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnLbl1MouseClicked
+        // TODO add your handling code here:
+        func.setForm(mainPanal, new Settings());
+        head1.setHeaderTitle("Settings");
+    }//GEN-LAST:event_settingBtnLbl1MouseClicked
+
+    private void settingBtnLbl1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnLbl1MouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(settingBtnLbl1, il.SettingsMenuWhiteBtn);
+    }//GEN-LAST:event_settingBtnLbl1MouseEntered
+
+    private void settingBtnLbl1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnLbl1MouseExited
+        // TODO add your handling code here:
+        func.iconSetter(settingBtnLbl1, il.SettingsMenuPurpleBtn);
+    }//GEN-LAST:event_settingBtnLbl1MouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -561,6 +598,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private com.raven.component.Menu menu1;
     private javax.swing.JLabel productManagementBtnLbl;
     private javax.swing.JLabel reportGenerationBtnLbl;
+    private javax.swing.JLabel settingBtnLbl1;
     private javax.swing.JLabel supplierManagmentBtnLbl;
     private javax.swing.JLabel userManagementBtnLbl;
     // End of variables declaration//GEN-END:variables
@@ -569,25 +607,16 @@ public class DashboardAdmin extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
     }
 
-    public void getUserId(int UserID) {
-        this.UseriD = UserID;
+    public void getUserImage() {
         JDBC DB = new JDBC();
         InputStream input;
         FileOutputStream output;
-        System.out.println("Data Load UserID : " + UserID);
+        System.out.println("Data Load UserID : " + UseriD);
         try {
-            FileWriter writer = new FileWriter("C:\\ShopManagementSystem\\userId.txt");
-            writer.write(Integer.toString(UserID));
-            writer.close();
-            System.out.println("UserID written to the file.");
-        } catch (IOException e) {
-            System.err.println("Error writing UserID to the file: " + e.getMessage());
-        }
-        try {
-            ResultSet rs = DB.getdata("SELECT * FROM user WHERE user_id = " + UserID + ";");
+            ResultSet rs = DB.getdata("SELECT * FROM user WHERE user_id = " + UseriD + ";");
             while (rs.next()) {
 
-                File file = new File("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\DBProfileImages\\img" + UserID + "_Dash_" + ".png");
+                File file = new File("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\DBProfileImages\\img" + UseriD + "_Dash_" + ".png");
                 output = new FileOutputStream(file);
                 input = rs.getBinaryStream("profile_pic");
                 byte buffer[] = new byte[1024];
@@ -610,4 +639,36 @@ public class DashboardAdmin extends javax.swing.JFrame {
         }
     }
 
+    private void jsonRead() {
+        Properties properties = new Properties();
+        Properties properties2 = new Properties();
+
+        // Load properties from the file
+        try (FileInputStream fileInputStream = new FileInputStream("user.properties")) {
+            properties.load(fileInputStream);
+            System.out.println("user loaded successfully.");
+
+            // Access individual properties
+            UseriD = Integer.parseInt(properties.getProperty("UserID"));
+
+            System.out.println("User ID: " + UseriD);
+            getUserImage();
+
+        } catch (Exception eb) {
+            System.err.println("Dashboard Admin jsonRead UserId: " + eb);
+        }
+
+        try (FileInputStream fileInputStream = new FileInputStream("Settings.properties")) {
+            properties2.load(fileInputStream);
+            System.out.println("Settings loaded successfully.");
+
+            // Access individual properties
+            int backupTime = Integer.parseInt((properties2.getProperty("BackupTime")));
+            backuptime = backupTime * 60 * 1000;
+            System.out.println("Backup Time : " + backuptime + " - " + backupTime);
+
+        } catch (Exception en) {
+            System.err.println("Dashboard Admin Backup Time : " + en);
+        }
+    }
 }

@@ -6,13 +6,15 @@ package com.zx.shopmanagementsystem.forms;
 
 import com.zx.shopmanagementsystem.barchart.ModelChart;
 import com.zx.shopmanagementsystem.chart.ModelData;
-import com.zx.shopmanagementsystem.components.PanelGlowingGradient;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.ui.AllSales;
+import com.zx.shopmanagementsystem.ui.LowStock;
 import java.awt.Color;
-import java.awt.Graphics;
+import java.io.FileInputStream;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.logging.Level;
@@ -31,9 +33,11 @@ public class HomeAdmin extends javax.swing.JPanel {
     private List<String> stockItems = new ArrayList<>();
     private List<String> stockLocations = new ArrayList<>();
     private int currentIndex = 0;
+    int quantityValue;
 
     public HomeAdmin() {
         initComponents();
+        jsonRead();
         setChart();
         setData();
         getDailySale();
@@ -41,8 +45,8 @@ public class HomeAdmin extends javax.swing.JPanel {
         arrayLoader();
         Timer timer = new Timer();
         long delay = 2000; // Initial delay in milliseconds
-        long period = 5000; // Repeat every 5 seconds (5000 milliseconds)
-        timer.schedule(new DisplayTask(), delay, period);
+        // Repeat every 5 seconds (5000 milliseconds)
+        timer.schedule(new DisplayTask(), delay, 5000);
     }
 
     /**
@@ -54,18 +58,21 @@ public class HomeAdmin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panal3 = new com.zx.shopmanagementsystem.components.PanelGlowingGradient();
-        jLabel3 = new javax.swing.JLabel();
-        store_Location = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        itemName = new javax.swing.JLabel();
-        panal2 = new com.zx.shopmanagementsystem.components.PanelGlowingGradient();
-        jLabel2 = new javax.swing.JLabel();
         totalMonthSaleTxt = new javax.swing.JLabel();
-        panal1 = new com.zx.shopmanagementsystem.components.PanelGlowingGradient();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        itemName = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        store_Location = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         totalDailySaleTxt = new javax.swing.JLabel();
+        lowStockBtnLbl = new javax.swing.JLabel();
+        todaySalseViewAllBtnLbl = new javax.swing.JLabel();
+        monthlySalseViewAllBtnLbl = new javax.swing.JLabel();
+        card3 = new javax.swing.JLabel();
+        card2 = new javax.swing.JLabel();
+        card1 = new javax.swing.JLabel();
         panelBorder1 = new com.raven.swing.PanelBorder();
         chart = new com.zx.shopmanagementsystem.barchart.Chart();
         iconLbl = new javax.swing.JLabel();
@@ -73,80 +80,86 @@ public class HomeAdmin extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panal3.setBackground(new java.awt.Color(114, 179, 240));
-        panal3.setBackgroundLight(new java.awt.Color(114, 179, 240));
-        panal3.setGradientColor1(new java.awt.Color(107, 1, 145));
-        panal3.setGradientColor2(new java.awt.Color(255, 255, 255));
+        totalMonthSaleTxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        totalMonthSaleTxt.setForeground(new java.awt.Color(255, 255, 255));
+        totalMonthSaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        add(totalMonthSaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 250, 80));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Monthly Sales");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 270, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Low Stock Alart");
-        panal3.add(jLabel3);
-        jLabel3.setBounds(90, 30, 110, 20);
-
-        store_Location.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        store_Location.setForeground(new java.awt.Color(255, 255, 255));
-        store_Location.setText("Store Location");
-        panal3.add(store_Location);
-        store_Location.setBounds(40, 130, 200, 30);
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 140, 110, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Item Name");
-        panal3.add(jLabel7);
-        jLabel7.setBounds(40, 50, 200, 30);
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Store Location");
-        panal3.add(jLabel8);
-        jLabel8.setBounds(40, 110, 200, 30);
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 170, 200, 30));
 
         itemName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         itemName.setForeground(new java.awt.Color(255, 255, 255));
         itemName.setText("Item Name");
-        panal3.add(itemName);
-        itemName.setBounds(41, 73, 200, 30);
+        add(itemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 200, 30));
 
-        add(panal3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 130, 280, 200));
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Store Location");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 220, 200, 30));
 
-        panal2.setBackground(new java.awt.Color(175, 93, 240));
-        panal2.setBackgroundLight(new java.awt.Color(175, 93, 240));
-        panal2.setGradientColor1(new java.awt.Color(107, 1, 145));
-        panal2.setGradientColor2(new java.awt.Color(255, 255, 255));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Monthly Sales");
-        panal2.add(jLabel2);
-        jLabel2.setBounds(90, 30, 100, 20);
-
-        totalMonthSaleTxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        totalMonthSaleTxt.setForeground(new java.awt.Color(255, 255, 255));
-        totalMonthSaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panal2.add(totalMonthSaleTxt);
-        totalMonthSaleTxt.setBounds(35, 70, 210, 100);
-
-        add(panal2, new org.netbeans.lib.awtextra.AbsoluteConstraints(372, 130, 280, 200));
-
-        panal1.setBackground(new java.awt.Color(182, 58, 202));
-        panal1.setBackgroundLight(new java.awt.Color(182, 58, 202));
-        panal1.setGradientColor1(new java.awt.Color(107, 1, 145));
-        panal1.setGradientColor2(new java.awt.Color(255, 255, 255));
+        store_Location.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        store_Location.setForeground(new java.awt.Color(255, 255, 255));
+        store_Location.setText("Store Location");
+        add(store_Location, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 240, 200, 30));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Today Sales");
-        panal1.add(jLabel1);
-        jLabel1.setBounds(100, 30, 80, 20);
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 270, -1));
 
         totalDailySaleTxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         totalDailySaleTxt.setForeground(new java.awt.Color(255, 255, 255));
         totalDailySaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        panal1.add(totalDailySaleTxt);
-        totalDailySaleTxt.setBounds(35, 66, 210, 100);
+        add(totalDailySaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 250, 80));
 
-        add(panal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 280, 200));
+        lowStockBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\ShowAll3.png")); // NOI18N
+        lowStockBtnLbl.setPreferredSize(new java.awt.Dimension(287, 39));
+        lowStockBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lowStockBtnLblMouseClicked(evt);
+            }
+        });
+        add(lowStockBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 270, 290, -1));
+
+        todaySalseViewAllBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\ShowAll1.png")); // NOI18N
+        todaySalseViewAllBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                todaySalseViewAllBtnLblMouseClicked(evt);
+            }
+        });
+        add(todaySalseViewAllBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 270, 290, 50));
+
+        monthlySalseViewAllBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\ShowAll2.png")); // NOI18N
+        monthlySalseViewAllBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                monthlySalseViewAllBtnLblMouseClicked(evt);
+            }
+        });
+        add(monthlySalseViewAllBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 270, 290, 40));
+
+        card3.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\3rd Rectangle.png")); // NOI18N
+        add(card3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, -1, -1));
+
+        card2.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\2nd Rectangle.png")); // NOI18N
+        add(card2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, -1));
+
+        card1.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\1st Rectangle.png")); // NOI18N
+        add(card1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
         panelBorder1.setBackground(new java.awt.Color(153, 0, 153));
 
@@ -175,7 +188,26 @@ public class HomeAdmin extends javax.swing.JPanel {
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Dashboard.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-class DisplayTask extends TimerTask {
+
+    private void lowStockBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lowStockBtnLblMouseClicked
+        // TODO add your handling code here:
+        LowStock ls = new LowStock();
+        ls.setVisible(true);
+    }//GEN-LAST:event_lowStockBtnLblMouseClicked
+
+    private void todaySalseViewAllBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_todaySalseViewAllBtnLblMouseClicked
+        // TODO add your handling code here:
+        AllSales as = new AllSales(0);
+        as.setVisible(true);
+    }//GEN-LAST:event_todaySalseViewAllBtnLblMouseClicked
+
+    private void monthlySalseViewAllBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_monthlySalseViewAllBtnLblMouseClicked
+        // TODO add your handling code here:
+        AllSales as = new AllSales(1);
+        as.setVisible(true);
+    }//GEN-LAST:event_monthlySalseViewAllBtnLblMouseClicked
+
+    class DisplayTask extends TimerTask {
 
         @Override
         public void run() {
@@ -192,6 +224,9 @@ class DisplayTask extends TimerTask {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel card1;
+    private javax.swing.JLabel card2;
+    private javax.swing.JLabel card3;
     private com.zx.shopmanagementsystem.barchart.Chart chart;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel itemName;
@@ -200,11 +235,11 @@ class DisplayTask extends TimerTask {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private com.zx.shopmanagementsystem.components.PanelGlowingGradient panal1;
-    private com.zx.shopmanagementsystem.components.PanelGlowingGradient panal2;
-    private com.zx.shopmanagementsystem.components.PanelGlowingGradient panal3;
+    private javax.swing.JLabel lowStockBtnLbl;
+    private javax.swing.JLabel monthlySalseViewAllBtnLbl;
     private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JLabel store_Location;
+    private javax.swing.JLabel todaySalseViewAllBtnLbl;
     private javax.swing.JLabel totalDailySaleTxt;
     private javax.swing.JLabel totalMonthSaleTxt;
     // End of variables declaration//GEN-END:variables
@@ -246,12 +281,13 @@ class DisplayTask extends TimerTask {
         String sql = "SELECT p.product_name, s.store_location_name\n"
                 + "FROM shopdb.product p\n"
                 + "JOIN shopdb.store_location s ON p.store_location_id = s.store_location_id\n"
-                + "WHERE p.stock_quantity < 1000;";
+                + "WHERE p.stock_quantity <= " + quantityValue + ";";
         try {
             ResultSet rs = DB.getdata(sql);
             ResultSet rs1 = DB.getdata(sql);
             if (!rs.next()) {
-                System.out.println("ResultSet Empty");
+                itemName.setText("No Items to Show");
+                store_Location.setText("No Items to Show");
             } else {
                 System.out.println("ResultSet Not Empty");
                 while (rs1.next()) {
@@ -271,11 +307,16 @@ class DisplayTask extends TimerTask {
 
         try {
             ResultSet rs = DB.getdata(sql);
+
             if (rs.next()) {
-                totalDailySaleTxt.setText("Rs." + rs.getString("total_sales") + "0/=");
+                if (rs.getString("total_sales") == null) {
+                    totalDailySaleTxt.setText("No Record");
+                } else {
+                    totalDailySaleTxt.setText("Rs." + rs.getString("total_sales") + "0/=");
+                }
             }
         } catch (Exception ex) {
-            Logger.getLogger(HomeAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("getDailySale -> Home Admin : " + ex.getMessage());
         }
     }
 
@@ -287,11 +328,27 @@ class DisplayTask extends TimerTask {
         try {
             ResultSet rs = DB.getdata(sql);
             if (rs.next()) {
-                totalMonthSaleTxt.setText("Rs." + rs.getString("total_sales") + "0/=");
+                if (rs.getString("total_sales") == null) {
+                    totalMonthSaleTxt.setText("No Record");
+                } else {
+                    totalMonthSaleTxt.setText("Rs." + rs.getString("total_sales") + "0/=");
+                }
             }
         } catch (Exception ex) {
-            Logger.getLogger(HomeAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            System.err.println("getMonthlySale -> Home Admin : " + ex.getMessage());
         }
     }
 
+    private void jsonRead() {
+        Properties properties = new Properties();
+        try (FileInputStream fileInputStream = new FileInputStream("Settings.properties")) {
+            properties.load(fileInputStream);
+            System.out.println("Settings loaded successfully.");
+
+            // Access individual properties
+            quantityValue = Integer.parseInt((properties.getProperty("LowStockAlert")));
+        } catch (Exception en) {
+            System.err.println("Home Admin LowStockAlert : " + en);
+        }
+    }
 }

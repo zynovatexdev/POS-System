@@ -10,6 +10,10 @@ import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.components.SplashPanal;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+import org.json.JSONObject;
 
 /**
  *
@@ -215,6 +219,7 @@ public class Login extends javax.swing.JFrame {
                         System.out.println("While Running");
                         int userRoleId = rs.getInt("user_role_id");
                         int userID = rs.getInt("user_id");
+                        save(userID);
 
                         if (userRoleId == 1) {
                             Login.this.dispose();
@@ -222,7 +227,6 @@ public class Login extends javax.swing.JFrame {
                             DashboardAdmin dashboardAdmin = new DashboardAdmin();
                             //dashboardAdmin.getUserId(userID);
                             dashboardAdmin.setVisible(true);
-                            dashboardAdmin.getUserId(userID);
                             break;
                         } else {
                             Login.this.dispose();
@@ -252,4 +256,24 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel showPasswordLbl;
     private com.zx.shopmanagementsystem.components.RoundedText usernameTxt;
     // End of variables declaration//GEN-END:variables
+
+    private void save(int UserID) {
+        // Create a JSON object
+        JSONObject jsonObject = new JSONObject();
+
+        // Add strings to the JSON object
+        jsonObject.put("UserID", UserID);  // New value for key1
+
+        // Convert JSON object to Properties
+        Properties properties = new Properties();
+        jsonObject.toMap().forEach((key, value) -> properties.setProperty(key.toString(), value.toString()));
+
+        // Save Properties to a file
+        try (FileOutputStream fileOutputStream = new FileOutputStream("user.properties")) {
+            properties.store(fileOutputStream, "user");
+            System.out.println("user saved successfully.");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

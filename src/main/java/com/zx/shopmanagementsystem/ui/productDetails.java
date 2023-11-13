@@ -39,7 +39,7 @@ public class productDetails extends javax.swing.JFrame {
     Func func = new Func();
     IconLocation il = new IconLocation();
     JDBC DB = new JDBC();
-    
+
     private InventoryManagement im;
     int ProductID;
     ArrayList<Integer> discountIdArray = new ArrayList<>();
@@ -48,7 +48,7 @@ public class productDetails extends javax.swing.JFrame {
     ArrayList<Integer> barcodeIdArray = new ArrayList<>();
     ArrayList<Integer> productTypeIdArray = new ArrayList<>();
     ArrayList<Integer> productLoactionIdArray = new ArrayList<>();
-    
+
     public productDetails(InventoryManagement im) {
         this.im = im;
         initComponents();
@@ -61,10 +61,10 @@ public class productDetails extends javax.swing.JFrame {
                     Socket socket = serverSocket.accept();
                     InputStream inputStream = socket.getInputStream();
                     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-                    
+
                     String line;
                     String prv = "";
-                    
+
                     while ((line = reader.readLine()) != null) {
                         if (line.equals(prv)) {
                             System.out.println("Same Value");
@@ -75,7 +75,7 @@ public class productDetails extends javax.swing.JFrame {
                             //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
                         } else {
                             System.out.println("it is not a QR");
-                            
+
                             if (barcodeChecker(line)) {
                                 barcodeCombo.setSelectedItem(line);
                             } else {
@@ -85,7 +85,7 @@ public class productDetails extends javax.swing.JFrame {
                         }
                         prv = line;
                     }
-                    
+
                     socket.close();
                 }
             } catch (IOException e) {
@@ -273,12 +273,12 @@ public class productDetails extends javax.swing.JFrame {
         updateProduct();
         im.setTable();
     }//GEN-LAST:event_updateProductBtnLblMouseClicked
-    
+
     private void updateProductBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProductBtnLblMouseEntered
         // TODO add your handling code here:
         func.iconSetter(updateProductBtnLbl, il.updateWhiteIcon);
     }//GEN-LAST:event_updateProductBtnLblMouseEntered
-    
+
     private void updateProductBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProductBtnLblMouseExited
         // TODO add your handling code here:
         func.iconSetter(updateProductBtnLbl, il.UpdatePurpleIcon);
@@ -364,9 +364,9 @@ public class productDetails extends javax.swing.JFrame {
         int barcodeValue = barcodeIdArray.get(barcodeCombo.getSelectedIndex());
         int categoryId = categoryIdArray.get(categoryIdCombo.getSelectedIndex());
         int typeId = productTypeIdArray.get(productTypeIdCombo.getSelectedIndex());
-        int discoundId = discountIdArray.get(discountIdCombo.getSelectedIndex());
+        int discoundId = (discountIdCombo.getSelectedIndex() != -1) ? discountIdArray.get(discountIdCombo.getSelectedIndex()) : 0;
         int locationId = productLoactionIdArray.get(productLocationIdCombo.getSelectedIndex());
-        
+
         if (productName.equals("")) {
             System.out.println("Product Name Empty");
             DialogBox.showMessage("WARNING!!!", "Product Name Empty", 2);
@@ -380,47 +380,47 @@ public class productDetails extends javax.swing.JFrame {
             System.out.println("Stock Quantity Empty");
             DialogBox.showMessage("WARNING!!!", "Stock Quantity Empty", 2);
         } else {
-            if (manufactureDate.equals("") || expDate.equals("")) {
-                System.out.println("Date Empty");
-                try {
-                    PreparedStatement pst = DB.con().prepareStatement("UPDATE product SET product_name = ?, reciving_price = ?, selling_price = ?, stock_quantity = ?, description = ?, brand = ?, dimensions = ?, manufacturing_date = ?, expiry_date = ?, supplier_id = ?, barcode_id = ?, category_id = ?, product_type_id = ?, discount_id = ?, store_location_id = ? WHERE product_id = ?");
-                    pst.setString(1, productName);
-                    pst.setString(2, recivingPrice);
-                    pst.setString(3, sellingPrice);
-                    pst.setString(4, stockQuantity);
-                    pst.setString(5, description);
-                    pst.setString(6, brand);
-                    pst.setString(7, dimention);
-                    pst.setString(8, manufactureDate);
-                    pst.setString(9, expDate);
-                    pst.setInt(10, supplierId);
-                    pst.setInt(11, barcodeValue);
-                    pst.setInt(12, categoryId);
-                    pst.setInt(13, typeId);
-                    pst.setInt(14, discoundId);
-                    pst.setInt(15, locationId);
-                    pst.setInt(16, ProductID); // Set the ProductID as the last parameter
-                    // Execute the update query
-                    int rowsUpdated = pst.executeUpdate();
-                    
-                    if (rowsUpdated > 0) {
-                        System.out.println("Update successful");
-                        String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
-                        func.QRGenerator(code, productName);
-                        DialogBox.showMessage("Saved", "Update successful\nQR Code Updated.", 1);
-                        DB.con().close();
-                    } else {
-                        System.out.println("Update failed");
+            ConfirmDialog confrim = new ConfirmDialog(this);
+            confrim.showMessage("Update", "Do you want to Update ?");
+            if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                System.out.println("Yes");
+                if (manufactureDate.equals("") || expDate.equals("")) {
+                    System.out.println("Date Empty");
+                    try {
+                        PreparedStatement pst = DB.con().prepareStatement("UPDATE product SET product_name = ?, reciving_price = ?, selling_price = ?, stock_quantity = ?, description = ?, brand = ?, dimensions = ?, manufacturing_date = ?, expiry_date = ?, supplier_id = ?, barcode_id = ?, category_id = ?, product_type_id = ?, discount_id = ?, store_location_id = ? WHERE product_id = ?");
+                        pst.setString(1, productName);
+                        pst.setString(2, recivingPrice);
+                        pst.setString(3, sellingPrice);
+                        pst.setString(4, stockQuantity);
+                        pst.setString(5, description);
+                        pst.setString(6, brand);
+                        pst.setString(7, dimention);
+                        pst.setString(8, manufactureDate);
+                        pst.setString(9, expDate);
+                        pst.setInt(10, supplierId);
+                        pst.setInt(11, barcodeValue);
+                        pst.setInt(12, categoryId);
+                        pst.setInt(13, typeId);
+                        pst.setInt(14, discoundId);
+                        pst.setInt(15, locationId);
+                        pst.setInt(16, ProductID); // Set the ProductID as the last parameter
+                        // Execute the update query
+                        int rowsUpdated = pst.executeUpdate();
+
+                        if (rowsUpdated > 0) {
+                            System.out.println("Update successful");
+                            String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
+                            func.QRGenerator(code, productName);
+                            DialogBox.showMessage("Saved", "Update successful\nQR Code Updated.", 1);
+                            DB.con().close();
+                        } else {
+                            System.out.println("Update failed");
+                        }
+
+                    } catch (Exception ex) {
+                        System.out.println("Data Save Without Date : " + ex.getMessage());
                     }
-                    
-                } catch (Exception ex) {
-                    System.out.println("Data Save Without Date : " + ex.getMessage());
-                }
-            } else {
-                ConfirmDialog confrim = new ConfirmDialog(this);
-                confrim.showMessage("Delete", "Do you want to Delete ?");
-                if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
-                    System.out.println("Yes");
+                } else {
                     if ((manufacDateVali(manufactureDate))) {
                         System.out.println("Manufacture Date Not Valid");
                         DialogBox.showMessage("WARNING!!!", "Manufacture Date Not Valid", 2);
@@ -447,7 +447,7 @@ public class productDetails extends javax.swing.JFrame {
                                 pst.setInt(16, ProductID); // Set the ProductID as the last parameter
                                 // Execute the update query
                                 int rowsUpdated = pst.executeUpdate();
-                                
+
                                 if (rowsUpdated > 0) {
                                     System.out.println("Update successful");
                                     String code = "{\"barcode\":\"" + barcodeCombo.getSelectedItem() + "\"}";
@@ -457,24 +457,24 @@ public class productDetails extends javax.swing.JFrame {
                                 } else {
                                     System.out.println("Update failed");
                                 }
-                                
+
                             } catch (Exception ex) {
                                 System.out.println("Data Save With Date : " + ex.getMessage());
                             }
-                            
+
                         } else {
                             System.out.println("Expire Date Not Valid");
                             DialogBox.showMessage("WARNING!!!", "Expire Date Not Valid", 2);
                         }
                     }
-                } else {
-                    System.out.println("No");
                 }
+            } else {
+                System.out.println("No");
             }
-            
+
         }
     }
-    
+
     public void dataLoad(int productId) {
         this.ProductID = productId;
         try {
@@ -496,7 +496,7 @@ public class productDetails extends javax.swing.JFrame {
                 int caregoryId = (rs.getInt("category_id"));
                 int Typeid = (rs.getInt("product_type_id"));
                 int discountid = (rs.getInt("discount_id"));
-                
+
                 productIdLbl.setText(String.valueOf(productId));
                 productNameTxt.setText(productName);
                 productDescriptionTxt.setText(description);
@@ -514,12 +514,12 @@ public class productDetails extends javax.swing.JFrame {
                 discountIdCombo.setSelectedIndex(discountIdArray.indexOf(discountid));
                 productLocationIdCombo.setSelectedIndex(productLoactionIdArray.indexOf(locationId));
             }
-            
+
         } catch (Exception ex) {
             System.out.println("Product Details -> DataLoad : " + ex.getMessage());
         }
     }
-    
+
     private void supplierComboLoader() {
         try {
             ResultSet rs = DB.getdata("SELECT * FROM supplier");
@@ -533,7 +533,7 @@ public class productDetails extends javax.swing.JFrame {
             System.out.println("Supplier Combo Loader : " + ex);
         }
     }
-    
+
     private void categoryComboLoader() {
         try {
             ResultSet rs = DB.getdata("SELECT * FROM product_category");
@@ -547,7 +547,7 @@ public class productDetails extends javax.swing.JFrame {
             System.out.println("Product Category Combo Loader : " + ex);
         }
     }
-    
+
     private void discountComboLoader() {
         try {
             ResultSet rs = DB.getdata("SELECT * FROM discont");
@@ -562,13 +562,13 @@ public class productDetails extends javax.swing.JFrame {
                 } else {
                     System.out.println("Day Before");
                 }
-                
+
             }
         } catch (Exception ex) {
             System.out.println("Discount Combo Loader : " + ex);
         }
     }
-    
+
     private void barcodeComboLoader() {
         try {
             ResultSet rs = DB.getdata("SELECT * FROM barcode");
@@ -582,7 +582,7 @@ public class productDetails extends javax.swing.JFrame {
             System.out.println("Barcode Combo Loader : " + ex);
         }
     }
-    
+
     private void productTypeComboLoader() {
         try {
             ResultSet rs = DB.getdata("SELECT * FROM product_type");
@@ -596,7 +596,7 @@ public class productDetails extends javax.swing.JFrame {
             System.out.println("Product Type Combo Loader : " + ex);
         }
     }
-    
+
     private void productLocationComboLoader() {
         try {
             ResultSet rs = DB.getdata("SELECT * FROM store_location");
@@ -610,7 +610,7 @@ public class productDetails extends javax.swing.JFrame {
             System.out.println("Product Type Combo Loader : " + ex);
         }
     }
-    
+
     private boolean barcodeChecker(String barcode) {
         String sql = "SELECT * FROM barcode WHERE barcode_value=?";
         boolean Exist = false;
@@ -630,7 +630,7 @@ public class productDetails extends javax.swing.JFrame {
         }
         return Exist;
     }
-    
+
     private boolean manufacDateVali(String manuDate) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date(); // Current date
@@ -639,7 +639,7 @@ public class productDetails extends javax.swing.JFrame {
         try {
             Date manufactureDate = sdf.parse(manufactureDateStr);
             Date validStartDate = currentDate;
-            
+
             date = !manufactureDate.before(validStartDate);
             //System.out.println("Manufacture date is valid.");
             //System.out.println("Manufacture date is not valid.");
@@ -648,7 +648,7 @@ public class productDetails extends javax.swing.JFrame {
         }
         return date;
     }
-    
+
     private boolean expDateVali(String manuDate, String expireDateStr) {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date currentDate = new Date(); // Current date
@@ -659,7 +659,7 @@ public class productDetails extends javax.swing.JFrame {
             Date manufactureDate = sdf.parse(manufactureDateStr);
             Date expirationDate = sdf.parse(expirationDateStr);
             Date validStartDate = currentDate;
-            
+
             date = expirationDate.after(manufactureDate) && expirationDate.after(validStartDate);
             //System.out.println("Expiration date is valid.");
             //System.out.println("Expiration date is not valid.");

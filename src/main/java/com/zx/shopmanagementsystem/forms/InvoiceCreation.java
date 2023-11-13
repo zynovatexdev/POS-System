@@ -6,8 +6,12 @@ package com.zx.shopmanagementsystem.forms;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
-import com.zx.shopmanagementsystem.ui.DashboardAdmin;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.table.TableCustom;
+import com.zx.shopmanagementsystem.ui.InvoiceCategory;
 import com.zx.shopmanagementsystem.ui.NewInvoice;
+import com.zx.shopmanagementsystem.ui.PaymentMethod;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,10 +25,13 @@ public class InvoiceCreation extends javax.swing.JPanel {
     public int uid;
     Func func = new Func();
     IconLocation il = new IconLocation();
+    JDBC DB = new JDBC();
 
     public InvoiceCreation() {
         initComponents();
-
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        tableDataClear();
+        tableDataLoader();
     }
 
     /**
@@ -37,6 +44,11 @@ public class InvoiceCreation extends javax.swing.JPanel {
     private void initComponents() {
 
         createNewInvoice = new javax.swing.JLabel();
+        paymentMethodBtnLbl = new javax.swing.JLabel();
+        invoiceCategoryBtnLbl = new javax.swing.JLabel();
+        panelBorder1 = new com.raven.swing.PanelBorder();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        expireTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
@@ -54,8 +66,79 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 createNewInvoiceMouseExited(evt);
             }
         });
-        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 310, 50));
+        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 310, 50));
 
+        paymentMethodBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\PaymentMethodPurpleIcon.png")); // NOI18N
+        paymentMethodBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paymentMethodBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                paymentMethodBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                paymentMethodBtnLblMouseExited(evt);
+            }
+        });
+        add(paymentMethodBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 310, 50));
+
+        invoiceCategoryBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\InvoiceCategoryPurpleIcon.png")); // NOI18N
+        invoiceCategoryBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                invoiceCategoryBtnLblMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                invoiceCategoryBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                invoiceCategoryBtnLblMouseExited(evt);
+            }
+        });
+        add(invoiceCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 310, 50));
+
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+
+        expireTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Item Name", "Expire Date", "Quantity", "Store Location"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(expireTbl);
+
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 900, 440));
+
+        iconLbl.setBackground(new java.awt.Color(255, 255, 255));
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\InvoiceCreation.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
@@ -77,8 +160,88 @@ public class InvoiceCreation extends javax.swing.JPanel {
         func.iconSetter(createNewInvoice, il.CreateInvoicePurpleIcon);
     }//GEN-LAST:event_createNewInvoiceMouseExited
 
+    private void paymentMethodBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentMethodBtnLblMouseClicked
+        // TODO add your handling code here:
+        PaymentMethod pm = new PaymentMethod();
+        pm.setVisible(true);
+    }//GEN-LAST:event_paymentMethodBtnLblMouseClicked
+
+    private void paymentMethodBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentMethodBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(paymentMethodBtnLbl, il.PaymentMethodWhiteIcon);
+    }//GEN-LAST:event_paymentMethodBtnLblMouseEntered
+
+    private void paymentMethodBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentMethodBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(paymentMethodBtnLbl, il.PaymentMethodPurpleIcon);
+    }//GEN-LAST:event_paymentMethodBtnLblMouseExited
+
+    private void invoiceCategoryBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCategoryBtnLblMouseClicked
+        // TODO add your handling code here:
+        InvoiceCategory ic = new InvoiceCategory();
+        ic.setVisible(true);
+    }//GEN-LAST:event_invoiceCategoryBtnLblMouseClicked
+
+    private void invoiceCategoryBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCategoryBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(invoiceCategoryBtnLbl, il.InvoiceCategoryWhiteIcon);
+    }//GEN-LAST:event_invoiceCategoryBtnLblMouseEntered
+
+    private void invoiceCategoryBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCategoryBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(invoiceCategoryBtnLbl, il.InvoiceCategoryPurpleIcon);
+    }//GEN-LAST:event_invoiceCategoryBtnLblMouseExited
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel createNewInvoice;
+    private javax.swing.JTable expireTbl;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JLabel invoiceCategoryBtnLbl;
+    private javax.swing.JScrollPane jScrollPane1;
+    private com.raven.swing.PanelBorder panelBorder1;
+    private javax.swing.JLabel paymentMethodBtnLbl;
     // End of variables declaration//GEN-END:variables
+
+    private void tableDataLoader() {
+        try {
+            String sql = "SELECT\n"
+                    + "    p.product_name,\n"
+                    + "    p.expiry_date,\n"
+                    + "    p.stock_quantity,\n"
+                    + "    s.store_location_name\n"
+                    + "FROM\n"
+                    + "    product p\n"
+                    + "JOIN\n"
+                    + "    store_location s ON p.store_location_id = s.store_location_id\n"
+                    + "WHERE\n"
+                    + "    p.expiry_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY);";
+
+            java.sql.ResultSet rs = DB.getdata(sql);
+            while (rs.next()) {
+                String product_name = String.valueOf(rs.getString("product_name"));
+                String expiry_date = String.valueOf(rs.getString("expiry_date"));
+                String stock_quantity = String.valueOf(rs.getString("stock_quantity"));
+                String store_location_name = String.valueOf(rs.getString("store_location_name"));
+
+                String table_data[] = {product_name, expiry_date, stock_quantity, store_location_name};
+                DefaultTableModel table = (DefaultTableModel) expireTbl.getModel();
+                table.addRow(table_data);
+
+            }
+            DB.con().close();
+        } catch (Exception ex) {
+            System.out.println("Expire Date Table Data Loader : " + ex);
+        }
+    }
+
+    private void tableDataClear() {
+        try {
+            while (0 <= expireTbl.getRowCount()) {
+                DefaultTableModel table = (DefaultTableModel) expireTbl.getModel();
+                table.removeRow(expireTbl.getRowCount() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("Expire Date Table Data Clear : " + e);
+        }
+    }
 }
