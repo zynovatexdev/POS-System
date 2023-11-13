@@ -7,8 +7,8 @@ package com.zx.shopmanagementsystem.ui;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.Debt;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
-import com.zx.shopmanagementsystem.notifications.Payment;
 import com.zx.shopmanagementsystem.table.DeleteButtonEditorRenderer;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
@@ -44,7 +44,7 @@ import org.json.JSONObject;
  *
  * @author User
  */
-public class NewInvoice extends javax.swing.JFrame {
+public class NewDebt extends javax.swing.JFrame {
 
     /**
      * Creates new form NewInvoice
@@ -61,10 +61,15 @@ public class NewInvoice extends javax.swing.JFrame {
     int UserID;
     String time;
     String date;
+    private int maxDebtInvoice;
+    private int newDebtInvoice;
+    private int maxDebtId;
+    private int newDebtId;
 
-    public NewInvoice() {
+    public NewDebt() {
         initComponents();
-        readUserIdFromFile();
+        getMaxDebtInvoiceValue();
+        getMaxDebtValue();
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         productComboLoader();
         customerComboLoader();
@@ -133,7 +138,6 @@ public class NewInvoice extends javax.swing.JFrame {
         productNameCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         customerCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         quantityTxt = new com.zx.shopmanagementsystem.components.RoundedText();
-        discountSpinner = new com.zx.shopmanagementsystem.components.Spinner();
         head1 = new com.zx.shopmanagementsystem.components.Head();
         priceTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         paymentBtn = new javax.swing.JLabel();
@@ -147,7 +151,7 @@ public class NewInvoice extends javax.swing.JFrame {
         editPriceLbl = new javax.swing.JLabel();
         selectBtnIcon = new javax.swing.JLabel();
         imageLbl = new javax.swing.JLabel();
-        idLbl = new javax.swing.JLabel();
+        discountSpinner = new com.zx.shopmanagementsystem.components.Spinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -201,37 +205,6 @@ public class NewInvoice extends javax.swing.JFrame {
         });
         getContentPane().add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, -1, -1));
 
-        discountSpinner.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        discountSpinner.setPreferredSize(new java.awt.Dimension(65, 50));
-        discountSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                discountSpinnerStateChanged(evt);
-            }
-        });
-        discountSpinner.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                discountSpinnerMouseClicked(evt);
-            }
-        });
-        discountSpinner.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                discountSpinnerInputMethodTextChanged(evt);
-            }
-        });
-        discountSpinner.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                discountSpinnerPropertyChange(evt);
-            }
-        });
-        discountSpinner.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
-            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
-                discountSpinnerVetoableChange(evt);
-            }
-        });
-        getContentPane().add(discountSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, 320, -1));
-
         head1.setHeaderTitle("");
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
@@ -239,7 +212,7 @@ public class NewInvoice extends javax.swing.JFrame {
         priceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         priceTxt.setHintText("Enter Price");
         priceTxt.setPreferredSize(new java.awt.Dimension(300, 50));
-        getContentPane().add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 610, -1, -1));
+        getContentPane().add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, -1, -1));
 
         paymentBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\paymentIcon.png")); // NOI18N
         paymentBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -254,7 +227,7 @@ public class NewInvoice extends javax.swing.JFrame {
                 paymentBtnMouseExited(evt);
             }
         });
-        getContentPane().add(paymentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 640, -1, -1));
+        getContentPane().add(paymentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 630, -1, -1));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -303,11 +276,11 @@ public class NewInvoice extends javax.swing.JFrame {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 680, 460));
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 680, 500));
 
         addInvoiceBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\addInvoiceIcon.png")); // NOI18N
         addInvoiceBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -323,7 +296,7 @@ public class NewInvoice extends javax.swing.JFrame {
                 addInvoiceBtnMouseExited(evt);
             }
         });
-        getContentPane().add(addInvoiceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 640, -1, -1));
+        getContentPane().add(addInvoiceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 630, -1, -1));
 
         clearBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\clearIcon.png")); // NOI18N
         clearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -338,18 +311,18 @@ public class NewInvoice extends javax.swing.JFrame {
                 clearBtnMouseExited(evt);
             }
         });
-        getContentPane().add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 640, -1, -1));
+        getContentPane().add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 630, -1, -1));
 
         priceLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         priceLbl.setForeground(new java.awt.Color(255, 255, 255));
         priceLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         priceLbl.setText("10000/=");
-        getContentPane().add(priceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 580, 120, 40));
+        getContentPane().add(priceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 640, 120, 40));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Total Price");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 580, 100, 40));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 640, 100, 40));
 
         editPriceLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         editPriceLbl.setForeground(new java.awt.Color(255, 255, 255));
@@ -359,7 +332,7 @@ public class NewInvoice extends javax.swing.JFrame {
                 editPriceLblMouseClicked(evt);
             }
         });
-        getContentPane().add(editPriceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 623, 70, -1));
+        getContentPane().add(editPriceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 510, 70, -1));
 
         selectBtnIcon.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SelectIcon.png")); // NOI18N
         selectBtnIcon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -369,12 +342,40 @@ public class NewInvoice extends javax.swing.JFrame {
         });
         getContentPane().add(selectBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, 30));
 
-        imageLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\AddNewInvoiceScreen.png")); // NOI18N
+        imageLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\AddNewDebt.png")); // NOI18N
         imageLbl.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(imageLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        idLbl.setText("jLabel1");
-        getContentPane().add(idLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 610, -1, -1));
+        discountSpinner.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        discountSpinner.setPreferredSize(new java.awt.Dimension(65, 50));
+        discountSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                discountSpinnerStateChanged(evt);
+            }
+        });
+        discountSpinner.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                discountSpinnerMouseClicked(evt);
+            }
+        });
+        discountSpinner.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                discountSpinnerInputMethodTextChanged(evt);
+            }
+        });
+        discountSpinner.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                discountSpinnerPropertyChange(evt);
+            }
+        });
+        discountSpinner.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                discountSpinnerVetoableChange(evt);
+            }
+        });
+        getContentPane().add(discountSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, 320, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -547,10 +548,10 @@ public class NewInvoice extends javax.swing.JFrame {
 
         double totalPrice = Double.parseDouble(totalPriceStr);
 
-        Payment pay = new Payment(this);
+        Debt pay = new Debt(this);
         pay.showMessage(totalPrice);
 
-        if (pay.getMessageType() == Payment.MessageType.YES) {
+        if (pay.getMessageType() == Debt.MessageType.YES) {
             System.out.println("Yes");
             try {
                 payment = Double.parseDouble(pay.getPaymentValue());
@@ -562,16 +563,14 @@ public class NewInvoice extends javax.swing.JFrame {
             }
 
             if (totalPrice > payment) {
-                System.out.println("Not Enough");
-                DialogBox.showMessage("ERROR !!!", "Payment Not Enough For Pay", 3);
-            } else {
-                double balance = payment - totalPrice;
-                String balancePrice = String.format("%.2f", balance);
-                generateInvoiceBill(invoiceData, balancePrice);
-                DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\nGive Balance : " + balancePrice, 1);
+                double outstandingAmount = totalPrice - payment;
+                String outstandingBalancePrice = String.format("%.2f", outstandingAmount);
+                generateInvoiceBill(invoiceData, outstandingBalancePrice);
                 updateStockAndCalculateProfit(model);
                 clear();
                 tableDataClear();
+                DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\n Outstanding Balance : " + outstandingBalancePrice, 1);
+            } else {
 
             }
         } else {
@@ -597,26 +596,27 @@ public class NewInvoice extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewInvoice.class
+            java.util.logging.Logger.getLogger(NewDebt.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewInvoice.class
+            java.util.logging.Logger.getLogger(NewDebt.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewInvoice.class
+            java.util.logging.Logger.getLogger(NewDebt.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
 
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewInvoice.class
+            java.util.logging.Logger.getLogger(NewDebt.class
                     .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new NewInvoice().setVisible(true);
+            new NewDebt().setVisible(true);
         });
     }
 
@@ -628,7 +628,6 @@ public class NewInvoice extends javax.swing.JFrame {
     private com.zx.shopmanagementsystem.components.Spinner discountSpinner;
     private javax.swing.JLabel editPriceLbl;
     private com.zx.shopmanagementsystem.components.Head head1;
-    private javax.swing.JLabel idLbl;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JTable invoiceTbl;
     private javax.swing.JLabel jLabel2;
@@ -751,7 +750,7 @@ public class NewInvoice extends javax.swing.JFrame {
 
             }
         } catch (Exception ex) {
-            Logger.getLogger(NewInvoice.class
+            Logger.getLogger(NewDebt.class
                     .getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -835,7 +834,7 @@ public class NewInvoice extends javax.swing.JFrame {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(NewInvoice.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NewDebt.class.getName()).log(Level.SEVERE, null, ex);
         }
         return availableQuantity;
     }
@@ -902,7 +901,7 @@ public class NewInvoice extends javax.swing.JFrame {
 
             // Create a bill header
             System.out.println("----------------------------------------");
-            System.out.println("                Invoice");
+            System.out.println("             Debt Invoice");
             System.out.println("----------------------------------------");
             System.out.printf("Date: %16s\n", date);
             System.out.printf("Time: %16s\n", time);
@@ -930,7 +929,7 @@ public class NewInvoice extends javax.swing.JFrame {
             System.out.println("----------------------------------------");
             System.out.printf("Total Price: %25s\n", totalPrice);
             System.out.printf("Payment: %29s\n", payment + "0/=");
-            System.out.printf("Balance Price: %23s\n", balance + "/=");
+            System.out.printf("Outstanding Price: %20s\n", balance + "/=");
             System.out.println("----------------------------------------");
             System.out.println("             Thank You");
             System.out.println("             Come Again");
@@ -984,6 +983,7 @@ public class NewInvoice extends javax.swing.JFrame {
             System.out.println("Cost : " + costPrice);
             System.out.println("Profit : " + profit);
             updateSoldItem(date, time, soldPrice, String.valueOf(quantity), productName, UserID, customerIdArray.get(customerCombo.getSelectedIndex()));
+            getMaxDebtInvoiceValue();
             // Update stock quantity and calculate profit in the database
             updateProductStock(productName, quantity);
 
@@ -993,8 +993,6 @@ public class NewInvoice extends javax.swing.JFrame {
         System.out.println("Total Sold : " + totalsold);
 
         if (UserID != -1) {
-            updateUserProfile(date, time, String.valueOf(totalProfit), String.valueOf(totalsold), UserID);
-            updateCashPayment(date, String.valueOf(totalsold), paymentMethodId, customerIdArray.get(customerCombo.getSelectedIndex()), 1);
 
         }
     }
@@ -1011,22 +1009,6 @@ public class NewInvoice extends javax.swing.JFrame {
         }
 
         return costPrice;
-    }
-
-    public void updateUserProfile(String date, String time, String profit, String sale, int userId) {
-        try {
-            DB.putdata("INSERT INTO user_profile (date, time, sale, profit, user_id) VALUES ('" + date + "','" + time + "','" + sale + "','" + profit + "','" + userId + "')");
-        } catch (Exception ex) {
-            System.out.println("updateUserProfile : " + ex.getMessage());
-        }
-    }
-
-    public void updateCashPayment(String date, String price, int payment_method_id, int customer_id, int invoice_category_id) {
-        try {
-            DB.putdata("INSERT INTO cash_payment (date, price, payment_method_id, customer_id, invoice_category_id) VALUES ('" + date + "','" + price + "','" + payment_method_id + "','" + customer_id + "','" + invoice_category_id + "')");
-        } catch (Exception ex) {
-            System.out.println("updateUserProfile : " + ex.getMessage());
-        }
     }
 
     public void readUserIdFromFile() {
@@ -1066,10 +1048,52 @@ public class NewInvoice extends javax.swing.JFrame {
             System.out.println("updateSoldItem(Get Product Id) -> New Invoice : " + ex.getMessage());
         }
         try {
-            DB.putdata("INSERT INTO sold_items (date, time, price, quantity, product_id, user_id, customer_id) VALUES ('" + Date + "','" + Time + "','" + soldPrice + "','" + quantity + "','" + productId + "','" + userID + "','" + customerId + "')");
+            DB.putdata("INSERT INTO debt_invoice (invoice_id, date, time, price, quantity, product_id, user_id, customer_id) VALUES ('" + newDebtInvoice + "','" + Date + "','" + Time + "','" + soldPrice + "','" + quantity + "','" + productId + "','" + userID + "','" + customerId + "')");
         } catch (Exception ex) {
-            System.out.println("updateSoldItem(Save Data) -> New Invoice : " + ex.getMessage());
+            System.out.println("updateSoldItem(Save Data) -> New Debt Invoice : " + ex.getMessage());
         }
+    }
+
+    private void getMaxDebtInvoiceValue() {
+        try {
+            java.sql.ResultSet rs1 = DB.getdata("SELECT MAX(invoice_id) FROM debt_invoice");
+            if (rs1.next()) {
+                //System.out.println("Table not empty");
+                maxDebtInvoice = rs1.getInt("max(invoice_id)");
+                System.out.println(maxDebtInvoice);
+                //barcodeIdLbl.setText(String.valueOf(maxBarId + 1));
+                newDebtInvoiceId(maxDebtInvoice);
+            } else {
+                System.out.println("Table Empty");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void newDebtInvoiceId(int maxValue) {
+        newDebtInvoice = maxValue + 1;
+    }
+
+    private void getMaxDebtValue() {
+        try {
+            java.sql.ResultSet rs1 = DB.getdata("SELECT MAX(debt_id) FROM debt");
+            if (rs1.next()) {
+                //System.out.println("Table not empty");
+                maxDebtId = rs1.getInt("max(debt_id)");
+                //System.out.println(maxCusId);
+                //barcodeIdLbl.setText(String.valueOf(maxBarId + 1));
+                newDebtId(maxDebtId);
+            } else {
+                System.out.println("Table Empty");
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CustomerRegistration.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void newDebtId(int maxValue) {
+        newDebtId = maxValue + 1;
     }
 
 }

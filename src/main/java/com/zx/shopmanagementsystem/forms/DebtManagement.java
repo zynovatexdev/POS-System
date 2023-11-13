@@ -4,6 +4,8 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
+import com.zx.shopmanagementsystem.ui.NewDebt;
+
 /**
  *
  * @author User
@@ -26,29 +28,31 @@ public class DebtManagement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        newDebtInvoiceBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        newDebtInvoiceBtnLbl.setText("New Debt Invoice");
+        newDebtInvoiceBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                newDebtInvoiceBtnLblMouseClicked(evt);
+            }
+        });
+        add(newDebtInvoiceBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 150, 40));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\DebtManagement.png")); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(iconLbl)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(iconLbl)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
+        add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void newDebtInvoiceBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newDebtInvoiceBtnLblMouseClicked
+        // TODO add your handling code here:
+        new NewDebt().setVisible(true);
+    }//GEN-LAST:event_newDebtInvoiceBtnLblMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JLabel newDebtInvoiceBtnLbl;
     // End of variables declaration//GEN-END:variables
 }
