@@ -56,6 +56,7 @@ public class AddBarcode extends javax.swing.JFrame {
                             System.out.println("Same Value");
                         } else if (line.equals("Done")) {
                             System.out.println("Done");
+                            socket.close();
                         } else if (line.startsWith("QRCODE")) {
                             System.out.println("it is a QR");
                             //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text

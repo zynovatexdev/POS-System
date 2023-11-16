@@ -13,15 +13,15 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 
 public class Menu extends JComponent {
-    
+
     public MenuEvent getEvent() {
         return event;
     }
-    
+
     public void setEvent(MenuEvent event) {
         this.event = event;
     }
-    
+
     private MenuEvent event;
     private MigLayout layout;
     private String[][] menuItems = new String[][]{
@@ -38,11 +38,11 @@ public class Menu extends JComponent {
         {"Help and Documentation"},
         {"Log Out"}
     };
-    
+
     public Menu() {
         init();
     }
-    
+
     private void init() {
         layout = new MigLayout("wrap 1, fillx, gapy 0, inset 2", "fill");
         setLayout(layout);
@@ -51,9 +51,9 @@ public class Menu extends JComponent {
         for (int i = 0; i < menuItems.length; i++) {
             addMenu(menuItems[i][0], i);
         }
-        
+
     }
-    
+
     private Icon getIcon(int index) {
         String url = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\dashboard\\icons\\" + index + ".png";
         if (url != null) {
@@ -62,7 +62,7 @@ public class Menu extends JComponent {
             return null;
         }
     }
-    
+
     private void addMenu(String menuName, int index) {
         int length = menuItems[index].length;
         MenuItem item = new MenuItem(menuName, index, length > 1);
@@ -93,7 +93,7 @@ public class Menu extends JComponent {
         revalidate();
         repaint();
     }
-    
+
     private void addSubMenu(MenuItem item, int index, int length, int indexZorder) {
         JPanel panel = new JPanel(new MigLayout("wrap 1, fillx, inset 0, gapy 0", "fill"));
         panel.setName(index + "");
@@ -116,7 +116,7 @@ public class Menu extends JComponent {
         repaint();
         MenuAnimation.showMenu(panel, item, layout, true);
     }
-    
+
     private void hideMenu(MenuItem item, int index) {
         for (Component com : getComponents()) {
             if (com instanceof JPanel && com.getName() != null && com.getName().equals(index + "")) {
@@ -126,13 +126,13 @@ public class Menu extends JComponent {
             }
         }
     }
-    
+
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
-        g2.setColor(Color.decode("#711bb3"));
+        g2.setColor(Color.decode("#6f0096"));
         g2.fill(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
         super.paintComponent(grphcs);
     }
-    
+
 }

@@ -22,6 +22,8 @@ import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -565,15 +567,19 @@ public class NewDebt extends javax.swing.JFrame {
             }
 
             if (totalPrice > payment) {
-                double outstandingAmount = totalPrice - payment;
-                String outstandingBalancePrice = String.format("%.2f", outstandingAmount);
-                generateInvoiceBill(invoiceData, outstandingBalancePrice);
-                updateStockAndCalculateProfit(model, outstandingBalancePrice);
-                clear();
-                tableDataClear();
-                DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\n Outstanding Balance : " + outstandingBalancePrice, 1);
+                if (isValidDate(nextPayDate)) {
+                    double outstandingAmount = totalPrice - payment;
+                    String outstandingBalancePrice = String.format("%.2f", outstandingAmount);
+                    generateInvoiceBill(invoiceData, outstandingBalancePrice);
+                    updateStockAndCalculateProfit(model, outstandingBalancePrice);
+                    clear();
+                    tableDataClear();
+                    DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\n Outstanding Balance : " + outstandingBalancePrice, 1);
+                } else {
+                    DialogBox.showMessage("Error!!!", "Please select a date equal or greater \nthan\n" + LocalDate.now().plusDays(1), 3);
+                }
             } else {
-
+                DialogBox.showMessage("Error!!!", "Payment is greater than debt amount\nPlease use Invoice Creation.\nOr enter 0 or less amount.", 3);
             }
         } else {
             System.out.println("No");
@@ -1105,6 +1111,28 @@ public class NewDebt extends javax.swing.JFrame {
         } catch (Exception ex) {
             System.err.println("New Debt -> SaveDebt : " + ex.getMessage());
         }
+    }
+
+    public boolean isValidDate(String inputDate) {
+        boolean value;
+        try {
+            // Parse the input date
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            String curDate = String.valueOf(LocalDate.now());
+            LocalDate currentDate = LocalDate.parse(curDate, formatter);
+            LocalDate enteredDate = LocalDate.parse(inputDate, formatter);
+
+            System.out.println("currentDate : " + currentDate);
+            System.out.println("enteredDate : " + enteredDate);
+
+            // Check if enteredDate is greater than one day from the current date
+            value = enteredDate.isAfter(currentDate);
+        } catch (Exception e) {
+            // Handle parsing exceptions (e.g., invalid date format)
+            value = false;
+        }
+        System.out.println(value);
+        return value;
     }
 
 }

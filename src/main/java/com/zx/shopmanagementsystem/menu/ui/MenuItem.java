@@ -94,7 +94,7 @@ public class MenuItem extends JButton {
         this.subMenuIndex = subMenuIndex;
         this.length = length;
         setBorder(new EmptyBorder(9, 33, 9, 10));
-        setBackground(Color.decode("#52157d"));
+        setBackground(Color.decode("#44015c"));
         setOpaque(true);
     }
 
@@ -104,7 +104,7 @@ public class MenuItem extends JButton {
         Graphics2D g2 = (Graphics2D) grphcs.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         if (length != 0) {
-            g2.setColor(Color.decode("#52157d"));
+            g2.setColor(Color.decode("#44015c"));
             if (subMenuIndex == 1) {
                 //  First Index
                 g2.drawImage(shadow, -shadowSize, -20, null);

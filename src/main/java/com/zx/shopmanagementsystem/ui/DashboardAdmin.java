@@ -19,7 +19,6 @@ import com.zx.shopmanagementsystem.forms.InvoiceCreation;
 import com.zx.shopmanagementsystem.forms.ProductManagement;
 import com.zx.shopmanagementsystem.forms.ProductPerformance;
 import com.zx.shopmanagementsystem.forms.ReportGeneration;
-import com.zx.shopmanagementsystem.forms.Settings;
 import com.zx.shopmanagementsystem.forms.SupplierManagement;
 import com.zx.shopmanagementsystem.forms.UserManagement;
 import com.zx.shopmanagementsystem.menu.ui.MenuEvent;
@@ -30,8 +29,6 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
 import java.util.Properties;
@@ -124,7 +121,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         setUndecorated(true);
         setResizable(false);
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(1366, 770));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1366, 768));
 
         header1.setPreferredSize(new java.awt.Dimension(167, 50));
         header1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -178,16 +175,22 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(header1Layout.createSequentialGroup()
-                        .addGroup(header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(closeBtnLbl)
-                            .addComponent(minimizeBtnLbl))
-                        .addGap(0, 8, Short.MAX_VALUE))
+                        .addGap(17, 17, 17)
+                        .addComponent(minimizeBtnLbl)
+                        .addGap(0, 18, Short.MAX_VALUE))
                     .addComponent(imageAvatar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(header1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(closeBtnLbl)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         scrollPaneWin111.setBorder(null);
         scrollPaneWin111.setViewportView(menu1);
+
+        body.setPreferredSize(new java.awt.Dimension(1116, 718));
+        body.setLayout(new javax.swing.BoxLayout(body, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -204,8 +207,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(header1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)
-                    .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, 718, Short.MAX_VALUE)))
+                    .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(body, javax.swing.GroupLayout.PREFERRED_SIZE, 718, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -216,7 +219,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
