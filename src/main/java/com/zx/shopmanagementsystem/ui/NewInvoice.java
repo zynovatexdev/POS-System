@@ -673,7 +673,7 @@ public class NewInvoice extends javax.swing.JFrame {
     }
 
     private void clear() {
-        customerCombo.setSelectedIndex(0);
+        //customerCombo.setSelectedIndex(0);
         productNameCombo.setSelectedIndex(0);
         quantityTxt.setText("");
         discountSpinner.setLabelText("0");

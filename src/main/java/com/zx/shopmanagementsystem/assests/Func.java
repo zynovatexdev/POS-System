@@ -4,6 +4,7 @@
  */
 package com.zx.shopmanagementsystem.assests;
 
+import com.zx.shopmanagementsystem.components.Header;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -82,6 +83,15 @@ public class Func {
 
     public void initMoving(JFrame frame, JLabel lable) {
         lable.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent me) {
+                frame.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);
+            }
+        });
+    }
+
+    public void initDashboardMoving(JFrame frame, Header header) {
+        header.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent me) {
                 frame.setLocation(me.getXOnScreen() - x, me.getYOnScreen() - y);

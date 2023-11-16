@@ -182,7 +182,6 @@ public class InvoiceCategory extends javax.swing.JFrame {
         MessageDialog DialogBox = new MessageDialog(this);
         String type = invoiceCategoryTxt.getText();
         String description = descriptionTxt.getText();
-        String sql = "INSERT INTO invoice_catergory (invoice_category_id, invoice_category_type, invoice_category_description) VALUES ('" + newBarId + "','" + type + "','" + description + "')";
 
         if (type.equals("")) {
             DialogBox.showMessage("WARNING!!!", "Text Can't Empty", 2);
@@ -197,10 +196,12 @@ public class InvoiceCategory extends javax.swing.JFrame {
                 if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
                     System.out.println("Yes");
                     try {
+                        String sql = "INSERT INTO invoice_catergory (invoice_category_id, invoice_category_type, invoice_category_description) VALUES ('" + newBarId + "','" + type + "','" + description + "')";
                         DB.putdata(sql);
                         DialogBox.showMessage("Done!!!", "Invoice Category Successfully Saved", 1);
                         invoiceCategoryTxt.setText("");
                         descriptionTxt.setText("");
+                        getMaxValue();
 
                     } catch (Exception ex) {
                         System.err.println("Save Invoice Category -> Invoice Category : " + ex.getMessage());

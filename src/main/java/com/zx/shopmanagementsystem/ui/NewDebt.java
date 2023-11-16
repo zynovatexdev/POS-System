@@ -65,6 +65,7 @@ public class NewDebt extends javax.swing.JFrame {
     private int newDebtInvoice;
     private int maxDebtId;
     private int newDebtId;
+    private String nextPayDate;
 
     public NewDebt() {
         initComponents();
@@ -556,6 +557,7 @@ public class NewDebt extends javax.swing.JFrame {
             try {
                 payment = Double.parseDouble(pay.getPaymentValue());
                 paymentMethodId = pay.getPaymentMethodId();
+                nextPayDate = pay.getNextDate();
                 System.out.println("payid : " + paymentMethodId);
                 System.out.println("pay : " + payment);
             } catch (NumberFormatException e) {
@@ -566,7 +568,7 @@ public class NewDebt extends javax.swing.JFrame {
                 double outstandingAmount = totalPrice - payment;
                 String outstandingBalancePrice = String.format("%.2f", outstandingAmount);
                 generateInvoiceBill(invoiceData, outstandingBalancePrice);
-                updateStockAndCalculateProfit(model);
+                updateStockAndCalculateProfit(model, outstandingBalancePrice);
                 clear();
                 tableDataClear();
                 DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\n Outstanding Balance : " + outstandingBalancePrice, 1);
@@ -962,7 +964,7 @@ public class NewDebt extends javax.swing.JFrame {
         }
     }
 
-    public void updateStockAndCalculateProfit(DefaultTableModel model) {
+    public void updateStockAndCalculateProfit(DefaultTableModel model, String outstandingAmount) {
         String productName = "";
         double quantity = 0.0;
         double soldPrice = 0;
@@ -993,7 +995,7 @@ public class NewDebt extends javax.swing.JFrame {
         System.out.println("Total Sold : " + totalsold);
 
         if (UserID != -1) {
-
+            saveDebt(String.valueOf(totalsold), outstandingAmount, payment, date, nextPayDate, paymentMethodId, customerIdArray.get(customerCombo.getSelectedIndex()));
         }
     }
 
@@ -1094,6 +1096,15 @@ public class NewDebt extends javax.swing.JFrame {
 
     private void newDebtId(int maxValue) {
         newDebtId = maxValue + 1;
+    }
+
+    private void saveDebt(String totalSold, String outstanding, double lastPay, String Date, String nextDate, int paymentMethod, int customerId) {
+        try {
+            DB.putdata("INSERT INTO debt (debt_id, total_amount, outstanding_amount, last_pay_amount, start_date, next_date, last_pay_date, payment_method, customer_id) VALUES('" + newDebtId + "','" + totalSold + "','" + outstanding + "','" + lastPay + "','" + Date + "','" + nextDate + "','" + Date + "','" + paymentMethod + "','" + customerId + "')");
+            getMaxDebtValue();
+        } catch (Exception ex) {
+            System.err.println("New Debt -> SaveDebt : " + ex.getMessage());
+        }
     }
 
 }

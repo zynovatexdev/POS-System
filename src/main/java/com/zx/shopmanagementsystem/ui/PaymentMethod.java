@@ -158,7 +158,7 @@ public class PaymentMethod extends javax.swing.JFrame {
 
     private void savePaymentMethod() {
         String paymentMethod = paymentMethodTxt.getText();
-        String sql = "INSERT INTO payment_method (payment_method_id, payment_method_type) VALUES('" + newBarId + "','" + paymentMethod + "')";
+
         MessageDialog DialogBox = new MessageDialog(this);
 
         if (paymentMethod.equals("")) {
@@ -172,9 +172,11 @@ public class PaymentMethod extends javax.swing.JFrame {
                 if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
                     System.out.println("Yes");
                     try {
+                        String sql = "INSERT INTO payment_method (payment_method_id, payment_method_type) VALUES('" + newBarId + "','" + paymentMethod + "')";
                         DB.putdata(sql);
                         DialogBox.showMessage("Done!!!", "Payment Method Successfully Saved", 1);
                         paymentMethodTxt.setText("");
+                        getMaxValue();
                     } catch (Exception ex) {
                         System.err.println("Save Payment Method -> Payment Method : " + ex.getMessage());
                     }

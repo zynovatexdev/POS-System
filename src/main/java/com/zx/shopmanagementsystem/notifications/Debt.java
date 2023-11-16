@@ -160,6 +160,10 @@ public class Debt extends javax.swing.JDialog {
         return paymentTxt.getText();
     }
 
+    public String getNextDate() {
+        return nextDateTxt.getText();
+    }
+
     public Integer getPaymentMethodId() {
         return paymentMethodId.get(paymentMethodCombo.getSelectedIndex());
     }
