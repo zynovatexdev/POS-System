@@ -10,7 +10,6 @@ import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import java.awt.Color;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -28,6 +27,7 @@ public class Analysis extends javax.swing.JPanel {
         initComponents();
         setChart();
         setData();
+
     }
 
     /**
@@ -39,69 +39,107 @@ public class Analysis extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelBorder1 = new com.raven.swing.PanelBorder();
+        roundedGradiantPanal1 = new com.zx.shopmanagementsystem.components.RoundedGradiantPanal();
+        noticeTxt = new javax.swing.JLabel();
         chart = new com.zx.shopmanagementsystem.chart.CurveLineChart();
         iconLbl = new javax.swing.JLabel();
 
+        setMinimumSize(new java.awt.Dimension(1116, 718));
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelBorder1.setBackground(new java.awt.Color(153, 0, 153));
+        roundedGradiantPanal1.setendColor(new java.awt.Color(51, 51, 51));
+        roundedGradiantPanal1.setOpaque(false);
+        roundedGradiantPanal1.setStartColor(new java.awt.Color(153, 153, 153));
+
+        noticeTxt.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        noticeTxt.setForeground(new java.awt.Color(255, 255, 255));
+        noticeTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        noticeTxt.setText("Not Enough Data.");
 
         chart.setForeground(new java.awt.Color(255, 255, 255));
 
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
-        panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
-                .addContainerGap())
+        javax.swing.GroupLayout roundedGradiantPanal1Layout = new javax.swing.GroupLayout(roundedGradiantPanal1);
+        roundedGradiantPanal1.setLayout(roundedGradiantPanal1Layout);
+        roundedGradiantPanal1Layout.setHorizontalGroup(
+            roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1060, Short.MAX_VALUE)
+            .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedGradiantPanal1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(noticeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE))
+                    .addContainerGap()))
         );
-        panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
-                .addContainerGap())
+        roundedGradiantPanal1Layout.setVerticalGroup(
+            roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 620, Short.MAX_VALUE)
+            .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedGradiantPanal1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                        .addComponent(noticeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addContainerGap()))
         );
 
-        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, 920, 560));
+        add(roundedGradiantPanal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 1060, 620));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Analysis.png")); // NOI18N
+        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.zx.shopmanagementsystem.chart.CurveLineChart chart;
     private javax.swing.JLabel iconLbl;
-    private com.raven.swing.PanelBorder panelBorder1;
+    private javax.swing.JLabel noticeTxt;
+    private com.zx.shopmanagementsystem.components.RoundedGradiantPanal roundedGradiantPanal1;
     // End of variables declaration//GEN-END:variables
 
     private void setData() {
+        String sql = "SELECT DATE_FORMAT(date, '%M-%Y') AS formatted_date, SUM(sale) AS sum_sale, SUM(profit) AS sum_profit\n"
+                + "FROM shopdb.user_profile\n"
+                + "WHERE DATE_FORMAT(date, '%Y-%m') BETWEEN DATE_FORMAT(DATE_SUB(CURRENT_DATE, INTERVAL 7 MONTH), '%Y-%m') AND DATE_FORMAT(CURRENT_DATE, '%Y-%m')\n"
+                + "GROUP BY formatted_date\n"
+                + "ORDER BY STR_TO_DATE(formatted_date, '%M-%Y') DESC;";
         try {
-            List<ModelData> list = new ArrayList<>();
-            ResultSet rs = DB.getdata("SELECT DATE_FORMAT(date, '%M-%Y') AS formatted_date, SUM(sale) AS sum_sale, SUM(profit) AS sum_profit\n"
-                    + "FROM shopdb.user_profile\n"
-                    + "WHERE DATE_FORMAT(date, '%Y-%m') BETWEEN DATE_FORMAT(DATE_SUB(CURRENT_DATE, INTERVAL 7 MONTH), '%Y-%m') AND DATE_FORMAT(CURRENT_DATE, '%Y-%m')\n"
-                    + "GROUP BY formatted_date\n"
-                    + "ORDER BY STR_TO_DATE(formatted_date, '%M-%Y') DESC;"); // Convert to date for sorting
-            while (rs.next()) {
-                String date = rs.getString("formatted_date");
-                double sale = Double.parseDouble(rs.getString("sum_sale"));
-                double profit = Double.parseDouble(rs.getString("sum_profit"));
-                list.add(new ModelData(date, sale, profit));
+            ResultSet resultSet = DB.getdata(sql);
+            int rowCount = 0;
+            while (resultSet.next()) {
+                rowCount++;
             }
-            rs.close();
+            if (rowCount >= 3) {
+                noticeTxt.setVisible(false);
+                chart.setVisible(true);
+                try {
+                    List<ModelData> list = new ArrayList<>();
+                    ResultSet rs = DB.getdata(sql); // Convert to date for sorting
+                    while (rs.next()) {
+                        String date = rs.getString("formatted_date");
+                        double sale = Double.parseDouble(rs.getString("sum_sale"));
+                        double profit = Double.parseDouble(rs.getString("sum_profit"));
+                        list.add(new ModelData(date, sale, profit));
+                    }
+                    rs.close();
 
-            for (ModelData d : list) {
-                chart.addData(new ModelChart(d.getDate(), new double[]{d.getProfit(), d.getSale()}));
+                    for (ModelData d : list) {
+                        chart.addData(new ModelChart(d.getDate(), new double[]{d.getProfit(), d.getSale()}));
+                    }
+                    chart.start();
+                } catch (Exception ex) {
+                    System.err.println("Analisis SetData : " + ex.getMessage());
+                }
+            } else {
+                noticeTxt.setVisible(true);
+                chart.setVisible(false);
+                System.out.println("The result set has 3 > rows.");
             }
-            chart.start();
         } catch (Exception ex) {
-            System.err.println("Analisis SetData : " + ex.getMessage());
+            System.err.println("Analysis -> Set Data (Row Check) : " + ex.getMessage());
         }
+
     }
 
     private void setChart() {

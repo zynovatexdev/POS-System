@@ -45,11 +45,12 @@ public class CustomerManagement extends javax.swing.JPanel {
 
         addCustomerCategoryBtnLbl = new javax.swing.JLabel();
         addCustomerBtnLbl = new javax.swing.JLabel();
+        panelBorder1 = new com.raven.swing.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(1015, 738));
+        setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addCustomerCategoryBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddCustomerCategoryPurpleIcon.png")); // NOI18N
@@ -64,7 +65,7 @@ public class CustomerManagement extends javax.swing.JPanel {
                 addCustomerCategoryBtnLblMouseExited(evt);
             }
         });
-        add(addCustomerCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 130, 259, 36));
+        add(addCustomerCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 115, 259, 36));
 
         addCustomerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddCustomerPurpleIcon.png")); // NOI18N
         addCustomerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -78,7 +79,11 @@ public class CustomerManagement extends javax.swing.JPanel {
                 addCustomerBtnLblMouseExited(evt);
             }
         });
-        add(addCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 175, 36));
+        add(addCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 115, 175, 36));
+
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jScrollPane1.setBorder(null);
 
         customerTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -98,10 +103,31 @@ public class CustomerManagement extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(customerTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 940, 480));
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1080, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelBorder1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 510, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelBorder1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 190, 1080, 510));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\CustomerManagement.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
+        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -151,6 +177,7 @@ public class CustomerManagement extends javax.swing.JPanel {
     private javax.swing.JTable customerTbl;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.raven.swing.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
 
     private void tableDataLoader() {

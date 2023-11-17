@@ -48,28 +48,28 @@ public class Settings extends javax.swing.JPanel {
         settingBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(1015, 738));
+        setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Minute");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 360, 100, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 320, 100, 20));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Items");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 250, 100, 20));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 100, 20));
 
         lowStockCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "50", "100", "150", "200" }));
         lowStockCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lowStockCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        add(lowStockCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 250, 50));
+        add(lowStockCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 250, 50));
 
         backUpTimeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "15", "20", "25", "30" }));
         backUpTimeCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         backUpTimeCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        add(backUpTimeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 250, 50));
+        add(backUpTimeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 250, 50));
 
         settingBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SavePurpleIcon.png")); // NOI18N
         settingBtnLbl.setText("jLabel3");
@@ -84,7 +84,7 @@ public class Settings extends javax.swing.JPanel {
                 settingBtnLblMouseExited(evt);
             }
         });
-        add(settingBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 630, 245, 50));
+        add(settingBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, 245, 50));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Settings.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

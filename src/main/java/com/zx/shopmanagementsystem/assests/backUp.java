@@ -243,10 +243,10 @@ public class backUp {
             ResultSet rs = DB.getdata("SELECT * FROM product_category");
             while (rs.next()) {
                 categoryId = rs.getInt("category_id");
-                categoryName = rs.getString("category_id");
+                categoryName = rs.getString("category_name");
 
-                data.put("discount_id", categoryId);
-                data.put("start_date", categoryName);
+                data.put("category_id", categoryId);
+                data.put("category_name", categoryName);
 
                 backUp("Product Category", String.valueOf(categoryId), data);
 

@@ -22,7 +22,7 @@ public class JFBC {
 
     public void connectFirebase() {
         try {
-            FileInputStream sa = new FileInputStream("C:\\Users\\User\\Documents\\NetBeansProjects\\ShopManagementSystem\\shopdb.json");
+            FileInputStream sa = new FileInputStream("C:\\ShopManagementSystem\\shopdb.json");
             FirebaseOptions options = FirebaseOptions.builder()
                     .setCredentials(GoogleCredentials.fromStream(sa))
                     .build();

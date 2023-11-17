@@ -51,7 +51,8 @@ public class InvoiceCreation extends javax.swing.JPanel {
         expireTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(1015, 738));
+        setName(""); // NOI18N
+        setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         createNewInvoice.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\CreateInvoicePurpleIcon.png")); // NOI18N
@@ -66,7 +67,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 createNewInvoiceMouseExited(evt);
             }
         });
-        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 310, 50));
+        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 310, 50));
 
         paymentMethodBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\PaymentMethodPurpleIcon.png")); // NOI18N
         paymentMethodBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -80,7 +81,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 paymentMethodBtnLblMouseExited(evt);
             }
         });
-        add(paymentMethodBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 310, 50));
+        add(paymentMethodBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 310, 50));
 
         invoiceCategoryBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\InvoiceCategoryPurpleIcon.png")); // NOI18N
         invoiceCategoryBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -94,7 +95,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 invoiceCategoryBtnLblMouseExited(evt);
             }
         });
-        add(invoiceCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 310, 50));
+        add(invoiceCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 310, 50));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -125,21 +126,22 @@ public class InvoiceCreation extends javax.swing.JPanel {
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 888, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 428, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 900, 440));
+        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 148, 1070, 550));
 
         iconLbl.setBackground(new java.awt.Color(255, 255, 255));
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\InvoiceCreation.png")); // NOI18N
+        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 

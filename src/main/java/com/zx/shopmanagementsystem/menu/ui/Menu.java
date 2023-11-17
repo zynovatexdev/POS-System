@@ -36,6 +36,7 @@ public class Menu extends JComponent {
         {"Customer Management"},
         {"User Management"},
         {"Help and Documentation"},
+        {"Settings"},
         {"Log Out"}
     };
 

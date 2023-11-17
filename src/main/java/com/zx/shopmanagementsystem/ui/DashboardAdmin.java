@@ -19,6 +19,7 @@ import com.zx.shopmanagementsystem.forms.InvoiceCreation;
 import com.zx.shopmanagementsystem.forms.ProductManagement;
 import com.zx.shopmanagementsystem.forms.ProductPerformance;
 import com.zx.shopmanagementsystem.forms.ReportGeneration;
+import com.zx.shopmanagementsystem.forms.Settings;
 import com.zx.shopmanagementsystem.forms.SupplierManagement;
 import com.zx.shopmanagementsystem.forms.UserManagement;
 import com.zx.shopmanagementsystem.menu.ui.MenuEvent;
@@ -56,6 +57,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
 
     public DashboardAdmin() {
         initComponents();
+        showForm(new HomeAdmin());
         menu1.setEvent(new MenuEvent() {
             @Override
             public void selected(int index, int subIndex) {
@@ -67,7 +69,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
                     showForm(new InventoryManagement());
                 } else if (index == 3 && subIndex == 1) {
                     showForm(new ProductManagement());
-                } else if (index == 3 && subIndex == 3) {
+                } else if (index == 3 && subIndex == 2) {
                     showForm(new ProductPerformance());
                 } else if (index == 4) {
                     showForm(new DebtManagement());
@@ -84,9 +86,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 } else if (index == 10) {
                     showForm(new Help());
                 } else if (index == 11) {
+                    showForm(new Settings());
+                } else if (index == 12) {
                     new LogOut().setVisible(true);
                     close();
-
                 }
             }
         });
@@ -307,7 +310,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             // Place your code here to execute every 10 minutes
             System.out.println("Task executed at: " + System.currentTimeMillis());
 
-            //backup.backupAll();
+            backup.backupAll();
         }
     }
 

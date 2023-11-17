@@ -97,11 +97,12 @@ public class InventoryManagement extends javax.swing.JPanel {
         barcodeIcon = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(1015, 738));
+        setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelBorder2.setBackground(new java.awt.Color(255, 255, 255));
 
+        jScrollPane1.setBorder(null);
         jScrollPane1.setOpaque(false);
 
         inventoryTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -128,18 +129,18 @@ public class InventoryManagement extends javax.swing.JPanel {
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 958, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelBorder2Layout.setVerticalGroup(
             panelBorder2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        add(panelBorder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 970, 490));
+        add(panelBorder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 136, 1070, 560));
 
         searchTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         searchTxt.setHintText("Barcode or Item Name");
@@ -148,7 +149,7 @@ public class InventoryManagement extends javax.swing.JPanel {
                 searchTxtKeyPressed(evt);
             }
         });
-        add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 170, 240, -1));
+        add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 85, 240, -1));
 
         barcodeIcon.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
         barcodeIcon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -156,10 +157,10 @@ public class InventoryManagement extends javax.swing.JPanel {
                 barcodeIconMouseClicked(evt);
             }
         });
-        add(barcodeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(927, 166, 40, 40));
+        add(barcodeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 85, 40, 40));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\InventoryManagement.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
+        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 

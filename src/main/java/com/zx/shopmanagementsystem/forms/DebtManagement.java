@@ -4,6 +4,8 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
+import com.zx.shopmanagementsystem.assests.Func;
+import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.ui.NewDebt;
 
 /**
@@ -15,6 +17,9 @@ public class DebtManagement extends javax.swing.JPanel {
     /**
      * Creates new form Home
      */
+    Func func = new Func();
+    IconLocation il = new IconLocation();
+
     public DebtManagement() {
         initComponents();
     }
@@ -34,15 +39,22 @@ public class DebtManagement extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        newDebtInvoiceBtnLbl.setText("New Debt Invoice");
+        newDebtInvoiceBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddNewDebtPurpleIcon.png")); // NOI18N
         newDebtInvoiceBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newDebtInvoiceBtnLblMouseClicked(evt);
             }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                newDebtInvoiceBtnLblMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                newDebtInvoiceBtnLblMouseExited(evt);
+            }
         });
-        add(newDebtInvoiceBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 150, 40));
+        add(newDebtInvoiceBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 220, 50));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\DebtManagement.png")); // NOI18N
+        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -50,6 +62,16 @@ public class DebtManagement extends javax.swing.JPanel {
         // TODO add your handling code here:
         new NewDebt().setVisible(true);
     }//GEN-LAST:event_newDebtInvoiceBtnLblMouseClicked
+
+    private void newDebtInvoiceBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newDebtInvoiceBtnLblMouseEntered
+        // TODO add your handling code here:
+        func.iconSetter(newDebtInvoiceBtnLbl, il.AddNewDebtWhiteIcon);
+    }//GEN-LAST:event_newDebtInvoiceBtnLblMouseEntered
+
+    private void newDebtInvoiceBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newDebtInvoiceBtnLblMouseExited
+        // TODO add your handling code here:
+        func.iconSetter(newDebtInvoiceBtnLbl, il.AddNewDebtPurpleIcon);
+    }//GEN-LAST:event_newDebtInvoiceBtnLblMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel iconLbl;

@@ -17,8 +17,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -73,11 +71,12 @@ public class HomeAdmin extends javax.swing.JPanel {
         card3 = new javax.swing.JLabel();
         card2 = new javax.swing.JLabel();
         card1 = new javax.swing.JLabel();
-        panelBorder1 = new com.raven.swing.PanelBorder();
+        roundedGradiantPanal1 = new com.zx.shopmanagementsystem.components.RoundedGradiantPanal();
         chart = new com.zx.shopmanagementsystem.barchart.Chart();
         iconLbl = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(1015, 738));
+        setPreferredSize(new java.awt.Dimension(1116, 718));
+        setVerifyInputWhenFocusTarget(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         totalMonthSaleTxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -161,31 +160,32 @@ public class HomeAdmin extends javax.swing.JPanel {
         card1.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\1st Rectangle.png")); // NOI18N
         add(card1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
-        panelBorder1.setBackground(new java.awt.Color(153, 0, 153));
+        roundedGradiantPanal1.setendColor(new java.awt.Color(102, 102, 102));
+        roundedGradiantPanal1.setStartColor(new java.awt.Color(153, 153, 153));
 
-        chart.setBackground(new java.awt.Color(153, 0, 153));
-        chart.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        chart.setOpaque(false);
 
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
-        panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
+        javax.swing.GroupLayout roundedGradiantPanal1Layout = new javax.swing.GroupLayout(roundedGradiantPanal1);
+        roundedGradiantPanal1.setLayout(roundedGradiantPanal1Layout);
+        roundedGradiantPanal1Layout.setHorizontalGroup(
+            roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedGradiantPanal1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 908, Short.MAX_VALUE)
+                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
+        roundedGradiantPanal1Layout.setVerticalGroup(
+            roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedGradiantPanal1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 400, 920, 320));
+        add(roundedGradiantPanal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 330, 1060, 370));
 
-        iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Dashboard.png")); // NOI18N
+        iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\AdminDashboard.png")); // NOI18N
+        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -237,7 +237,7 @@ public class HomeAdmin extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lowStockBtnLbl;
     private javax.swing.JLabel monthlySalseViewAllBtnLbl;
-    private com.raven.swing.PanelBorder panelBorder1;
+    private com.zx.shopmanagementsystem.components.RoundedGradiantPanal roundedGradiantPanal1;
     private javax.swing.JLabel store_Location;
     private javax.swing.JLabel todaySalseViewAllBtnLbl;
     private javax.swing.JLabel totalDailySaleTxt;

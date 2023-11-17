@@ -42,12 +42,13 @@ public class SupplierManagement extends javax.swing.JPanel {
     private void initComponents() {
 
         addSupplierBtnLbl = new javax.swing.JLabel();
+        panelBorder1 = new com.raven.swing.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
         supllierTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1015, 738));
-        setPreferredSize(new java.awt.Dimension(1015, 738));
+        setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         addSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddSupplierPurpleIcon.png")); // NOI18N
@@ -62,7 +63,9 @@ public class SupplierManagement extends javax.swing.JPanel {
                 addSupplierBtnLblMouseExited(evt);
             }
         });
-        add(addSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, -1, -1));
+        add(addSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 100, -1, -1));
+
+        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
         supllierTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,10 +90,31 @@ public class SupplierManagement extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(supllierTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 240, 920, 480));
+        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
+        panelBorder1.setLayout(panelBorder1Layout);
+        panelBorder1Layout.setHorizontalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1060, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelBorder1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        panelBorder1Layout.setVerticalGroup(
+            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 510, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelBorder1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+
+        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 185, 1060, 510));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\SupplierManagement.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1015, 738));
+        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,6 +147,7 @@ public class SupplierManagement extends javax.swing.JPanel {
     private javax.swing.JLabel addSupplierBtnLbl;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JTable supllierTbl;
     // End of variables declaration//GEN-END:variables
     private void tableDataLoader() {

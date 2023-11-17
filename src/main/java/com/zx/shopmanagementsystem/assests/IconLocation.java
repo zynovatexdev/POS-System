@@ -124,5 +124,7 @@ public class IconLocation {
     public String SaveWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SaveWhiteIcon.png";
     public String SettingsMenuPurpleBtn = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SettingsMenuPurpleBtn.png";
     public String SettingsMenuWhiteBtn = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SettingsMenuWhiteBtn.png";
+    public String AddNewDebtPurpleIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/AddNewDebtPurpleIcon.png";
+    public String AddNewDebtWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SettingsMenuWhiteBtn.png";
 
 }

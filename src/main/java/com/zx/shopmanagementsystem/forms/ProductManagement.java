@@ -62,7 +62,7 @@ public class ProductManagement extends javax.swing.JPanel {
                 addProductTypeBtnLblMouseExited(evt);
             }
         });
-        add(addProductTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 190, -1, -1));
+        add(addProductTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, -1, -1));
 
         addProductBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductPurple.png")); // NOI18N
         addProductBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -77,7 +77,7 @@ public class ProductManagement extends javax.swing.JPanel {
                 addProductBtnLblMouseExited(evt);
             }
         });
-        add(addProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 190, -1, -1));
+        add(addProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
 
         addProductCategoryBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductCategaryPurple.png")); // NOI18N
         addProductCategoryBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -92,7 +92,7 @@ public class ProductManagement extends javax.swing.JPanel {
                 addProductCategoryBtnLblMouseExited(evt);
             }
         });
-        add(addProductCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 190, -1, -1));
+        add(addProductCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, -1, -1));
 
         addBarcodeBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddBarcodePurple.png")); // NOI18N
         addBarcodeBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -107,7 +107,7 @@ public class ProductManagement extends javax.swing.JPanel {
                 addBarcodeBtnLblMouseExited(evt);
             }
         });
-        add(addBarcodeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 340, -1, -1));
+        add(addBarcodeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, -1, -1));
 
         addDiscountBrnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddDiscountPurple.png")); // NOI18N
         addDiscountBrnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -122,7 +122,7 @@ public class ProductManagement extends javax.swing.JPanel {
                 addDiscountBrnLblMouseExited(evt);
             }
         });
-        add(addDiscountBrnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, -1, -1));
+        add(addDiscountBrnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
 
         addStoreLocationBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddStoreLocationPurple.png")); // NOI18N
         addStoreLocationBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -137,7 +137,7 @@ public class ProductManagement extends javax.swing.JPanel {
                 addStoreLocationBtnLblMouseExited(evt);
             }
         });
-        add(addStoreLocationBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, -1, -1));
+        add(addStoreLocationBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, -1, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ProductManagement.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1116, 718));

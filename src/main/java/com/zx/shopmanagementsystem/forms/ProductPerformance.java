@@ -34,11 +34,11 @@ public class ProductPerformance extends javax.swing.JPanel {
 
         iconLbl = new javax.swing.JLabel();
 
-        setPreferredSize(new java.awt.Dimension(1015, 738));
+        setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ProductManagement.png")); // NOI18N
-        add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1015, 738));
+        iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ProductPerformance.png")); // NOI18N
+        add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1116, 718));
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
