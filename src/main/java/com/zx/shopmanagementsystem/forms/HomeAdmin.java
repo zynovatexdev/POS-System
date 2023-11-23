@@ -7,6 +7,7 @@ package com.zx.shopmanagementsystem.forms;
 import com.zx.shopmanagementsystem.barchart.ModelChart;
 import com.zx.shopmanagementsystem.chart.ModelData;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.piechart.ModelPieChart;
 import com.zx.shopmanagementsystem.ui.AllSales;
 import com.zx.shopmanagementsystem.ui.LowStock;
 import java.awt.Color;
@@ -40,6 +41,7 @@ public class HomeAdmin extends javax.swing.JPanel {
         setData();
         getDailySale();
         getMonthlySale();
+        setWeekPieChart();
         arrayLoader();
         Timer timer = new Timer();
         long delay = 2000; // Initial delay in milliseconds
@@ -56,136 +58,70 @@ public class HomeAdmin extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        totalMonthSaleTxt = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        itemName = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        store_Location = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         totalDailySaleTxt = new javax.swing.JLabel();
+        itemName = new javax.swing.JLabel();
+        store_Location = new javax.swing.JLabel();
         lowStockBtnLbl = new javax.swing.JLabel();
         todaySalseViewAllBtnLbl = new javax.swing.JLabel();
         monthlySalseViewAllBtnLbl = new javax.swing.JLabel();
-        card3 = new javax.swing.JLabel();
-        card2 = new javax.swing.JLabel();
-        card1 = new javax.swing.JLabel();
-        roundedGradiantPanal1 = new com.zx.shopmanagementsystem.components.RoundedGradiantPanal();
+        totalMonthSaleTxt = new javax.swing.JLabel();
         chart = new com.zx.shopmanagementsystem.barchart.Chart();
+        weekPieChat = new com.zx.shopmanagementsystem.piechart.PieChart();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1116, 718));
         setVerifyInputWhenFocusTarget(false);
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        totalMonthSaleTxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        totalMonthSaleTxt.setForeground(new java.awt.Color(255, 255, 255));
-        totalMonthSaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(totalMonthSaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 180, 250, 80));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Monthly Sales");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 270, -1));
-
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Low Stock Alart");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 140, 110, -1));
-
-        jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Item Name");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 170, 200, 30));
+        totalDailySaleTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 30)); // NOI18N
+        totalDailySaleTxt.setForeground(new java.awt.Color(255, 255, 255));
+        totalDailySaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        add(totalDailySaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 170, 295, 80));
 
         itemName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         itemName.setForeground(new java.awt.Color(255, 255, 255));
         itemName.setText("Item Name");
-        add(itemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 190, 200, 30));
-
-        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Store Location");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 220, 200, 30));
+        add(itemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, 200, 30));
 
         store_Location.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         store_Location.setForeground(new java.awt.Color(255, 255, 255));
         store_Location.setText("Store Location");
-        add(store_Location, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 240, 200, 30));
+        add(store_Location, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 200, 30));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Today Sales");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 270, -1));
-
-        totalDailySaleTxt.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        totalDailySaleTxt.setForeground(new java.awt.Color(255, 255, 255));
-        totalDailySaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(totalDailySaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 180, 250, 80));
-
-        lowStockBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\ShowAll3.png")); // NOI18N
         lowStockBtnLbl.setPreferredSize(new java.awt.Dimension(287, 39));
         lowStockBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lowStockBtnLblMouseClicked(evt);
             }
         });
-        add(lowStockBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(672, 270, 290, -1));
+        add(lowStockBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 290, 20));
 
-        todaySalseViewAllBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\ShowAll1.png")); // NOI18N
         todaySalseViewAllBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 todaySalseViewAllBtnLblMouseClicked(evt);
             }
         });
-        add(todaySalseViewAllBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 270, 290, 50));
+        add(todaySalseViewAllBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 280, 20));
 
-        monthlySalseViewAllBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\ShowAll2.png")); // NOI18N
         monthlySalseViewAllBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 monthlySalseViewAllBtnLblMouseClicked(evt);
             }
         });
-        add(monthlySalseViewAllBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(362, 270, 290, 40));
+        add(monthlySalseViewAllBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 280, 20));
 
-        card3.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\3rd Rectangle.png")); // NOI18N
-        add(card3, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 120, -1, -1));
-
-        card2.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\2nd Rectangle.png")); // NOI18N
-        add(card2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, -1, -1));
-
-        card1.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\1st Rectangle.png")); // NOI18N
-        add(card1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
-
-        roundedGradiantPanal1.setendColor(new java.awt.Color(102, 102, 102));
-        roundedGradiantPanal1.setStartColor(new java.awt.Color(153, 153, 153));
+        totalMonthSaleTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 30)); // NOI18N
+        totalMonthSaleTxt.setForeground(new java.awt.Color(255, 255, 255));
+        totalMonthSaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        add(totalMonthSaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 170, 295, 80));
 
         chart.setOpaque(false);
+        add(chart, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 360, 645, 315));
 
-        javax.swing.GroupLayout roundedGradiantPanal1Layout = new javax.swing.GroupLayout(roundedGradiantPanal1);
-        roundedGradiantPanal1.setLayout(roundedGradiantPanal1Layout);
-        roundedGradiantPanal1Layout.setHorizontalGroup(
-            roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundedGradiantPanal1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        roundedGradiantPanal1Layout.setVerticalGroup(
-            roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(roundedGradiantPanal1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(chart, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        add(roundedGradiantPanal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(26, 330, 1060, 370));
+        weekPieChat.setFont(new java.awt.Font("Poppins SemiBold", 1, 12)); // NOI18N
+        add(weekPieChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 337, 370, 360));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\AdminDashboard.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -224,24 +160,16 @@ public class HomeAdmin extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel card1;
-    private javax.swing.JLabel card2;
-    private javax.swing.JLabel card3;
     private com.zx.shopmanagementsystem.barchart.Chart chart;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel itemName;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel lowStockBtnLbl;
     private javax.swing.JLabel monthlySalseViewAllBtnLbl;
-    private com.zx.shopmanagementsystem.components.RoundedGradiantPanal roundedGradiantPanal1;
     private javax.swing.JLabel store_Location;
     private javax.swing.JLabel todaySalseViewAllBtnLbl;
     private javax.swing.JLabel totalDailySaleTxt;
     private javax.swing.JLabel totalMonthSaleTxt;
+    private com.zx.shopmanagementsystem.piechart.PieChart weekPieChat;
     // End of variables declaration//GEN-END:variables
 
     private void setChart() {
@@ -350,5 +278,42 @@ public class HomeAdmin extends javax.swing.JPanel {
         } catch (Exception en) {
             System.err.println("Home Admin LowStockAlert : " + en);
         }
+    }
+
+    private void setWeekPieChart() {
+        weekPieChat.clearData();
+        String sql = "SELECT\n"
+                + "    s.product_id,\n"
+                + "    p.product_name,\n"
+                + "    SUM(s.quantity) as total_quantity\n"
+                + "FROM\n"
+                + "    shopdb.sold_items s\n"
+                + "JOIN\n"
+                + "    shopdb.product p ON s.product_id = p.product_id\n"
+                + "WHERE\n"
+                + "    date >= CURDATE() - INTERVAL 7 DAY\n"
+                + "GROUP BY\n"
+                + "    s.product_id, p.product_name\n"
+                + "ORDER BY\n"
+                + "    total_quantity DESC\n"
+                + "LIMIT 5;";
+        try {
+            ResultSet rs = DB.getdata(sql);
+            int index = 0;
+            while (rs.next()) {
+                String productName = rs.getString("product_name");
+                double totalQuantity = Double.parseDouble(rs.getString("total_quantity"));
+
+                weekPieChat.addData(new ModelPieChart(productName, totalQuantity, getColor(index++)));
+            }
+
+        } catch (Exception ex) {
+            System.err.println("HomeAdmin -> setWeekPieChart : " + ex.getMessage());
+        }
+    }
+
+    private Color getColor(int index) {
+        Color[] color = new Color[]{Color.decode("#d90f0f"), Color.decode("#d9b00b"), Color.decode("#2dd90b"), Color.decode("#0b6bd9"), Color.decode("#730fd1")};
+        return color[index];
     }
 }

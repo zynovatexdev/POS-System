@@ -46,7 +46,6 @@ public class InvoiceCreation extends javax.swing.JPanel {
         createNewInvoice = new javax.swing.JLabel();
         paymentMethodBtnLbl = new javax.swing.JLabel();
         invoiceCategoryBtnLbl = new javax.swing.JLabel();
-        panelBorder1 = new com.raven.swing.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
         expireTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
@@ -55,7 +54,6 @@ public class InvoiceCreation extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        createNewInvoice.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\CreateInvoicePurpleIcon.png")); // NOI18N
         createNewInvoice.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 createNewInvoiceMouseClicked(evt);
@@ -67,9 +65,8 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 createNewInvoiceMouseExited(evt);
             }
         });
-        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 80, 310, 50));
+        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 260, 40));
 
-        paymentMethodBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\PaymentMethodPurpleIcon.png")); // NOI18N
         paymentMethodBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 paymentMethodBtnLblMouseClicked(evt);
@@ -81,9 +78,8 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 paymentMethodBtnLblMouseExited(evt);
             }
         });
-        add(paymentMethodBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 80, 310, 50));
+        add(paymentMethodBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 270, 40));
 
-        invoiceCategoryBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\InvoiceCategoryPurpleIcon.png")); // NOI18N
         invoiceCategoryBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 invoiceCategoryBtnLblMouseClicked(evt);
@@ -95,9 +91,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 invoiceCategoryBtnLblMouseExited(evt);
             }
         });
-        add(invoiceCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 80, 310, 50));
-
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        add(invoiceCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, 260, 40));
 
         expireTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -120,28 +114,10 @@ public class InvoiceCreation extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(expireTbl);
 
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
-        panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1058, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 148, 1070, 550));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 157, 1020, 520));
 
         iconLbl.setBackground(new java.awt.Color(255, 255, 255));
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\InvoiceCreation.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -154,12 +130,12 @@ public class InvoiceCreation extends javax.swing.JPanel {
 
     private void createNewInvoiceMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createNewInvoiceMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(createNewInvoice, il.CreateInvoiceWhiteIcon);
+
     }//GEN-LAST:event_createNewInvoiceMouseEntered
 
     private void createNewInvoiceMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createNewInvoiceMouseExited
         // TODO add your handling code here:
-        func.iconSetter(createNewInvoice, il.CreateInvoicePurpleIcon);
+
     }//GEN-LAST:event_createNewInvoiceMouseExited
 
     private void paymentMethodBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentMethodBtnLblMouseClicked
@@ -170,12 +146,12 @@ public class InvoiceCreation extends javax.swing.JPanel {
 
     private void paymentMethodBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentMethodBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(paymentMethodBtnLbl, il.PaymentMethodWhiteIcon);
+
     }//GEN-LAST:event_paymentMethodBtnLblMouseEntered
 
     private void paymentMethodBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentMethodBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(paymentMethodBtnLbl, il.PaymentMethodPurpleIcon);
+
     }//GEN-LAST:event_paymentMethodBtnLblMouseExited
 
     private void invoiceCategoryBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCategoryBtnLblMouseClicked
@@ -186,12 +162,12 @@ public class InvoiceCreation extends javax.swing.JPanel {
 
     private void invoiceCategoryBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCategoryBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(invoiceCategoryBtnLbl, il.InvoiceCategoryWhiteIcon);
+
     }//GEN-LAST:event_invoiceCategoryBtnLblMouseEntered
 
     private void invoiceCategoryBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCategoryBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(invoiceCategoryBtnLbl, il.InvoiceCategoryPurpleIcon);
+
     }//GEN-LAST:event_invoiceCategoryBtnLblMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -200,7 +176,6 @@ public class InvoiceCreation extends javax.swing.JPanel {
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel invoiceCategoryBtnLbl;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JLabel paymentMethodBtnLbl;
     // End of variables declaration//GEN-END:variables
 

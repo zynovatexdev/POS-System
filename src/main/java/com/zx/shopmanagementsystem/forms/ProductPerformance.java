@@ -6,6 +6,10 @@ package com.zx.shopmanagementsystem.forms;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.piechart.ModelPieChart;
+import java.awt.Color;
+import java.sql.ResultSet;
 
 /**
  *
@@ -19,8 +23,13 @@ public class ProductPerformance extends javax.swing.JPanel {
     Func func = new Func();
     IconLocation il = new IconLocation();
 
+    JDBC DB = new JDBC();
+
     public ProductPerformance() {
         initComponents();
+        setTopPreformingTodayChart();
+        setUnderPreformingTodayChart();
+
     }
 
     /**
@@ -32,16 +41,388 @@ public class ProductPerformance extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        tabPanal = new com.zx.shopmanagementsystem.tab.TabbedPaneCustom();
+        roundedGradiantPanal1 = new com.zx.shopmanagementsystem.components.RoundedGradiantPanal();
+        errorLbl = new javax.swing.JLabel();
+        topPrePieChart = new com.zx.shopmanagementsystem.piechart.PieChart();
+        topDateCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        roundedGradiantPanal2 = new com.zx.shopmanagementsystem.components.RoundedGradiantPanal();
+        underDateCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        underPrePieChart = new com.zx.shopmanagementsystem.piechart.PieChart();
+        errorLbl1 = new javax.swing.JLabel();
+        roundedGradiantPanal3 = new com.zx.shopmanagementsystem.components.RoundedGradiantPanal();
+        roundedGradiantPanal5 = new com.zx.shopmanagementsystem.components.RoundedGradiantPanal();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        tabPanal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tabPanal.setSelectedColor(new java.awt.Color(102, 204, 255));
+        tabPanal.setUnselectedColor(new java.awt.Color(215, 215, 215));
+        tabPanal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabPanalMouseClicked(evt);
+            }
+        });
+
+        roundedGradiantPanal1.setendColor(new java.awt.Color(245, 245, 245));
+        roundedGradiantPanal1.setStartColor(new java.awt.Color(245, 245, 245));
+
+        errorLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 24)); // NOI18N
+        errorLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorLbl.setText("Not Enough Data");
+
+        topPrePieChart.setChartType(com.zx.shopmanagementsystem.piechart.PieChart.PeiChartType.DONUT_CHART);
+        topPrePieChart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                topPrePieChartMouseClicked(evt);
+            }
+        });
+
+        topDateCombo.setBorder(new javax.swing.border.MatteBorder(null));
+        topDateCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Today", "Monthly" }));
+        topDateCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        topDateCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                topDateComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        javax.swing.GroupLayout roundedGradiantPanal1Layout = new javax.swing.GroupLayout(roundedGradiantPanal1);
+        roundedGradiantPanal1.setLayout(roundedGradiantPanal1Layout);
+        roundedGradiantPanal1Layout.setHorizontalGroup(
+            roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedGradiantPanal1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(topPrePieChart, javax.swing.GroupLayout.DEFAULT_SIZE, 1053, Short.MAX_VALUE)
+                    .addGroup(roundedGradiantPanal1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(topDateCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(errorLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 1065, Short.MAX_VALUE))
+        );
+        roundedGradiantPanal1Layout.setVerticalGroup(
+            roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedGradiantPanal1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(topDateCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(topPrePieChart, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+            .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedGradiantPanal1Layout.createSequentialGroup()
+                    .addContainerGap(33, Short.MAX_VALUE)
+                    .addComponent(errorLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(14, Short.MAX_VALUE)))
+        );
+
+        tabPanal.addTab("Top-Preforming Product", roundedGradiantPanal1);
+
+        roundedGradiantPanal2.setendColor(new java.awt.Color(245, 245, 245));
+        roundedGradiantPanal2.setStartColor(new java.awt.Color(245, 245, 245));
+
+        underDateCombo.setBorder(new javax.swing.border.MatteBorder(null));
+        underDateCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Today", "Monthly" }));
+        underDateCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        underDateCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                underDateComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+
+        underPrePieChart.setChartType(com.zx.shopmanagementsystem.piechart.PieChart.PeiChartType.DONUT_CHART);
+        underPrePieChart.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                underPrePieChartMouseClicked(evt);
+            }
+        });
+
+        errorLbl1.setFont(new java.awt.Font("Poppins SemiBold", 1, 24)); // NOI18N
+        errorLbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        errorLbl1.setText("Not Enough Data");
+
+        javax.swing.GroupLayout roundedGradiantPanal2Layout = new javax.swing.GroupLayout(roundedGradiantPanal2);
+        roundedGradiantPanal2.setLayout(roundedGradiantPanal2Layout);
+        roundedGradiantPanal2Layout.setHorizontalGroup(
+            roundedGradiantPanal2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(roundedGradiantPanal2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(roundedGradiantPanal2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(underPrePieChart, javax.swing.GroupLayout.DEFAULT_SIZE, 1053, Short.MAX_VALUE)
+                    .addGroup(roundedGradiantPanal2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(underDateCombo, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(roundedGradiantPanal2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(roundedGradiantPanal2Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(errorLbl1, javax.swing.GroupLayout.DEFAULT_SIZE, 1053, Short.MAX_VALUE)
+                    .addContainerGap()))
+        );
+        roundedGradiantPanal2Layout.setVerticalGroup(
+            roundedGradiantPanal2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedGradiantPanal2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(underDateCombo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(underPrePieChart, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
+            .addGroup(roundedGradiantPanal2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(roundedGradiantPanal2Layout.createSequentialGroup()
+                    .addGap(23, 23, 23)
+                    .addComponent(errorLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(24, Short.MAX_VALUE)))
+        );
+
+        tabPanal.addTab("Under-Preforming Product", roundedGradiantPanal2);
+
+        roundedGradiantPanal3.setendColor(new java.awt.Color(255, 255, 255));
+        roundedGradiantPanal3.setStartColor(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout roundedGradiantPanal3Layout = new javax.swing.GroupLayout(roundedGradiantPanal3);
+        roundedGradiantPanal3.setLayout(roundedGradiantPanal3Layout);
+        roundedGradiantPanal3Layout.setHorizontalGroup(
+            roundedGradiantPanal3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1065, Short.MAX_VALUE)
+        );
+        roundedGradiantPanal3Layout.setVerticalGroup(
+            roundedGradiantPanal3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 589, Short.MAX_VALUE)
+        );
+
+        tabPanal.addTab("Detailed Metrics Section", roundedGradiantPanal3);
+
+        roundedGradiantPanal5.setendColor(new java.awt.Color(255, 255, 255));
+        roundedGradiantPanal5.setStartColor(new java.awt.Color(255, 255, 255));
+
+        javax.swing.GroupLayout roundedGradiantPanal5Layout = new javax.swing.GroupLayout(roundedGradiantPanal5);
+        roundedGradiantPanal5.setLayout(roundedGradiantPanal5Layout);
+        roundedGradiantPanal5Layout.setHorizontalGroup(
+            roundedGradiantPanal5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1065, Short.MAX_VALUE)
+        );
+        roundedGradiantPanal5Layout.setVerticalGroup(
+            roundedGradiantPanal5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 589, Short.MAX_VALUE)
+        );
+
+        tabPanal.addTab("Analytical Tools", roundedGradiantPanal5);
+
+        add(tabPanal, new org.netbeans.lib.awtextra.AbsoluteConstraints(23, 70, 1070, 630));
+
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ProductPerformance.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1116, 718));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void topPrePieChartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_topPrePieChartMouseClicked
+        // TODO add your handling code here:
+        System.out.println(topPrePieChart.getSelectedIndex());
+    }//GEN-LAST:event_topPrePieChartMouseClicked
+
+    private void topDateComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_topDateComboPopupMenuWillBecomeInvisible
+        if (topDateCombo.getSelectedIndex() == 0) {
+            System.out.println("Today");
+            setTopPreformingTodayChart();
+        } else {
+            System.out.println("Monthly");
+            setTopPreformingMonthlyChart();
+        }
+    }//GEN-LAST:event_topDateComboPopupMenuWillBecomeInvisible
+
+    private void tabPanalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabPanalMouseClicked
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_tabPanalMouseClicked
+
+    private void underDateComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_underDateComboPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        if (underDateCombo.getSelectedIndex() == 0) {
+            System.out.println("Today");
+            setUnderPreformingTodayChart();
+        } else {
+            System.out.println("Monthly");
+            setUnderPreformingMonthlyChart();
+        }
+    }//GEN-LAST:event_underDateComboPopupMenuWillBecomeInvisible
+
+    private void underPrePieChartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_underPrePieChartMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_underPrePieChartMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel errorLbl;
+    private javax.swing.JLabel errorLbl1;
     private javax.swing.JLabel iconLbl;
+    private com.zx.shopmanagementsystem.components.RoundedGradiantPanal roundedGradiantPanal1;
+    private com.zx.shopmanagementsystem.components.RoundedGradiantPanal roundedGradiantPanal2;
+    private com.zx.shopmanagementsystem.components.RoundedGradiantPanal roundedGradiantPanal3;
+    private com.zx.shopmanagementsystem.components.RoundedGradiantPanal roundedGradiantPanal5;
+    private com.zx.shopmanagementsystem.tab.TabbedPaneCustom tabPanal;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion topDateCombo;
+    private com.zx.shopmanagementsystem.piechart.PieChart topPrePieChart;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion underDateCombo;
+    private com.zx.shopmanagementsystem.piechart.PieChart underPrePieChart;
     // End of variables declaration//GEN-END:variables
+
+    private void setTopPreformingMonthlyChart() {
+        topPrePieChart.clearData();
+        String sql = "SELECT s.product_id, p.product_name, SUM(s.quantity) as total_quantity\n"
+                + "FROM shopdb.sold_items s\n"
+                + "JOIN shopdb.product p ON s.product_id = p.product_id\n"
+                + "WHERE s.date BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE()\n"
+                + "GROUP BY s.product_id, p.product_name\n"
+                + "ORDER BY total_quantity DESC\n"
+                + "LIMIT 5;";
+        try {
+            ResultSet rs = DB.getdata(sql);
+            ResultSet rs2 = DB.getdata(sql);
+            int index = 0;
+            if (rs2.next()) {
+                errorLbl.setVisible(false);
+                topPrePieChart.setVisible(true);
+                while (rs.next()) {
+                    String productName = rs.getString("product_name");
+                    double totalQuantity = Double.parseDouble(rs.getString("total_quantity"));
+
+                    topPrePieChart.addData(new ModelPieChart(productName, totalQuantity, getColor(index++)));
+                }
+            } else {
+                errorLbl.setVisible(true);
+                topPrePieChart.setVisible(false);
+            }
+
+        } catch (Exception ex) {
+            System.err.println("ProductPerformance -> setTopPreformingMonthlyChart : " + ex.getMessage());
+        }
+    }
+
+    private void setTopPreformingTodayChart() {
+        topPrePieChart.clearData();
+        String sql = "SELECT s.product_id, p.product_name, SUM(s.quantity) as total_quantity\n"
+                + "FROM shopdb.sold_items s\n"
+                + "JOIN shopdb.product p ON s.product_id = p.product_id\n"
+                + "WHERE DATE(date) = CURDATE()\n"
+                + "GROUP BY s.product_id, p.product_name\n"
+                + "ORDER BY total_quantity DESC\n"
+                + "LIMIT 5;";
+        try {
+            ResultSet rs = DB.getdata(sql);
+            ResultSet rs2 = DB.getdata(sql);
+            int index = 0;
+            if (rs2.next()) {
+                errorLbl.setVisible(false);
+                topPrePieChart.setVisible(true);
+                while (rs.next()) {
+                    String productName = rs.getString("product_name");
+                    double totalQuantity = Double.parseDouble(rs.getString("total_quantity"));
+
+                    topPrePieChart.addData(new ModelPieChart(productName, totalQuantity, getColor(index++)));
+                }
+            } else {
+                errorLbl.setVisible(true);
+                topPrePieChart.setVisible(false);
+            }
+
+        } catch (Exception ex) {
+            System.err.println("ProductPerformance -> setTopPreformingMonthlyChart : " + ex.getMessage());
+        }
+    }
+
+    private Color getColor(int index) {
+        Color[] color = new Color[]{Color.decode("#663ee7"), Color.decode("#34d1ac"), Color.decode("#ff955b"), Color.decode("#2662f0"), Color.decode("#ff715b")};
+        return color[index];
+    }
+
+    private void setUnderPreformingMonthlyChart() {
+        underPrePieChart.clearData();
+        String sql = "SELECT\n"
+                + "    p.product_id,\n"
+                + "    p.product_name,\n"
+                + "    COALESCE(SUM(s.quantity), 0) as total_quantity\n"
+                + "FROM\n"
+                + "    shopdb.product p\n"
+                + "    LEFT JOIN shopdb.sold_items s ON p.product_id = s.product_id\n"
+                + "WHERE\n"
+                + "    s.date BETWEEN CURDATE() - INTERVAL 30 DAY AND CURDATE()\n"
+                + "GROUP BY\n"
+                + "    p.product_id, p.product_name\n"
+                + "ORDER BY\n"
+                + "    total_quantity ASC\n"
+                + "LIMIT 5;";
+        try {
+            ResultSet rs = DB.getdata(sql);
+            ResultSet rs2 = DB.getdata(sql);
+            int index = 0;
+            if (rs2.next()) {
+                errorLbl1.setVisible(false);
+                underPrePieChart.setVisible(true);
+                while (rs.next()) {
+                    String productName = rs.getString("product_name");
+                    double totalQuantity = Double.parseDouble(rs.getString("total_quantity"));
+
+                    underPrePieChart.addData(new ModelPieChart(productName, totalQuantity, getUnderColor(index++)));
+                }
+            } else {
+                errorLbl1.setVisible(true);
+                underPrePieChart.setVisible(false);
+            }
+        } catch (Exception ex) {
+            System.err.println("ProductPerformance -> setTopPreformingMonthlyChart : " + ex.getMessage());
+        }
+    }
+
+    private void setUnderPreformingTodayChart() {
+        underPrePieChart.clearData();
+        String sql = "SELECT\n"
+                + "    p.product_id,\n"
+                + "    p.product_name,\n"
+                + "    COALESCE(SUM(s.quantity), 0) as total_quantity\n"
+                + "FROM\n"
+                + "    shopdb.product p\n"
+                + "    LEFT JOIN shopdb.sold_items s ON p.product_id = s.product_id\n"
+                + "WHERE\n"
+                + "    DATE(s.date) = CURRENT_DATE\n"
+                + "GROUP BY\n"
+                + "    p.product_id, p.product_name\n"
+                + "ORDER BY\n"
+                + "    total_quantity ASC\n"
+                + "LIMIT 5;";
+        try {
+            ResultSet rs = DB.getdata(sql);
+            ResultSet rs2 = DB.getdata(sql);
+            int index = 0;
+            if (rs2.next()) {
+                errorLbl1.setVisible(false);
+                underPrePieChart.setVisible(true);
+                while (rs.next()) {
+                    String productName = rs.getString("product_name");
+                    double totalQuantity = Double.parseDouble(rs.getString("total_quantity"));
+
+                    underPrePieChart.addData(new ModelPieChart(productName, totalQuantity, getUnderColor(index++)));
+                }
+            } else {
+                errorLbl1.setVisible(true);
+                underPrePieChart.setVisible(false);
+            }
+
+        } catch (Exception ex) {
+            System.err.println("ProductPerformance -> setTopPreformingMonthlyChart : " + ex.getMessage());
+        }
+    }
+
+    private Color getUnderColor(int index) {
+        Color[] color = new Color[]{Color.decode("#d90f0f"), Color.decode("#d9b00b"), Color.decode("#2dd90b"), Color.decode("#0b6bd9"), Color.decode("#730fd1")};
+        return color[index];
+    }
 }

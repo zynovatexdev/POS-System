@@ -568,6 +568,7 @@ public class NewInvoice extends javax.swing.JFrame {
                 double balance = payment - totalPrice;
                 String balancePrice = String.format("%.2f", balance);
                 generateInvoiceBill(invoiceData, balancePrice);
+                //generateBill(invoiceData);
                 DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\nGive Balance : " + balancePrice, 1);
                 updateStockAndCalculateProfit(model);
                 clear();

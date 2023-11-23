@@ -2,6 +2,8 @@ package com.zx.shopmanagementsystem.menu.ui;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
@@ -26,7 +28,7 @@ public class Menu extends JComponent {
     private MigLayout layout;
     private String[][] menuItems = new String[][]{
         {"Dashboard"},
-        {"Invoice Managemet"},
+        {"Invoice Generation"},
         {"Inventory Management"},
         {"Product", "Product Management", "Product Performance"},
         {"Debt Management"},
@@ -45,7 +47,7 @@ public class Menu extends JComponent {
     }
 
     private void init() {
-        layout = new MigLayout("wrap 1, fillx, gapy 0, inset 2", "fill");
+        layout = new MigLayout("wrap 1, fillx, gapy 0, insets 9 10 10 10", "fill");
         setLayout(layout);
         setOpaque(true);
         //  Init MenuItem
@@ -67,6 +69,7 @@ public class Menu extends JComponent {
     private void addMenu(String menuName, int index) {
         int length = menuItems[index].length;
         MenuItem item = new MenuItem(menuName, index, length > 1);
+        item.setFont(new Font("Poppins SemiBold", Font.BOLD, 14));
         Icon icon = getIcon(index);
         if (icon != null) {
             item.setIcon(icon);
@@ -90,7 +93,13 @@ public class Menu extends JComponent {
                 }
             }
         });
-        add(item);
+
+        // Check if this is the last item and set a different constraint
+        if (index == menuItems.length - 1) {
+            add(item, "gaptop 5, aligny 50"); // Add padding to the last item and center vertically
+        } else {
+            add(item);
+        }
         revalidate();
         repaint();
     }
@@ -128,11 +137,23 @@ public class Menu extends JComponent {
         }
     }
 
+    Color endColor = Color.decode("#2A2A72");
+    Color startColor = Color.decode("#005181");
+
     @Override
     protected void paintComponent(Graphics grphcs) {
         Graphics2D g2 = (Graphics2D) grphcs.create();
-        g2.setColor(Color.decode("#6f0096"));
-        g2.fill(new Rectangle2D.Double(0, 0, getWidth(), getHeight()));
+
+        int width = getWidth();
+        int height = getHeight();
+
+        GradientPaint gradientPaint = new GradientPaint(0, 0, startColor, 0, height, endColor);
+
+        g2.setPaint(gradientPaint);
+
+        g2.fillRect(0, 0, width, height);
+
+        g2.dispose();
         super.paintComponent(grphcs);
     }
 

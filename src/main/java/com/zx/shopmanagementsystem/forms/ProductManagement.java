@@ -49,7 +49,6 @@ public class ProductManagement extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        addProductTypeBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductTypePurple.png")); // NOI18N
         addProductTypeBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addProductTypeBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -62,9 +61,8 @@ public class ProductManagement extends javax.swing.JPanel {
                 addProductTypeBtnLblMouseExited(evt);
             }
         });
-        add(addProductTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 240, -1, -1));
+        add(addProductTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 100, 150, 50));
 
-        addProductBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductPurple.png")); // NOI18N
         addProductBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addProductBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -77,9 +75,8 @@ public class ProductManagement extends javax.swing.JPanel {
                 addProductBtnLblMouseExited(evt);
             }
         });
-        add(addProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 240, -1, -1));
+        add(addProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 95, 150, 55));
 
-        addProductCategoryBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductCategaryPurple.png")); // NOI18N
         addProductCategoryBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addProductCategoryBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -92,9 +89,8 @@ public class ProductManagement extends javax.swing.JPanel {
                 addProductCategoryBtnLblMouseExited(evt);
             }
         });
-        add(addProductCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 240, -1, -1));
+        add(addProductCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 100, 140, 50));
 
-        addBarcodeBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddBarcodePurple.png")); // NOI18N
         addBarcodeBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addBarcodeBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -107,9 +103,8 @@ public class ProductManagement extends javax.swing.JPanel {
                 addBarcodeBtnLblMouseExited(evt);
             }
         });
-        add(addBarcodeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 390, -1, -1));
+        add(addBarcodeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 100, 150, 50));
 
-        addDiscountBrnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddDiscountPurple.png")); // NOI18N
         addDiscountBrnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addDiscountBrnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -122,9 +117,8 @@ public class ProductManagement extends javax.swing.JPanel {
                 addDiscountBrnLblMouseExited(evt);
             }
         });
-        add(addDiscountBrnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, -1, -1));
+        add(addDiscountBrnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 150, 50));
 
-        addStoreLocationBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddStoreLocationPurple.png")); // NOI18N
         addStoreLocationBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addStoreLocationBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -137,7 +131,7 @@ public class ProductManagement extends javax.swing.JPanel {
                 addStoreLocationBtnLblMouseExited(evt);
             }
         });
-        add(addStoreLocationBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 390, -1, -1));
+        add(addStoreLocationBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 150, 50));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ProductManagement.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1116, 718));
@@ -145,62 +139,62 @@ public class ProductManagement extends javax.swing.JPanel {
 
     private void addProductBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addProductBtnLbl, il.addProductWhiteIcon);
+
     }//GEN-LAST:event_addProductBtnLblMouseEntered
 
     private void addProductBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addProductBtnLbl, il.addProductPurpleIcon);
+
     }//GEN-LAST:event_addProductBtnLblMouseExited
 
     private void addProductCategoryBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductCategoryBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addProductCategoryBtnLbl, il.addProductCategoryWhiteIcon);
+
     }//GEN-LAST:event_addProductCategoryBtnLblMouseEntered
 
     private void addProductCategoryBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductCategoryBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addProductCategoryBtnLbl, il.addProductCategoryPurpleIcon);
+
     }//GEN-LAST:event_addProductCategoryBtnLblMouseExited
 
     private void addProductTypeBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductTypeBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addProductTypeBtnLbl, il.addProductTypeWhiteIcon);
+
     }//GEN-LAST:event_addProductTypeBtnLblMouseEntered
 
     private void addProductTypeBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductTypeBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addProductTypeBtnLbl, il.addProductTypePurpleIcon);
+
     }//GEN-LAST:event_addProductTypeBtnLblMouseExited
 
     private void addDiscountBrnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDiscountBrnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addDiscountBrnLbl, il.addDiscountWhiteIcon);
+
     }//GEN-LAST:event_addDiscountBrnLblMouseEntered
 
     private void addDiscountBrnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addDiscountBrnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addDiscountBrnLbl, il.addDiscountPurpleIcon);
+
     }//GEN-LAST:event_addDiscountBrnLblMouseExited
 
     private void addBarcodeBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBarcodeBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addBarcodeBtnLbl, il.addBarcodeWhiteIcon);
+
     }//GEN-LAST:event_addBarcodeBtnLblMouseEntered
 
     private void addBarcodeBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBarcodeBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addBarcodeBtnLbl, il.addBarcodePurpleIcon);
+
     }//GEN-LAST:event_addBarcodeBtnLblMouseExited
 
     private void addStoreLocationBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreLocationBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addStoreLocationBtnLbl, il.addStoreLocationWhiteIcon);
+
     }//GEN-LAST:event_addStoreLocationBtnLblMouseEntered
 
     private void addStoreLocationBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreLocationBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addStoreLocationBtnLbl, il.addStoreLocationPurpleIcon);
+
     }//GEN-LAST:event_addStoreLocationBtnLblMouseExited
 
     private void addBarcodeBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addBarcodeBtnLblMouseClicked

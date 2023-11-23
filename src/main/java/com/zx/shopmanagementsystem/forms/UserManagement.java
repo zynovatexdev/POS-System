@@ -43,7 +43,6 @@ public class UserManagement extends javax.swing.JPanel {
     private void initComponents() {
 
         addUserBtnIcon = new javax.swing.JLabel();
-        panelBorder1 = new com.raven.swing.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
         userTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
@@ -51,7 +50,6 @@ public class UserManagement extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        addUserBtnIcon.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddUserPurpleIcon.png")); // NOI18N
         addUserBtnIcon.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addUserBtnIconMouseClicked(evt);
@@ -63,7 +61,7 @@ public class UserManagement extends javax.swing.JPanel {
                 addUserBtnIconMouseExited(evt);
             }
         });
-        add(addUserBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+        add(addUserBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 90, 210, 40));
 
         userTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -180,42 +178,20 @@ public class UserManagement extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(userTbl);
 
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
-        panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelBorder1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1068, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-        panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 500, Short.MAX_VALUE)
-            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelBorder1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
-                    .addContainerGap()))
-        );
-
-        add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 200, 1080, 500));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 157, 1020, 520));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\UserManagement.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void addUserBtnIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserBtnIconMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addUserBtnIcon, il.addUserWhiteIcon);
+
     }//GEN-LAST:event_addUserBtnIconMouseEntered
 
     private void addUserBtnIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserBtnIconMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addUserBtnIcon, il.addUserPurpleIcon);
+
     }//GEN-LAST:event_addUserBtnIconMouseExited
 
     private void addUserBtnIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserBtnIconMouseClicked
@@ -238,7 +214,6 @@ public class UserManagement extends javax.swing.JPanel {
     private javax.swing.JLabel addUserBtnIcon;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JTable userTbl;
     // End of variables declaration//GEN-END:variables
 

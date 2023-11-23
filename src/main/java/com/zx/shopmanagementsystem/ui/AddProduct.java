@@ -513,7 +513,12 @@ public class AddProduct extends javax.swing.JFrame {
         int barcodeValue = barcodeIdArray.get(barcodeCombo.getSelectedIndex());
         int categoryId = categoryIdArray.get(categoryIdCombo.getSelectedIndex());
         int typeId = productTypeIdArray.get(productTypeIdCombo.getSelectedIndex());
-        int discoundId = discountIdArray.get(discountIdCombo.getSelectedIndex());
+        int discoundId;
+        if (discountIdCombo.getItemCount() == 1) {
+            discoundId = 0;
+        } else {
+            discoundId = discountIdArray.get(discountIdCombo.getSelectedIndex());
+        }
         int locationId = productLoactionIdArray.get(productLocationIdCombo.getSelectedIndex());
 
         if (productName.equals("")) {
@@ -544,7 +549,7 @@ public class AddProduct extends javax.swing.JFrame {
                         getMaxValue();
                         clear();
                     } catch (Exception ex) {
-                        System.out.println("Data Save Without Date : " + ex.getMessage());
+                        System.out.println("Data Save Without Date : " + ex);
                     }
                 } else {
                     if ((manufacDateVali(manufactureDate))) {

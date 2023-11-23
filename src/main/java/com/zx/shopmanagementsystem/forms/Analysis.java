@@ -39,55 +39,23 @@ public class Analysis extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        roundedGradiantPanal1 = new com.zx.shopmanagementsystem.components.RoundedGradiantPanal();
-        noticeTxt = new javax.swing.JLabel();
         chart = new com.zx.shopmanagementsystem.chart.CurveLineChart();
+        noticeTxt = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1116, 718));
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        roundedGradiantPanal1.setendColor(new java.awt.Color(51, 51, 51));
-        roundedGradiantPanal1.setOpaque(false);
-        roundedGradiantPanal1.setStartColor(new java.awt.Color(153, 153, 153));
+        chart.setForeground(new java.awt.Color(255, 255, 255));
+        add(chart, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 75, 1050, 610));
 
         noticeTxt.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
-        noticeTxt.setForeground(new java.awt.Color(255, 255, 255));
         noticeTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         noticeTxt.setText("Not Enough Data.");
-
-        chart.setForeground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout roundedGradiantPanal1Layout = new javax.swing.GroupLayout(roundedGradiantPanal1);
-        roundedGradiantPanal1.setLayout(roundedGradiantPanal1Layout);
-        roundedGradiantPanal1Layout.setHorizontalGroup(
-            roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1060, Short.MAX_VALUE)
-            .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedGradiantPanal1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(noticeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 1048, Short.MAX_VALUE))
-                    .addContainerGap()))
-        );
-        roundedGradiantPanal1Layout.setVerticalGroup(
-            roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 620, Short.MAX_VALUE)
-            .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, roundedGradiantPanal1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(roundedGradiantPanal1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(chart, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
-                        .addComponent(noticeTxt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addContainerGap()))
-        );
-
-        add(roundedGradiantPanal1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 1060, 620));
+        add(noticeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 80, 1050, 600));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Analysis.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -95,7 +63,6 @@ public class Analysis extends javax.swing.JPanel {
     private com.zx.shopmanagementsystem.chart.CurveLineChart chart;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel noticeTxt;
-    private com.zx.shopmanagementsystem.components.RoundedGradiantPanal roundedGradiantPanal1;
     // End of variables declaration//GEN-END:variables
 
     private void setData() {

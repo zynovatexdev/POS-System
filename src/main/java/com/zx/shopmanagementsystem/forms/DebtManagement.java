@@ -39,7 +39,6 @@ public class DebtManagement extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        newDebtInvoiceBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddNewDebtPurpleIcon.png")); // NOI18N
         newDebtInvoiceBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 newDebtInvoiceBtnLblMouseClicked(evt);
@@ -51,10 +50,9 @@ public class DebtManagement extends javax.swing.JPanel {
                 newDebtInvoiceBtnLblMouseExited(evt);
             }
         });
-        add(newDebtInvoiceBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 220, 50));
+        add(newDebtInvoiceBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 210, 40));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\DebtManagement.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -65,12 +63,12 @@ public class DebtManagement extends javax.swing.JPanel {
 
     private void newDebtInvoiceBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newDebtInvoiceBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(newDebtInvoiceBtnLbl, il.AddNewDebtWhiteIcon);
+
     }//GEN-LAST:event_newDebtInvoiceBtnLblMouseEntered
 
     private void newDebtInvoiceBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newDebtInvoiceBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(newDebtInvoiceBtnLbl, il.AddNewDebtPurpleIcon);
+
     }//GEN-LAST:event_newDebtInvoiceBtnLblMouseExited
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

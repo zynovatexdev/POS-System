@@ -16,7 +16,7 @@ public class TableCustom {
 
     public static void apply(JScrollPane scroll, TableType type) {
         JTable table = (JTable) scroll.getViewport().getComponent(0);
-        table.setSelectionBackground(new Color(123, 207, 255));
+        table.setSelectionBackground(new Color(120, 174, 255));
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setDefaultRenderer(new TableHeaderCustomCellRender(table));
         table.setRowHeight(30);
@@ -29,7 +29,7 @@ public class TableCustom {
         }
         table.setDefaultRenderer(Object.class, cellRender);
         table.setShowVerticalLines(false);
-        table.setGridColor(new Color(159, 31, 223));
+        table.setGridColor(new Color(71, 74, 255));
         table.setForeground(new Color(51, 51, 51));
         table.setSelectionForeground(new Color(51, 51, 51));
         scroll.setBorder(new LineBorder(new Color(220, 220, 220)));
@@ -42,7 +42,7 @@ public class TableCustom {
                 grphcs.dispose();
             }
         };
-        panel.setBackground(Color.decode("#6f0096"));
+        panel.setBackground(Color.decode("#0a0096"));
         scroll.setCorner(JScrollPane.UPPER_RIGHT_CORNER, panel);
         scroll.getViewport().setBackground(Color.WHITE);
         scroll.getVerticalScrollBar().setUI(new ScrollBarCustomUI());

@@ -1,6 +1,7 @@
 package com.zx.shopmanagementsystem.menu.ui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -71,12 +72,13 @@ public class MenuItem extends JButton {
         this.index = index;
         this.subMenuAble = subMenuAble;
         setContentAreaFilled(false);
-        setForeground(new Color(255, 255, 255));
+        setForeground(new Color(230, 230, 230));
         setHorizontalAlignment(SwingConstants.LEFT);
         setBorder(new EmptyBorder(9, 10, 9, 10));
         setIconTextGap(10);
         rippleEffect = new RippleEffect(this);
-        rippleEffect.setRippleColor(new Color(255, 255, 255));
+        rippleEffect.setRippleColor(new Color(220, 220, 220));
+        setFont(new Font("Poppins SemiBold", Font.BOLD, 14));
     }
 
     private void createShadowImage() {
@@ -94,7 +96,7 @@ public class MenuItem extends JButton {
         this.subMenuIndex = subMenuIndex;
         this.length = length;
         setBorder(new EmptyBorder(9, 33, 9, 10));
-        setBackground(Color.decode("#44015c"));
+        setBackground(Color.decode("#005181"));
         setOpaque(true);
     }
 
@@ -104,7 +106,7 @@ public class MenuItem extends JButton {
         Graphics2D g2 = (Graphics2D) grphcs.create();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         if (length != 0) {
-            g2.setColor(Color.decode("#44015c"));
+            g2.setColor(Color.decode("#005181"));
             if (subMenuIndex == 1) {
                 //  First Index
                 g2.drawImage(shadow, -shadowSize, -20, null);

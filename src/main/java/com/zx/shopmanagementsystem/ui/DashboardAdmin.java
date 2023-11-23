@@ -115,6 +115,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
         imageAvatar = new com.zx.shopmanagementsystem.components.ImageAvatar();
         closeBtnLbl = new javax.swing.JLabel();
         minimizeBtnLbl = new javax.swing.JLabel();
+        nameLbl = new javax.swing.JLabel();
         scrollPaneWin111 = new com.zx.shopmanagementsystem.menu.scroll.win11.ScrollPaneWin11();
         menu1 = new com.zx.shopmanagementsystem.menu.ui.Menu();
         body = new javax.swing.JPanel();
@@ -159,6 +160,9 @@ public class DashboardAdmin extends javax.swing.JFrame {
             }
         });
 
+        nameLbl.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        nameLbl.setForeground(new java.awt.Color(255, 255, 255));
+
         javax.swing.GroupLayout header1Layout = new javax.swing.GroupLayout(header1);
         header1.setLayout(header1Layout);
         header1Layout.setHorizontalGroup(
@@ -166,6 +170,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
             .addGroup(header1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(imageAvatar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(minimizeBtnLbl)
                 .addGap(18, 18, 18)
@@ -175,21 +181,25 @@ public class DashboardAdmin extends javax.swing.JFrame {
         header1Layout.setVerticalGroup(
             header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(header1Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(header1Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addComponent(minimizeBtnLbl)
-                        .addGap(0, 18, Short.MAX_VALUE))
-                    .addComponent(imageAvatar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(header1Layout.createSequentialGroup()
+                                .addGap(17, 17, 17)
+                                .addComponent(minimizeBtnLbl)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(imageAvatar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
+                    .addGroup(header1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(closeBtnLbl)))
                 .addContainerGap())
-            .addGroup(header1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(closeBtnLbl)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         scrollPaneWin111.setBorder(null);
+
+        menu1.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         scrollPaneWin111.setViewportView(menu1);
 
         body.setPreferredSize(new java.awt.Dimension(1116, 718));
@@ -310,7 +320,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
             // Place your code here to execute every 10 minutes
             System.out.println("Task executed at: " + System.currentTimeMillis());
 
-            backup.backupAll();
+            //backup.backupAll();
         }
     }
 
@@ -329,6 +339,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private com.zx.shopmanagementsystem.menu.ui.Menu menu1;
     private javax.swing.JLabel minimizeBtnLbl;
+    private javax.swing.JLabel nameLbl;
     private com.zx.shopmanagementsystem.menu.scroll.win11.ScrollPaneWin11 scrollPaneWin111;
     // End of variables declaration//GEN-END:variables
 
@@ -339,7 +350,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
     public void getUserImage() {
         JDBC DB = new JDBC();
         InputStream input;
+        String userName;
+        String Name;
         FileOutputStream output;
+
         System.out.println("Data Load UserID : " + UseriD);
         try {
             ResultSet rs = DB.getdata("SELECT * FROM user WHERE user_id = " + UseriD + ";");
@@ -348,6 +362,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 File file = new File("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\DBProfileImages\\img" + UseriD + "_Dash_" + ".png");
                 output = new FileOutputStream(file);
                 input = rs.getBinaryStream("profile_pic");
+                userName = rs.getString("user_name");
+                Name = rs.getString("full_name");
                 byte buffer[] = new byte[1024];
                 while (input.read(buffer) > 0) {
                     output.write(buffer);
@@ -360,6 +376,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 imageAvatar.setIcon(imageIcon);
                 imageAvatar.setVisible(false);
                 imageAvatar.setVisible(true);
+                nameLbl.setText("Hello, " + userName + " (" + Name + ")");
 
                 break;
             }
@@ -411,4 +428,5 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private void close() {
         this.dispose();
     }
+
 }
