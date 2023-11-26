@@ -28,7 +28,7 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setOpaque(false);
-        head1.setHeaderTitle("Login");
+        //head1.setHeaderTitle("Login");
         head1.setFrame(Login.this);
 
     }
@@ -74,7 +74,7 @@ public class Login extends javax.swing.JFrame {
                 showPasswordLblMouseExited(evt);
             }
         });
-        getContentPane().add(showPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, 30));
+        getContentPane().add(showPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 437, -1, 30));
 
         loginLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -98,12 +98,12 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(forgotPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 100, 20));
 
-        usernameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        usernameTxt.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
         usernameTxt.setHintText("Enter Username");
-        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 370, 50));
+        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 380, 45));
 
-        passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 370, 50));
+        passwordTxt.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
+        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 380, 45));
 
         head1.setHeaderTextColor("#FFFFFF");
         head1.setHeaderTitle("");

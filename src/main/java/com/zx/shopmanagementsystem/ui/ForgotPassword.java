@@ -55,11 +55,12 @@ public class ForgotPassword extends javax.swing.JFrame {
         newPasswordTxt = new com.zx.shopmanagementsystem.components.RoundedPassword();
         updatePasswordLbl = new javax.swing.JLabel();
         backButtonLbl = new javax.swing.JLabel();
-        head1 = new com.zx.shopmanagementsystem.components.Head();
+        head1 = new com.zx.shopmanagementsystem.components.Head_Dark_BG();
         iconLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(1366, 768));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -77,11 +78,11 @@ public class ForgotPassword extends javax.swing.JFrame {
                 searchIconMouseExited(evt);
             }
         });
-        getContentPane().add(searchIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 295, 40, 40));
+        getContentPane().add(searchIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 290, 40, 40));
 
-        usernameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        usernameTxt.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
         usernameTxt.setHintText("Enter your username");
-        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 290, 390, 50));
+        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 290, 370, 45));
 
         confirmPasswordLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\HidePassword.png")); // NOI18N
         confirmPasswordLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -96,7 +97,7 @@ public class ForgotPassword extends javax.swing.JFrame {
                 confirmPasswordLblMouseExited(evt);
             }
         });
-        getContentPane().add(confirmPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 460, -1, 30));
+        getContentPane().add(confirmPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 450, -1, 30));
 
         newPasswordLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\HidePassword.png")); // NOI18N
         newPasswordLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -111,15 +112,15 @@ public class ForgotPassword extends javax.swing.JFrame {
                 newPasswordLblMouseExited(evt);
             }
         });
-        getContentPane().add(newPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 375, -1, 30));
+        getContentPane().add(newPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 370, -1, 30));
 
-        confirmPasswordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        confirmPasswordTxt.setHintText("Confirm Password");
-        getContentPane().add(confirmPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 450, 390, 50));
+        confirmPasswordTxt.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
+        confirmPasswordTxt.setHintText("Retype Password");
+        getContentPane().add(confirmPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 445, 370, 45));
 
-        newPasswordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        newPasswordTxt.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
         newPasswordTxt.setHintText("New Password");
-        getContentPane().add(newPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 365, 390, 50));
+        getContentPane().add(newPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 365, 370, 45));
 
         updatePasswordLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updatePasswordLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -143,11 +144,11 @@ public class ForgotPassword extends javax.swing.JFrame {
         });
         getContentPane().add(backButtonLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 570, 70, 15));
 
-        head1.setHeaderTitle("");
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1370, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Forgot_Password.png")); // NOI18N
+        iconLbl.setPreferredSize(new java.awt.Dimension(1366, 768));
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -156,7 +157,7 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     private void searchIconMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchIconMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(searchIcon, il.searchIconAnimated);
+        //func.iconSetter(searchIcon, il.searchIconAnimated);
     }//GEN-LAST:event_searchIconMouseEntered
 
     private void searchIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchIconMouseExited
@@ -325,7 +326,7 @@ public class ForgotPassword extends javax.swing.JFrame {
     private javax.swing.JLabel backButtonLbl;
     private javax.swing.JLabel confirmPasswordLbl;
     private com.zx.shopmanagementsystem.components.RoundedPassword confirmPasswordTxt;
-    private com.zx.shopmanagementsystem.components.Head head1;
+    private com.zx.shopmanagementsystem.components.Head_Dark_BG head1;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel newPasswordLbl;
     private com.zx.shopmanagementsystem.components.RoundedPassword newPasswordTxt;

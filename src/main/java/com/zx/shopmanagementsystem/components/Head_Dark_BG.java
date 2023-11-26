@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  *
  * @author User
  */
-public class Head extends javax.swing.JPanel {
+public class Head_Dark_BG extends javax.swing.JPanel {
 
     /**
      * Creates new form Head
@@ -24,7 +24,7 @@ public class Head extends javax.swing.JPanel {
         this.frame = fr;
     }
 
-    public Head() {
+    public Head_Dark_BG() {
         initComponents();
 
     }
@@ -73,7 +73,7 @@ public class Head extends javax.swing.JPanel {
             }
         });
 
-        closeLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\CloseBlue.png")); // NOI18N
+        closeLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\Close_Black.png")); // NOI18N
         closeLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 closeLblMouseClicked(evt);
@@ -86,7 +86,7 @@ public class Head extends javax.swing.JPanel {
             }
         });
 
-        minimiseLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\MinimizeIconBlue.png")); // NOI18N
+        minimiseLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\Minimise_Black.png")); // NOI18N
         minimiseLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 minimiseLblMouseClicked(evt);
@@ -127,7 +127,7 @@ public class Head extends javax.swing.JPanel {
 
     private void closeLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(closeLbl, il.CloseBlue);
+        func.iconSetter(closeLbl, il.closeBlackIcon);
     }//GEN-LAST:event_closeLblMouseExited
 
     private void closeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseClicked
@@ -142,7 +142,7 @@ public class Head extends javax.swing.JPanel {
 
     private void minimiseLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimiseLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(minimiseLbl, il.MinimizeIconBlue);
+        func.iconSetter(minimiseLbl, il.minimiseBlackIcon);
     }//GEN-LAST:event_minimiseLblMouseExited
 
     private void minimiseLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_minimiseLblMouseClicked

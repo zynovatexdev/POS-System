@@ -87,7 +87,7 @@ public class MessageDialog extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addGap(126, 126, 126)
+                .addGap(133, 133, 133)
                 .addComponent(okBtnLbl)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
