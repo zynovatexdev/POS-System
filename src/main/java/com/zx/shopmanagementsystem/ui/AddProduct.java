@@ -8,7 +8,6 @@ import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.components.ScrollBarCustom;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
-import com.zx.shopmanagementsystem.forms.InventoryManagement;
 import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import java.awt.Toolkit;
@@ -150,7 +149,6 @@ public class AddProduct extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        addProductBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddProductPurpleIcon.png")); // NOI18N
         addProductBtnLbl.setPreferredSize(new java.awt.Dimension(406, 56));
         addProductBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -163,7 +161,7 @@ public class AddProduct extends javax.swing.JFrame {
                 addProductBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 630, -1, -1));
+        getContentPane().add(addProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 670, 200, 50));
 
         head1.setHeaderTextColor("#000000");
         head1.setHeaderTitle("");
@@ -173,39 +171,39 @@ public class AddProduct extends javax.swing.JFrame {
         productIdLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productIdLbl.setForeground(new java.awt.Color(255, 255, 255));
         productIdLbl.setText("0");
-        getContentPane().add(productIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 102, 240, 20));
+        getContentPane().add(productIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 185, 240, 20));
 
         sellingPriceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         sellingPriceTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(sellingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 450, 190, -1));
+        getContentPane().add(sellingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 515, 180, -1));
 
         dimentionTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         dimentionTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(dimentionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 390, -1));
+        getContentPane().add(dimentionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, 290, -1));
 
         stockQuantityTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         stockQuantityTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(stockQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 550, 190, -1));
+        getContentPane().add(stockQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 220, 180, -1));
 
         productNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         productNameTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 170, 360, -1));
+        getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 360, -1));
 
         brandTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         brandTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(brandTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 180, -1));
+        getContentPane().add(brandTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 180, -1));
 
         manufactureDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         manufactureDateTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(manufactureDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, 190, -1));
+        getContentPane().add(manufactureDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 190, -1));
 
         expireDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         expireDateTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(expireDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 230, 200, -1));
+        getContentPane().add(expireDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 310, 200, -1));
 
         recivingPriceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         recivingPriceTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(recivingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 180, -1));
+        getContentPane().add(recivingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 515, 180, -1));
 
         barcodeScannerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
         barcodeScannerBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -214,31 +212,36 @@ public class AddProduct extends javax.swing.JFrame {
                 barcodeScannerBtnLblMouseClicked(evt);
             }
         });
-        getContentPane().add(barcodeScannerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 350, 40, 40));
+        getContentPane().add(barcodeScannerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1195, 415, 40, 40));
 
         productLocationIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productLocationIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 560, 190, -1));
+        getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 600, 190, -1));
 
         productTypeIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productTypeIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productTypeIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 450, 190, -1));
+        getContentPane().add(productTypeIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 510, 190, -1));
 
         discountIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         discountIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(discountIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 560, 190, -1));
+        getContentPane().add(discountIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, 190, -1));
 
         categoryIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         categoryIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(categoryIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 450, 190, -1));
+        getContentPane().add(categoryIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 510, 190, -1));
 
         supplierIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         supplierIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(supplierIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 190, -1));
+        getContentPane().add(supplierIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 410, 190, -1));
 
         barcodeCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         barcodeCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 340, 190, -1));
+        barcodeCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                barcodeComboActionPerformed(evt);
+            }
+        });
+        getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 410, 190, -1));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -259,13 +262,13 @@ public class AddProduct extends javax.swing.JFrame {
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, 360, 120));
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 365, 360, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_new_Product.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -282,12 +285,12 @@ public class AddProduct extends javax.swing.JFrame {
 
     private void addProductBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addProductBtnLbl, il.addProductWhiteIcon2);
+        //func.iconSetter(addProductBtnLbl, il.addProductWhiteIcon2);
     }//GEN-LAST:event_addProductBtnLblMouseEntered
 
     private void addProductBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProductBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addProductBtnLbl, il.addProductPurpleIcon2);
+        //func.iconSetter(addProductBtnLbl, il.addProductPurpleIcon2);
     }//GEN-LAST:event_addProductBtnLblMouseExited
 
     private void barcodeScannerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barcodeScannerBtnLblMouseClicked
@@ -299,6 +302,10 @@ public class AddProduct extends javax.swing.JFrame {
             System.out.println("Barcode Detector Btn : " + ex.getMessage());
         }
     }//GEN-LAST:event_barcodeScannerBtnLblMouseClicked
+
+    private void barcodeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barcodeComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_barcodeComboActionPerformed
 
     /**
      * @param args the command line arguments

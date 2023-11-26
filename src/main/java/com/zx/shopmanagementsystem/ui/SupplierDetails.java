@@ -58,21 +58,20 @@ public class SupplierDetails extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(1280, 720));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         supplierNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         supplierNameTxt.setHintText("Enter Customer Name");
         supplierNameTxt.setPreferredSize(new java.awt.Dimension(129, 40));
-        getContentPane().add(supplierNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 245, 310, 50));
+        getContentPane().add(supplierNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 310, 50));
 
         supplierNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         supplierNumberTxt.setHintText("Enter Customer Number");
         supplierNumberTxt.setPreferredSize(new java.awt.Dimension(129, 40));
-        getContentPane().add(supplierNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 310, 310, 50));
+        getContentPane().add(supplierNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 310, 50));
 
-        editSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\EditPurpleIcon.png")); // NOI18N
+        editSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\edit.png")); // NOI18N
         editSupplierBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 editSupplierBtnLblMouseClicked(evt);
@@ -84,9 +83,9 @@ public class SupplierDetails extends javax.swing.JFrame {
                 editSupplierBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(editSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 460, -1, -1));
+        getContentPane().add(editSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 610, -1, -1));
 
-        deleteSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\DeleteRedIcon.png")); // NOI18N
+        deleteSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\delete.png")); // NOI18N
         deleteSupplierBtnLbl.setPreferredSize(new java.awt.Dimension(183, 54));
         deleteSupplierBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -99,9 +98,9 @@ public class SupplierDetails extends javax.swing.JFrame {
                 deleteSupplierBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(deleteSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 460, 160, -1));
+        getContentPane().add(deleteSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 610, 210, 55));
 
-        updateSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\UpdatePurpleIcon.png")); // NOI18N
+        updateSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\update.png")); // NOI18N
         updateSupplierBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateSupplierBtnLblMouseClicked(evt);
@@ -113,7 +112,7 @@ public class SupplierDetails extends javax.swing.JFrame {
                 updateSupplierBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(updateSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 450, -1, -1));
+        getContentPane().add(updateSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 610, -1, -1));
 
         head1.setHeaderTextColor("#ffffff");
         head1.setHeaderTitle("");
@@ -134,12 +133,12 @@ public class SupplierDetails extends javax.swing.JFrame {
 
     private void editSupplierBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editSupplierBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(editSupplierBtnLbl, il.editDetailsWhiteIcon);
+        //func.iconSetter(editSupplierBtnLbl, il.editDetailsWhiteIcon);
     }//GEN-LAST:event_editSupplierBtnLblMouseEntered
 
     private void editSupplierBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editSupplierBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(editSupplierBtnLbl, il.editDetailsPurpleIcon);
+        // func.iconSetter(editSupplierBtnLbl, il.editDetailsPurpleIcon);
     }//GEN-LAST:event_editSupplierBtnLblMouseExited
 
     private void updateSupplierBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSupplierBtnLblMouseClicked
@@ -150,12 +149,12 @@ public class SupplierDetails extends javax.swing.JFrame {
 
     private void updateSupplierBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSupplierBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(updateSupplierBtnLbl, il.updateWhiteIcon);
+        //func.iconSetter(updateSupplierBtnLbl, il.updateWhiteIcon);
     }//GEN-LAST:event_updateSupplierBtnLblMouseEntered
 
     private void updateSupplierBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateSupplierBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(updateSupplierBtnLbl, il.UpdatePurpleIcon);
+        //func.iconSetter(updateSupplierBtnLbl, il.UpdatePurpleIcon);
     }//GEN-LAST:event_updateSupplierBtnLblMouseExited
 
     private void deleteSupplierBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteSupplierBtnLblMouseClicked
@@ -183,12 +182,12 @@ public class SupplierDetails extends javax.swing.JFrame {
 
     private void deleteSupplierBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteSupplierBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(deleteSupplierBtnLbl, il.deleteWhiteIcon);
+        //func.iconSetter(deleteSupplierBtnLbl, il.deleteWhiteIcon);
     }//GEN-LAST:event_deleteSupplierBtnLblMouseEntered
 
     private void deleteSupplierBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteSupplierBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(deleteSupplierBtnLbl, il.deleteRedIcon);
+        //func.iconSetter(deleteSupplierBtnLbl, il.deleteRedIcon);
     }//GEN-LAST:event_deleteSupplierBtnLblMouseExited
 
     /**

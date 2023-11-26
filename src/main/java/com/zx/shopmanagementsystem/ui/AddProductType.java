@@ -65,7 +65,6 @@ public class AddProductType extends javax.swing.JFrame {
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
-        addProcuctTypeBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
         addProcuctTypeBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addProcuctTypeBtnLblMouseClicked(evt);
@@ -77,12 +76,12 @@ public class AddProductType extends javax.swing.JFrame {
                 addProcuctTypeBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addProcuctTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 460, -1, -1));
+        getContentPane().add(addProcuctTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 597, 200, 50));
 
         productTypeTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         productTypeTxt.setHintText("Enter Product Type");
         productTypeTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        getContentPane().add(productTypeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 480, -1));
+        getContentPane().add(productTypeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 480, -1));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -109,7 +108,7 @@ public class AddProductType extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 300, 480, 150));
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 480, 150));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Product_Type.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -120,12 +119,12 @@ public class AddProductType extends javax.swing.JFrame {
 
     private void addProcuctTypeBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProcuctTypeBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addProcuctTypeBtnLbl, il.addWhiteIcon);
+        //func.iconSetter(addProcuctTypeBtnLbl, il.addWhiteIcon);
     }//GEN-LAST:event_addProcuctTypeBtnLblMouseEntered
 
     private void addProcuctTypeBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProcuctTypeBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addProcuctTypeBtnLbl, il.addPurpleIcon);
+        //func.iconSetter(addProcuctTypeBtnLbl, il.addPurpleIcon);
     }//GEN-LAST:event_addProcuctTypeBtnLblMouseExited
 
     private void addProcuctTypeBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProcuctTypeBtnLblMouseClicked

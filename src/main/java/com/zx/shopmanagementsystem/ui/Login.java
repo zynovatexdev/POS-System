@@ -74,9 +74,8 @@ public class Login extends javax.swing.JFrame {
                 showPasswordLblMouseExited(evt);
             }
         });
-        getContentPane().add(showPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 410, -1, 30));
+        getContentPane().add(showPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 440, -1, 30));
 
-        loginLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\LoginPurpleIcon.png")); // NOI18N
         loginLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -89,7 +88,7 @@ public class Login extends javax.swing.JFrame {
                 loginLblMouseExited(evt);
             }
         });
-        getContentPane().add(loginLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 490, 450, 60));
+        getContentPane().add(loginLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(155, 510, 370, 40));
 
         forgotPasswordLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         forgotPasswordLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -97,14 +96,14 @@ public class Login extends javax.swing.JFrame {
                 forgotPasswordLblMouseClicked(evt);
             }
         });
-        getContentPane().add(forgotPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(577, 576, 190, 30));
+        getContentPane().add(forgotPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 100, 20));
 
         usernameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         usernameTxt.setHintText("Enter Username");
-        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 280, 480, 50));
+        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 370, 50));
 
         passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 400, 480, 50));
+        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 370, 50));
 
         head1.setHeaderTextColor("#FFFFFF");
         head1.setHeaderTitle("");
@@ -120,12 +119,12 @@ public class Login extends javax.swing.JFrame {
 
     private void loginLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(loginLbl, il.LoginWhiteIcon);
+        //func.iconSetter(loginLbl, il.LoginWhiteIcon);
     }//GEN-LAST:event_loginLblMouseEntered
 
     private void loginLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(loginLbl, il.LoginPurpleIcon);
+        //func.iconSetter(loginLbl, il.LoginPurpleIcon);
     }//GEN-LAST:event_loginLblMouseExited
 
     private void forgotPasswordLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_forgotPasswordLblMouseClicked

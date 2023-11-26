@@ -69,7 +69,6 @@ public class AddProductCategory extends javax.swing.JFrame {
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
-        addProCatBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
         addProCatBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addProCatBtnLblMouseClicked(evt);
@@ -81,12 +80,11 @@ public class AddProductCategory extends javax.swing.JFrame {
                 addProCatBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(addProCatBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 430, -1, -1));
+        getContentPane().add(addProCatBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
         catIdLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        catIdLbl.setForeground(new java.awt.Color(255, 255, 255));
         catIdLbl.setText("0");
-        getContentPane().add(catIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 217, 290, 20));
+        getContentPane().add(catIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 290, 20));
 
         cateNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         cateNameTxt.setHintText("Enter Category Name");
@@ -96,7 +94,7 @@ public class AddProductCategory extends javax.swing.JFrame {
                 cateNameTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(cateNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 340, 460, -1));
+        getContentPane().add(cateNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 460, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Product_Category.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -107,12 +105,12 @@ public class AddProductCategory extends javax.swing.JFrame {
 
     private void addProCatBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProCatBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addProCatBtnLbl, il.addWhiteIcon);
+        //func.iconSetter(addProCatBtnLbl, il.addWhiteIcon);
     }//GEN-LAST:event_addProCatBtnLblMouseEntered
 
     private void addProCatBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProCatBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addProCatBtnLbl, il.addPurpleIcon);
+        //func.iconSetter(addProCatBtnLbl, il.addPurpleIcon);
     }//GEN-LAST:event_addProCatBtnLblMouseExited
 
     private void addProCatBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addProCatBtnLblMouseClicked

@@ -34,7 +34,6 @@ public class AddStoreLocation extends javax.swing.JFrame {
 
     public AddStoreLocation() {
         initComponents();
-        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         getMaxValue();
         head1.setFrame(this);
@@ -53,7 +52,7 @@ public class AddStoreLocation extends javax.swing.JFrame {
         addStoreLocation = new javax.swing.JLabel();
         storeLocationTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         panelBorder1 = new com.raven.swing.PanelBorder();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        scrollPaneWin111 = new com.zx.shopmanagementsystem.menu.scroll.win11.ScrollPaneWin11();
         storeLocationDescription = new javax.swing.JTextArea();
         iconLbl = new javax.swing.JLabel();
 
@@ -67,7 +66,7 @@ public class AddStoreLocation extends javax.swing.JFrame {
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
-        addStoreLocation.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
+        addStoreLocation.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addStoreLocation.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 addStoreLocationMouseClicked(evt);
@@ -79,43 +78,42 @@ public class AddStoreLocation extends javax.swing.JFrame {
                 addStoreLocationMouseExited(evt);
             }
         });
-        getContentPane().add(addStoreLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 470, -1, -1));
+        getContentPane().add(addStoreLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
         storeLocationTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         storeLocationTxt.setHintText("Enter Product Type");
         storeLocationTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        getContentPane().add(storeLocationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 210, 480, -1));
+        getContentPane().add(storeLocationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 340, -1));
 
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder1.setBackground(new java.awt.Color(238, 238, 238));
+
+        scrollPaneWin111.setBorder(null);
 
         storeLocationDescription.setColumns(20);
         storeLocationDescription.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         storeLocationDescription.setRows(5);
-        jScrollPane1.setViewportView(storeLocationDescription);
+        scrollPaneWin111.setViewportView(storeLocationDescription);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 472, Short.MAX_VALUE)
-            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 140, Short.MAX_VALUE)
-            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(panelBorder1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                    .addContainerGap()))
+            .addGroup(panelBorder1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(scrollPaneWin111, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 300, 470, 140));
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 330, 150));
 
+        iconLbl.setBackground(new java.awt.Color(250, 250, 250));
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Store_Location.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -125,12 +123,12 @@ public class AddStoreLocation extends javax.swing.JFrame {
 
     private void addStoreLocationMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreLocationMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addStoreLocation, il.addWhiteIcon);
+
     }//GEN-LAST:event_addStoreLocationMouseEntered
 
     private void addStoreLocationMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreLocationMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addStoreLocation, il.addPurpleIcon);
+
     }//GEN-LAST:event_addStoreLocationMouseExited
 
     private void addStoreLocationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreLocationMouseClicked
@@ -208,8 +206,8 @@ public class AddStoreLocation extends javax.swing.JFrame {
     private javax.swing.JLabel addStoreLocation;
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel iconLbl;
-    private javax.swing.JScrollPane jScrollPane1;
     private com.raven.swing.PanelBorder panelBorder1;
+    private com.zx.shopmanagementsystem.menu.scroll.win11.ScrollPaneWin11 scrollPaneWin111;
     private javax.swing.JTextArea storeLocationDescription;
     private com.zx.shopmanagementsystem.components.RoundedText storeLocationTxt;
     // End of variables declaration//GEN-END:variables

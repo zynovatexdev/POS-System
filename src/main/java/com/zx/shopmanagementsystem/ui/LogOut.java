@@ -15,7 +15,7 @@ public class LogOut extends javax.swing.JFrame {
      */
     public LogOut() {
         initComponents();
-        head1.setFrame(this);
+        //head1.setFrame(this);
     }
 
     /**
@@ -28,7 +28,7 @@ public class LogOut extends javax.swing.JFrame {
     private void initComponents() {
 
         looutLbl = new javax.swing.JLabel();
-        head1 = new com.zx.shopmanagementsystem.components.Head();
+        head_Systemout1 = new com.zx.shopmanagementsystem.components.Head_Systemout();
         iconLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -44,8 +44,8 @@ public class LogOut extends javax.swing.JFrame {
         });
         getContentPane().add(looutLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 280, 40));
 
-        head1.setOpaque(false);
-        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, -1));
+        head_Systemout1.setOpaque(false);
+        getContentPane().add(head_Systemout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\LogoutScreen.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -97,7 +97,7 @@ public class LogOut extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private com.zx.shopmanagementsystem.components.Head head1;
+    private com.zx.shopmanagementsystem.components.Head_Systemout head_Systemout1;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel looutLbl;
     // End of variables declaration//GEN-END:variables

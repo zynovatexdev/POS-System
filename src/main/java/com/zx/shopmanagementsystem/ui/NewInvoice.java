@@ -4,33 +4,50 @@
  */
 package com.zx.shopmanagementsystem.ui;
 
+import com.google.cloud.ByteArray;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import com.zx.shopmanagementsystem.notifications.Payment;
+import com.zx.shopmanagementsystem.print.ReportManager;
+import com.zx.shopmanagementsystem.print.model.FieldReportPayment;
+import com.zx.shopmanagementsystem.print.model.ParameterReportPayment;
 import com.zx.shopmanagementsystem.table.DeleteButtonEditorRenderer;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -137,15 +154,13 @@ public class NewInvoice extends javax.swing.JFrame {
         head1 = new com.zx.shopmanagementsystem.components.Head();
         priceTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         paymentBtn = new javax.swing.JLabel();
-        panelBorder1 = new com.raven.swing.PanelBorder();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        invoiceTbl = new javax.swing.JTable();
         addInvoiceBtn = new javax.swing.JLabel();
         clearBtn = new javax.swing.JLabel();
         priceLbl = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         editPriceLbl = new javax.swing.JLabel();
         selectBtnIcon = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        invoiceTbl = new javax.swing.JTable();
         imageLbl = new javax.swing.JLabel();
         idLbl = new javax.swing.JLabel();
 
@@ -161,7 +176,7 @@ public class NewInvoice extends javax.swing.JFrame {
                 batcodeIconLblMouseClicked(evt);
             }
         });
-        getContentPane().add(batcodeIconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 40, 40));
+        getContentPane().add(batcodeIconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, 40, 40));
 
         productNameCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productNameCombo.setPreferredSize(new java.awt.Dimension(163, 50));
@@ -185,11 +200,16 @@ public class NewInvoice extends javax.swing.JFrame {
                 productNameComboKeyPressed(evt);
             }
         });
-        getContentPane().add(productNameCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 300, -1));
+        getContentPane().add(productNameCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 300, -1));
 
         customerCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         customerCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        getContentPane().add(customerCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 182, 300, -1));
+        customerCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerComboActionPerformed(evt);
+            }
+        });
+        getContentPane().add(customerCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 300, -1));
 
         quantityTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         quantityTxt.setHintText("Enter Quantity");
@@ -199,7 +219,7 @@ public class NewInvoice extends javax.swing.JFrame {
                 quantityTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, -1, -1));
+        getContentPane().add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, -1, -1));
 
         discountSpinner.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         discountSpinner.setPreferredSize(new java.awt.Dimension(65, 50));
@@ -230,7 +250,7 @@ public class NewInvoice extends javax.swing.JFrame {
                 discountSpinnerVetoableChange(evt);
             }
         });
-        getContentPane().add(discountSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, 320, -1));
+        getContentPane().add(discountSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 460, 320, -1));
 
         head1.setHeaderTitle("");
         head1.setOpaque(false);
@@ -239,9 +259,8 @@ public class NewInvoice extends javax.swing.JFrame {
         priceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         priceTxt.setHintText("Enter Price");
         priceTxt.setPreferredSize(new java.awt.Dimension(300, 50));
-        getContentPane().add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 610, -1, -1));
+        getContentPane().add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 540, -1, -1));
 
-        paymentBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\paymentIcon.png")); // NOI18N
         paymentBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         paymentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -254,9 +273,61 @@ public class NewInvoice extends javax.swing.JFrame {
                 paymentBtnMouseExited(evt);
             }
         });
-        getContentPane().add(paymentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 640, -1, -1));
+        getContentPane().add(paymentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 610, 200, 40));
 
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        addInvoiceBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        addInvoiceBtn.setPreferredSize(new java.awt.Dimension(217, 49));
+        addInvoiceBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addInvoiceBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                addInvoiceBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                addInvoiceBtnMouseExited(evt);
+            }
+        });
+        getContentPane().add(addInvoiceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(577, 610, 200, 40));
+
+        clearBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\clearIcon.png")); // NOI18N
+        clearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        clearBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clearBtnMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                clearBtnMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                clearBtnMouseExited(evt);
+            }
+        });
+        getContentPane().add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 605, -1, -1));
+
+        priceLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        priceLbl.setForeground(new java.awt.Color(0, 51, 204));
+        priceLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        priceLbl.setText("10000/=");
+        getContentPane().add(priceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 610, 140, 40));
+
+        editPriceLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        editPriceLbl.setForeground(new java.awt.Color(0, 51, 102));
+        editPriceLbl.setText("Edit Price");
+        editPriceLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                editPriceLblMouseClicked(evt);
+            }
+        });
+        getContentPane().add(editPriceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 550, 70, -1));
+
+        selectBtnIcon.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SelectIcon.png")); // NOI18N
+        selectBtnIcon.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                selectBtnIconMouseClicked(evt);
+            }
+        });
+        getContentPane().add(selectBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, -1, 30));
 
         invoiceTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -290,87 +361,9 @@ public class NewInvoice extends javax.swing.JFrame {
             invoiceTbl.getColumnModel().getColumn(4).setPreferredWidth(3);
         }
 
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
-        panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 680, 460));
-
-        addInvoiceBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\addInvoiceIcon.png")); // NOI18N
-        addInvoiceBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        addInvoiceBtn.setPreferredSize(new java.awt.Dimension(217, 49));
-        addInvoiceBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addInvoiceBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addInvoiceBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                addInvoiceBtnMouseExited(evt);
-            }
-        });
-        getContentPane().add(addInvoiceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 640, -1, -1));
-
-        clearBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\clearIcon.png")); // NOI18N
-        clearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        clearBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                clearBtnMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                clearBtnMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                clearBtnMouseExited(evt);
-            }
-        });
-        getContentPane().add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 640, -1, -1));
-
-        priceLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        priceLbl.setForeground(new java.awt.Color(255, 255, 255));
-        priceLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        priceLbl.setText("10000/=");
-        getContentPane().add(priceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 580, 120, 40));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Total Price");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 580, 100, 40));
-
-        editPriceLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        editPriceLbl.setForeground(new java.awt.Color(255, 255, 255));
-        editPriceLbl.setText("Edit Price");
-        editPriceLbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                editPriceLblMouseClicked(evt);
-            }
-        });
-        getContentPane().add(editPriceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 623, 70, -1));
-
-        selectBtnIcon.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SelectIcon.png")); // NOI18N
-        selectBtnIcon.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                selectBtnIconMouseClicked(evt);
-            }
-        });
-        getContentPane().add(selectBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, 30));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(582, 157, 630, 410));
 
         imageLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\AddNewInvoiceScreen.png")); // NOI18N
-        imageLbl.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(imageLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         idLbl.setText("jLabel1");
@@ -505,12 +498,12 @@ public class NewInvoice extends javax.swing.JFrame {
 
     private void addInvoiceBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addInvoiceBtnMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addInvoiceBtn, il.AddInvoice2Icon);
+
     }//GEN-LAST:event_addInvoiceBtnMouseEntered
 
     private void addInvoiceBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addInvoiceBtnMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addInvoiceBtn, il.AddInvoice1Icon);
+
     }//GEN-LAST:event_addInvoiceBtnMouseExited
 
     private void clearBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseEntered
@@ -525,12 +518,12 @@ public class NewInvoice extends javax.swing.JFrame {
 
     private void paymentBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentBtnMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(paymentBtn, il.Payment2CheckOutIcon);
+
     }//GEN-LAST:event_paymentBtnMouseEntered
 
     private void paymentBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentBtnMouseExited
         // TODO add your handling code here:
-        func.iconSetter(paymentBtn, il.Payment1CheckOutIcon);
+
     }//GEN-LAST:event_paymentBtnMouseExited
 
     private void paymentBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentBtnMouseClicked
@@ -568,7 +561,7 @@ public class NewInvoice extends javax.swing.JFrame {
                 double balance = payment - totalPrice;
                 String balancePrice = String.format("%.2f", balance);
                 generateInvoiceBill(invoiceData, balancePrice);
-                //generateBill(invoiceData);
+                generateBill(invoiceData);
                 DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\nGive Balance : " + balancePrice, 1);
                 updateStockAndCalculateProfit(model);
                 clear();
@@ -579,6 +572,10 @@ public class NewInvoice extends javax.swing.JFrame {
             System.out.println("No");
         }
     }//GEN-LAST:event_paymentBtnMouseClicked
+
+    private void customerComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerComboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -632,9 +629,7 @@ public class NewInvoice extends javax.swing.JFrame {
     private javax.swing.JLabel idLbl;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JTable invoiceTbl;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JLabel paymentBtn;
     private javax.swing.JLabel priceLbl;
     private com.zx.shopmanagementsystem.components.RoundedText priceTxt;
@@ -981,10 +976,11 @@ public class NewInvoice extends javax.swing.JFrame {
             profit = (soldPrice - costPrice);
             totalProfit += profit;
             totalsold += soldPrice;
+            System.out.println("Product Name : " + productName);
             System.out.println("Sold : " + soldPrice);
             System.out.println("Cost : " + costPrice);
             System.out.println("Profit : " + profit);
-            updateSoldItem(date, time, soldPrice, String.valueOf(quantity), productName, UserID, customerIdArray.get(customerCombo.getSelectedIndex()));
+            updateSoldItem(date, time, soldPrice, profit, String.valueOf(quantity), productName, UserID, customerIdArray.get(customerCombo.getSelectedIndex()));
             // Update stock quantity and calculate profit in the database
             updateProductStock(productName, quantity);
 
@@ -1031,6 +1027,11 @@ public class NewInvoice extends javax.swing.JFrame {
     }
 
     public void readUserIdFromFile() {
+        try {
+            ReportManager.getInstance().compileReport();
+        } catch (Exception e) {
+            System.out.println("Report Manager Compile : " + e.getMessage());
+        }
         Properties properties = new Properties();
 
         // Load properties from the file
@@ -1053,7 +1054,7 @@ public class NewInvoice extends javax.swing.JFrame {
         }
     }
 
-    private void updateSoldItem(String Date, String Time, double soldPrice, String quantity, String productName, int userID, int customerId) {
+    private void updateSoldItem(String Date, String Time, double soldPrice, double profit, String quantity, String productName, int userID, int customerId) {
         int productId = 0;
         String sql = "SELECT product_id FROM product WHERE product_name = '" + productName + "'";
 
@@ -1067,10 +1068,59 @@ public class NewInvoice extends javax.swing.JFrame {
             System.out.println("updateSoldItem(Get Product Id) -> New Invoice : " + ex.getMessage());
         }
         try {
-            DB.putdata("INSERT INTO sold_items (date, time, price, quantity, product_id, user_id, customer_id) VALUES ('" + Date + "','" + Time + "','" + soldPrice + "','" + quantity + "','" + productId + "','" + userID + "','" + customerId + "')");
+            DB.putdata("INSERT INTO sold_items (date, time, price, profit, quantity, product_id, user_id, customer_id) VALUES ('" + Date + "','" + Time + "','" + soldPrice + "','" + profit + "','" + quantity + "','" + productId + "','" + userID + "','" + customerId + "')");
         } catch (Exception ex) {
             System.out.println("updateSoldItem(Save Data) -> New Invoice : " + ex.getMessage());
         }
+    }
+
+    private void generateBill(JSONObject invoiceData) {
+        JSONArray invoiceItems = invoiceData.getJSONArray("InvoiceItems");
+        String Date = invoiceData.getString("Date");
+        String Time = invoiceData.getString("Time");
+        String CustomerName = invoiceData.getString("Customer Name");
+        try {
+            List<FieldReportPayment> fields = new ArrayList<>();
+            for (int i = 0; i < invoiceItems.length(); i++) {
+                JSONObject item = invoiceItems.getJSONObject(i);
+                String productName = item.getString("ProductName");
+                double quantity = Double.parseDouble(item.getString("Quantity"));
+                double price = Double.parseDouble(item.getString("Price"));
+                fields.add(new FieldReportPayment(productName, quantity, price));
+            }
+            ParameterReportPayment dataPrint = new ParameterReportPayment(Date, Time, CustomerName, invoiceData.getString("TotalPrice"), getLogo(), getQrCode(Time, Date), fields);
+            ReportManager.getInstance().printReportPayment(dataPrint);
+        } catch (Exception e) {
+        }
+    }
+
+    private InputStream getQrCode(String Time, String Date) throws IOException, WriterException {
+        JSONObject qrData = new JSONObject();
+        qrData.put("Date", Date);
+        qrData.put("Time", Time);
+        qrData.put("CustomerID", customerIdArray.get(customerCombo.getSelectedIndex()));
+
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.MARGIN, 0);
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(qrData.toString(), BarcodeFormat.QR_CODE, 80, 80, hints);
+        BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", outputStream);
+        return new ByteArrayInputStream(outputStream.toByteArray());
+
+    }
+
+    private InputStream getLogo() {
+        try {
+            String imageUrl = "file:" + il.logo; // Assuming il.logo is a string representing the image location
+            URL url = new URL(imageUrl);
+            return url.openStream();
+        } catch (MalformedURLException e) {
+            e.printStackTrace(); // Handle the URL format exception
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the IO exception
+        }
+        return null;
     }
 
 }

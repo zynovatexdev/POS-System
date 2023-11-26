@@ -66,9 +66,8 @@ public class PaymentMethod extends javax.swing.JFrame {
                 paymentMethodTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(paymentMethodTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 240, 340, -1));
+        getContentPane().add(paymentMethodTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 340, -1));
 
-        saveBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SavePurpleIcon.png")); // NOI18N
         saveBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 saveBtnLblMouseClicked(evt);
@@ -80,14 +79,13 @@ public class PaymentMethod extends javax.swing.JFrame {
                 saveBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(saveBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 500, 245, 50));
+        getContentPane().add(saveBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
         head1.setHeaderTitle("");
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Payment Method.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -100,12 +98,12 @@ public class PaymentMethod extends javax.swing.JFrame {
 
     private void saveBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(saveBtnLbl, il.SaveWhiteIcon);
+
     }//GEN-LAST:event_saveBtnLblMouseEntered
 
     private void saveBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(saveBtnLbl, il.SavePurpleIcon);
+
     }//GEN-LAST:event_saveBtnLblMouseExited
 
     private void saveBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveBtnLblMouseClicked

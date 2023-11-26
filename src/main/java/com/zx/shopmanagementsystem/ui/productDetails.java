@@ -150,7 +150,6 @@ public class productDetails extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        updateProductBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\UpdatePurpleIcon.png")); // NOI18N
         updateProductBtnLbl.setPreferredSize(new java.awt.Dimension(406, 56));
         updateProductBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -163,7 +162,7 @@ public class productDetails extends javax.swing.JFrame {
                 updateProductBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(updateProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 630, 450, 60));
+        getContentPane().add(updateProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(582, 672, 200, 50));
 
         head1.setHeaderTextColor("#000000");
         head1.setHeaderTitle("");
@@ -177,62 +176,62 @@ public class productDetails extends javax.swing.JFrame {
 
         sellingPriceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         sellingPriceTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(sellingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 450, 190, -1));
+        getContentPane().add(sellingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 515, 190, -1));
 
         dimentionTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         dimentionTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(dimentionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 130, 390, -1));
+        getContentPane().add(dimentionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, 290, -1));
 
         stockQuantityTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         stockQuantityTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(stockQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 550, 190, -1));
+        getContentPane().add(stockQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 220, 190, -1));
 
         productNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         productNameTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, 340, -1));
+        getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 340, -1));
 
         brandTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         brandTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(brandTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 180, -1));
+        getContentPane().add(brandTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 180, -1));
 
         manufactureDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         manufactureDateTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(manufactureDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 230, 190, -1));
+        getContentPane().add(manufactureDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 190, -1));
 
         expireDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         expireDateTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(expireDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 230, 200, -1));
+        getContentPane().add(expireDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 310, 200, -1));
 
         recivingPriceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         recivingPriceTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(recivingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 450, 180, -1));
+        getContentPane().add(recivingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 515, 180, -1));
 
         productLocationIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productLocationIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 560, 190, -1));
+        getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 600, 190, -1));
 
         productTypeIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productTypeIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productTypeIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 450, 190, -1));
+        getContentPane().add(productTypeIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 510, 190, -1));
 
         discountIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         discountIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(discountIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 560, 190, -1));
+        getContentPane().add(discountIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, 190, -1));
 
         categoryIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         categoryIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(categoryIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 450, 190, -1));
+        getContentPane().add(categoryIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 510, 190, -1));
 
         supplierIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         supplierIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(supplierIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 340, 190, -1));
+        getContentPane().add(supplierIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 410, 190, -1));
 
         barcodeCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         barcodeCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 340, 190, -1));
+        getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 410, 190, -1));
 
         barcodeScannerLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
-        getContentPane().add(barcodeScannerLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1110, 350, 40, 40));
+        getContentPane().add(barcodeScannerLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1195, 415, 40, 40));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -247,19 +246,19 @@ public class productDetails extends javax.swing.JFrame {
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19))
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 330, -1));
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 365, 360, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\EditProduct.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

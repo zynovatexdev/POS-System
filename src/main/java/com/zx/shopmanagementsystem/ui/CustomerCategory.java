@@ -34,7 +34,7 @@ public class CustomerCategory extends javax.swing.JFrame {
 
     public CustomerCategory() {
         initComponents();
-        jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
+
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(CustomerCategory.this);
         setIcon();
@@ -64,9 +64,9 @@ public class CustomerCategory extends javax.swing.JFrame {
 
         typeTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         typeTxt.setHintText("Enter Customer Category Type");
-        getContentPane().add(typeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, 440, 50));
+        getContentPane().add(typeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 440, 50));
 
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        panelBorder1.setBackground(new java.awt.Color(238, 238, 238));
 
         descriptionTxt.setColumns(20);
         descriptionTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -77,22 +77,21 @@ public class CustomerCategory extends javax.swing.JFrame {
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 330, -1, 160));
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 430, 160));
 
-        submitBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\AddPurpleIcon.png")); // NOI18N
         submitBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         submitBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -105,7 +104,7 @@ public class CustomerCategory extends javax.swing.JFrame {
                 submitBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(submitBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 510, -1, -1));
+        getContentPane().add(submitBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
         head1.setHeaderTextColor("#FFFFFF");
         head1.setHeaderTitle("");
@@ -121,12 +120,12 @@ public class CustomerCategory extends javax.swing.JFrame {
 
     private void submitBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(submitBtnLbl, il.submitWhiteIcon);
+
     }//GEN-LAST:event_submitBtnLblMouseEntered
 
     private void submitBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(submitBtnLbl, il.submitPurpleIcon);
+
     }//GEN-LAST:event_submitBtnLblMouseExited
 
     private void submitBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_submitBtnLblMouseClicked

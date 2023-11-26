@@ -22,8 +22,6 @@ import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -67,7 +65,6 @@ public class NewDebt extends javax.swing.JFrame {
     private int newDebtInvoice;
     private int maxDebtId;
     private int newDebtId;
-    private String nextPayDate;
 
     public NewDebt() {
         initComponents();
@@ -144,13 +141,11 @@ public class NewDebt extends javax.swing.JFrame {
         head1 = new com.zx.shopmanagementsystem.components.Head();
         priceTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         paymentBtn = new javax.swing.JLabel();
-        panelBorder1 = new com.raven.swing.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
         invoiceTbl = new javax.swing.JTable();
         addInvoiceBtn = new javax.swing.JLabel();
         clearBtn = new javax.swing.JLabel();
         priceLbl = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         editPriceLbl = new javax.swing.JLabel();
         selectBtnIcon = new javax.swing.JLabel();
         imageLbl = new javax.swing.JLabel();
@@ -168,7 +163,7 @@ public class NewDebt extends javax.swing.JFrame {
                 batcodeIconLblMouseClicked(evt);
             }
         });
-        getContentPane().add(batcodeIconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 250, 40, 40));
+        getContentPane().add(batcodeIconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, 40, 40));
 
         productNameCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productNameCombo.setPreferredSize(new java.awt.Dimension(163, 50));
@@ -192,11 +187,16 @@ public class NewDebt extends javax.swing.JFrame {
                 productNameComboKeyPressed(evt);
             }
         });
-        getContentPane().add(productNameCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 300, -1));
+        getContentPane().add(productNameCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 300, -1));
 
         customerCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         customerCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        getContentPane().add(customerCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 182, 300, -1));
+        customerCombo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                customerComboActionPerformed(evt);
+            }
+        });
+        getContentPane().add(customerCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 300, -1));
 
         quantityTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         quantityTxt.setHintText("Enter Quantity");
@@ -206,7 +206,7 @@ public class NewDebt extends javax.swing.JFrame {
                 quantityTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, -1, -1));
+        getContentPane().add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, -1, -1));
 
         head1.setHeaderTitle("");
         head1.setOpaque(false);
@@ -215,9 +215,13 @@ public class NewDebt extends javax.swing.JFrame {
         priceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         priceTxt.setHintText("Enter Price");
         priceTxt.setPreferredSize(new java.awt.Dimension(300, 50));
-        getContentPane().add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, -1, -1));
+        priceTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                priceTxtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 530, -1, -1));
 
-        paymentBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\paymentIcon.png")); // NOI18N
         paymentBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         paymentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -230,9 +234,7 @@ public class NewDebt extends javax.swing.JFrame {
                 paymentBtnMouseExited(evt);
             }
         });
-        getContentPane().add(paymentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 630, -1, -1));
-
-        panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(paymentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 610, 200, 50));
 
         invoiceTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -266,26 +268,8 @@ public class NewDebt extends javax.swing.JFrame {
             invoiceTbl.getColumnModel().getColumn(4).setPreferredWidth(3);
         }
 
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
-        panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(582, 157, 630, 410));
 
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 100, 680, 500));
-
-        addInvoiceBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\addInvoiceIcon.png")); // NOI18N
         addInvoiceBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         addInvoiceBtn.setPreferredSize(new java.awt.Dimension(217, 49));
         addInvoiceBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -299,9 +283,8 @@ public class NewDebt extends javax.swing.JFrame {
                 addInvoiceBtnMouseExited(evt);
             }
         });
-        getContentPane().add(addInvoiceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 630, -1, -1));
+        getContentPane().add(addInvoiceBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 610, 190, -1));
 
-        clearBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\clearIcon.png")); // NOI18N
         clearBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         clearBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -314,28 +297,23 @@ public class NewDebt extends javax.swing.JFrame {
                 clearBtnMouseExited(evt);
             }
         });
-        getContentPane().add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 630, -1, -1));
+        getContentPane().add(clearBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 610, 200, 50));
 
         priceLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        priceLbl.setForeground(new java.awt.Color(255, 255, 255));
+        priceLbl.setForeground(new java.awt.Color(0, 0, 153));
         priceLbl.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         priceLbl.setText("10000/=");
-        getContentPane().add(priceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1100, 640, 120, 40));
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Total Price");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 640, 100, 40));
+        getContentPane().add(priceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 610, 120, 40));
 
         editPriceLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        editPriceLbl.setForeground(new java.awt.Color(255, 255, 255));
+        editPriceLbl.setForeground(new java.awt.Color(0, 51, 102));
         editPriceLbl.setText("Edit Price");
         editPriceLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 editPriceLblMouseClicked(evt);
             }
         });
-        getContentPane().add(editPriceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 510, 70, -1));
+        getContentPane().add(editPriceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 540, 70, -1));
 
         selectBtnIcon.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SelectIcon.png")); // NOI18N
         selectBtnIcon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -343,10 +321,9 @@ public class NewDebt extends javax.swing.JFrame {
                 selectBtnIconMouseClicked(evt);
             }
         });
-        getContentPane().add(selectBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 300, -1, 30));
+        getContentPane().add(selectBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, 30));
 
         imageLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\AddNewDebt.png")); // NOI18N
-        imageLbl.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(imageLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         discountSpinner.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -509,32 +486,32 @@ public class NewDebt extends javax.swing.JFrame {
 
     private void addInvoiceBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addInvoiceBtnMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(addInvoiceBtn, il.AddInvoice2Icon);
+
     }//GEN-LAST:event_addInvoiceBtnMouseEntered
 
     private void addInvoiceBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addInvoiceBtnMouseExited
         // TODO add your handling code here:
-        func.iconSetter(addInvoiceBtn, il.AddInvoice1Icon);
+
     }//GEN-LAST:event_addInvoiceBtnMouseExited
 
     private void clearBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(clearBtn, il.ClearDetails2Icon);
+
     }//GEN-LAST:event_clearBtnMouseEntered
 
     private void clearBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clearBtnMouseExited
         // TODO add your handling code here:
-        func.iconSetter(clearBtn, il.ClearDetails1Icon);
+
     }//GEN-LAST:event_clearBtnMouseExited
 
     private void paymentBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentBtnMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(paymentBtn, il.Payment2CheckOutIcon);
+
     }//GEN-LAST:event_paymentBtnMouseEntered
 
     private void paymentBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentBtnMouseExited
         // TODO add your handling code here:
-        func.iconSetter(paymentBtn, il.Payment1CheckOutIcon);
+
     }//GEN-LAST:event_paymentBtnMouseExited
 
     private void paymentBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentBtnMouseClicked
@@ -556,10 +533,11 @@ public class NewDebt extends javax.swing.JFrame {
 
         if (pay.getMessageType() == Debt.MessageType.YES) {
             System.out.println("Yes");
+            String nextDate = "";
             try {
                 payment = Double.parseDouble(pay.getPaymentValue());
                 paymentMethodId = pay.getPaymentMethodId();
-                nextPayDate = pay.getNextDate();
+                nextDate = pay.getNextDate();
                 System.out.println("payid : " + paymentMethodId);
                 System.out.println("pay : " + payment);
             } catch (NumberFormatException e) {
@@ -567,24 +545,29 @@ public class NewDebt extends javax.swing.JFrame {
             }
 
             if (totalPrice > payment) {
-                if (isValidDate(nextPayDate)) {
-                    double outstandingAmount = totalPrice - payment;
-                    String outstandingBalancePrice = String.format("%.2f", outstandingAmount);
-                    generateInvoiceBill(invoiceData, outstandingBalancePrice);
-                    updateStockAndCalculateProfit(model, outstandingBalancePrice);
-                    clear();
-                    tableDataClear();
-                    DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\n Outstanding Balance : " + outstandingBalancePrice, 1);
-                } else {
-                    DialogBox.showMessage("Error!!!", "Please select a date equal or greater \nthan\n" + LocalDate.now().plusDays(1), 3);
-                }
+                double outstandingAmount = totalPrice - payment;
+                String outstandingBalancePrice = String.format("%.2f", outstandingAmount);
+                generateInvoiceBill(invoiceData, outstandingBalancePrice);
+                updateStockAndCalculateProfit(model);
+                updateDebt(totalPriceStr, outstandingBalancePrice, String.valueOf(payment), date, nextDate, date, paymentMethodId, customerIdArray.get(customerCombo.getSelectedIndex()));
+                clear();
+                tableDataClear();
+                DialogBox.showMessage("Payment Successfull !!!", "Payment Successfull\n Outstanding Balance : " + outstandingBalancePrice, 1);
             } else {
-                DialogBox.showMessage("Error!!!", "Payment is greater than debt amount\nPlease use Invoice Creation.\nOr enter 0 or less amount.", 3);
+
             }
         } else {
             System.out.println("No");
         }
     }//GEN-LAST:event_paymentBtnMouseClicked
+
+    private void customerComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerComboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_customerComboActionPerformed
+
+    private void priceTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_priceTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -638,9 +621,7 @@ public class NewDebt extends javax.swing.JFrame {
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel imageLbl;
     private javax.swing.JTable invoiceTbl;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JLabel paymentBtn;
     private javax.swing.JLabel priceLbl;
     private com.zx.shopmanagementsystem.components.RoundedText priceTxt;
@@ -970,7 +951,7 @@ public class NewDebt extends javax.swing.JFrame {
         }
     }
 
-    public void updateStockAndCalculateProfit(DefaultTableModel model, String outstandingAmount) {
+    public void updateStockAndCalculateProfit(DefaultTableModel model) {
         String productName = "";
         double quantity = 0.0;
         double soldPrice = 0;
@@ -1001,7 +982,7 @@ public class NewDebt extends javax.swing.JFrame {
         System.out.println("Total Sold : " + totalsold);
 
         if (UserID != -1) {
-            saveDebt(String.valueOf(totalsold), outstandingAmount, payment, date, nextPayDate, paymentMethodId, customerIdArray.get(customerCombo.getSelectedIndex()));
+            //updateDebt(String.valueOf(totalsold), productName, time, date, date, date, paymentMethodId, UserID);
         }
     }
 
@@ -1056,7 +1037,7 @@ public class NewDebt extends javax.swing.JFrame {
             System.out.println("updateSoldItem(Get Product Id) -> New Invoice : " + ex.getMessage());
         }
         try {
-            DB.putdata("INSERT INTO debt_invoice (invoice_id, date, time, price, quantity, product_id, user_id, customer_id) VALUES ('" + newDebtInvoice + "','" + Date + "','" + Time + "','" + soldPrice + "','" + quantity + "','" + productId + "','" + userID + "','" + customerId + "')");
+            DB.putdata("INSERT INTO debt_invoice (invoice_id, date, time, price, quantity, product_id, user_id, customer_id, debt_id) VALUES ('" + newDebtInvoice + "','" + Date + "','" + Time + "','" + soldPrice + "','" + quantity + "','" + productId + "','" + userID + "','" + customerId + "','" + newDebtId + "')");
         } catch (Exception ex) {
             System.out.println("updateSoldItem(Save Data) -> New Debt Invoice : " + ex.getMessage());
         }
@@ -1104,35 +1085,11 @@ public class NewDebt extends javax.swing.JFrame {
         newDebtId = maxValue + 1;
     }
 
-    private void saveDebt(String totalSold, String outstanding, double lastPay, String Date, String nextDate, int paymentMethod, int customerId) {
+    public void updateDebt(String totalAmount, String outstandingAmount, String lastPayAmount, String startDate, String nextDate, String lastPayDate, int paymentMethod, int customerId) {
         try {
-            DB.putdata("INSERT INTO debt (debt_id, total_amount, outstanding_amount, last_pay_amount, start_date, next_date, last_pay_date, payment_method, customer_id) VALUES('" + newDebtId + "','" + totalSold + "','" + outstanding + "','" + lastPay + "','" + Date + "','" + nextDate + "','" + Date + "','" + paymentMethod + "','" + customerId + "')");
-            getMaxDebtValue();
+            DB.putdata("INSERT INTO debt (debt_id, total_amount, outstanding_amount, last_pay_amount, start_date, next_date, last_pay_date, payment_method, customer_id) VALUES ('" + newDebtId + "','" + totalAmount + "','" + outstandingAmount + "','" + lastPayAmount + "','" + startDate + "','" + nextDate + "','" + lastPayDate + "','" + paymentMethod + "','" + customerId + "')");
         } catch (Exception ex) {
-            System.err.println("New Debt -> SaveDebt : " + ex.getMessage());
+            System.out.println("updateDebt -> NewDebt : " + ex.getMessage());
         }
     }
-
-    public boolean isValidDate(String inputDate) {
-        boolean value;
-        try {
-            // Parse the input date
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-            String curDate = String.valueOf(LocalDate.now());
-            LocalDate currentDate = LocalDate.parse(curDate, formatter);
-            LocalDate enteredDate = LocalDate.parse(inputDate, formatter);
-
-            System.out.println("currentDate : " + currentDate);
-            System.out.println("enteredDate : " + enteredDate);
-
-            // Check if enteredDate is greater than one day from the current date
-            value = enteredDate.isAfter(currentDate);
-        } catch (Exception e) {
-            // Handle parsing exceptions (e.g., invalid date format)
-            value = false;
-        }
-        System.out.println(value);
-        return value;
-    }
-
 }

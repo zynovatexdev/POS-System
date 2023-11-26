@@ -55,7 +55,6 @@ public class CustomerRegistration extends javax.swing.JFrame {
         customerNameTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         customerNumberTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         updateBtn = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         customerIdLbl = new javax.swing.JLabel();
         customerCategoryCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         panelBorder1 = new com.raven.swing.PanelBorder();
@@ -75,13 +74,13 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
         customerNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerNameTxt.setHintText("Enter Customer Name");
-        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 140, 480, 50));
+        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, 480, 50));
 
         customerNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerNumberTxt.setHintText("Enter Customer Number");
-        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 230, 480, 50));
+        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 280, 50));
 
-        updateBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\RegisterPurpleIcon.png")); // NOI18N
+        updateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateBtnMouseClicked(evt);
@@ -93,20 +92,14 @@ public class CustomerRegistration extends javax.swing.JFrame {
                 updateBtnMouseExited(evt);
             }
         });
-        getContentPane().add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 570, -1, 70));
-
-        jLabel1.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("New Customer ID");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 70, 150, 30));
+        getContentPane().add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
         customerIdLbl.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
-        customerIdLbl.setForeground(new java.awt.Color(255, 255, 255));
-        getContentPane().add(customerIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 70, 150, 30));
+        getContentPane().add(customerIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 150, 30));
 
         customerCategoryCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         customerCategoryCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 470, 480, -1));
+        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 260, -1));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -122,20 +115,24 @@ public class CustomerRegistration extends javax.swing.JFrame {
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 480, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGap(0, 160, Short.MAX_VALUE)
+            .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelBorder1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 320, 480, 110));
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 480, 160));
 
         iconLable.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Customer_Registration.png")); // NOI18N
         getContentPane().add(iconLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -146,12 +143,12 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
     private void updateBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(updateBtn, il.RegisterWhiteIcon);
+
     }//GEN-LAST:event_updateBtnMouseEntered
 
     private void updateBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseExited
         // TODO add your handling code here:
-        func.iconSetter(updateBtn, il.RegisterPurpleIcon);
+
     }//GEN-LAST:event_updateBtnMouseExited
 
     private void updateBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnMouseClicked
@@ -238,7 +235,6 @@ public class CustomerRegistration extends javax.swing.JFrame {
     private com.zx.shopmanagementsystem.components.RoundedText customerNumberTxt;
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel iconLable;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JLabel updateBtn;

@@ -88,7 +88,7 @@ public class UserDetails extends javax.swing.JFrame {
 
         fullNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         fullNameTxt.setHintText("Full Name");
-        getContentPane().add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 430, 310, 50));
+        getContentPane().add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 310, 50));
 
         hidePasswordLblBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\HidePassword.png")); // NOI18N
         hidePasswordLblBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -96,13 +96,13 @@ public class UserDetails extends javax.swing.JFrame {
                 hidePasswordLblBtnMouseClicked(evt);
             }
         });
-        getContentPane().add(hidePasswordLblBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1120, 380, 35, 30));
+        getContentPane().add(hidePasswordLblBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 450, 35, 30));
 
         userNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         userNameTxt.setHintText("User Name");
-        getContentPane().add(userNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 310, 310, 50));
+        getContentPane().add(userNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 310, 50));
 
-        deleteBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\DeleteRedIcon.png")); // NOI18N
+        deleteBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\delete.png")); // NOI18N
         deleteBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteBtnLblMouseClicked(evt);
@@ -114,9 +114,9 @@ public class UserDetails extends javax.swing.JFrame {
                 deleteBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(deleteBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 610, -1, 54));
+        getContentPane().add(deleteBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 580, -1, 60));
 
-        editBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\EditPurpleIcon.png")); // NOI18N
+        editBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\edit.png")); // NOI18N
         editBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 editBtnLblMouseClicked(evt);
@@ -128,9 +128,9 @@ public class UserDetails extends javax.swing.JFrame {
                 editBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(editBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 610, 170, 54));
+        getContentPane().add(editBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 580, -1, 60));
 
-        updateBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\UpdatePurpleIcon.png")); // NOI18N
+        updateBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\update.png")); // NOI18N
         updateBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateBtnLblMouseClicked(evt);
@@ -142,13 +142,13 @@ public class UserDetails extends javax.swing.JFrame {
                 updateBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(updateBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 600, -1, -1));
+        getContentPane().add(updateBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 580, -1, -1));
 
         passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         passwordTxt.setPreferredSize(new java.awt.Dimension(157, 50));
-        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 370, 310, -1));
+        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 310, -1));
 
-        imageAvatar.setIcon(new javax.swing.ImageIcon("C:\\Users\\User\\Pictures\\image.jpg")); // NOI18N
+        imageAvatar.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\UserIcon.png")); // NOI18N
 
         updateImageIconBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\EditImageIcon.png")); // NOI18N
         updateImageIconBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -157,17 +157,17 @@ public class UserDetails extends javax.swing.JFrame {
             }
         });
         imageAvatar.add(updateImageIconBtn);
-        updateImageIconBtn.setBounds(150, 150, 50, 50);
+        updateImageIconBtn.setBounds(120, 130, 50, 50);
 
-        getContentPane().add(imageAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 70, 200, 200));
+        getContentPane().add(imageAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 180, 180));
 
         roleCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         roleCombo.setMinimumSize(new java.awt.Dimension(163, 50));
         roleCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        getContentPane().add(roleCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 490, 310, -1));
+        getContentPane().add(roleCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 310, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\User_Details.png")); // NOI18N
-        getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -175,32 +175,32 @@ public class UserDetails extends javax.swing.JFrame {
 
     private void editBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(editBtnLbl, il.editDetailsWhiteIcon);
+        //func.iconSetter(editBtnLbl, il.editDetailsWhiteIcon);
     }//GEN-LAST:event_editBtnLblMouseEntered
 
     private void editBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(editBtnLbl, il.editDetailsPurpleIcon);
+        //func.iconSetter(editBtnLbl, il.editDetailsPurpleIcon);
     }//GEN-LAST:event_editBtnLblMouseExited
 
     private void deleteBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(deleteBtnLbl, il.deleteWhiteIcon);
+        //func.iconSetter(deleteBtnLbl, il.deleteWhiteIcon);
     }//GEN-LAST:event_deleteBtnLblMouseEntered
 
     private void deleteBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(deleteBtnLbl, il.deleteRedIcon);
+        //func.iconSetter(deleteBtnLbl, il.deleteRedIcon);
     }//GEN-LAST:event_deleteBtnLblMouseExited
 
     private void updateBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(updateBtnLbl, il.updateWhiteIcon);
+        //func.iconSetter(updateBtnLbl, il.updateWhiteIcon);
     }//GEN-LAST:event_updateBtnLblMouseEntered
 
     private void updateBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(updateBtnLbl, il.UpdatePurpleIcon);
+        //func.iconSetter(updateBtnLbl, il.UpdatePurpleIcon);
     }//GEN-LAST:event_updateBtnLblMouseExited
 
     private void editBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBtnLblMouseClicked
@@ -208,7 +208,7 @@ public class UserDetails extends javax.swing.JFrame {
         deleteBtnLbl.setVisible(false);
         editBtnLbl.setVisible(false);
         updateBtnLbl.setVisible(true);
-        func.iconSetter(iconLbl, il.editUserScreen);
+        //func.iconSetter(iconLbl, il.editUserScreen);
         formEnable();
         updateImageIconBtn.setVisible(true);
     }//GEN-LAST:event_editBtnLblMouseClicked

@@ -65,9 +65,9 @@ public class InvoiceCategory extends javax.swing.JFrame {
 
         invoiceCategoryTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         invoiceCategoryTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        getContentPane().add(invoiceCategoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 240, 350, -1));
+        getContentPane().add(invoiceCategoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 350, -1));
 
-        saveBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SavePurpleIcon.png")); // NOI18N
+        saveBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         saveBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 saveBtnLblMouseClicked(evt);
@@ -79,7 +79,7 @@ public class InvoiceCategory extends javax.swing.JFrame {
                 saveBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(saveBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 520, 245, 50));
+        getContentPane().add(saveBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -105,10 +105,9 @@ public class InvoiceCategory extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 340, 350, 170));
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 350, 170));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Invoice Category.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1280, 720));
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
@@ -117,12 +116,12 @@ public class InvoiceCategory extends javax.swing.JFrame {
 
     private void saveBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(saveBtnLbl, il.SaveWhiteIcon);
+
     }//GEN-LAST:event_saveBtnLblMouseEntered
 
     private void saveBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(saveBtnLbl, il.SavePurpleIcon);
+
     }//GEN-LAST:event_saveBtnLblMouseExited
 
     private void saveBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveBtnLblMouseClicked

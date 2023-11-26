@@ -49,7 +49,6 @@ public class AllSales extends javax.swing.JFrame {
 
         combo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         head1 = new com.zx.shopmanagementsystem.components.Head();
-        panelBorder1 = new com.raven.swing.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
         allSalesTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
@@ -72,7 +71,12 @@ public class AllSales extends javax.swing.JFrame {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
-        getContentPane().add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 60, 240, 50));
+        combo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboActionPerformed(evt);
+            }
+        });
+        getContentPane().add(combo, new org.netbeans.lib.awtextra.AbsoluteConstraints(990, 48, 240, 40));
 
         head1.setHeaderTitle("");
         head1.setOpaque(false);
@@ -102,24 +106,7 @@ public class AllSales extends javax.swing.JFrame {
             allSalesTbl.getColumnModel().getColumn(0).setPreferredWidth(5);
         }
 
-        javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
-        panelBorder1.setLayout(panelBorder1Layout);
-        panelBorder1Layout.setHorizontalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1108, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        panelBorder1Layout.setVerticalGroup(
-            panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelBorder1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 1120, 480));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 1180, 520));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\All Sales.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -139,6 +126,10 @@ public class AllSales extends javax.swing.JFrame {
             monthly();
         }
     }//GEN-LAST:event_comboPopupMenuWillBecomeInvisible
+
+    private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboActionPerformed
 
     /**
      * @param args the command line arguments
@@ -182,7 +173,6 @@ public class AllSales extends javax.swing.JFrame {
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
-    private com.raven.swing.PanelBorder panelBorder1;
     // End of variables declaration//GEN-END:variables
 
     private void daily() {
