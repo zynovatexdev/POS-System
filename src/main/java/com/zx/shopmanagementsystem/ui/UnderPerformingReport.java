@@ -4,8 +4,22 @@
  */
 package com.zx.shopmanagementsystem.ui;
 
+import com.zx.shopmanagementsystem.assests.ExcelExporterProduct;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.assests.PdfExporterProduct;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
+import javax.swing.JTable;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,10 +31,33 @@ public class UnderPerformingReport extends javax.swing.JFrame {
      * Creates new form SalesReport
      */
     IconLocation il = new IconLocation();
+    JDBC DB = new JDBC();
 
     public UnderPerformingReport() {
         initComponents();
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        tableDataClear();
+        toDateTxt.setText("");
+        fromDateTxt.setText("");
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
+        toDateTxt.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) {
+                // This method is called when text is inserted into the document
+                handleTextChange();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                // This method is called when text is removed from the document
+                //handleTextChange();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                // This method is generally not needed for plain text fields
+            }
+        });
+        head1.setFrame(this);
     }
 
     /**
@@ -32,19 +69,119 @@ public class UnderPerformingReport extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        generateReportBtnLbl = new javax.swing.JLabel();
+        fromDate = new com.zx.shopmanagementsystem.dateChooser.DateChooser();
+        toDate = new com.zx.shopmanagementsystem.dateChooser.DateChooser();
+        fromDateTxt = new com.zx.shopmanagementsystem.components.RoundedText();
+        toDateTxt = new com.zx.shopmanagementsystem.components.RoundedText();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        underProductTbl = new javax.swing.JTable();
+        generateReportBtnLbl1 = new javax.swing.JLabel();
+        head1 = new com.zx.shopmanagementsystem.components.Head();
         iconLbl = new javax.swing.JLabel();
 
+        fromDate.setForeground(new java.awt.Color(0, 102, 255));
+        fromDate.setDateFormat("yyyy-MM-dd");
+        fromDate.setTextRefernce(fromDateTxt);
+
+        toDate.setForeground(new java.awt.Color(0, 102, 255));
+        toDate.setDateFormat("yyyy-MM-dd");
+        toDate.setTextRefernce(toDateTxt);
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(generateReportBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 640, 155, 40));
+
+        fromDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        fromDateTxt.setHintText("From Date");
+        getContentPane().add(fromDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 124, 190, 50));
+
+        toDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        toDateTxt.setHintText("To Date");
+        toDateTxt.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                toDateTxtInputMethodTextChanged(evt);
+            }
+        });
+        toDateTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toDateTxtActionPerformed(evt);
+            }
+        });
+        toDateTxt.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                toDateTxtPropertyChange(evt);
+            }
+        });
+        getContentPane().add(toDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 124, 190, 50));
+
+        underProductTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Index", "Product Name", "Total Sold"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(underProductTbl);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(55, 193, 1020, 420));
+
+        generateReportBtnLbl1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                generateReportBtnLbl1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(generateReportBtnLbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 640, 155, 40));
+
+        head1.setHeaderTitle("");
+        head1.setOpaque(false);
+        getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\UnderPerforminProduct Report.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1130, 718));
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void toDateTxtInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_toDateTxtInputMethodTextChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toDateTxtInputMethodTextChanged
+
+    private void toDateTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toDateTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toDateTxtActionPerformed
+
+    private void toDateTxtPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_toDateTxtPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toDateTxtPropertyChange
+
+    private void generateReportBtnLbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generateReportBtnLbl1MouseClicked
+        // TODO add your handling code here:
+        MessageDialog DialogBox = new MessageDialog(this);
+        if (isTableEmpty(underProductTbl)) {
+            System.out.println("The table is empty.");
+            DialogBox.showMessage("WARNING", "Choose Data First", 2);
+        } else {
+            System.out.println("The table is not empty.");
+            generateExcelReport();
+            generatePdfReport();
+        }
+    }//GEN-LAST:event_generateReportBtnLbl1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -83,7 +220,164 @@ public class UnderPerformingReport extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel generateReportBtnLbl;
+    private com.zx.shopmanagementsystem.dateChooser.DateChooser fromDate;
+    private com.zx.shopmanagementsystem.components.RoundedText fromDateTxt;
+    private javax.swing.JLabel generateReportBtnLbl1;
+    private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JScrollPane jScrollPane1;
+    private com.zx.shopmanagementsystem.dateChooser.DateChooser toDate;
+    private com.zx.shopmanagementsystem.components.RoundedText toDateTxt;
+    private javax.swing.JTable underProductTbl;
     // End of variables declaration//GEN-END:variables
+
+    private void handleTextChange() {
+        MessageDialog DialogBox = new MessageDialog(this);
+        if (fromDateTxt.getText().equals("")) {
+            DialogBox.showMessage("ERROR", "Please Select a Date in 'From Date'", 3);
+        } else if (toDateTxt.getText().equals("")) {
+            DialogBox.showMessage("ERROR", "Please Select a Date in 'To Date'", 3);
+        } else {
+            String fromDateStr = fromDateTxt.getText(); // Replace this with your from date string
+            String toDateStr = toDateTxt.getText();   // Replace this with your to date string
+
+            // Parse the strings to Date objects
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                Date fromDate = dateFormat.parse(fromDateStr);
+                Date toDate = dateFormat.parse(toDateStr);
+
+                // Get today's date
+                Date today = new Date();
+
+                // Compare timestamps
+                if (compareDates(fromDate, today) < 0) {
+                    System.out.println("From date is before today.");
+                    tableDataClear();
+                    tableDataLoader();
+                } else {
+                    System.out.println("Please Select " + LocalDate.now().minusDays(1) + " or Before");
+                    DialogBox.showMessage("WARNING", "Please Select " + LocalDate.now().minusDays(1) + " or Before in \n'From Date'", 2);
+                    tableDataClear();
+                }
+
+                if (compareDates(toDate, today) <= 0) {
+                    if (toDate.equals(LocalDate.now())) {
+                        System.out.println("Today");
+                    } else {
+                        System.out.println("Before");
+                        tableDataClear();
+                        tableDataLoader();
+                    }
+                } else {
+                    System.out.println("To date is in the future.");
+                    DialogBox.showMessage("WARNING", "Please Select " + LocalDate.now().minusDays(1) + " or Today in \n'To Date'", 2);
+                    tableDataClear();
+
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+    private static int compareDates(Date date1, Date date2) {
+        // Compare timestamps
+        long timestamp1 = date1.getTime();
+        long timestamp2 = date2.getTime();
+
+        return Long.compare(timestamp1, timestamp2);
+    }
+
+    private void tableDataLoader() {
+        String sql = "SELECT\n"
+                + "    p.product_name,\n"
+                + "    SUM(s.quantity) as total_quantity\n"
+                + "FROM\n"
+                + "    shopdb.sold_items s\n"
+                + "JOIN\n"
+                + "    shopdb.product p ON s.product_id = p.product_id\n"
+                + "WHERE\n"
+                + "    s.date BETWEEN '" + fromDateTxt.getText() + "' AND '" + toDateTxt.getText() + "'\n"
+                + "GROUP BY\n"
+                + "    s.product_id, p.product_name\n"
+                + "ORDER BY\n"
+                + "    total_quantity ASC\n" // Order in ascending order
+                + "LIMIT 12;";
+
+        try {
+            java.sql.ResultSet rs = DB.getdata(sql);
+            java.sql.ResultSet rs2 = DB.getdata(sql);
+            int index = 1; // Initialize index
+            if (rs2.next()) {
+                while (rs.next()) {
+                    String product_name = rs.getString("product_name");
+                    String total_quantity = rs.getString("total_quantity");
+
+                    String[] table_data = {String.valueOf(index), product_name, total_quantity};
+                    DefaultTableModel table = (DefaultTableModel) underProductTbl.getModel();
+                    table.addRow(table_data);
+                    index++; // Increment index for the next row
+                }
+            } else {
+                MessageDialog DialogBox = new MessageDialog(this);
+                DialogBox.showMessage("WARNING", "NO DATA", 2);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Top Performing Report Table Data Loader : " + ex);
+        }
+    }
+
+    private void tableDataClear() {
+        try {
+            while (0 <= underProductTbl.getRowCount()) {
+                DefaultTableModel table = (DefaultTableModel) underProductTbl.getModel();
+                table.removeRow(underProductTbl.getRowCount() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("Top Performing Table Data Clear : " + e);
+        }
+    }
+
+    private static boolean isTableEmpty(JTable table) {
+        // Get the table model
+        DefaultTableModel model = (DefaultTableModel) table.getModel();
+
+        // Check if the model has any rows
+        return model.getRowCount() == 0;
+    }
+
+    private void generateExcelReport() {
+        // Create file path using File.separator for cross-platform compatibility
+        String fileName = "Under_Performing_Report _" + fromDateTxt.getText() + "_to_" + toDateTxt.getText() + ".xlsx";
+        String directoryPath = System.getProperty("user.home") + File.separator + "Documents\\Reports\\Excel\\Under-Performing";
+        String filePath = directoryPath + File.separator + fileName;
+
+        // Create the necessary directories
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        // Generate the Excel report
+        ExcelExporterProduct.exportToExcel(underProductTbl, filePath);
+    }
+
+    private void generatePdfReport() {
+        // Create file path using File.separator for cross-platform compatibility
+        String fileName = "Under_Performing_Report _" + fromDateTxt.getText() + "_to_" + toDateTxt.getText() + ".pdf";
+        String directoryPath = System.getProperty("user.home") + File.separator + "Documents\\Reports\\PDF\\Under-Performing";
+        String filePath = directoryPath + File.separator + fileName;
+
+        // Create the necessary directories
+        File directory = new File(directoryPath);
+        if (!directory.exists()) {
+            directory.mkdirs();
+        }
+
+        // Generate the Excel report
+        PdfExporterProduct.exportToPdf(underProductTbl, filePath);
+    }
 }
