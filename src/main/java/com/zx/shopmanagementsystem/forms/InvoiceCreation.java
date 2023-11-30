@@ -93,19 +93,23 @@ public class InvoiceCreation extends javax.swing.JPanel {
         });
         add(invoiceCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, 260, 40));
 
+        jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        expireTbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        expireTbl.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         expireTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Item Name", "Expire Date", "Quantity", "Store Location"
+                "Invoice No", "Date", "Time", "Price", "Payment Method", "Customer Name", "Invoice Category"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -181,33 +185,42 @@ public class InvoiceCreation extends javax.swing.JPanel {
 
     private void tableDataLoader() {
         try {
-            String sql = "SELECT\n"
-                    + "    p.product_name,\n"
-                    + "    p.expiry_date,\n"
-                    + "    p.stock_quantity,\n"
-                    + "    s.store_location_name\n"
+            String sql = "SELECT \n"
+                    + "    cp.cash_invoice_id,\n"
+                    + "    cp.date,\n"
+                    + "    cp.time,\n"
+                    + "    cp.price,\n"
+                    + "    pm.payment_method_type,\n"
+                    + "    c.customer_name,\n"
+                    + "    ic.invoice_category_type\n"
                     + "FROM\n"
-                    + "    product p\n"
-                    + "JOIN\n"
-                    + "    store_location s ON p.store_location_id = s.store_location_id\n"
-                    + "WHERE\n"
-                    + "    p.expiry_date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 30 DAY);";
+                    + "    shopdb.cash_payment cp\n"
+                    + "        JOIN\n"
+                    + "    shopdb.payment_method pm ON cp.payment_method_id = pm.payment_method_id\n"
+                    + "        JOIN\n"
+                    + "    shopdb.customer c ON cp.customer_id = c.customer_id\n"
+                    + "        JOIN\n"
+                    + "    shopdb.invoice_catergory ic ON cp.invoice_category_id = ic.invoice_category_id\n"
+                    + "ORDER BY cp.date DESC , cp.time DESC;";
 
             java.sql.ResultSet rs = DB.getdata(sql);
             while (rs.next()) {
-                String product_name = String.valueOf(rs.getString("product_name"));
-                String expiry_date = String.valueOf(rs.getString("expiry_date"));
-                String stock_quantity = String.valueOf(rs.getString("stock_quantity"));
-                String store_location_name = String.valueOf(rs.getString("store_location_name"));
+                String cash_invoice_id = String.valueOf(rs.getInt("cash_invoice_id"));
+                String date = String.valueOf(rs.getString("date"));
+                String time = String.valueOf(rs.getString("time"));
+                String price = String.valueOf(rs.getString("price"));
+                String payment_method_type = String.valueOf(rs.getString("payment_method_type"));
+                String customer_name = String.valueOf(rs.getString("customer_name"));
+                String invoice_category_type = String.valueOf(rs.getString("invoice_category_type"));
 
-                String table_data[] = {product_name, expiry_date, stock_quantity, store_location_name};
+                String table_data[] = {cash_invoice_id, date, time, price, payment_method_type, customer_name, invoice_category_type};
                 DefaultTableModel table = (DefaultTableModel) expireTbl.getModel();
                 table.addRow(table_data);
 
             }
             DB.con().close();
         } catch (Exception ex) {
-            System.out.println("Expire Date Table Data Loader : " + ex);
+            System.out.println("Payment History Table Data Loader : " + ex);
         }
     }
 
@@ -218,7 +231,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 table.removeRow(expireTbl.getRowCount() - 1);
             }
         } catch (Exception e) {
-            System.out.println("Expire Date Table Data Clear : " + e);
+            System.out.println("Payment History Table Data Clear : " + e);
         }
     }
 }

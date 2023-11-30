@@ -18,7 +18,7 @@ public class SplashPanal extends javax.swing.JDialog {
     public SplashPanal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        getContentPane().setBackground(Color.decode("#d28df0"));
+        getContentPane().setBackground(Color.decode("#025282"));
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 

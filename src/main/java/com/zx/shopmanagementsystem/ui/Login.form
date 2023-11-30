@@ -66,7 +66,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="155" y="510" width="370" height="40"/>
+          <AbsoluteConstraints x="160" y="530" width="370" height="40"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -88,7 +88,7 @@
     <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="usernameTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins Medium" size="13" style="0"/>
+          <Font name="Poppins SemiBold" size="12" style="1"/>
         </Property>
         <Property name="hintText" type="java.lang.String" value="Enter Username"/>
       </Properties>
@@ -101,7 +101,7 @@
     <Component class="com.zx.shopmanagementsystem.components.RoundedPassword" name="passwordTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins Medium" size="13" style="0"/>
+          <Font name="Poppins SemiBold" size="12" style="1"/>
         </Property>
       </Properties>
       <Constraints>

@@ -57,7 +57,7 @@ public class ProductPerformance extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tabPanal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        tabPanal.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         tabPanal.setSelectedColor(new java.awt.Color(102, 204, 255));
         tabPanal.setUnselectedColor(new java.awt.Color(215, 215, 215));
         tabPanal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -74,6 +74,7 @@ public class ProductPerformance extends javax.swing.JPanel {
         errorLbl.setText("Not Enough Data");
 
         topPrePieChart.setChartType(com.zx.shopmanagementsystem.piechart.PieChart.PeiChartType.DONUT_CHART);
+        topPrePieChart.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         topPrePieChart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 topPrePieChartMouseClicked(evt);
@@ -142,6 +143,7 @@ public class ProductPerformance extends javax.swing.JPanel {
         });
 
         underPrePieChart.setChartType(com.zx.shopmanagementsystem.piechart.PieChart.PeiChartType.DONUT_CHART);
+        underPrePieChart.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         underPrePieChart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 underPrePieChartMouseClicked(evt);
@@ -198,7 +200,7 @@ public class ProductPerformance extends javax.swing.JPanel {
         );
         roundedGradiantPanal3Layout.setVerticalGroup(
             roundedGradiantPanal3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGap(0, 587, Short.MAX_VALUE)
         );
 
         tabPanal.addTab("Detailed Metrics Section", roundedGradiantPanal3);
@@ -214,7 +216,7 @@ public class ProductPerformance extends javax.swing.JPanel {
         );
         roundedGradiantPanal5Layout.setVerticalGroup(
             roundedGradiantPanal5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 589, Short.MAX_VALUE)
+            .addGap(0, 587, Short.MAX_VALUE)
         );
 
         tabPanal.addTab("Analytical Tools", roundedGradiantPanal5);

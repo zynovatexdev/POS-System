@@ -9,9 +9,11 @@ import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,6 +37,9 @@ public class InvoiceCategory extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         getMaxValue();
         head1.setFrame(this);
+        tableDataClear();
+        tableDataLoader();
+        TableCustom.apply(jScrollPane2, TableCustom.TableType.MULTI_LINE);
     }
 
     /**
@@ -52,6 +57,8 @@ public class InvoiceCategory extends javax.swing.JFrame {
         panelBorder1 = new com.raven.swing.PanelBorder();
         jScrollPane1 = new javax.swing.JScrollPane();
         descriptionTxt = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        invoiceCategoryTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,6 +114,29 @@ public class InvoiceCategory extends javax.swing.JFrame {
 
         getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 350, 170));
 
+        invoiceCategoryTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Invoice Category", "Description"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(invoiceCategoryTbl);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, 610, 380));
+
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Invoice Category.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -127,6 +157,8 @@ public class InvoiceCategory extends javax.swing.JFrame {
     private void saveBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveBtnLblMouseClicked
         // TODO add your handling code here:
         save();
+        tableDataClear();
+        tableDataLoader();
     }//GEN-LAST:event_saveBtnLblMouseClicked
 
     /**
@@ -171,8 +203,10 @@ public class InvoiceCategory extends javax.swing.JFrame {
     private javax.swing.JTextArea descriptionTxt;
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JTable invoiceCategoryTbl;
     private com.zx.shopmanagementsystem.components.RoundedText invoiceCategoryTxt;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private com.raven.swing.PanelBorder panelBorder1;
     private javax.swing.JLabel saveBtnLbl;
     // End of variables declaration//GEN-END:variables
@@ -251,5 +285,36 @@ public class InvoiceCategory extends javax.swing.JFrame {
             System.out.println(ex.getMessage() + "Invoice Category Checker");
         }
         return methodExist;
+    }
+
+    private void tableDataLoader() {
+        try {
+            String sql = "SELECT * FROM invoice_catergory";
+
+            java.sql.ResultSet rs = DB.getdata(sql);
+            while (rs.next()) {
+                String invoice_category_type = String.valueOf(rs.getString("invoice_category_type"));
+                String invoice_category_description = String.valueOf(rs.getString("invoice_category_description"));
+
+                String table_data[] = {invoice_category_type, invoice_category_description};
+                DefaultTableModel table = (DefaultTableModel) invoiceCategoryTbl.getModel();
+                table.addRow(table_data);
+
+            }
+            DB.con().close();
+        } catch (Exception ex) {
+            System.out.println("Payment History Table Data Loader : " + ex);
+        }
+    }
+
+    private void tableDataClear() {
+        try {
+            while (0 <= invoiceCategoryTbl.getRowCount()) {
+                DefaultTableModel table = (DefaultTableModel) invoiceCategoryTbl.getModel();
+                table.removeRow(invoiceCategoryTbl.getRowCount() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("Payment History Table Data Clear : " + e);
+        }
     }
 }

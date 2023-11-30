@@ -9,11 +9,11 @@ import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,9 +34,12 @@ public class PaymentMethod extends javax.swing.JFrame {
 
     public PaymentMethod() {
         initComponents();
+        TableCustom.apply(jScrollPane2, TableCustom.TableType.MULTI_LINE);
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         head1.setFrame(this);
         getMaxValue();
+        tableDataClear();
+        tableDataLoader();
     }
 
     /**
@@ -48,9 +51,15 @@ public class PaymentMethod extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        curruncyTxt = new com.zx.shopmanagementsystem.components.RoundedText();
+        bankTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         paymentMethodTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         saveBtnLbl = new javax.swing.JLabel();
         head1 = new com.zx.shopmanagementsystem.components.Head();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        paymentMethodTbl = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        description = new javax.swing.JTextArea();
         iconLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -58,7 +67,27 @@ public class PaymentMethod extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        paymentMethodTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        curruncyTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
+        curruncyTxt.setHintText("Enter Currency ");
+        curruncyTxt.setPreferredSize(new java.awt.Dimension(129, 50));
+        curruncyTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                curruncyTxtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(curruncyTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, 340, 45));
+
+        bankTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
+        bankTxt.setHintText("Enter Bank Name");
+        bankTxt.setPreferredSize(new java.awt.Dimension(129, 50));
+        bankTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bankTxtActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bankTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 600, 340, 45));
+
+        paymentMethodTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         paymentMethodTxt.setHintText("Enter Payment Method");
         paymentMethodTxt.setPreferredSize(new java.awt.Dimension(129, 50));
         paymentMethodTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +95,7 @@ public class PaymentMethod extends javax.swing.JFrame {
                 paymentMethodTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(paymentMethodTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 340, -1));
+        getContentPane().add(paymentMethodTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 340, 45));
 
         saveBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -84,6 +113,36 @@ public class PaymentMethod extends javax.swing.JFrame {
         head1.setHeaderTitle("");
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
+
+        paymentMethodTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Payment Method Type", "Description", "Curruncy", "Bank Name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(paymentMethodTbl);
+
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 620, 400));
+
+        description.setColumns(20);
+        description.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
+        description.setRows(5);
+        jScrollPane1.setViewportView(description);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 320, 190));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Payment Method.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -110,6 +169,14 @@ public class PaymentMethod extends javax.swing.JFrame {
         // TODO add your handling code here:
         savePaymentMethod();
     }//GEN-LAST:event_saveBtnLblMouseClicked
+
+    private void curruncyTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_curruncyTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_curruncyTxtActionPerformed
+
+    private void bankTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bankTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bankTxtActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,19 +215,30 @@ public class PaymentMethod extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.zx.shopmanagementsystem.components.RoundedText bankTxt;
+    private com.zx.shopmanagementsystem.components.RoundedText curruncyTxt;
+    private javax.swing.JTextArea description;
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable paymentMethodTbl;
     private com.zx.shopmanagementsystem.components.RoundedText paymentMethodTxt;
     private javax.swing.JLabel saveBtnLbl;
     // End of variables declaration//GEN-END:variables
 
     private void savePaymentMethod() {
         String paymentMethod = paymentMethodTxt.getText();
+        String description = this.description.getText();
+        String curruncyType = curruncyTxt.getText();
+        String bankName = bankTxt.getText();
 
         MessageDialog DialogBox = new MessageDialog(this);
 
         if (paymentMethod.equals("")) {
             DialogBox.showMessage("WARNING!!!", "Text Can't Empty", 2);
+        } else if (description.equals("")) {
+            DialogBox.showMessage("WARNING!!!", "Description Can't Empty", 2);
         } else {
             if (paymentMethodChecker(paymentMethod) == 1) {
                 DialogBox.showMessage("ERROR!!!", "Payment Method is Already Taken.", 3);
@@ -170,10 +248,15 @@ public class PaymentMethod extends javax.swing.JFrame {
                 if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
                     System.out.println("Yes");
                     try {
-                        String sql = "INSERT INTO payment_method (payment_method_id, payment_method_type) VALUES('" + newBarId + "','" + paymentMethod + "')";
+                        String sql = "INSERT INTO payment_method (payment_method_id, payment_method_type, description, curruncyType, bankName) VALUES('" + newBarId + "','" + paymentMethod + "','" + description + "','" + curruncyType + "','" + bankName + "')";
                         DB.putdata(sql);
                         DialogBox.showMessage("Done!!!", "Payment Method Successfully Saved", 1);
                         paymentMethodTxt.setText("");
+                        this.description.setText("");
+                        curruncyTxt.setText("");
+                        bankTxt.setText("");
+                        tableDataClear();
+                        tableDataLoader();
                         getMaxValue();
                     } catch (Exception ex) {
                         System.err.println("Save Payment Method -> Payment Method : " + ex.getMessage());
@@ -226,4 +309,36 @@ public class PaymentMethod extends javax.swing.JFrame {
         return methodExist;
     }
 
+    private void tableDataLoader() {
+        try {
+            String sql = "SELECT * FROM payment_method";
+
+            java.sql.ResultSet rs = DB.getdata(sql);
+            while (rs.next()) {
+                String payment_method_type = String.valueOf(rs.getString("payment_method_type"));
+                String descriptionStr = String.valueOf(rs.getString("description"));
+                String curruncyType = String.valueOf(rs.getString("curruncyType"));
+                String bankName = String.valueOf(rs.getString("bankName"));
+
+                String table_data[] = {payment_method_type, descriptionStr, curruncyType, bankName};
+                DefaultTableModel table = (DefaultTableModel) paymentMethodTbl.getModel();
+                table.addRow(table_data);
+
+            }
+            DB.con().close();
+        } catch (Exception ex) {
+            System.out.println("Payment History Table Data Loader : " + ex);
+        }
+    }
+
+    private void tableDataClear() {
+        try {
+            while (0 <= paymentMethodTbl.getRowCount()) {
+                DefaultTableModel table = (DefaultTableModel) paymentMethodTbl.getModel();
+                table.removeRow(paymentMethodTbl.getRowCount() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("Payment History Table Data Clear : " + e);
+        }
+    }
 }

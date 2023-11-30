@@ -162,7 +162,7 @@ public class productDetails extends javax.swing.JFrame {
                 updateProductBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(updateProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(582, 672, 200, 50));
+        getContentPane().add(updateProductBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 660, 200, 50));
 
         head1.setHeaderTextColor("#000000");
         head1.setHeaderTitle("");
@@ -275,12 +275,12 @@ public class productDetails extends javax.swing.JFrame {
 
     private void updateProductBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProductBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(updateProductBtnLbl, il.updateWhiteIcon);
+        //func.iconSetter(updateProductBtnLbl, il.updateWhiteIcon);
     }//GEN-LAST:event_updateProductBtnLblMouseEntered
 
     private void updateProductBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateProductBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(updateProductBtnLbl, il.UpdatePurpleIcon);
+        //func.iconSetter(updateProductBtnLbl, il.UpdatePurpleIcon);
     }//GEN-LAST:event_updateProductBtnLblMouseExited
 
     /**

@@ -105,6 +105,7 @@ public class InventoryManagement extends javax.swing.JPanel {
         jScrollPane1.setBorder(null);
         jScrollPane1.setOpaque(false);
 
+        inventoryTbl.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         inventoryTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -142,7 +143,6 @@ public class InventoryManagement extends javax.swing.JPanel {
 
         add(panelBorder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 136, 1070, 560));
 
-        searchTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         searchTxt.setHintText("Barcode or Item Name");
         searchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -160,7 +160,6 @@ public class InventoryManagement extends javax.swing.JPanel {
         add(barcodeIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 85, 40, 40));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\InventoryManagement.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(1116, 718));
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 

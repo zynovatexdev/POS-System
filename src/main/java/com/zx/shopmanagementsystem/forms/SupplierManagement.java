@@ -63,6 +63,7 @@ public class SupplierManagement extends javax.swing.JPanel {
         });
         add(addSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 90, 210, 40));
 
+        supllierTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         supllierTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

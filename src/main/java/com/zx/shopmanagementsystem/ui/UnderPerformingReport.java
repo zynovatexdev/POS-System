@@ -9,6 +9,7 @@ import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.assests.PdfExporterProduct;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import com.zx.shopmanagementsystem.notifications.PrintType;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
 import java.io.File;
@@ -178,8 +179,13 @@ public class UnderPerformingReport extends javax.swing.JFrame {
             DialogBox.showMessage("WARNING", "Choose Data First", 2);
         } else {
             System.out.println("The table is not empty.");
-            generateExcelReport();
-            generatePdfReport();
+            PrintType PrintType = new PrintType(this);
+            PrintType.showMessage();
+            if (PrintType.getReportType() == 0) {
+                generateExcelReport();
+            } else {
+                generatePdfReport();
+            }
         }
     }//GEN-LAST:event_generateReportBtnLbl1MouseClicked
 

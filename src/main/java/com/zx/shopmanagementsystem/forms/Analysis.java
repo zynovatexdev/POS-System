@@ -48,9 +48,10 @@ public class Analysis extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         chart.setForeground(new java.awt.Color(255, 255, 255));
+        chart.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
         add(chart, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 75, 1050, 610));
 
-        noticeTxt.setFont(new java.awt.Font("SansSerif", 1, 24)); // NOI18N
+        noticeTxt.setFont(new java.awt.Font("Poppins Medium", 0, 24)); // NOI18N
         noticeTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         noticeTxt.setText("Not Enough Data.");
         add(noticeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 80, 1050, 600));

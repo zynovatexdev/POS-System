@@ -63,6 +63,7 @@ public class UserManagement extends javax.swing.JPanel {
         });
         add(addUserBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 90, 210, 40));
 
+        userTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         userTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},

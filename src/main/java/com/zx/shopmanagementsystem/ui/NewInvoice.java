@@ -991,7 +991,7 @@ public class NewInvoice extends javax.swing.JFrame {
 
         if (UserID != -1) {
             updateUserProfile(date, time, String.valueOf(totalProfit), String.valueOf(totalsold), UserID);
-            updateCashPayment(date, String.valueOf(totalsold), paymentMethodId, customerIdArray.get(customerCombo.getSelectedIndex()), 1);
+            updateCashPayment(time, date, String.valueOf(totalsold), paymentMethodId, customerIdArray.get(customerCombo.getSelectedIndex()), 1);
 
         }
     }
@@ -1018,9 +1018,9 @@ public class NewInvoice extends javax.swing.JFrame {
         }
     }
 
-    public void updateCashPayment(String date, String price, int payment_method_id, int customer_id, int invoice_category_id) {
+    public void updateCashPayment(String time, String date, String price, int payment_method_id, int customer_id, int invoice_category_id) {
         try {
-            DB.putdata("INSERT INTO cash_payment (date, price, payment_method_id, customer_id, invoice_category_id) VALUES ('" + date + "','" + price + "','" + payment_method_id + "','" + customer_id + "','" + invoice_category_id + "')");
+            DB.putdata("INSERT INTO cash_payment (date, time, price, payment_method_id, customer_id, invoice_category_id) VALUES ('" + date + "','" + time + "','" + price + "','" + payment_method_id + "','" + customer_id + "','" + invoice_category_id + "')");
         } catch (Exception ex) {
             System.out.println("updateUserProfile : " + ex.getMessage());
         }
@@ -1112,7 +1112,7 @@ public class NewInvoice extends javax.swing.JFrame {
 
     private InputStream getLogo() {
         try {
-            String imageUrl = "file:" + il.logo; // Assuming il.logo is a string representing the image location
+            String imageUrl = "file:" + il.logo_1;
             URL url = new URL(imageUrl);
             return url.openStream();
         } catch (MalformedURLException e) {

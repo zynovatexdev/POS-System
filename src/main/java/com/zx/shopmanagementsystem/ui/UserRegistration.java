@@ -86,7 +86,7 @@ public class UserRegistration extends javax.swing.JFrame {
                 hidePasswordLblBtnMouseClicked(evt);
             }
         });
-        getContentPane().add(hidePasswordLblBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 340, -1, 30));
+        getContentPane().add(hidePasswordLblBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 470, -1, 30));
 
         registerBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,14 +104,14 @@ public class UserRegistration extends javax.swing.JFrame {
 
         usernameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         usernameTxt.setHintText("Enter User Name");
-        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 320, 50));
+        getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 330, 50));
 
         passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 330, 330, 50));
+        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 330, 50));
 
         fullNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         fullNameTxt.setHintText("Enter Full Name");
-        getContentPane().add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 440, 330, 50));
+        getContentPane().add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 330, 50));
 
         head1.setFrame(null);
         head1.setHeaderTitle("");
@@ -142,7 +142,7 @@ public class UserRegistration extends javax.swing.JFrame {
 
         userRoleCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         userRoleCombo.setPreferredSize(new java.awt.Dimension(185, 50));
-        getContentPane().add(userRoleCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 550, 320, -1));
+        getContentPane().add(userRoleCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 550, 330, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\User_Registration.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

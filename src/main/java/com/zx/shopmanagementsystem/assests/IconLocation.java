@@ -128,4 +128,5 @@ public class IconLocation {
     public String AddNewDebtWhiteIcon = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/SettingsMenuWhiteBtn.png";
     public String MinimizeIconBlue = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/MinimizeIconBlue.png";
     public String CloseBlue = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/CloseBlue.png";
+    public String logo_1 = "/C:/ShopManagementSystem/src/main/java/com/zx/shopmanagementsystem/icons/logo_1.png";
 }

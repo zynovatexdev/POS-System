@@ -78,12 +78,12 @@ public class HomeAdmin extends javax.swing.JPanel {
         totalDailySaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         add(totalDailySaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 170, 295, 80));
 
-        itemName.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        itemName.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         itemName.setForeground(new java.awt.Color(255, 255, 255));
         itemName.setText("Item Name");
         add(itemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, 200, 30));
 
-        store_Location.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        store_Location.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         store_Location.setForeground(new java.awt.Color(255, 255, 255));
         store_Location.setText("Store Location");
         add(store_Location, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 200, 30));
@@ -94,27 +94,28 @@ public class HomeAdmin extends javax.swing.JPanel {
                 lowStockBtnLblMouseClicked(evt);
             }
         });
-        add(lowStockBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 290, 20));
+        add(lowStockBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 300, 290, 30));
 
         todaySalseViewAllBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 todaySalseViewAllBtnLblMouseClicked(evt);
             }
         });
-        add(todaySalseViewAllBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 280, 20));
+        add(todaySalseViewAllBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 300, 280, 30));
 
         monthlySalseViewAllBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 monthlySalseViewAllBtnLblMouseClicked(evt);
             }
         });
-        add(monthlySalseViewAllBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 280, 20));
+        add(monthlySalseViewAllBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 300, 280, 30));
 
         totalMonthSaleTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 30)); // NOI18N
         totalMonthSaleTxt.setForeground(new java.awt.Color(255, 255, 255));
         totalMonthSaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         add(totalMonthSaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 170, 295, 80));
 
+        chart.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         chart.setOpaque(false);
         add(chart, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 360, 645, 315));
 

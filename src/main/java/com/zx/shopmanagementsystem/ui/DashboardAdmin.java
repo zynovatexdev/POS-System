@@ -32,6 +32,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 import javax.swing.ImageIcon;
 import java.util.Timer;
@@ -41,7 +44,7 @@ import java.util.TimerTask;
  *
  * @author User
  */
-public class DashboardAdmin extends javax.swing.JFrame {
+public class DashboardAdmin extends javax.swing.JFrame implements Runnable {
 
     /**
      * Creates new form Dashboard
@@ -54,6 +57,10 @@ public class DashboardAdmin extends javax.swing.JFrame {
     public int UseriD;
     String path;
     long backuptime;
+
+    int hour, min, sec;
+    int day, month, year;
+    String timeStr, yearStr;
 
     public DashboardAdmin() {
         initComponents();
@@ -99,6 +106,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         timer.scheduleAtFixedRate(new MyTask(), 0, backuptime);
         setBackground(new Color(255, 255, 255));
         setIcon();
+        Thread t = new Thread(this);
+        t.start();
     }
 
     /**
@@ -116,6 +125,8 @@ public class DashboardAdmin extends javax.swing.JFrame {
         closeBtnLbl = new javax.swing.JLabel();
         minimizeBtnLbl = new javax.swing.JLabel();
         nameLbl = new javax.swing.JLabel();
+        timeLbl = new javax.swing.JLabel();
+        dateLbl = new javax.swing.JLabel();
         scrollPaneWin111 = new com.zx.shopmanagementsystem.menu.scroll.win11.ScrollPaneWin11();
         menu1 = new com.zx.shopmanagementsystem.menu.ui.Menu();
         body = new javax.swing.JPanel();
@@ -163,6 +174,16 @@ public class DashboardAdmin extends javax.swing.JFrame {
         nameLbl.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         nameLbl.setForeground(new java.awt.Color(255, 255, 255));
 
+        timeLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 12)); // NOI18N
+        timeLbl.setForeground(new java.awt.Color(255, 255, 255));
+        timeLbl.setText("jLabel1");
+        timeLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        dateLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 12)); // NOI18N
+        dateLbl.setForeground(new java.awt.Color(255, 255, 255));
+        dateLbl.setText("jLabel2");
+        dateLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
         javax.swing.GroupLayout header1Layout = new javax.swing.GroupLayout(header1);
         header1.setLayout(header1Layout);
         header1Layout.setHorizontalGroup(
@@ -173,27 +194,38 @@ public class DashboardAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(minimizeBtnLbl)
+                .addGroup(header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(header1Layout.createSequentialGroup()
+                        .addComponent(timeLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(minimizeBtnLbl))
+                    .addComponent(dateLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(closeBtnLbl)
                 .addGap(15, 15, 15))
         );
         header1Layout.setVerticalGroup(
             header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(header1Layout.createSequentialGroup()
-                .addGroup(header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(header1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, header1Layout.createSequentialGroup()
+                .addGroup(header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, header1Layout.createSequentialGroup()
+                        .addGap(15, 15, 15)
+                        .addComponent(closeBtnLbl)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, header1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(header1Layout.createSequentialGroup()
-                                .addGap(17, 17, 17)
-                                .addComponent(minimizeBtnLbl)
-                                .addGap(0, 0, Short.MAX_VALUE))
                             .addComponent(imageAvatar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)))
-                    .addGroup(header1Layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(closeBtnLbl)))
+                            .addComponent(nameLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(header1Layout.createSequentialGroup()
+                                .addGroup(header1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(timeLbl)
+                                    .addGroup(header1Layout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addComponent(minimizeBtnLbl)))
+                                .addGap(0, 0, 0)
+                                .addComponent(dateLbl)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
 
@@ -313,6 +345,36 @@ public class DashboardAdmin extends javax.swing.JFrame {
         });
     }
 
+    @Override
+    public void run() {
+        while (true) {
+            try {
+                Calendar c = Calendar.getInstance();
+                hour = c.get(Calendar.HOUR_OF_DAY);
+                if (hour > 12) {
+                    hour = hour - 12;
+                }
+
+                min = c.get(Calendar.MINUTE);
+                sec = c.get(Calendar.SECOND);
+                year = c.get(Calendar.YEAR);
+                month = c.get(Calendar.MONTH);
+                day = c.get(Calendar.DAY_OF_MONTH);
+                SimpleDateFormat stf = new SimpleDateFormat("hh:mm:ss a");
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyy:MM:dd");
+                Date time_date = c.getTime();
+
+                timeStr = stf.format(time_date);
+                yearStr = sdf.format(time_date);
+
+                timeLbl.setText(timeStr);
+                dateLbl.setText(yearStr);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     private class MyTask extends TimerTask {
 
         @Override
@@ -334,6 +396,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel body;
     private javax.swing.JLabel closeBtnLbl;
+    private javax.swing.JLabel dateLbl;
     private com.zx.shopmanagementsystem.components.Header header1;
     private com.zx.shopmanagementsystem.components.ImageAvatar imageAvatar;
     private javax.swing.JPanel jPanel1;
@@ -341,6 +404,7 @@ public class DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel minimizeBtnLbl;
     private javax.swing.JLabel nameLbl;
     private com.zx.shopmanagementsystem.menu.scroll.win11.ScrollPaneWin11 scrollPaneWin111;
+    private javax.swing.JLabel timeLbl;
     // End of variables declaration//GEN-END:variables
 
     private void setIcon() {

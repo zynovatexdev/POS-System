@@ -80,6 +80,7 @@ public class CustomerManagement extends javax.swing.JPanel {
 
         jScrollPane1.setBorder(null);
 
+        customerTbl.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
         customerTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},

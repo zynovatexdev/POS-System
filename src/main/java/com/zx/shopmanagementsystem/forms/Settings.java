@@ -51,21 +51,21 @@ public class Settings extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         jLabel2.setText("Minute");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 100, 20));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         jLabel1.setText("Items");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 100, 20));
 
         lowStockCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "50", "100", "150", "200" }));
-        lowStockCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lowStockCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         lowStockCombo.setPreferredSize(new java.awt.Dimension(163, 50));
         add(lowStockCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 250, 50));
 
         backUpTimeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "15", "20", "25", "30" }));
-        backUpTimeCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        backUpTimeCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         backUpTimeCombo.setPreferredSize(new java.awt.Dimension(163, 50));
         add(backUpTimeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 250, 50));
 
@@ -82,7 +82,7 @@ public class Settings extends javax.swing.JPanel {
                 settingBtnLblMouseExited(evt);
             }
         });
-        add(settingBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 630, 245, 50));
+        add(settingBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 620, 245, 50));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Settings.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

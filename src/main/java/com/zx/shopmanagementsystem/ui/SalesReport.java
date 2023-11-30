@@ -9,6 +9,7 @@ import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.assests.PdfExporter;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import com.zx.shopmanagementsystem.notifications.PrintType;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
 import java.io.File;
@@ -176,13 +177,20 @@ public class SalesReport extends javax.swing.JFrame {
     private void generateReportBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_generateReportBtnLblMouseClicked
         // TODO add your handling code here:
         MessageDialog DialogBox = new MessageDialog(this);
+
         if (isTableEmpty(salesTbl)) {
             System.out.println("The table is empty.");
             DialogBox.showMessage("WARNING", "Choose Data First", 2);
         } else {
             System.out.println("The table is not empty.");
-            generateExcelReport();
-            generatePdfReport();
+            PrintType PrintType = new PrintType(this);
+            PrintType.showMessage();
+            if (PrintType.getReportType() == 0) {
+                generateExcelReport();
+            } else {
+                generatePdfReport();
+            }
+
         }
     }//GEN-LAST:event_generateReportBtnLblMouseClicked
 
@@ -315,9 +323,9 @@ public class SalesReport extends javax.swing.JFrame {
                 String sale_date = (rs.getString("sale_date"));
                 String product_name = (rs.getString("product_name"));
                 String products_sold = (rs.getString("products_sold"));
-                String total_profit = (rs.getString("total_profit"));
+                String total_sales = (rs.getString("total_sales"));
 
-                String table_data[] = {sale_date, product_name, products_sold, total_profit};
+                String table_data[] = {sale_date, product_name, products_sold, total_sales};
                 DefaultTableModel table = (DefaultTableModel) salesTbl.getModel();
                 table.addRow(table_data);
 
