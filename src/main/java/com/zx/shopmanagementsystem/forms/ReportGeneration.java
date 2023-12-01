@@ -35,6 +35,7 @@ public class ReportGeneration extends javax.swing.JPanel {
         topReportBtnLbl = new javax.swing.JLabel();
         underReportBtnLbl = new javax.swing.JLabel();
         salsReportBtnLbl = new javax.swing.JLabel();
+        sendLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1116, 718));
@@ -67,6 +68,7 @@ public class ReportGeneration extends javax.swing.JPanel {
             }
         });
         add(salsReportBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 150, 50));
+        add(sendLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 640, 155, 40));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ReportGeneration.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -96,6 +98,7 @@ public class ReportGeneration extends javax.swing.JPanel {
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel profitReportBtnLbl;
     private javax.swing.JLabel salsReportBtnLbl;
+    private javax.swing.JLabel sendLbl;
     private javax.swing.JLabel topReportBtnLbl;
     private javax.swing.JLabel underReportBtnLbl;
     // End of variables declaration//GEN-END:variables
