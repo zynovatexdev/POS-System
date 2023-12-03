@@ -54,7 +54,7 @@ public class Head_Systemout extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(111, 0, 150));
 
-        closeLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\Close_Black.png")); // NOI18N
+        closeLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\CloseBlue.png")); // NOI18N
         closeLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 closeLblMouseClicked(evt);
@@ -89,7 +89,7 @@ public class Head_Systemout extends javax.swing.JPanel {
 
     private void closeLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(closeLbl, il.closeBlackIcon);
+        func.iconSetter(closeLbl, il.CloseBlue);
     }//GEN-LAST:event_closeLblMouseExited
 
     private void closeLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_closeLblMouseClicked

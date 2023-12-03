@@ -69,8 +69,6 @@ public class Settings extends javax.swing.JPanel {
         backUpTimeCombo.setPreferredSize(new java.awt.Dimension(163, 50));
         add(backUpTimeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 250, 50));
 
-        settingBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SavePurpleIcon.png")); // NOI18N
-        settingBtnLbl.setText("jLabel3");
         settingBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 settingBtnLblMouseClicked(evt);
@@ -82,7 +80,7 @@ public class Settings extends javax.swing.JPanel {
                 settingBtnLblMouseExited(evt);
             }
         });
-        add(settingBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 620, 245, 50));
+        add(settingBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(435, 610, 250, 60));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Settings.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -90,12 +88,12 @@ public class Settings extends javax.swing.JPanel {
 
     private void settingBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnLblMouseEntered
         // TODO add your handling code here:
-        func.iconSetter(settingBtnLbl, il.SaveWhiteIcon);
+        // func.iconSetter(settingBtnLbl, il.SaveWhiteIcon);
     }//GEN-LAST:event_settingBtnLblMouseEntered
 
     private void settingBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnLblMouseExited
         // TODO add your handling code here:
-        func.iconSetter(settingBtnLbl, il.SavePurpleIcon);
+        //func.iconSetter(settingBtnLbl, il.SavePurpleIcon);
     }//GEN-LAST:event_settingBtnLblMouseExited
 
     private void settingBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingBtnLblMouseClicked

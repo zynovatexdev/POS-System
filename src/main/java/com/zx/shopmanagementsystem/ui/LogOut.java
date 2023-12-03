@@ -4,6 +4,8 @@
  */
 package com.zx.shopmanagementsystem.ui;
 
+import java.io.IOException;
+
 /**
  *
  * @author User
@@ -42,7 +44,7 @@ public class LogOut extends javax.swing.JFrame {
                 looutLblMouseClicked(evt);
             }
         });
-        getContentPane().add(looutLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 360, 280, 40));
+        getContentPane().add(looutLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 340, 280, 40));
 
         head_Systemout1.setOpaque(false);
         getContentPane().add(head_Systemout1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 960, -1));
@@ -56,9 +58,10 @@ public class LogOut extends javax.swing.JFrame {
 
     private void looutLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_looutLblMouseClicked
         // TODO add your handling code here:
-        Login login = new Login();
-        login.setVisible(true);
-        this.dispose();
+//        Login login = new Login();
+//        login.setVisible(true);
+//        this.dispose();
+        restartApplication(Login.class);
     }//GEN-LAST:event_looutLblMouseClicked
 
     /**
@@ -101,4 +104,28 @@ public class LogOut extends javax.swing.JFrame {
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel looutLbl;
     // End of variables declaration//GEN-END:variables
+
+    private void restartApplication(Class<?> clazz) {
+        // Dispose of the current JFrame before restarting
+        this.dispose();
+
+        try {
+            // Get the current Java process
+            String java = System.getProperty("java.home") + "/bin/java";
+            String className = clazz.getName();
+
+            // Start a new process to run the specified Java class
+            ProcessBuilder builder = new ProcessBuilder(java, "-cp", System.getProperty("java.class.path"), className);
+            builder.inheritIO(); // Redirect input/output/error streams to the current process
+
+            // Start the new process and wait for it to finish
+            Process process = builder.start();
+            process.waitFor();
+
+            // Exit the current process
+            System.exit(0);
+        } catch (IOException | InterruptedException ex) {
+            ex.printStackTrace();
+        }
+    }
 }

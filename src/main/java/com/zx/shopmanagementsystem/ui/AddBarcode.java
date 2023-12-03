@@ -39,42 +39,6 @@ public class AddBarcode extends javax.swing.JFrame {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         getMaxValue();
-        Thread dataUpdateThread = new Thread(() -> {
-            try {
-                ServerSocket serverSocket = new ServerSocket(12345);  // Use an available port
-
-                while (true) {
-                    Socket socket = serverSocket.accept();
-                    InputStream inputStream = socket.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                    String line;
-                    String prv = "";
-
-                    while ((line = reader.readLine()) != null) {
-                        if (line.equals(prv)) {
-                            System.out.println("Same Value");
-                        } else if (line.equals("Done")) {
-                            System.out.println("Done");
-                            socket.close();
-                        } else if (line.startsWith("QRCODE")) {
-                            System.out.println("it is a QR");
-                            //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
-                        } else {
-                            System.out.println("it is not a QR");
-                            barcodeValueTxt.setText(line);
-                            //barcodeTxt.setText(line);
-                        }
-                        prv = line;
-                    }
-
-                    socket.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        dataUpdateThread.start();
         head1.setFrame(this);
     }
 
@@ -184,12 +148,32 @@ public class AddBarcode extends javax.swing.JFrame {
     }//GEN-LAST:event_addBarcodeBtnLblMouseClicked
 
     private void barcodeDetectorBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barcodeDetectorBtnLblMouseClicked
-        // TODO add your handling code here:
-        String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abc.py";
         try {
-            Runtime.getRuntime().exec("python " + pythonScript);
-        } catch (IOException ex) {
-            System.out.println("Barcode Detector Btn : " + ex.getMessage());
+            String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abcCopy.py";
+            Process process = Runtime.getRuntime().exec("python " + pythonScript);
+
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            try {
+                while ((line = reader.readLine()) != null) {
+                    if (line.equals("Done")) {
+                        System.out.println("Done");
+
+                    } else if (line.startsWith("QRCODE")) {
+                        System.out.println("it is a QR");
+                        // jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
+                    } else {
+                        System.out.println("it is not a QR");
+                        barcodeValueTxt.setText(line);
+                        // barcodeTxt.setText(line);
+                    }
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(AddBarcode.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_barcodeDetectorBtnLblMouseClicked
 

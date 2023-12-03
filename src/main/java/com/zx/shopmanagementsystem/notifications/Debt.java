@@ -157,7 +157,14 @@ public class Debt extends javax.swing.JDialog {
     }
 
     public String getPaymentValue() {
-        return paymentTxt.getText();
+        String value;
+        if (paymentTxt.getText().equals("")) {
+            value = "0";
+        } else {
+            value = paymentTxt.getText();
+        }
+        return value;
+
     }
 
     public String getNextDate() {

@@ -86,7 +86,7 @@ public class InvoiceCategory extends javax.swing.JFrame {
                 saveBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(saveBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
+        getContentPane().add(saveBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 610, 200, 50));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -133,9 +133,10 @@ public class InvoiceCategory extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        invoiceCategoryTbl.setPreferredSize(new java.awt.Dimension(155, 80));
         jScrollPane2.setViewportView(invoiceCategoryTbl);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 180, 610, 380));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 160, 635, 430));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Invoice Category.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

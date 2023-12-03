@@ -61,6 +61,7 @@ public class NewDebt extends javax.swing.JFrame {
     int UserID;
     String time;
     String date;
+    String nextDate;
     private int maxDebtInvoice;
     private int newDebtInvoice;
     private int maxDebtId;
@@ -75,50 +76,8 @@ public class NewDebt extends javax.swing.JFrame {
         customerComboLoader();
         onlyNumbers(priceTxt);
         onlyNumbers(quantityTxt);
-        Thread dataUpdateThread = new Thread(() -> {
-            try {
-                ServerSocket serverSocket = new ServerSocket(12345);  // Use an available port
-                MessageDialog DialogBox = new MessageDialog(this);
-                while (true) {
-                    Socket socket = serverSocket.accept();
-                    InputStream inputStream = socket.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                    String line;
-                    String prv = "";
-
-                    while ((line = reader.readLine()) != null) {
-                        if (line.equals(prv)) {
-                            System.out.println("Same Value");
-                        } else if (line.equals("Done")) {
-                            System.out.println("Done");
-                        } else if (line.startsWith("QRCODE")) {
-                            System.out.println("it is a QR");
-                            //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
-                        } else {
-                            System.out.println("it is not a QR");
-
-                            if (barcodeChecker(line)) {
-                                System.out.println("Barcode Found");
-                                getItemDetails();
-                            } else {
-                                System.out.println("Barcode Not Found : New Invoice");
-                                DialogBox.showMessage("ERROR!!!", "Barcode Not Found in System", 3);
-                            }
-                        }
-                        prv = line;
-                    }
-
-                    socket.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        dataUpdateThread.start();
         head1.setFrame(this);
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
-
         clear();
         tableDataClear();
         invoiceTbl.getColumnModel().getColumn(4).setCellRenderer(new DeleteButtonEditorRenderer());
@@ -134,6 +93,7 @@ public class NewDebt extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        invoiceCategoryCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         batcodeIconLbl = new javax.swing.JLabel();
         productNameCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         customerCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
@@ -148,13 +108,38 @@ public class NewDebt extends javax.swing.JFrame {
         priceLbl = new javax.swing.JLabel();
         editPriceLbl = new javax.swing.JLabel();
         selectBtnIcon = new javax.swing.JLabel();
-        imageLbl = new javax.swing.JLabel();
         discountSpinner = new com.zx.shopmanagementsystem.components.Spinner();
+        imageLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        invoiceCategoryCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Regular", "Retail" }));
+        invoiceCategoryCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        invoiceCategoryCombo.setPreferredSize(new java.awt.Dimension(163, 50));
+        invoiceCategoryCombo.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                invoiceCategoryComboItemStateChanged(evt);
+            }
+        });
+        invoiceCategoryCombo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                invoiceCategoryComboMouseClicked(evt);
+            }
+        });
+        invoiceCategoryCombo.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                invoiceCategoryComboPropertyChange(evt);
+            }
+        });
+        invoiceCategoryCombo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                invoiceCategoryComboKeyPressed(evt);
+            }
+        });
+        getContentPane().add(invoiceCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 380, 300, 40));
 
         batcodeIconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
         batcodeIconLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -163,7 +148,7 @@ public class NewDebt extends javax.swing.JFrame {
                 batcodeIconLblMouseClicked(evt);
             }
         });
-        getContentPane().add(batcodeIconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 310, 40, 40));
+        getContentPane().add(batcodeIconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(515, 295, 40, 40));
 
         productNameCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productNameCombo.setPreferredSize(new java.awt.Dimension(163, 50));
@@ -187,7 +172,7 @@ public class NewDebt extends javax.swing.JFrame {
                 productNameComboKeyPressed(evt);
             }
         });
-        getContentPane().add(productNameCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 300, -1));
+        getContentPane().add(productNameCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 300, 40));
 
         customerCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         customerCombo.setPreferredSize(new java.awt.Dimension(163, 50));
@@ -196,7 +181,7 @@ public class NewDebt extends javax.swing.JFrame {
                 customerComboActionPerformed(evt);
             }
         });
-        getContentPane().add(customerCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 300, -1));
+        getContentPane().add(customerCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 300, 40));
 
         quantityTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         quantityTxt.setHintText("Enter Quantity");
@@ -206,7 +191,7 @@ public class NewDebt extends javax.swing.JFrame {
                 quantityTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, -1, -1));
+        getContentPane().add(quantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 465, 180, 40));
 
         head1.setHeaderTitle("");
         head1.setOpaque(false);
@@ -220,7 +205,7 @@ public class NewDebt extends javax.swing.JFrame {
                 priceTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 530, -1, -1));
+        getContentPane().add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 550, 300, 40));
 
         paymentBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         paymentBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -313,7 +298,7 @@ public class NewDebt extends javax.swing.JFrame {
                 editPriceLblMouseClicked(evt);
             }
         });
-        getContentPane().add(editPriceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 540, 70, -1));
+        getContentPane().add(editPriceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 560, 70, -1));
 
         selectBtnIcon.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SelectIcon.png")); // NOI18N
         selectBtnIcon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -321,10 +306,7 @@ public class NewDebt extends javax.swing.JFrame {
                 selectBtnIconMouseClicked(evt);
             }
         });
-        getContentPane().add(selectBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 320, -1, 30));
-
-        imageLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\AddNewDebt.png")); // NOI18N
-        getContentPane().add(imageLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(selectBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, -1, 30));
 
         discountSpinner.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         discountSpinner.setPreferredSize(new java.awt.Dimension(65, 50));
@@ -355,7 +337,10 @@ public class NewDebt extends javax.swing.JFrame {
                 discountSpinnerVetoableChange(evt);
             }
         });
-        getContentPane().add(discountSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 510, 320, -1));
+        getContentPane().add(discountSpinner, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 460, 180, 40));
+
+        imageLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\AddNewDebt.png")); // NOI18N
+        getContentPane().add(imageLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -447,11 +432,39 @@ public class NewDebt extends javax.swing.JFrame {
 
     private void batcodeIconLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_batcodeIconLblMouseClicked
         // TODO add your handling code here:
-        String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abc.py";
+        MessageDialog DialogBox = new MessageDialog(this);
         try {
-            Runtime.getRuntime().exec("python " + pythonScript);
-        } catch (IOException ex) {
-            System.out.println("Barcode Detector Btn : " + ex.getMessage());
+            String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abcCopy.py";
+            Process process = Runtime.getRuntime().exec("python " + pythonScript);
+
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            String prv = "";
+
+            while ((line = reader.readLine()) != null) {
+                if (line.equals(prv)) {
+                    System.out.println("Same Value");
+                } else if (line.equals("Done")) {
+                    System.out.println("Done");
+                } else if (line.startsWith("QRCODE")) {
+                    System.out.println("it is a QR");
+                    //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
+                } else {
+                    System.out.println("it is not a QR");
+
+                    if (barcodeChecker(line)) {
+                        System.out.println("Barcode Found");
+                        getItemDetails();
+                    } else {
+                        System.out.println("Barcode Not Found : New Invoice");
+                        DialogBox.showMessage("ERROR!!!", "Barcode Not Found in System", 3);
+                    }
+                }
+                prv = line;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_batcodeIconLblMouseClicked
 
@@ -533,13 +546,15 @@ public class NewDebt extends javax.swing.JFrame {
 
         if (pay.getMessageType() == Debt.MessageType.YES) {
             System.out.println("Yes");
-            String nextDate = "";
+
             try {
                 payment = Double.parseDouble(pay.getPaymentValue());
                 paymentMethodId = pay.getPaymentMethodId();
                 nextDate = pay.getNextDate();
+                System.out.println("Next Date : " + nextDate);
                 System.out.println("payid : " + paymentMethodId);
                 System.out.println("pay : " + payment);
+                System.out.println("Payment : " + payment);
             } catch (NumberFormatException e) {
                 System.err.println("Invalid number format: " + e.getMessage());
             }
@@ -568,6 +583,22 @@ public class NewDebt extends javax.swing.JFrame {
     private void priceTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceTxtActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_priceTxtActionPerformed
+
+    private void invoiceCategoryComboItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_invoiceCategoryComboItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_invoiceCategoryComboItemStateChanged
+
+    private void invoiceCategoryComboMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCategoryComboMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_invoiceCategoryComboMouseClicked
+
+    private void invoiceCategoryComboPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_invoiceCategoryComboPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_invoiceCategoryComboPropertyChange
+
+    private void invoiceCategoryComboKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_invoiceCategoryComboKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_invoiceCategoryComboKeyPressed
 
     /**
      * @param args the command line arguments
@@ -620,6 +651,7 @@ public class NewDebt extends javax.swing.JFrame {
     private javax.swing.JLabel editPriceLbl;
     private com.zx.shopmanagementsystem.components.Head head1;
     private javax.swing.JLabel imageLbl;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion invoiceCategoryCombo;
     private javax.swing.JTable invoiceTbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel paymentBtn;
@@ -1087,9 +1119,10 @@ public class NewDebt extends javax.swing.JFrame {
 
     public void updateDebt(String totalAmount, String outstandingAmount, String lastPayAmount, String startDate, String nextDate, String lastPayDate, int paymentMethod, int customerId) {
         try {
-            DB.putdata("INSERT INTO debt (debt_id, total_amount, outstanding_amount, last_pay_amount, start_date, next_date, last_pay_date, payment_method, customer_id) VALUES ('" + newDebtId + "','" + totalAmount + "','" + outstandingAmount + "','" + lastPayAmount + "','" + startDate + "','" + nextDate + "','" + lastPayDate + "','" + paymentMethod + "','" + customerId + "')");
+            DB.putdata("INSERT INTO debt (debt_id, total_amount, outstanding_amount, last_pay_amount, start_date, next_date, last_pay_date, payment_method, customer_id, invoice_category_id) VALUES ('" + newDebtId + "','" + totalAmount + "','" + outstandingAmount + "','" + lastPayAmount + "','" + startDate + "','" + nextDate + "','" + lastPayDate + "','" + paymentMethod + "','" + customerId + "','" + invoiceCategoryCombo.getSelectedIndex() + "')");
         } catch (Exception ex) {
-            System.out.println("updateDebt -> NewDebt : " + ex.getMessage());
+            //System.out.print("updateDebt -> NewDebt : ");
+            ex.printStackTrace();
         }
     }
 }

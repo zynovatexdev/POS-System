@@ -75,7 +75,7 @@ public class PaymentMethod extends javax.swing.JFrame {
                 curruncyTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(curruncyTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 520, 340, 45));
+        getContentPane().add(curruncyTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 340, 40));
 
         bankTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         bankTxt.setHintText("Enter Bank Name");
@@ -85,7 +85,7 @@ public class PaymentMethod extends javax.swing.JFrame {
                 bankTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(bankTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 600, 340, 45));
+        getContentPane().add(bankTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 340, 40));
 
         paymentMethodTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         paymentMethodTxt.setHintText("Enter Payment Method");
@@ -95,7 +95,7 @@ public class PaymentMethod extends javax.swing.JFrame {
                 paymentMethodTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(paymentMethodTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 340, 45));
+        getContentPane().add(paymentMethodTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 340, 40));
 
         saveBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -108,7 +108,7 @@ public class PaymentMethod extends javax.swing.JFrame {
                 saveBtnLblMouseExited(evt);
             }
         });
-        getContentPane().add(saveBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
+        getContentPane().add(saveBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 610, 200, 50));
 
         head1.setHeaderTitle("");
         head1.setOpaque(false);
@@ -135,14 +135,14 @@ public class PaymentMethod extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(paymentMethodTbl);
 
-        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 170, 620, 400));
+        getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(583, 164, 630, 425));
 
         description.setColumns(20);
         description.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         description.setRows(5);
         jScrollPane1.setViewportView(description);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, 320, 190));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 340, 130));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Payment Method.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

@@ -98,12 +98,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="settingBtnLbl">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\ShopManagementSystem\src\main\java\com\zx\shopmanagementsystem\icons\SavePurpleIcon.png"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="jLabel3"/>
-      </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="settingBtnLblMouseClicked"/>
         <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="settingBtnLblMouseEntered"/>
@@ -111,7 +105,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="470" y="620" width="245" height="50"/>
+          <AbsoluteConstraints x="435" y="610" width="250" height="60"/>
         </Constraint>
       </Constraints>
     </Component>

@@ -8,9 +8,10 @@ import sys
 try:
     #Extract command-line arguments
     to_email = sys.argv[1]
-    subject = sys.argv[2]
-    message = sys.argv[3]
-    filePath = sys.argv[4]
+    email_from = sys.argv[2]
+    subject = sys.argv[3]
+    message = sys.argv[4]
+    filePath = sys.argv[5]
 
     # to_email = "usepersonal922@gmail.com"
     # subject = "Email Subject"
@@ -24,7 +25,7 @@ try:
     smtp_server = "smtp.gmail.com"  # Google SMTP Server
 
     # Set up the email lists
-    email_from = "arunachinthaka99@gmail.com"
+    #email_from = "arunachinthaka99@gmail.com"
     email_list = [to_email]
 
     # Define the password

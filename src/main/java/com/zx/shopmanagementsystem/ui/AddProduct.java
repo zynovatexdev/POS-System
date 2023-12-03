@@ -23,6 +23,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -50,46 +52,6 @@ public class AddProduct extends javax.swing.JFrame {
         initComponents();
         jScrollPane1.setVerticalScrollBar(new ScrollBarCustom());
         getMaxValue();
-        Thread dataUpdateThread = new Thread(() -> {
-            try {
-                ServerSocket serverSocket = new ServerSocket(12345);  // Use an available port
-                MessageDialog DialogBox = new MessageDialog(this);
-                while (true) {
-                    Socket socket = serverSocket.accept();
-                    InputStream inputStream = socket.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                    String line;
-                    String prv = "";
-
-                    while ((line = reader.readLine()) != null) {
-                        if (line.equals(prv)) {
-                            System.out.println("Same Value");
-                        } else if (line.equals("Done")) {
-                            System.out.println("Done");
-                        } else if (line.startsWith("QRCODE")) {
-                            System.out.println("it is a QR");
-                            //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
-                        } else {
-                            System.out.println("it is not a QR");
-
-                            if (barcodeChecker(line)) {
-                                barcodeCombo.setSelectedItem(line);
-                            } else {
-                                System.out.println("Barcode Not Found : Add Product");
-                                DialogBox.showMessage("ERROR!!!", "Barcode Not Found in System", 3);
-                            }
-                        }
-                        prv = line;
-                    }
-
-                    socket.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        dataUpdateThread.start();
         supplierComboLoader();
         categoryComboLoader();
         discountComboLoader();
@@ -295,11 +257,38 @@ public class AddProduct extends javax.swing.JFrame {
 
     private void barcodeScannerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barcodeScannerBtnLblMouseClicked
         // TODO add your handling code here:
-        String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abc.py";
+        MessageDialog DialogBox = new MessageDialog(this);
         try {
-            Runtime.getRuntime().exec("python " + pythonScript);
-        } catch (IOException ex) {
-            System.out.println("Barcode Detector Btn : " + ex.getMessage());
+            String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abcCopy.py";
+            Process process = Runtime.getRuntime().exec("python " + pythonScript);
+
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            String prv = "";
+
+            while ((line = reader.readLine()) != null) {
+                if (line.equals(prv)) {
+                    System.out.println("Same Value");
+                } else if (line.equals("Done")) {
+                    System.out.println("Done");
+                } else if (line.startsWith("QRCODE")) {
+                    System.out.println("it is a QR");
+                    //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
+                } else {
+                    System.out.println("it is not a QR");
+
+                    if (barcodeChecker(line)) {
+                        barcodeCombo.setSelectedItem(line);
+                    } else {
+                        System.out.println("Barcode Not Found : Add Product");
+                        DialogBox.showMessage("ERROR!!!", "Barcode Not Found in System", 3);
+                    }
+                }
+                prv = line;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_barcodeScannerBtnLblMouseClicked
 
