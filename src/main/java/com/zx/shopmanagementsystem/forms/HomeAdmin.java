@@ -176,29 +176,62 @@ public class HomeAdmin extends javax.swing.JPanel {
     private void setChart() {
         chart.addLegend("Sales", Color.decode("#f56942"));
         chart.addLegend("Profit", Color.decode("#00fa21"));
+        chart.addLegend("Expenses", Color.RED);
     }
 
     private void setData() {
+
         try {
             List<ModelData> list = new ArrayList<>();
-            ResultSet rs = DB.getdata("SELECT \n"
-                    + "    DATE_FORMAT(date, '%Y-%m-%d') AS formatted_date,\n"
-                    + "    SUM(sale) AS total_sales,\n"
-                    + "    SUM(profit) AS total_profit\n"
-                    + "FROM shopdb.user_profile\n"
-                    + "WHERE date >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)\n"
-                    + "GROUP BY formatted_date\n"
-                    + "ORDER BY formatted_date;");
+            ResultSet rs = DB.getdata("SELECT\n"
+                    + "    date,\n"
+                    + "    COALESCE(SUM(total_sales), 0) AS total_sales,\n"
+                    + "    COALESCE(SUM(total_profit), 0) AS total_profit,\n"
+                    + "    COALESCE(SUM(total_expenses), 0) AS total_expenses\n"
+                    + "FROM (\n"
+                    + "    -- Subquery for total sales and profit\n"
+                    + "    SELECT\n"
+                    + "        DATE(date) AS date,\n"
+                    + "        SUM(sale) AS total_sales,\n"
+                    + "        SUM(profit) AS total_profit,\n"
+                    + "        0 AS total_expenses\n"
+                    + "    FROM\n"
+                    + "        shopdb.user_profile\n"
+                    + "    WHERE\n"
+                    + "        date BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE()\n"
+                    + "    GROUP BY\n"
+                    + "        DATE(date)\n"
+                    + "\n"
+                    + "    UNION ALL\n"
+                    + "\n"
+                    + "    -- Subquery for total expenses\n"
+                    + "    SELECT\n"
+                    + "        DATE(expenses_date) AS date,\n"
+                    + "        0 AS total_sales,\n"
+                    + "        0 AS total_profit,\n"
+                    + "        SUM(expenses_amount) AS total_expenses\n"
+                    + "    FROM\n"
+                    + "        shopdb.expenses\n"
+                    + "    WHERE\n"
+                    + "        expenses_date BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE()\n"
+                    + "    GROUP BY\n"
+                    + "        DATE(expenses_date)\n"
+                    + ") AS combined_data\n"
+                    + "GROUP BY\n"
+                    + "    date\n"
+                    + "ORDER BY\n"
+                    + "    date DESC;");
             while (rs.next()) {
-                String date = rs.getString("formatted_date");
+                String date = rs.getString("date");
                 double sale = Double.parseDouble(rs.getString("total_sales"));
                 double profit = Double.parseDouble(rs.getString("total_profit"));
-                list.add(new ModelData(date, sale, profit));
+                double expenses = Double.parseDouble(rs.getString("total_expenses"));
+                list.add(new ModelData(date, sale, profit, expenses));
             }
             rs.close();
 
             for (ModelData d : list) {
-                chart.addData(new ModelChart(d.getDate(), new double[]{d.getSale(), d.getProfit()}));
+                chart.addData(new ModelChart(d.getDate(), new double[]{d.getSale(), d.getProfit(), d.getExpenses()}));
             }
             chart.start();
         } catch (Exception ex) {

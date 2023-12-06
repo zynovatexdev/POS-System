@@ -45,7 +45,6 @@ public class InvoiceCreation extends javax.swing.JPanel {
 
         createNewInvoice = new javax.swing.JLabel();
         paymentMethodBtnLbl = new javax.swing.JLabel();
-        invoiceCategoryBtnLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         expireTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
@@ -65,7 +64,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 createNewInvoiceMouseExited(evt);
             }
         });
-        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 260, 40));
+        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 260, 45));
 
         paymentMethodBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -78,20 +77,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 paymentMethodBtnLblMouseExited(evt);
             }
         });
-        add(paymentMethodBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, 270, 40));
-
-        invoiceCategoryBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                invoiceCategoryBtnLblMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                invoiceCategoryBtnLblMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                invoiceCategoryBtnLblMouseExited(evt);
-            }
-        });
-        add(invoiceCategoryBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, 260, 40));
+        add(paymentMethodBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 270, 45));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
@@ -158,27 +144,10 @@ public class InvoiceCreation extends javax.swing.JPanel {
 
     }//GEN-LAST:event_paymentMethodBtnLblMouseExited
 
-    private void invoiceCategoryBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCategoryBtnLblMouseClicked
-        // TODO add your handling code here:
-        InvoiceCategory ic = new InvoiceCategory();
-        ic.setVisible(true);
-    }//GEN-LAST:event_invoiceCategoryBtnLblMouseClicked
-
-    private void invoiceCategoryBtnLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCategoryBtnLblMouseEntered
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_invoiceCategoryBtnLblMouseEntered
-
-    private void invoiceCategoryBtnLblMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceCategoryBtnLblMouseExited
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_invoiceCategoryBtnLblMouseExited
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel createNewInvoice;
     private javax.swing.JTable expireTbl;
     private javax.swing.JLabel iconLbl;
-    private javax.swing.JLabel invoiceCategoryBtnLbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel paymentMethodBtnLbl;
     // End of variables declaration//GEN-END:variables

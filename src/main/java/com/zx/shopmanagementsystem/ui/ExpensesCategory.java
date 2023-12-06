@@ -4,10 +4,12 @@
  */
 package com.zx.shopmanagementsystem.ui;
 
+import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
 import com.zx.shopmanagementsystem.table.TableCustom;
+import java.awt.Toolkit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +23,7 @@ public class ExpensesCategory extends javax.swing.JFrame {
     private int maxBarId;
     private int newBarId;
     JDBC DB = new JDBC();
+    IconLocation il = new IconLocation();
 
     /**
      * Creates new form Expenses
@@ -32,6 +35,7 @@ public class ExpensesCategory extends javax.swing.JFrame {
         getMaxValue();
         tableDataClear();
         tableDataLoader();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
     }
 
     /**

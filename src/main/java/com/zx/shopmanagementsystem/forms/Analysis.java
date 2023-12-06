@@ -88,7 +88,8 @@ public class Analysis extends javax.swing.JPanel {
                         String date = rs.getString("formatted_date");
                         double sale = Double.parseDouble(rs.getString("sum_sale"));
                         double profit = Double.parseDouble(rs.getString("sum_profit"));
-                        list.add(new ModelData(date, sale, profit));
+                        double expenses = 500.00;
+                        list.add(new ModelData(date, sale, profit, expenses));
                     }
                     rs.close();
 

@@ -52,13 +52,26 @@ public class ModelData {
         this.profit = profit;
     }
 
-    public ModelData(String date, double sale, double profit) {
+    public double getExpenses() {
+        return expenses;
+    }
+
+    /**
+     * @param expenses the profit to set
+     */
+    public void setExpenses(double expenses) {
+        this.expenses = expenses;
+    }
+
+    public ModelData(String date, double sale, double profit, double expenses) {
         this.date = date;
         this.sale = sale;
         this.profit = profit;
+        this.expenses = expenses;
     }
 
     private String date;
     private double sale;
     private double profit;
+    private double expenses;
 }

@@ -4,9 +4,12 @@
  */
 package com.zx.shopmanagementsystem.ui;
 
+import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.forms.Expenses;
 import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import java.awt.Toolkit;
 import java.io.FileInputStream;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -38,8 +41,11 @@ public class ExpensesForm extends javax.swing.JFrame {
     ArrayList<Integer> supplierIdArray = new ArrayList<>();
     ArrayList<Integer> userIdArray = new ArrayList<>();
     private int UseriD;
+    private Expenses expenses;
+    IconLocation il = new IconLocation();
 
-    public ExpensesForm() {
+    public ExpensesForm(Expenses expenses) {
+        this.expenses = expenses;
         initComponents();
         head2.setFrame(this);
         categoryComboLoader();
@@ -47,6 +53,7 @@ public class ExpensesForm extends javax.swing.JFrame {
         onlyNumbers(expensesAmountTxt);
         vendorCombo.addItem("No Action");
         jsonRead();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
     }
 
     /**
@@ -147,6 +154,7 @@ public class ExpensesForm extends javax.swing.JFrame {
         confrim.showMessage("Save", "Do you want to Add ?");
         if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
             save();
+            expenses.setTable();
         } else {
             System.out.println("No");
         }
@@ -181,9 +189,11 @@ public class ExpensesForm extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
+        Expenses cm = new Expenses();
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ExpensesForm().setVisible(true);
+                ExpensesForm cr = new ExpensesForm(cm);
+                cr.setVisible(true);
             }
         });
     }

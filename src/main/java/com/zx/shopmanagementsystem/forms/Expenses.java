@@ -4,6 +4,12 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.table.TableCustom;
+import com.zx.shopmanagementsystem.ui.ExpensesCategory;
+import com.zx.shopmanagementsystem.ui.ExpensesForm;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author User
@@ -13,8 +19,13 @@ public class Expenses extends javax.swing.JPanel {
     /**
      * Creates new form Home
      */
+    JDBC DB = new JDBC();
+
     public Expenses() {
         initComponents();
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        tableDataClear();
+        tableDataLoader();
     }
 
     /**
@@ -28,20 +39,126 @@ public class Expenses extends javax.swing.JPanel {
 
         expensesBtnLbl = new javax.swing.JLabel();
         expensesCategotyBtnLbl = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        expensesTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        expensesBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                expensesBtnLblMouseClicked(evt);
+            }
+        });
         add(expensesBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 86, 200, 40));
+
+        expensesCategotyBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                expensesCategotyBtnLblMouseClicked(evt);
+            }
+        });
         add(expensesCategotyBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 86, 270, 40));
+
+        expensesTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Date", "Category", "Description", "Amount", "Payment Method", "Vendor", "User"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(expensesTbl);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 155, 1026, 525));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ExpensesDashboardScreen.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    private void expensesBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expensesBtnLblMouseClicked
+        // TODO add your handling code here:
+        new ExpensesForm(this).setVisible(true);
+    }//GEN-LAST:event_expensesBtnLblMouseClicked
+
+    private void expensesCategotyBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_expensesCategotyBtnLblMouseClicked
+        // TODO add your handling code here:
+        new ExpensesCategory().setVisible(true);
+    }//GEN-LAST:event_expensesCategotyBtnLblMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel expensesBtnLbl;
     private javax.swing.JLabel expensesCategotyBtnLbl;
+    private javax.swing.JTable expensesTbl;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
+
+    private void tableDataLoader() {
+        try {
+            java.sql.ResultSet rs = DB.getdata("SELECT\n"
+                    + "    e.expense_id,\n"
+                    + "    e.expenses_date,\n"
+                    + "    ec.category_name,\n"
+                    + "    e.expenses_description,\n"
+                    + "    e.expenses_amount,\n"
+                    + "    pm.payment_method_type,\n"
+                    + "    e.vendor_supplier,\n"
+                    + "    u.user_name\n"
+                    + "FROM\n"
+                    + "    shopdb.expenses e\n"
+                    + "JOIN\n"
+                    + "    shopdb.expense_category ec ON e.expenses_category_id = ec.expenses_category_id\n"
+                    + "JOIN\n"
+                    + "    shopdb.payment_method pm ON e.payment_method = pm.payment_method_id\n"
+                    + "JOIN\n"
+                    + "    shopdb.user u ON e.user_id = u.user_id;");
+            while (rs.next()) {
+                String expenses_date = String.valueOf(rs.getString("expenses_date"));
+                String category_name = String.valueOf(rs.getString("category_name"));
+                String expenses_description = String.valueOf(rs.getString("expenses_description"));
+                String expenses_amount = String.valueOf(rs.getString("expenses_amount"));
+                String payment_method_type = String.valueOf(rs.getString("payment_method_type"));
+                String vendor_supplier = String.valueOf(rs.getString("vendor_supplier"));
+                String user_name = String.valueOf(rs.getString("user_name"));
+
+//                System.out.println("User ID" + userId);
+//                System.out.println("User Name" + userName);
+//                System.out.println("Full Name" + fullName);
+                String table_data[] = {expenses_date, category_name, expenses_description, expenses_amount, payment_method_type, vendor_supplier, user_name};
+                DefaultTableModel table = (DefaultTableModel) expensesTbl.getModel();
+                table.addRow(table_data);
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Expenses Table Data Loader : " + ex);
+        }
+    }
+
+    private void tableDataClear() {
+        try {
+            while (0 <= expensesTbl.getRowCount()) {
+                DefaultTableModel table = (DefaultTableModel) expensesTbl.getModel();
+                table.removeRow(expensesTbl.getRowCount() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("Expenses Table Data Clear : " + e);
+        }
+    }
+
+    public void setTable() {
+        tableDataClear();
+        tableDataLoader();
+    }
 }
