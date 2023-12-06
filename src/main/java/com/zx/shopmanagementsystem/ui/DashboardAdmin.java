@@ -12,6 +12,7 @@ import com.zx.shopmanagementsystem.dbconnection.JFBC;
 import com.zx.shopmanagementsystem.forms.Analysis;
 import com.zx.shopmanagementsystem.forms.CustomerManagement;
 import com.zx.shopmanagementsystem.forms.DebtManagement;
+import com.zx.shopmanagementsystem.forms.Expenses;
 import com.zx.shopmanagementsystem.forms.Help;
 import com.zx.shopmanagementsystem.forms.HomeAdmin;
 import com.zx.shopmanagementsystem.forms.InventoryManagement;
@@ -91,10 +92,12 @@ public class DashboardAdmin extends javax.swing.JFrame implements Runnable {
                 } else if (index == 9) {
                     showForm(new UserManagement());
                 } else if (index == 10) {
-                    showForm(new Help());
+                    showForm(new Expenses());
                 } else if (index == 11) {
-                    showForm(new Settings());
+                    showForm(new Help());
                 } else if (index == 12) {
+                    showForm(new Settings());
+                } else if (index == 13) {
                     new LogOut().setVisible(true);
                     close();
                 }
@@ -315,7 +318,7 @@ public class DashboardAdmin extends javax.swing.JFrame implements Runnable {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
