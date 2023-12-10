@@ -4,13 +4,21 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import com.zx.shopmanagementsystem.ui.GetDebt;
 import com.zx.shopmanagementsystem.ui.NewDebt;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -46,7 +54,7 @@ public class DebtManagement extends javax.swing.JPanel {
         newDebtInvoiceBtnLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         debtTbl = new javax.swing.JTable();
-        getDebtBtnLbl = new javax.swing.JLabel();
+        searchTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
@@ -63,7 +71,7 @@ public class DebtManagement extends javax.swing.JPanel {
                 newDebtInvoiceBtnLblMouseExited(evt);
             }
         });
-        add(newDebtInvoiceBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 210, 50));
+        add(newDebtInvoiceBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 85, 210, 45));
 
         debtTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -93,15 +101,26 @@ public class DebtManagement extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 155, 1025, 523));
 
-        getDebtBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        getDebtBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                getDebtBtnLblMouseClicked(evt);
+        searchTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
+        searchTxt.setHintText("Enter Debt ID or Scan");
+        searchTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTxtActionPerformed(evt);
             }
         });
-        add(getDebtBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 86, 210, 40));
+        searchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                searchTxtKeyPressed(evt);
+            }
+        });
+        add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 320, 50));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\DebtManagement.png")); // NOI18N
+        iconLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                iconLblMouseClicked(evt);
+            }
+        });
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -131,17 +150,77 @@ public class DebtManagement extends javax.swing.JPanel {
 
     }//GEN-LAST:event_debtTblMouseClicked
 
-    private void getDebtBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getDebtBtnLblMouseClicked
+    private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
         // TODO add your handling code here:
-        new GetDebt().setVisible(true);
-    }//GEN-LAST:event_getDebtBtnLblMouseClicked
+    }//GEN-LAST:event_searchTxtActionPerformed
+
+    private void searchTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchTxtKeyPressed
+        // TODO add your handling code here:
+        searchTxt.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                checkTextField();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                checkTextField();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                checkTextField();
+            }
+
+            private void checkTextField() {
+                if (searchTxt.getText().isEmpty()) {
+                    System.out.println("Text field is empty");
+                    tableDataClear();
+                    tableDataLoader();
+                } else {
+                    System.out.println("Text field is not empty");
+                    tableDataLoader2(searchTxt.getText());
+                }
+            }
+        });
+    }//GEN-LAST:event_searchTxtKeyPressed
+
+    private void iconLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconLblMouseClicked
+        // TODO add your handling code here:
+        try {
+            String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abcCopy.py";
+            Process process = Runtime.getRuntime().exec("python " + pythonScript);
+
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            String prv = "";
+
+            while ((line = reader.readLine()) != null) {
+                if (line.equals(prv)) {
+                    System.out.println("Same Value");
+                } else if (line.equals("Done")) {
+                    System.out.println("Done");
+                } else if (line.startsWith("QRCODE")) {
+                    System.out.println("it is a QR");
+                    jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
+                } else {
+                    System.out.println("it is not a QR");
+                    //searchTxt.setText(line);
+                }
+                prv = line;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_iconLblMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable debtTbl;
-    private javax.swing.JLabel getDebtBtnLbl;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel newDebtInvoiceBtnLbl;
+    private com.zx.shopmanagementsystem.components.RoundedText searchTxt;
     // End of variables declaration//GEN-END:variables
     private void tableDataLoader() {
         debtId.clear();
@@ -190,6 +269,64 @@ public class DebtManagement extends javax.swing.JPanel {
             }
         } catch (Exception e) {
             System.out.println("Debt Management Table Data Clear : " + e);
+        }
+    }
+
+    private void tableDataLoader2(String value) {
+        debtId.clear();
+        tableDataClear();
+        try {
+            java.sql.ResultSet rs = DB.getdata("SELECT\n"
+                    + "    d.total_amount,\n"
+                    + "    d.debt_id,\n"
+                    + "    d.outstanding_amount,\n"
+                    + "    d.last_pay_amount,\n"
+                    + "    d.start_date,\n"
+                    + "    d.next_date,\n"
+                    + "    d.last_pay_date,\n"
+                    + "    d.status,\n"
+                    + "    c.customer_name\n"
+                    + "FROM\n"
+                    + "    shopdb.debt d\n"
+                    + "JOIN\n"
+                    + "    shopdb.customer c ON d.customer_id = c.customer_id\n"
+                    + "WHERE\n"
+                    + "    d.debt_id = '" + value + "';");
+            while (rs.next()) {
+                String total_amount = String.valueOf(rs.getInt("total_amount"));
+                String outstanding_amount = String.valueOf(rs.getString("outstanding_amount"));
+                String start_date = String.valueOf(rs.getString("start_date"));
+                String last_pay_date = String.valueOf(rs.getString("last_pay_date"));
+                String next_date = String.valueOf(rs.getString("next_date"));
+                String customer_name = String.valueOf(rs.getString("customer_name"));
+                String status = String.valueOf(rs.getString("status"));
+                int debt_id = rs.getInt("debt_id");
+                System.out.println("Debt ID : " + debt_id);
+                debtId.add(debt_id);
+                String table_data[] = {total_amount, outstanding_amount, start_date, last_pay_date, next_date, customer_name, status};
+                DefaultTableModel table = (DefaultTableModel) debtTbl.getModel();
+                table.addRow(table_data);
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Debt Management Table Data Loader : " + ex);
+        }
+    }
+
+    private void jsonRead(String data) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        try {
+            // Read JSON string into JsonNode
+            JsonNode jsonNode = objectMapper.readTree(data);
+
+            // Extract values
+            String ID = jsonNode.get("ID").asText();
+            tableDataClear();
+            tableDataLoader2(ID);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

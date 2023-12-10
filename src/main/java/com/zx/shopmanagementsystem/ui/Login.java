@@ -74,7 +74,7 @@ public class Login extends javax.swing.JFrame {
                 showPasswordLblMouseExited(evt);
             }
         });
-        getContentPane().add(showPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 437, -1, 30));
+        getContentPane().add(showPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 438, -1, 30));
 
         loginLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -162,7 +162,7 @@ public class Login extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

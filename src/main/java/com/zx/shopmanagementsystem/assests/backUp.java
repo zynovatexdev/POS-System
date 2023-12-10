@@ -146,6 +146,7 @@ public class backUp {
         int invoiceCategoryId;
         String date;
         String price;
+        String time;
 
         try {
             ResultSet rs = DB.getdata("SELECT * FROM cash_payment");
@@ -156,7 +157,9 @@ public class backUp {
                 invoiceCategoryId = rs.getInt("invoice_category_id");
                 date = rs.getString("date");
                 price = rs.getString("price");
+                time = rs.getString("time");
 
+                data.put("time", time);
                 data.put("cash_invoice_id", cashInvoiceId);
                 data.put("date", date);
                 data.put("price", price);

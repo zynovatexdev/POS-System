@@ -12,6 +12,7 @@ import com.zx.shopmanagementsystem.ui.AddProduct;
 import com.zx.shopmanagementsystem.ui.AddProductCategory;
 import com.zx.shopmanagementsystem.ui.AddProductType;
 import com.zx.shopmanagementsystem.ui.AddStoreLocation;
+import com.zx.shopmanagementsystem.ui.ReturnItems;
 
 /**
  *
@@ -133,6 +134,12 @@ public class ProductManagement extends javax.swing.JPanel {
             }
         });
         add(addStoreLocationBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 150, 50));
+
+        returnItemsBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                returnItemsBtnLblMouseClicked(evt);
+            }
+        });
         add(returnItemsBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 155, 60));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ProductManagement.png")); // NOI18N
@@ -234,6 +241,11 @@ public class ProductManagement extends javax.swing.JPanel {
         AddProduct ap = new AddProduct();
         ap.setVisible(true);
     }//GEN-LAST:event_addProductBtnLblMouseClicked
+
+    private void returnItemsBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnItemsBtnLblMouseClicked
+        // TODO add your handling code here:
+        new ReturnItems().setVisible(true);
+    }//GEN-LAST:event_returnItemsBtnLblMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addBarcodeBtnLbl;

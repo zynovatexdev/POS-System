@@ -31,7 +31,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="330" y="80" width="210" height="50"/>
+          <AbsoluteConstraints x="125" y="85" width="210" height="45"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -109,18 +109,20 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JLabel" name="getDebtBtnLbl">
+    <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="searchTxt">
       <Properties>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Hand Cursor"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
+        <Property name="hintText" type="java.lang.String" value="Enter Debt ID or Scan"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="getDebtBtnLblMouseClicked"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchTxtActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="searchTxtKeyPressed"/>
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="570" y="86" width="210" height="40"/>
+          <AbsoluteConstraints x="450" y="80" width="320" height="50"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -130,6 +132,9 @@
           <Image iconType="2" name="C:\ShopManagementSystem\src\main\java\com\zx\shopmanagementsystem\images\DebtManagement.png"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="iconLblMouseClicked"/>
+      </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="0" y="0" width="-1" height="-1"/>

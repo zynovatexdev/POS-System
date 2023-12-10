@@ -20,6 +20,7 @@ import java.io.InputStreamReader;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -39,6 +40,7 @@ public class ReturnItems extends javax.swing.JFrame {
      */
     IconLocation il = new IconLocation();
     JDBC DB = new JDBC();
+    ArrayList<Integer> customerIdArray = new ArrayList<>();
 
     public ReturnItems() {
         initComponents();
@@ -74,6 +76,7 @@ public class ReturnItems extends javax.swing.JFrame {
         scanLbl = new javax.swing.JLabel();
         returnTotalLbl = new javax.swing.JLabel();
         timeCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
+        customerNameCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         dateCombo = new com.zx.shopmanagementsystem.components.ComboBoxSuggestion();
         backwardBtnLbl = new javax.swing.JLabel();
         forwardBtnLbl = new javax.swing.JLabel();
@@ -110,14 +113,26 @@ public class ReturnItems extends javax.swing.JFrame {
                 scanLblMouseClicked(evt);
             }
         });
-        getContentPane().add(scanLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 165, 135, 40));
+        getContentPane().add(scanLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 165, 135, 40));
 
         returnTotalLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 16)); // NOI18N
         returnTotalLbl.setForeground(new java.awt.Color(42, 44, 116));
         getContentPane().add(returnTotalLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 565, 270, 30));
 
         timeCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
-        getContentPane().add(timeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 170, 240, -1));
+        getContentPane().add(timeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 165, 140, -1));
+
+        customerNameCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
+        customerNameCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
+            }
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {
+                customerNameComboPopupMenuWillBecomeInvisible(evt);
+            }
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
+            }
+        });
+        getContentPane().add(customerNameCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 165, 220, -1));
 
         dateCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         dateCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
@@ -129,7 +144,7 @@ public class ReturnItems extends javax.swing.JFrame {
             public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt) {
             }
         });
-        getContentPane().add(dateCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 170, 240, -1));
+        getContentPane().add(dateCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 165, 140, -1));
 
         backwardBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -240,8 +255,9 @@ public class ReturnItems extends javax.swing.JFrame {
         String date = (String) dateCombo.getSelectedItem();
         String time = (String) timeCombo.getSelectedItem();
 
-        tableDataClear();
-        tableDataLoader(date, time);
+        //tableDataClear();
+        //tableDataLoader(date, time);
+        displayAvailableCustomers(date, time);
 
     }//GEN-LAST:event_searchLbl1MouseClicked
 
@@ -313,6 +329,12 @@ public class ReturnItems extends javax.swing.JFrame {
         printTable2Data();
     }//GEN-LAST:event_backwardBtnLblMouseClicked
 
+    private void customerNameComboPopupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt) {//GEN-FIRST:event_customerNameComboPopupMenuWillBecomeInvisible
+        // TODO add your handling code here:
+        tableDataClear();
+        tableDataLoader(dateCombo.getSelectedItem().toString(), timeCombo.getSelectedItem().toString(), customerIdArray.get(customerNameCombo.getSelectedIndex()));
+    }//GEN-LAST:event_customerNameComboPopupMenuWillBecomeInvisible
+
     /**
      * @param args the command line arguments
      */
@@ -350,6 +372,7 @@ public class ReturnItems extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel backwardBtnLbl;
+    private com.zx.shopmanagementsystem.components.ComboBoxSuggestion customerNameCombo;
     private com.zx.shopmanagementsystem.components.ComboBoxSuggestion dateCombo;
     private javax.swing.JLabel forwardBtnLbl;
     private com.zx.shopmanagementsystem.components.Head head1;
@@ -394,6 +417,36 @@ public class ReturnItems extends javax.swing.JFrame {
         }
     }
 
+    private void displayAvailableCustomers(String date, String time) {
+        customerIdArray.clear();
+        customerNameCombo.removeAllItems();
+        try {
+            String sql = "SELECT DISTINCT c.customer_id, c.customer_name\n"
+                    + "FROM sold_items si\n"
+                    + "JOIN customer c ON si.customer_id = c.customer_id\n"
+                    + "WHERE si.date = ? AND si.time = ?";
+
+            PreparedStatement preparedStatement = DB.con().prepareStatement(sql);
+            preparedStatement.setString(1, date);
+            preparedStatement.setString(2, time);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int customerId = rs.getInt("customer_id");
+                String customerName = rs.getString("customer_name");
+                customerIdArray.add(customerId);
+                customerNameCombo.addItem(customerName);
+                System.out.println("Customer ID: " + customerId + ", Customer Name: " + customerName);
+
+                // You can use this information as needed, such as displaying it in a UI component.
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(ReturnItems.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     private void jsonRead(String data) {
         ObjectMapper objectMapper = new ObjectMapper();
 
@@ -405,7 +458,11 @@ public class ReturnItems extends javax.swing.JFrame {
             String time = jsonNode.get("Time").asText();
             int customerID = jsonNode.get("CustomerID").asInt();
             String date = jsonNode.get("Date").asText();
-
+            dateCombo.setSelectedItem(date);
+            timeCombo.setSelectedItem(time);
+            displayAvailableCustomers(date, time);
+            tableDataClear();
+            tableDataLoader(date, time, customerID);
             // Print values
             System.out.println("Time: " + time);
             System.out.println("CustomerID: " + customerID);
@@ -415,7 +472,7 @@ public class ReturnItems extends javax.swing.JFrame {
         }
     }
 
-    private void tableDataLoader(String date, String time) {
+    private void tableDataLoader(String date, String time, int cudtomerId) {
         try {
             String sql = "SELECT\n"
                     + "    si.sold_item_id,\n"
@@ -432,7 +489,7 @@ public class ReturnItems extends javax.swing.JFrame {
                     + "JOIN\n"
                     + "    shopdb.product p ON si.product_id = p.product_id\n"
                     + "WHERE\n"
-                    + "    si.date = '" + date + "' AND si.time = '" + time + "';";
+                    + "    si.date = '" + date + "' AND si.time = '" + time + "' AND si.customer_id = '" + cudtomerId + "';";
 
             ResultSet rs = DB.getdata(sql);
             while (rs.next()) {

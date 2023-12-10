@@ -1144,7 +1144,7 @@ public class NewDebt extends javax.swing.JFrame {
 
     public void updateDebt(String totalAmount, String outstandingAmount, String lastPayAmount, String startDate, String nextDate, String lastPayDate, int paymentMethod, int customerId) {
         try {
-            DB.putdata("INSERT INTO debt (debt_id, total_amount, outstanding_amount, last_pay_amount, start_date, next_date, last_pay_date, payment_method, customer_id) VALUES ('" + newDebtId + "','" + totalAmount + "','" + outstandingAmount + "','" + lastPayAmount + "','" + startDate + "','" + nextDate + "','" + lastPayDate + "','" + paymentMethod + "','" + customerId + "')");
+            DB.putdata("INSERT INTO debt (debt_id, total_amount, outstanding_amount, last_pay_amount, start_date, next_date, last_pay_date, payment_method, customer_id,status) VALUES ('" + newDebtId + "','" + totalAmount + "','" + outstandingAmount + "','" + lastPayAmount + "','" + startDate + "','" + nextDate + "','" + lastPayDate + "','" + paymentMethod + "','" + customerId + "','Pending')");
         } catch (Exception ex) {
             //System.out.print("updateDebt -> NewDebt : ");
             ex.printStackTrace();

@@ -64,6 +64,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        searchIcon.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\Search_Icon.png")); // NOI18N
         searchIcon.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         searchIcon.setPreferredSize(new java.awt.Dimension(40, 40));
         searchIcon.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -77,7 +78,7 @@ public class ForgotPassword extends javax.swing.JFrame {
                 searchIconMouseExited(evt);
             }
         });
-        getContentPane().add(searchIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 290, 40, 40));
+        getContentPane().add(searchIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 297, 30, 30));
 
         usernameTxt.setHintText("Enter your username");
         getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 290, 370, 45));
@@ -95,7 +96,7 @@ public class ForgotPassword extends javax.swing.JFrame {
                 confirmPasswordLblMouseExited(evt);
             }
         });
-        getContentPane().add(confirmPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 450, -1, 30));
+        getContentPane().add(confirmPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 457, -1, 20));
 
         newPasswordLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\HidePassword.png")); // NOI18N
         newPasswordLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -110,7 +111,7 @@ public class ForgotPassword extends javax.swing.JFrame {
                 newPasswordLblMouseExited(evt);
             }
         });
-        getContentPane().add(newPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 370, -1, 30));
+        getContentPane().add(newPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 373, -1, 30));
 
         confirmPasswordTxt.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
         confirmPasswordTxt.setHintText("Retype Password");
@@ -160,7 +161,7 @@ public class ForgotPassword extends javax.swing.JFrame {
 
     private void searchIconMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchIconMouseExited
         // TODO add your handling code here:
-        func.iconSetter(searchIcon, il.searchIconNormal);
+        //func.iconSetter(searchIcon, il.searchIconNormal);
     }//GEN-LAST:event_searchIconMouseExited
 
     private void confirmPasswordLblMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmPasswordLblMouseEntered
