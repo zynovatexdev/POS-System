@@ -42,39 +42,6 @@ public class InventoryManagement extends javax.swing.JPanel {
 
     public InventoryManagement() {
         initComponents();
-        Thread dataUpdateThread = new Thread(() -> {
-            try {
-                ServerSocket serverSocket = new ServerSocket(12345);  // Use an available port
-                while (true) {
-                    Socket socket = serverSocket.accept();
-                    InputStream inputStream = socket.getInputStream();
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-
-                    String line;
-                    String prv = "";
-
-                    while ((line = reader.readLine()) != null) {
-                        if (line.equals(prv)) {
-                            System.out.println("Same Value");
-                        } else if (line.equals("Done")) {
-                            System.out.println("Done");
-                        } else if (line.startsWith("QRCODE")) {
-                            System.out.println("it is a QR");
-                            //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
-                        } else {
-                            System.out.println("it is not a QR");
-                            searchTxt.setText(line);
-                        }
-                        prv = line;
-                    }
-
-                    socket.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        dataUpdateThread.start();
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
         tableDataClear();
         tableDataLoader();
@@ -143,6 +110,7 @@ public class InventoryManagement extends javax.swing.JPanel {
 
         add(panelBorder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 136, 1070, 560));
 
+        searchTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
         searchTxt.setHintText("Barcode or Item Name");
         searchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -205,11 +173,31 @@ public class InventoryManagement extends javax.swing.JPanel {
 
     private void barcodeIconMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_barcodeIconMouseClicked
         // TODO add your handling code here:
-        String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abc.py";
         try {
-            Runtime.getRuntime().exec("python " + pythonScript);
-        } catch (IOException ex) {
-            System.out.println("Barcode Detector Btn : " + ex.getMessage());
+            String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abcCopy.py";
+            Process process = Runtime.getRuntime().exec("python " + pythonScript);
+
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            String prv = "";
+
+            while ((line = reader.readLine()) != null) {
+                if (line.equals(prv)) {
+                    System.out.println("Same Value");
+                } else if (line.equals("Done")) {
+                    System.out.println("Done");
+                } else if (line.startsWith("QRCODE")) {
+                    System.out.println("it is a QR");
+                    //jsonRead(line.substring(6));  // Remove "QRCODE" prefix and update text
+                } else {
+                    System.out.println("it is not a QR");
+                    searchTxt.setText(line);
+                }
+                prv = line;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }//GEN-LAST:event_barcodeIconMouseClicked
 
@@ -225,7 +213,29 @@ public class InventoryManagement extends javax.swing.JPanel {
     private void tableDataLoader() {
         productIdArray.clear();
         try {
-            java.sql.ResultSet rs = DB.getdata("SELECT * FROM product");
+            java.sql.ResultSet rs = DB.getdata("SELECT\n"
+                    + "    p.product_id,\n"
+                    + "    p.product_name,\n"
+                    + "    p.reciving_price,\n"
+                    + "    p.selling_price,\n"
+                    + "    p.stock_quantity,\n"
+                    + "    p.description,\n"
+                    + "    p.brand,\n"
+                    + "    p.dimensions,\n"
+                    + "    p.manufacturing_date,\n"
+                    + "    p.expiry_date,\n"
+                    + "    p.supplier_id,\n"
+                    + "    p.barcode_id,\n"
+                    + "    p.category_id,\n"
+                    + "    p.product_type_id,\n"
+                    + "    p.discount_id,\n"
+                    + "    p.store_location_id,\n"
+                    + "    sl.store_location_name,\n"
+                    + "    sl.store_location_description\n"
+                    + "FROM\n"
+                    + "    shopdb.product p\n"
+                    + "JOIN\n"
+                    + "    shopdb.store_location sl ON p.store_location_id = sl.store_location_id;");
             while (rs.next()) {
                 int productId = (rs.getInt("product_id"));
                 String productName = (rs.getString("product_name"));
@@ -234,7 +244,7 @@ public class InventoryManagement extends javax.swing.JPanel {
                 String stockQuantitiy = (rs.getString("stock_quantity"));
                 String manuDate = (rs.getString("manufacturing_date"));
                 String expDate = (rs.getString("expiry_date"));
-                int locationId = (rs.getInt("store_location_id"));
+                String locationId = (rs.getString("store_location_name"));
 
 //                System.out.println("Product : " + productId);
 //                System.out.println("Product : " + productName);
@@ -245,7 +255,7 @@ public class InventoryManagement extends javax.swing.JPanel {
 //                System.out.println("Product : " + expDate);
 //                System.out.println("Product : " + locationId);
                 productIdArray.add(productId);
-                String table_data[] = {productName, recivingPrice, sellingPrice, stockQuantitiy, manuDate, expDate, String.valueOf(locationId)};
+                String table_data[] = {productName, recivingPrice, sellingPrice, stockQuantitiy, manuDate, expDate, locationId};
                 DefaultTableModel table = (DefaultTableModel) inventoryTbl.getModel();
                 table.addRow(table_data);
 
@@ -268,9 +278,20 @@ public class InventoryManagement extends javax.swing.JPanel {
 
     private void findProductByNameOrBarcode(String searchTerm) {
 
-        String query = "SELECT * FROM product "
-                + "JOIN barcode ON product.barcode_id = barcode.barcode_id "
-                + "WHERE product.product_name LIKE ? OR barcode.barcode_value = ?";
+        String query = "SELECT\n"
+                + "    p.*,\n"
+                + "    b.barcode_value,\n"
+                + "    sl.store_location_id,\n"
+                + "    sl.store_location_name,\n"
+                + "    sl.store_location_description\n"
+                + "FROM\n"
+                + "    shopdb.product p\n"
+                + "JOIN\n"
+                + "    barcode b ON p.barcode_id = b.barcode_id\n"
+                + "LEFT JOIN\n"
+                + "    shopdb.store_location sl ON p.store_location_id = sl.store_location_id\n"
+                + "WHERE\n"
+                + "    p.product_name LIKE ? OR b.barcode_value = ?;";
 
         try (PreparedStatement pstmt = DB.con().prepareStatement(query)) {
             pstmt.setString(1, "%" + searchTerm + "%"); // Match partial product names
@@ -293,9 +314,9 @@ public class InventoryManagement extends javax.swing.JPanel {
                 String stockQuantitiy = (resultSet.getString("stock_quantity"));
                 String manuDate = (resultSet.getString("manufacturing_date"));
                 String expDate = (resultSet.getString("expiry_date"));
-                int locationId = (resultSet.getInt("store_location_id"));
+                String locationName = (resultSet.getString("store_location_name"));
                 productIdArray.add(productId);
-                String table_data[] = {productName, recivingPrice, sellingPrice, stockQuantitiy, manuDate, expDate, String.valueOf(locationId)};
+                String table_data[] = {productName, recivingPrice, sellingPrice, stockQuantitiy, manuDate, expDate, locationName};
                 DefaultTableModel table = (DefaultTableModel) inventoryTbl.getModel();
                 table.addRow(table_data);
 

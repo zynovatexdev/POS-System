@@ -74,11 +74,11 @@ public class CustomerRegistration extends javax.swing.JFrame {
 
         customerNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerNameTxt.setHintText("Enter Customer Name");
-        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 440, 480, 50));
+        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 280, 50));
 
         customerNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
         customerNumberTxt.setHintText("Enter Customer Number");
-        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 290, 280, 50));
+        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 280, 50));
 
         updateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,16 +95,16 @@ public class CustomerRegistration extends javax.swing.JFrame {
         getContentPane().add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
         customerIdLbl.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
-        getContentPane().add(customerIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 150, 30));
+        getContentPane().add(customerIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 170, 40));
 
         customerCategoryCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         customerCategoryCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 260, -1));
+        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 280, -1));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
         customerAddressTxt.setColumns(20);
-        customerAddressTxt.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
+        customerAddressTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         customerAddressTxt.setRows(5);
         customerAddressTxt.setSelectionColor(new java.awt.Color(80, 199, 255));
         jScrollPane1.setViewportView(customerAddressTxt);
@@ -115,12 +115,12 @@ public class CustomerRegistration extends javax.swing.JFrame {
         panelBorder1.setLayout(panelBorder1Layout);
         panelBorder1Layout.setHorizontalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
+            .addGap(0, 380, Short.MAX_VALUE)
             .addGroup(panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBorder1Layout.createSequentialGroup()
                     .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(105, 105, 105)))
         );
         panelBorder1Layout.setVerticalGroup(
             panelBorder1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +132,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
                     .addContainerGap()))
         );
 
-        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 480, 160));
+        getContentPane().add(panelBorder1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 510, 280, 160));
 
         iconLable.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Customer_Registration.png")); // NOI18N
         getContentPane().add(iconLable, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -164,7 +164,7 @@ public class CustomerRegistration extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

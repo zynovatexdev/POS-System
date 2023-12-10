@@ -115,7 +115,7 @@ public class AddDiscount extends javax.swing.JFrame {
         });
         getContentPane().add(addDiscountBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
-        endDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        endDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         endDateTxt.setHintText("Enter End Date");
         endDateTxt.setPreferredSize(new java.awt.Dimension(129, 40));
         endDateTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -125,7 +125,7 @@ public class AddDiscount extends javax.swing.JFrame {
         });
         getContentPane().add(endDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 460, 50));
 
-        stratDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        stratDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         stratDateTxt.setHintText("Enter Strat Date");
         stratDateTxt.setPreferredSize(new java.awt.Dimension(129, 40));
         stratDateTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -135,7 +135,7 @@ public class AddDiscount extends javax.swing.JFrame {
         });
         getContentPane().add(stratDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 460, 50));
 
-        discountTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        discountTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         discountTxt.setHintText("Discount Presentage");
         discountTxt.setPreferredSize(new java.awt.Dimension(129, 40));
         discountTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -196,7 +196,7 @@ public class AddDiscount extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

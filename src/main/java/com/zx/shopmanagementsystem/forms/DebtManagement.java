@@ -6,7 +6,12 @@ package com.zx.shopmanagementsystem.forms;
 
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.table.TableCustom;
+import com.zx.shopmanagementsystem.ui.GetDebt;
 import com.zx.shopmanagementsystem.ui.NewDebt;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,9 +24,14 @@ public class DebtManagement extends javax.swing.JPanel {
      */
     Func func = new Func();
     IconLocation il = new IconLocation();
+    JDBC DB = new JDBC();
+    ArrayList<Integer> debtId = new ArrayList<>();
 
     public DebtManagement() {
         initComponents();
+        tableDataClear();
+        tableDataLoader();
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
     }
 
     /**
@@ -34,6 +44,9 @@ public class DebtManagement extends javax.swing.JPanel {
     private void initComponents() {
 
         newDebtInvoiceBtnLbl = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        debtTbl = new javax.swing.JTable();
+        getDebtBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
@@ -50,7 +63,43 @@ public class DebtManagement extends javax.swing.JPanel {
                 newDebtInvoiceBtnLblMouseExited(evt);
             }
         });
-        add(newDebtInvoiceBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 90, 210, 40));
+        add(newDebtInvoiceBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 210, 50));
+
+        debtTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Total Amount", "Outstanding Amount", "Start Date", "Last Pay date", "Next Date", "Customer Name", "Status"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        debtTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                debtTblMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(debtTbl);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 155, 1025, 523));
+
+        getDebtBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getDebtBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                getDebtBtnLblMouseClicked(evt);
+            }
+        });
+        add(getDebtBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 86, 210, 40));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\DebtManagement.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -71,8 +120,76 @@ public class DebtManagement extends javax.swing.JPanel {
 
     }//GEN-LAST:event_newDebtInvoiceBtnLblMouseExited
 
+    private void debtTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debtTblMouseClicked
+        // TODO add your handling code here:
+        System.out.println("Selected Row : " + debtTbl.getSelectedRow());
+        System.out.println("Debt ID : " + debtId.get(debtTbl.getSelectedRow()));
+
+        int debtID = debtId.get(debtTbl.getSelectedRow());
+        GetDebt getdebt = new GetDebt();
+        getdebt.showWindow(debtID);
+
+    }//GEN-LAST:event_debtTblMouseClicked
+
+    private void getDebtBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_getDebtBtnLblMouseClicked
+        // TODO add your handling code here:
+        new GetDebt().setVisible(true);
+    }//GEN-LAST:event_getDebtBtnLblMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable debtTbl;
+    private javax.swing.JLabel getDebtBtnLbl;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel newDebtInvoiceBtnLbl;
     // End of variables declaration//GEN-END:variables
+    private void tableDataLoader() {
+        debtId.clear();
+        try {
+            java.sql.ResultSet rs = DB.getdata("SELECT\n"
+                    + "    d.total_amount,\n"
+                    + "    d.debt_id,\n"
+                    + "    d.outstanding_amount,\n"
+                    + "    d.last_pay_amount,\n"
+                    + "    d.start_date,\n"
+                    + "    d.next_date,\n"
+                    + "    d.last_pay_date,\n"
+                    + "    d.status,\n"
+                    + "    c.customer_name\n"
+                    + "   \n"
+                    + "FROM\n"
+                    + "    shopdb.debt d\n"
+                    + "JOIN\n"
+                    + "    shopdb.customer c ON d.customer_id = c.customer_id;");
+            while (rs.next()) {
+                String total_amount = String.valueOf(rs.getInt("total_amount"));
+                String outstanding_amount = String.valueOf(rs.getString("outstanding_amount"));
+                String start_date = String.valueOf(rs.getString("start_date"));
+                String last_pay_date = String.valueOf(rs.getString("last_pay_date"));
+                String next_date = String.valueOf(rs.getString("next_date"));
+                String customer_name = String.valueOf(rs.getString("customer_name"));
+                String status = String.valueOf(rs.getString("status"));
+                int debt_id = rs.getInt("debt_id");
+                System.out.println("Debt ID : " + debt_id);
+                debtId.add(debt_id);
+                String table_data[] = {total_amount, outstanding_amount, start_date, last_pay_date, next_date, customer_name, status};
+                DefaultTableModel table = (DefaultTableModel) debtTbl.getModel();
+                table.addRow(table_data);
+
+            }
+        } catch (Exception ex) {
+            System.out.println("Debt Management Table Data Loader : " + ex);
+        }
+    }
+
+    private void tableDataClear() {
+        try {
+            while (0 <= debtTbl.getRowCount()) {
+                DefaultTableModel table = (DefaultTableModel) debtTbl.getModel();
+                table.removeRow(debtTbl.getRowCount() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("Debt Management Table Data Clear : " + e);
+        }
+    }
 }

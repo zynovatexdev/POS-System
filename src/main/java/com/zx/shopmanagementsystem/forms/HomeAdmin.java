@@ -13,6 +13,7 @@ import com.zx.shopmanagementsystem.ui.LowStock;
 import java.awt.Color;
 import java.io.FileInputStream;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -76,17 +77,17 @@ public class HomeAdmin extends javax.swing.JPanel {
         totalDailySaleTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 30)); // NOI18N
         totalDailySaleTxt.setForeground(new java.awt.Color(255, 255, 255));
         totalDailySaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(totalDailySaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 170, 295, 80));
+        add(totalDailySaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 155, 295, 80));
 
         itemName.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         itemName.setForeground(new java.awt.Color(255, 255, 255));
         itemName.setText("Item Name");
-        add(itemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 160, 200, 30));
+        add(itemName, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 165, 200, 30));
 
         store_Location.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
         store_Location.setForeground(new java.awt.Color(255, 255, 255));
         store_Location.setText("Store Location");
-        add(store_Location, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 210, 200, 30));
+        add(store_Location, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 215, 200, 30));
 
         lowStockBtnLbl.setPreferredSize(new java.awt.Dimension(287, 39));
         lowStockBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -113,7 +114,7 @@ public class HomeAdmin extends javax.swing.JPanel {
         totalMonthSaleTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 30)); // NOI18N
         totalMonthSaleTxt.setForeground(new java.awt.Color(255, 255, 255));
         totalMonthSaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        add(totalMonthSaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 170, 295, 80));
+        add(totalMonthSaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 155, 295, 80));
 
         chart.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
         chart.setOpaque(false);
@@ -192,13 +193,13 @@ public class HomeAdmin extends javax.swing.JPanel {
                     + "    -- Subquery for total sales and profit\n"
                     + "    SELECT\n"
                     + "        DATE(date) AS date,\n"
-                    + "        SUM(sale) AS total_sales,\n"
+                    + "        SUM(price) AS total_sales,\n"
                     + "        SUM(profit) AS total_profit,\n"
                     + "        0 AS total_expenses\n"
                     + "    FROM\n"
-                    + "        shopdb.user_profile\n"
+                    + "        shopdb.sold_items\n"
                     + "    WHERE\n"
-                    + "        date BETWEEN CURDATE() - INTERVAL 7 DAY AND CURDATE()\n"
+                    + "        date BETWEEN CURDATE() - INTERVAL 6 DAY AND CURDATE()\n"
                     + "    GROUP BY\n"
                     + "        DATE(date)\n"
                     + "\n"
@@ -263,18 +264,22 @@ public class HomeAdmin extends javax.swing.JPanel {
     }
 
     private void getDailySale() {
-        String sql = "SELECT SUM(sale) AS total_sales\n"
-                + "FROM shopdb.user_profile\n"
+        String sql = "SELECT FORMAT(SUM(price), 2) AS total_sales\n"
+                + "FROM shopdb.sold_items\n"
                 + "WHERE DATE(date) = CURDATE();";
 
         try {
             ResultSet rs = DB.getdata(sql);
 
             if (rs.next()) {
-                if (rs.getString("total_sales") == null) {
+                String totalSales = rs.getString("total_sales");
+                System.out.println(totalSales);
+
+                if (totalSales == null) {
                     totalDailySaleTxt.setText("No Record");
                 } else {
-                    totalDailySaleTxt.setText("Rs." + rs.getString("total_sales") + "0/=");
+                    // Format the result with 2 decimal points
+                    totalDailySaleTxt.setText("Rs." + totalSales + "/=");
                 }
             }
         } catch (Exception ex) {
@@ -283,8 +288,8 @@ public class HomeAdmin extends javax.swing.JPanel {
     }
 
     private void getMonthlySale() {
-        String sql = "SELECT SUM(sale) AS total_sales\n"
-                + "FROM shopdb.user_profile\n"
+        String sql = "SELECT FORMAT(SUM(price), 2) AS total_sales\n"
+                + "FROM shopdb.sold_items\n"
                 + "WHERE YEAR(date) = YEAR(CURDATE()) AND MONTH(date) = MONTH(CURDATE());";
 
         try {

@@ -4,33 +4,52 @@
  */
 package com.zx.shopmanagementsystem.ui;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.notifications.Debt;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import com.zx.shopmanagementsystem.print.ReportManager;
+import com.zx.shopmanagementsystem.print.ReportManagerDebt;
+import com.zx.shopmanagementsystem.print.model.FieldReportDebt;
+import com.zx.shopmanagementsystem.print.model.FieldReportPayment;
+import com.zx.shopmanagementsystem.print.model.ParameterReportDebt;
+import com.zx.shopmanagementsystem.print.model.ParameterReportPayment;
 import com.zx.shopmanagementsystem.table.DeleteButtonEditorRenderer;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -563,6 +582,7 @@ public class NewDebt extends javax.swing.JFrame {
                 double outstandingAmount = totalPrice - payment;
                 String outstandingBalancePrice = String.format("%.2f", outstandingAmount);
                 generateInvoiceBill(invoiceData, outstandingBalancePrice);
+                generateBill(invoiceData, outstandingBalancePrice, nextDate);
                 updateStockAndCalculateProfit(model);
                 updateDebt(totalPriceStr, outstandingBalancePrice, String.valueOf(payment), date, nextDate, date, paymentMethodId, customerIdArray.get(customerCombo.getSelectedIndex()));
                 clear();
@@ -607,7 +627,7 @@ public class NewDebt extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1077,6 +1097,11 @@ public class NewDebt extends javax.swing.JFrame {
 
     private void getMaxDebtInvoiceValue() {
         try {
+            ReportManagerDebt.getInstance().compileReportDebt();
+        } catch (Exception e) {
+            System.out.println("Report Manager Compile Debt: " + e.getMessage());
+        }
+        try {
             java.sql.ResultSet rs1 = DB.getdata("SELECT MAX(invoice_id) FROM debt_invoice");
             if (rs1.next()) {
                 //System.out.println("Table not empty");
@@ -1119,10 +1144,60 @@ public class NewDebt extends javax.swing.JFrame {
 
     public void updateDebt(String totalAmount, String outstandingAmount, String lastPayAmount, String startDate, String nextDate, String lastPayDate, int paymentMethod, int customerId) {
         try {
-            DB.putdata("INSERT INTO debt (debt_id, total_amount, outstanding_amount, last_pay_amount, start_date, next_date, last_pay_date, payment_method, customer_id, invoice_category_id) VALUES ('" + newDebtId + "','" + totalAmount + "','" + outstandingAmount + "','" + lastPayAmount + "','" + startDate + "','" + nextDate + "','" + lastPayDate + "','" + paymentMethod + "','" + customerId + "','" + invoiceCategoryCombo.getSelectedIndex() + "')");
+            DB.putdata("INSERT INTO debt (debt_id, total_amount, outstanding_amount, last_pay_amount, start_date, next_date, last_pay_date, payment_method, customer_id) VALUES ('" + newDebtId + "','" + totalAmount + "','" + outstandingAmount + "','" + lastPayAmount + "','" + startDate + "','" + nextDate + "','" + lastPayDate + "','" + paymentMethod + "','" + customerId + "')");
         } catch (Exception ex) {
             //System.out.print("updateDebt -> NewDebt : ");
             ex.printStackTrace();
         }
+    }
+
+    private void generateBill(JSONObject invoiceData, String balance, String nxtDate) {
+        JSONArray invoiceItems = invoiceData.getJSONArray("InvoiceItems");
+        String Date = invoiceData.getString("Date");
+        String Time = invoiceData.getString("Time");
+        String CustomerName = invoiceData.getString("Customer Name");
+        try {
+            List<FieldReportDebt> fields = new ArrayList<>();
+            for (int i = 0; i < invoiceItems.length(); i++) {
+                JSONObject item = invoiceItems.getJSONObject(i);
+                String productName = item.getString("ProductName");
+                double quantity = Double.parseDouble(item.getString("Quantity"));
+                double price = Double.parseDouble(item.getString("Price"));
+                fields.add(new FieldReportDebt(productName, quantity, price));
+            }
+            ParameterReportDebt dataPrint = new ParameterReportDebt(getLogo(), getQrCode(Time, Date), Date, nxtDate, Time, CustomerName, invoiceData.getString("TotalPrice"), balance, fields);
+            ReportManagerDebt.getInstance().printReportDebt(dataPrint);
+        } catch (Exception e) {
+        }
+    }
+
+    private InputStream getQrCode(String Time, String Date) throws IOException, WriterException {
+        JSONObject qrData = new JSONObject();
+        qrData.put("Date", Date);
+        qrData.put("Time", Time);
+        qrData.put("CustomerID", customerIdArray.get(customerCombo.getSelectedIndex()));
+        qrData.put("ID", newDebtId);
+
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.MARGIN, 0);
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(qrData.toString(), BarcodeFormat.QR_CODE, 80, 80, hints);
+        BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", outputStream);
+        return new ByteArrayInputStream(outputStream.toByteArray());
+
+    }
+
+    private InputStream getLogo() {
+        try {
+            String imageUrl = "file:" + il.logo_1;
+            URL url = new URL(imageUrl);
+            return url.openStream();
+        } catch (MalformedURLException e) {
+            e.printStackTrace(); // Handle the URL format exception
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the IO exception
+        }
+        return null;
     }
 }

@@ -155,13 +155,22 @@ public class CustomerManagement extends javax.swing.JPanel {
 
     private void tableDataLoader() {
         try {
-            java.sql.ResultSet rs = DB.getdata("SELECT * FROM customer");
+            java.sql.ResultSet rs = DB.getdata("SELECT\n"
+                    + "    c.customer_id,\n"
+                    + "    c.customer_name,\n"
+                    + "    c.customer_address,\n"
+                    + "    c.customer_phone,\n"
+                    + "    cc.customer_type\n"
+                    + "FROM\n"
+                    + "    shopdb.customer c\n"
+                    + "JOIN\n"
+                    + "    shopdb.customer_category cc ON c.category_id = cc.customer_category_id;");
             while (rs.next()) {
                 String customerId = String.valueOf(rs.getInt("customer_id"));
                 String customerName = String.valueOf(rs.getString("customer_name"));
                 String customerAddress = String.valueOf(rs.getString("customer_address"));
                 String customerPhone = String.valueOf(rs.getString("customer_phone"));
-                String customerCategoryId = String.valueOf(rs.getString("category_id"));
+                String customerCategoryId = String.valueOf(rs.getString("customer_type"));
 
 //                System.out.println("User ID" + userId);
 //                System.out.println("User Name" + userName);

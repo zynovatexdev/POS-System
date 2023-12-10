@@ -70,6 +70,7 @@ public class ProductPerformance extends javax.swing.JPanel {
         roundedGradiantPanal1.setStartColor(new java.awt.Color(245, 245, 245));
 
         errorLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 24)); // NOI18N
+        errorLbl.setForeground(new java.awt.Color(2, 82, 130));
         errorLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         errorLbl.setText("Not Enough Data");
 
@@ -151,6 +152,7 @@ public class ProductPerformance extends javax.swing.JPanel {
         });
 
         errorLbl1.setFont(new java.awt.Font("Poppins SemiBold", 1, 24)); // NOI18N
+        errorLbl1.setForeground(new java.awt.Color(2, 82, 130));
         errorLbl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         errorLbl1.setText("Not Enough Data");
 

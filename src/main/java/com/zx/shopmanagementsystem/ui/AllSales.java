@@ -207,7 +207,7 @@ public class AllSales extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -257,8 +257,8 @@ public class AllSales extends javax.swing.JFrame {
         String sql = "SELECT\n"
                 + "    p.product_name,\n"
                 + "    SUM(s.quantity) AS total_quantity,\n"
-                + "    SUM(s.price * s.quantity) AS total_sales_price,\n"
-                + "    SUM((s.price - p.reciving_price) * s.quantity) AS total_profit\n"
+                + "    ROUND(SUM(s.price), 2) AS total_sales_price,\n"
+                + "    ROUND(SUM(s.price - p.reciving_price), 2) AS total_profit\n"
                 + "FROM shopdb.sold_items s\n"
                 + "JOIN shopdb.product p ON s.product_id = p.product_id\n"
                 + "WHERE s.date = CURRENT_DATE\n"
@@ -288,8 +288,8 @@ public class AllSales extends javax.swing.JFrame {
                 DB.con().close();
             }
 
-            totalSalesTxt.setText(String.valueOf(sumOfSales) + "/=");
-            totalProfitTxt.setText(String.valueOf(sumOfProfit) + "/=");
+            totalSalesTxt.setText(String.format("%.2f/=", sumOfSales));
+            totalProfitTxt.setText(String.format("%.2f/=", sumOfProfit));
 
         } catch (Exception ex) {
             Logger.getLogger(AllSales.class.getName()).log(Level.SEVERE, null, ex);
@@ -302,8 +302,8 @@ public class AllSales extends javax.swing.JFrame {
         String sql = "SELECT\n"
                 + "    p.product_name,\n"
                 + "    SUM(s.quantity) AS total_quantity,\n"
-                + "    SUM(s.price * s.quantity) AS total_sales_price,\n"
-                + "    SUM((s.price - p.reciving_price) * s.quantity) AS total_profit\n"
+                + "    ROUND(SUM(s.price), 2) AS total_sales_price,\n"
+                + "    ROUND(SUM(s.price - p.reciving_price), 2) AS total_profit\n"
                 + "FROM shopdb.sold_items s\n"
                 + "JOIN shopdb.product p ON s.product_id = p.product_id\n"
                 + "WHERE MONTH(s.date) = MONTH(CURRENT_DATE) AND YEAR(s.date) = YEAR(CURRENT_DATE)\n"
@@ -332,8 +332,8 @@ public class AllSales extends javax.swing.JFrame {
                 table.addRow(new Object[]{table.getRowCount() + 1, product_name, total_quantity, total_sales_price, total_profit});
                 DB.con().close();
             }
-            totalSalesTxt.setText(String.valueOf(sumOfSales) + "/=");
-            totalProfitTxt.setText(String.valueOf(sumOfProfit) + "/=");
+            totalSalesTxt.setText(String.format("%.2f/=", sumOfSales));
+            totalProfitTxt.setText(String.format("%.2f/=", sumOfProfit));
         } catch (Exception ex) {
             Logger.getLogger(AllSales.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -416,8 +416,8 @@ public class AllSales extends javax.swing.JFrame {
         String sql = "SELECT\n"
                 + "    p.product_name,\n"
                 + "    SUM(s.quantity) AS total_quantity,\n"
-                + "    SUM(s.price * s.quantity) AS total_sales_price,\n"
-                + "    SUM((s.price - p.reciving_price) * s.quantity) AS total_profit\n"
+                + "    ROUND(SUM(s.price), 2) AS total_sales_price,\n"
+                + "    ROUND(SUM(s.price - p.reciving_price), 2) AS total_profit\n"
                 + "FROM\n"
                 + "    shopdb.sold_items s\n"
                 + "JOIN\n"
@@ -449,8 +449,8 @@ public class AllSales extends javax.swing.JFrame {
                 table.addRow(new Object[]{table.getRowCount() + 1, product_name, total_quantity, total_sales_price, total_profit});
                 DB.con().close();
             }
-            totalSalesTxt.setText(String.valueOf(sumOfSales) + "/=");
-            totalProfitTxt.setText(String.valueOf(sumOfProfit) + "/=");
+            totalSalesTxt.setText(String.format("%.2f/=", sumOfSales));
+            totalProfitTxt.setText(String.format("%.2f/=", sumOfProfit));
         } catch (Exception ex) {
             System.out.println("Sales Report Table Data Loader : " + ex);
         }

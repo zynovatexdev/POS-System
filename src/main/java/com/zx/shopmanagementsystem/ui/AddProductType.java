@@ -78,7 +78,7 @@ public class AddProductType extends javax.swing.JFrame {
         });
         getContentPane().add(addProcuctTypeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 597, 200, 50));
 
-        productTypeTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        productTypeTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         productTypeTxt.setHintText("Enter Product Type");
         productTypeTxt.setPreferredSize(new java.awt.Dimension(129, 50));
         getContentPane().add(productTypeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 480, -1));
@@ -86,7 +86,7 @@ public class AddProductType extends javax.swing.JFrame {
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
         productDescriptionTxt.setColumns(20);
-        productDescriptionTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        productDescriptionTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         productDescriptionTxt.setRows(5);
         productDescriptionTxt.setBorder(null);
         jScrollPane1.setViewportView(productDescriptionTxt);
@@ -166,7 +166,7 @@ public class AddProductType extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -20,38 +20,41 @@ import net.sf.jasperreports.view.JasperViewer;
  *
  * @author Aruna Chinthaka
  */
-public class ReportManager {
+public class ReportManagerDebt {
 
-    private static ReportManager instance;
+    private static ReportManagerDebt instance;
 
-    JasperReport reportPay;
+    JasperReport reportDebt;
 
-    public static ReportManager getInstance() {
+    public static ReportManagerDebt getInstance() {
         if (instance == null) {
-            instance = new ReportManager();
+            instance = new ReportManagerDebt();
         }
         return instance;
     }
 
-    private ReportManager() {
+    private ReportManagerDebt() {
     }
 
-    public void compileReport() throws JRException {
-        reportPay = JasperCompileManager.compileReport("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\print\\report_pay.jrxml");
+    public void compileReportDebt() throws JRException {
+        reportDebt = JasperCompileManager.compileReport("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\print\\report_debt.jrxml");
     }
 
-    public void printReportPayment(ParameterReportPayment data) throws JRException {
+    public void printReportDebt(ParameterReportDebt data) throws JRException {
         Map para = new HashMap();
         para.put("date", data.getDate());
+        para.put("nxtdate", data.getNxtdate());
         para.put("time", data.getTime());
         para.put("customer", data.getCustomer());
         para.put("total", data.getTotal());
+        para.put("outstanding", data.getOutstanding());
         para.put("logo", data.getLogo());
         para.put("qrcode", data.getQrcode());
 
         JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(data.getFields());
-        JasperPrint print = JasperFillManager.fillReport(reportPay, para, dataSource);
+        JasperPrint print = JasperFillManager.fillReport(reportDebt, para, dataSource);
         view(print);
+
     }
 
     private void view(JasperPrint print) throws JRException {

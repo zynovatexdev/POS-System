@@ -4,6 +4,7 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
+import com.zx.shopmanagementsystem.ui.MailSend;
 import com.zx.shopmanagementsystem.ui.ProfitReport;
 import com.zx.shopmanagementsystem.ui.SalesReport;
 import com.zx.shopmanagementsystem.ui.TopPerformingReport;
@@ -68,6 +69,12 @@ public class ReportGeneration extends javax.swing.JPanel {
             }
         });
         add(salsReportBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 150, 50));
+
+        sendLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                sendLblMouseClicked(evt);
+            }
+        });
         add(sendLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 640, 155, 40));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ReportGeneration.png")); // NOI18N
@@ -93,6 +100,12 @@ public class ReportGeneration extends javax.swing.JPanel {
         // TODO add your handling code here:
         new UnderPerformingReport().setVisible(true);
     }//GEN-LAST:event_underReportBtnLblMouseClicked
+
+    private void sendLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendLblMouseClicked
+        // TODO add your handling code here:
+        MailSend ms = new MailSend();
+        ms.setVisible(true);
+    }//GEN-LAST:event_sendLblMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel iconLbl;

@@ -60,6 +60,7 @@ public class Expenses extends javax.swing.JPanel {
         });
         add(expensesCategotyBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 86, 270, 40));
 
+        expensesTbl.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
         expensesTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -123,7 +124,9 @@ public class Expenses extends javax.swing.JPanel {
                     + "JOIN\n"
                     + "    shopdb.payment_method pm ON e.payment_method = pm.payment_method_id\n"
                     + "JOIN\n"
-                    + "    shopdb.user u ON e.user_id = u.user_id;");
+                    + "    shopdb.user u ON e.user_id = u.user_id\n"
+                    + "ORDER BY\n"
+                    + "    e.expenses_date DESC;");
             while (rs.next()) {
                 String expenses_date = String.valueOf(rs.getString("expenses_date"));
                 String category_name = String.valueOf(rs.getString("category_name"));

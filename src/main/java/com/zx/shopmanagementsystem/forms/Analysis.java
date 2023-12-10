@@ -47,11 +47,13 @@ public class Analysis extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(1015, 738));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        chart.setForeground(new java.awt.Color(255, 255, 255));
+        chart.setBackground(new java.awt.Color(0, 51, 51));
+        chart.setForeground(new java.awt.Color(0, 0, 0));
         chart.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
         add(chart, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 75, 1050, 610));
 
         noticeTxt.setFont(new java.awt.Font("Poppins Medium", 0, 24)); // NOI18N
+        noticeTxt.setForeground(new java.awt.Color(2, 82, 130));
         noticeTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         noticeTxt.setText("Not Enough Data.");
         add(noticeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(33, 80, 1050, 600));
@@ -67,11 +69,44 @@ public class Analysis extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void setData() {
-        String sql = "SELECT DATE_FORMAT(date, '%M-%Y') AS formatted_date, SUM(sale) AS sum_sale, SUM(profit) AS sum_profit\n"
-                + "FROM shopdb.user_profile\n"
-                + "WHERE DATE_FORMAT(date, '%Y-%m') BETWEEN DATE_FORMAT(DATE_SUB(CURRENT_DATE, INTERVAL 7 MONTH), '%Y-%m') AND DATE_FORMAT(CURRENT_DATE, '%Y-%m')\n"
-                + "GROUP BY formatted_date\n"
-                + "ORDER BY STR_TO_DATE(formatted_date, '%M-%Y') DESC;";
+        String sql = "SELECT\n"
+                + "    month,\n"
+                + "    COALESCE(ROUND(SUM(total_sales), 2), 0) AS total_sales,\n"
+                + "    COALESCE(ROUND(SUM(total_profit), 2), 0) AS total_profit,\n"
+                + "    COALESCE(ROUND(SUM(total_expenses), 2), 0) AS total_expenses\n"
+                + "FROM (\n"
+                + "    -- Subquery for total sales and profit\n"
+                + "    SELECT\n"
+                + "        DATE_FORMAT(date, '%Y-%m') AS month,\n"
+                + "        SUM(price) AS total_sales,\n"
+                + "        SUM(profit) AS total_profit,\n"
+                + "        0 AS total_expenses\n"
+                + "    FROM\n"
+                + "        shopdb.sold_items\n"
+                + "    WHERE\n"
+                + "        date BETWEEN CURDATE() - INTERVAL 7 MONTH AND CURDATE()\n"
+                + "    GROUP BY\n"
+                + "        month\n"
+                + "\n"
+                + "    UNION ALL\n"
+                + "\n"
+                + "    -- Subquery for total expenses\n"
+                + "    SELECT\n"
+                + "        DATE_FORMAT(expenses_date, '%Y-%m') AS month,\n"
+                + "        0 AS total_sales,\n"
+                + "        0 AS total_profit,\n"
+                + "        SUM(expenses_amount) AS total_expenses\n"
+                + "    FROM\n"
+                + "        shopdb.expenses\n"
+                + "    WHERE\n"
+                + "        expenses_date BETWEEN CURDATE() - INTERVAL 7 MONTH AND CURDATE()\n"
+                + "    GROUP BY\n"
+                + "        month\n"
+                + ") AS combined_data\n"
+                + "GROUP BY\n"
+                + "    month\n"
+                + "ORDER BY\n"
+                + "    month DESC;";
         try {
             ResultSet resultSet = DB.getdata(sql);
             int rowCount = 0;
@@ -85,16 +120,16 @@ public class Analysis extends javax.swing.JPanel {
                     List<ModelData> list = new ArrayList<>();
                     ResultSet rs = DB.getdata(sql); // Convert to date for sorting
                     while (rs.next()) {
-                        String date = rs.getString("formatted_date");
-                        double sale = Double.parseDouble(rs.getString("sum_sale"));
-                        double profit = Double.parseDouble(rs.getString("sum_profit"));
-                        double expenses = 500.00;
+                        String date = rs.getString("month");
+                        double sale = Double.parseDouble(rs.getString("total_sales"));
+                        double profit = Double.parseDouble(rs.getString("total_profit"));
+                        double expenses = Double.parseDouble(rs.getString("total_expenses"));
                         list.add(new ModelData(date, sale, profit, expenses));
                     }
                     rs.close();
 
                     for (ModelData d : list) {
-                        chart.addData(new ModelChart(d.getDate(), new double[]{d.getProfit(), d.getSale()}));
+                        chart.addData(new ModelChart(d.getDate(), new double[]{d.getProfit(), d.getSale(), d.getExpenses()}));
                     }
                     chart.start();
                 } catch (Exception ex) {
@@ -115,6 +150,7 @@ public class Analysis extends javax.swing.JPanel {
         chart.setTitle("Sales and Profit");
         chart.addLegend("Profit", Color.decode("#f56942"), Color.decode("#fafa00"));
         chart.addLegend("Sales", Color.decode("#00fa21"), Color.decode("#0021fa"));
+        chart.addLegend("Expenses", Color.decode("#6441A5"), Color.decode("#2a0845"));
     }
 
 }

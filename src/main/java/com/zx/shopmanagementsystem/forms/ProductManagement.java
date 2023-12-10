@@ -44,6 +44,7 @@ public class ProductManagement extends javax.swing.JPanel {
         addBarcodeBtnLbl = new javax.swing.JLabel();
         addDiscountBrnLbl = new javax.swing.JLabel();
         addStoreLocationBtnLbl = new javax.swing.JLabel();
+        returnItemsBtnLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1116, 718));
@@ -132,6 +133,7 @@ public class ProductManagement extends javax.swing.JPanel {
             }
         });
         add(addStoreLocationBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 100, 150, 50));
+        add(returnItemsBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 155, 60));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ProductManagement.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1116, 718));
@@ -241,5 +243,6 @@ public class ProductManagement extends javax.swing.JPanel {
     private javax.swing.JLabel addProductTypeBtnLbl;
     private javax.swing.JLabel addStoreLocationBtnLbl;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JLabel returnItemsBtnLbl;
     // End of variables declaration//GEN-END:variables
 }

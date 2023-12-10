@@ -625,7 +625,7 @@ public class NewInvoice extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -1064,7 +1064,7 @@ public class NewInvoice extends javax.swing.JFrame {
         try {
             DB.putdata("INSERT INTO cash_payment (date, time, price, payment_method_id, customer_id, invoice_category_id) VALUES ('" + date + "','" + time + "','" + price + "','" + payment_method_id + "','" + customer_id + "','" + invoice_category_id + "')");
         } catch (Exception ex) {
-            System.out.println("updateUserProfile : " + ex.getMessage());
+            System.out.println("updateCashPaymentProfile : " + ex.getMessage());
         }
     }
 
