@@ -73,6 +73,7 @@ public class DebtManagement extends javax.swing.JPanel {
         });
         add(newDebtInvoiceBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 85, 210, 45));
 
+        debtTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         debtTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},

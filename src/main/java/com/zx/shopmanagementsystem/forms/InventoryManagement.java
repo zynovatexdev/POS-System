@@ -72,7 +72,7 @@ public class InventoryManagement extends javax.swing.JPanel {
         jScrollPane1.setBorder(null);
         jScrollPane1.setOpaque(false);
 
-        inventoryTbl.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        inventoryTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         inventoryTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},

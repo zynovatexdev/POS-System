@@ -2,6 +2,7 @@ package com.zx.shopmanagementsystem.table;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -20,6 +21,7 @@ public class TextAreaCellRenderer extends JTextArea implements TableCellRenderer
         setWrapStyleWord(true);
         setLineWrap(true);
         setOpaque(true);
+        setFont(new Font("Poppins Semi Bold", Font.PLAIN, 13));
         setBorder(new EmptyBorder(8, 10, 8, 10));
     }
 
@@ -34,7 +36,7 @@ public class TextAreaCellRenderer extends JTextArea implements TableCellRenderer
                 setBackground(Color.decode("#bcbcf7"));
             } else {
                 if (row % 2 == 0) {
-                    setBackground(Color.decode("#a0a1fa"));
+                    setBackground(Color.decode("#f9f9f9"));
                 } else {
                     setBackground(new Color(255, 255, 255));
                 }

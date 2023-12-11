@@ -8,6 +8,11 @@ import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import com.zx.shopmanagementsystem.ui.ExpensesCategory;
 import com.zx.shopmanagementsystem.ui.ExpensesForm;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,11 +42,24 @@ public class Expenses extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        dateChooser1 = new com.zx.shopmanagementsystem.dateChooser.DateChooser();
+        dateChooser2 = new com.zx.shopmanagementsystem.dateChooser.DateChooser();
         expensesBtnLbl = new javax.swing.JLabel();
         expensesCategotyBtnLbl = new javax.swing.JLabel();
+        to = new com.zx.shopmanagementsystem.components.RoundedText();
+        from = new com.zx.shopmanagementsystem.components.RoundedText();
+        searchBtnLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         expensesTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
+
+        dateChooser1.setForeground(new java.awt.Color(0, 51, 204));
+        dateChooser1.setDateFormat("yyyy-MM-dd");
+        dateChooser1.setTextRefernce(from);
+
+        dateChooser2.setForeground(new java.awt.Color(0, 51, 204));
+        dateChooser2.setDateFormat("yyyy-MM-dd");
+        dateChooser2.setTextRefernce(to);
 
         setPreferredSize(new java.awt.Dimension(1116, 718));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,16 +69,31 @@ public class Expenses extends javax.swing.JPanel {
                 expensesBtnLblMouseClicked(evt);
             }
         });
-        add(expensesBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 86, 200, 40));
+        add(expensesBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, 180, 50));
 
         expensesCategotyBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 expensesCategotyBtnLblMouseClicked(evt);
             }
         });
-        add(expensesCategotyBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 86, 270, 40));
+        add(expensesCategotyBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 230, 50));
 
-        expensesTbl.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
+        to.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        to.setHintText("Enter Date");
+        add(to, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 87, 130, -1));
+
+        from.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        from.setHintText("Enter Date");
+        add(from, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 87, 130, -1));
+
+        searchBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchBtnLblMouseClicked(evt);
+            }
+        });
+        add(searchBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 86, 125, 40));
+
+        expensesTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         expensesTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -98,12 +131,27 @@ public class Expenses extends javax.swing.JPanel {
         new ExpensesCategory().setVisible(true);
     }//GEN-LAST:event_expensesCategotyBtnLblMouseClicked
 
+    private void searchBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchBtnLblMouseClicked
+        // TODO add your handling code here:
+        tableDataClear();
+        try {
+            betweenDays();
+        } catch (Exception ex) {
+            Logger.getLogger(Expenses.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_searchBtnLblMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private com.zx.shopmanagementsystem.dateChooser.DateChooser dateChooser1;
+    private com.zx.shopmanagementsystem.dateChooser.DateChooser dateChooser2;
     private javax.swing.JLabel expensesBtnLbl;
     private javax.swing.JLabel expensesCategotyBtnLbl;
     private javax.swing.JTable expensesTbl;
+    private com.zx.shopmanagementsystem.components.RoundedText from;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel searchBtnLbl;
+    private com.zx.shopmanagementsystem.components.RoundedText to;
     // End of variables declaration//GEN-END:variables
 
     private void tableDataLoader() {
@@ -163,5 +211,57 @@ public class Expenses extends javax.swing.JPanel {
     public void setTable() {
         tableDataClear();
         tableDataLoader();
+    }
+
+    private void betweenDays() throws Exception {
+        String sql = "SELECT\n"
+                + "    e.expense_id,\n"
+                + "    e.expenses_date,\n"
+                + "    ec.category_name,\n"
+                + "    e.expenses_description,\n"
+                + "    e.expenses_amount,\n"
+                + "    pm.payment_method_type,\n"
+                + "    e.vendor_supplier,\n"
+                + "    u.user_name\n"
+                + "FROM\n"
+                + "    shopdb.expenses e\n"
+                + "JOIN\n"
+                + "    shopdb.expense_category ec ON e.expenses_category_id = ec.expenses_category_id\n"
+                + "JOIN\n"
+                + "    shopdb.payment_method pm ON e.payment_method = pm.payment_method_id\n"
+                + "JOIN\n"
+                + "    shopdb.user u ON e.user_id = u.user_id\n"
+                + "WHERE\n"
+                + "    e.expenses_date BETWEEN ? AND ?\n"
+                + "ORDER BY\n"
+                + "    e.expenses_date DESC;";
+
+        try (PreparedStatement preparedStatement = DB.con().prepareStatement(sql)) {
+            preparedStatement.setString(1, from.getText());
+            preparedStatement.setString(2, to.getText());
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            // Process the resultSet as needed
+            while (rs.next()) {
+                String expenses_date = String.valueOf(rs.getString("expenses_date"));
+                String category_name = String.valueOf(rs.getString("category_name"));
+                String expenses_description = String.valueOf(rs.getString("expenses_description"));
+                String expenses_amount = String.valueOf(rs.getString("expenses_amount"));
+                String payment_method_type = String.valueOf(rs.getString("payment_method_type"));
+                String vendor_supplier = String.valueOf(rs.getString("vendor_supplier"));
+                String user_name = String.valueOf(rs.getString("user_name"));
+
+//                System.out.println("User ID" + userId);
+//                System.out.println("User Name" + userName);
+//                System.out.println("Full Name" + fullName);
+                String table_data[] = {expenses_date, category_name, expenses_description, expenses_amount, payment_method_type, vendor_supplier, user_name};
+                DefaultTableModel table = (DefaultTableModel) expensesTbl.getModel();
+                table.addRow(table_data);
+
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

@@ -11,6 +11,11 @@ import com.zx.shopmanagementsystem.table.TableCustom;
 import com.zx.shopmanagementsystem.ui.InvoiceCategory;
 import com.zx.shopmanagementsystem.ui.NewInvoice;
 import com.zx.shopmanagementsystem.ui.PaymentMethod;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +37,39 @@ public class InvoiceCreation extends javax.swing.JPanel {
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
         tableDataClear();
         tableDataLoader();
+        // Add a DocumentListener to the searchTxt
+        searchTxt.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
     }
 
     /**
@@ -47,6 +85,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
         paymentMethodBtnLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         expireTbl = new javax.swing.JTable();
+        searchTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         iconLbl = new javax.swing.JLabel();
 
         setName(""); // NOI18N
@@ -82,7 +121,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
         expireTbl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        expireTbl.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        expireTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         expireTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -104,7 +143,16 @@ public class InvoiceCreation extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(expireTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 157, 1020, 520));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 207, 1020, 470));
+
+        searchTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        searchTxt.setHintText("Customer Name or Invoice ID");
+        searchTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTxtActionPerformed(evt);
+            }
+        });
+        add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(757, 160, 260, -1));
 
         iconLbl.setBackground(new java.awt.Color(255, 255, 255));
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\InvoiceCreation.png")); // NOI18N
@@ -144,12 +192,17 @@ public class InvoiceCreation extends javax.swing.JPanel {
 
     }//GEN-LAST:event_paymentMethodBtnLblMouseExited
 
+    private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTxtActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel createNewInvoice;
     private javax.swing.JTable expireTbl;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel paymentMethodBtnLbl;
+    private com.zx.shopmanagementsystem.components.RoundedText searchTxt;
     // End of variables declaration//GEN-END:variables
 
     private void tableDataLoader() {
@@ -202,5 +255,62 @@ public class InvoiceCreation extends javax.swing.JPanel {
         } catch (Exception e) {
             System.out.println("Payment History Table Data Clear : " + e);
         }
+    }
+
+    private void handleSearchTextUpdate() throws Exception {
+        if (searchTxt.getText().equals("")) {
+            tableDataClear();
+            tableDataLoader();
+        } else {
+
+            tableDataClear();
+            String sql = "SELECT \n"
+                    + "    cp.cash_invoice_id,\n"
+                    + "    cp.date,\n"
+                    + "    cp.time,\n"
+                    + "    cp.price,\n"
+                    + "    pm.payment_method_type,\n"
+                    + "    c.customer_name,\n"
+                    + "    ic.invoice_category_type\n"
+                    + "FROM\n"
+                    + "    shopdb.cash_payment cp\n"
+                    + "JOIN\n"
+                    + "    shopdb.payment_method pm ON cp.payment_method_id = pm.payment_method_id\n"
+                    + "JOIN\n"
+                    + "    shopdb.customer c ON cp.customer_id = c.customer_id\n"
+                    + "JOIN\n"
+                    + "    shopdb.invoice_catergory ic ON cp.invoice_category_id = ic.invoice_category_id\n"
+                    + "WHERE\n"
+                    + "    c.customer_name LIKE ? OR cp.cash_invoice_id = ?\n"
+                    + "ORDER BY\n"
+                    + "    cp.date DESC, cp.time DESC;";
+
+            try (PreparedStatement preparedStatement = DB.con().prepareStatement(sql)) {
+                preparedStatement.setString(1, "%" + searchTxt.getText() + "%");
+                preparedStatement.setString(2, searchTxt.getText());
+
+                ResultSet rs = preparedStatement.executeQuery();
+
+                // Process the resultSet as needed
+                while (rs.next()) {
+                    String cash_invoice_id = String.valueOf(rs.getInt("cash_invoice_id"));
+                    String date = String.valueOf(rs.getString("date"));
+                    String time = String.valueOf(rs.getString("time"));
+                    String price = String.valueOf(rs.getString("price"));
+                    String payment_method_type = String.valueOf(rs.getString("payment_method_type"));
+                    String customer_name = String.valueOf(rs.getString("customer_name"));
+                    String invoice_category_type = String.valueOf(rs.getString("invoice_category_type"));
+
+                    String table_data[] = {cash_invoice_id, date, time, price, payment_method_type, customer_name, invoice_category_type};
+                    DefaultTableModel table = (DefaultTableModel) expireTbl.getModel();
+                    table.addRow(table_data);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+
     }
 }

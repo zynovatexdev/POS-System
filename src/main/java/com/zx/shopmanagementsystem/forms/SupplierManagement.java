@@ -10,6 +10,11 @@ import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import com.zx.shopmanagementsystem.ui.SupplierDetails;
 import com.zx.shopmanagementsystem.ui.SupplierRegistration;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -30,6 +35,38 @@ public class SupplierManagement extends javax.swing.JPanel {
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
         tableDataClear();
         tableDataLoader();
+        searchTxt.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
     }
 
     /**
@@ -44,6 +81,7 @@ public class SupplierManagement extends javax.swing.JPanel {
         addSupplierBtnLbl = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         supllierTbl = new javax.swing.JTable();
+        searchTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         iconLbl = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(1015, 738));
@@ -63,7 +101,7 @@ public class SupplierManagement extends javax.swing.JPanel {
         });
         add(addSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 90, 210, 40));
 
-        supllierTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        supllierTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         supllierTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -87,7 +125,16 @@ public class SupplierManagement extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(supllierTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 157, 1020, 520));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 207, 1020, 470));
+
+        searchTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        searchTxt.setHintText("Supplier Name or Supplier ID");
+        searchTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTxtActionPerformed(evt);
+            }
+        });
+        add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(757, 160, 260, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\SupplierManagement.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -118,10 +165,15 @@ public class SupplierManagement extends javax.swing.JPanel {
         sd.dataLoad(supplierID);
     }//GEN-LAST:event_supllierTblMouseClicked
 
+    private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTxtActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addSupplierBtnLbl;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.zx.shopmanagementsystem.components.RoundedText searchTxt;
     private javax.swing.JTable supllierTbl;
     // End of variables declaration//GEN-END:variables
     private void tableDataLoader() {
@@ -160,5 +212,44 @@ public class SupplierManagement extends javax.swing.JPanel {
     public void setTable() {
         tableDataClear();
         tableDataLoader();
+    }
+
+    private void handleSearchTextUpdate() throws Exception {
+        if (searchTxt.getText().equals("")) {
+            tableDataClear();
+            tableDataLoader();
+        } else {
+
+            tableDataClear();
+            String sql = "SELECT * FROM supplier\n"
+                    + "WHERE supplier_id = ? OR supplier_name LIKE ?;";
+
+            try (PreparedStatement preparedStatement = DB.con().prepareStatement(sql)) {
+                preparedStatement.setString(2, "%" + searchTxt.getText() + "%");
+                preparedStatement.setString(1, searchTxt.getText());
+
+                ResultSet rs = preparedStatement.executeQuery();
+
+                // Process the resultSet as needed
+                while (rs.next()) {
+                    String supId = String.valueOf(rs.getInt("supplier_id"));
+                    String supName = String.valueOf(rs.getString("supplier_name"));
+                    String supContact = String.valueOf(rs.getString("supplier_contact"));
+
+                    System.out.println("Supplier ID" + supId);
+                    System.out.println("Supplier Name" + supName);
+                    System.out.println("Supplier Contact" + supContact);
+
+                    String table_data[] = {supId, supName, supContact};
+                    DefaultTableModel table = (DefaultTableModel) supllierTbl.getModel();
+                    table.addRow(table_data);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+
     }
 }

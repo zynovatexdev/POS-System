@@ -74,6 +74,7 @@ public class ExpensesCategory extends javax.swing.JFrame {
         });
         getContentPane().add(saveBtbLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 616, 190, 40));
 
+        categoryTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         categoryTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},

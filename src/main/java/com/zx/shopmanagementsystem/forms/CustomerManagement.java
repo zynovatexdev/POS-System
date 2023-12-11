@@ -11,6 +11,11 @@ import com.zx.shopmanagementsystem.table.TableCustom;
 import com.zx.shopmanagementsystem.ui.CustomerCategory;
 import com.zx.shopmanagementsystem.ui.CustomerDetails;
 import com.zx.shopmanagementsystem.ui.CustomerRegistration;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,6 +37,40 @@ public class CustomerManagement extends javax.swing.JPanel {
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
         tableDataClear();
         tableDataLoader();
+
+        // Add a DocumentListener to the searchTxt
+        searchTxt.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
     }
 
     /**
@@ -45,6 +84,7 @@ public class CustomerManagement extends javax.swing.JPanel {
 
         addCustomerCategoryBtnLbl = new javax.swing.JLabel();
         addCustomerBtnLbl = new javax.swing.JLabel();
+        searchTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         jScrollPane1 = new javax.swing.JScrollPane();
         customerTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
@@ -78,9 +118,18 @@ public class CustomerManagement extends javax.swing.JPanel {
         });
         add(addCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 260, 36));
 
+        searchTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        searchTxt.setHintText("EnteName or Phone Number");
+        searchTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTxtActionPerformed(evt);
+            }
+        });
+        add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(757, 160, 260, -1));
+
         jScrollPane1.setBorder(null);
 
-        customerTbl.setFont(new java.awt.Font("Poppins Medium", 0, 12)); // NOI18N
+        customerTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         customerTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -99,7 +148,7 @@ public class CustomerManagement extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(customerTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 157, 1020, 520));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 207, 1020, 470));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\CustomerManagement.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -145,12 +194,18 @@ public class CustomerManagement extends javax.swing.JPanel {
         cc.setVisible(true);
     }//GEN-LAST:event_addCustomerCategoryBtnLblMouseClicked
 
+    private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_searchTxtActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addCustomerBtnLbl;
     private javax.swing.JLabel addCustomerCategoryBtnLbl;
     private javax.swing.JTable customerTbl;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.zx.shopmanagementsystem.components.RoundedText searchTxt;
     // End of variables declaration//GEN-END:variables
 
     private void tableDataLoader() {
@@ -192,12 +247,62 @@ public class CustomerManagement extends javax.swing.JPanel {
                 table.removeRow(customerTbl.getRowCount() - 1);
             }
         } catch (Exception e) {
-            System.out.println("User Management Table Data Clear : " + e);
+            System.out.println("Customer Management Table Data Clear : " + e);
         }
     }
 
     public void setTable() {
         tableDataClear();
         tableDataLoader();
+    }
+
+    private void handleSearchTextUpdate() throws Exception {
+        if (searchTxt.getText().equals("")) {
+            tableDataClear();
+            tableDataLoader();
+        } else {
+
+            tableDataClear();
+            String sql = "SELECT\n"
+                    + "    c.customer_id,\n"
+                    + "    c.customer_name,\n"
+                    + "    c.customer_address,\n"
+                    + "    c.customer_phone,\n"
+                    + "    cc.customer_type\n"
+                    + "FROM\n"
+                    + "    shopdb.customer c\n"
+                    + "JOIN\n"
+                    + "    shopdb.customer_category cc ON c.category_id = cc.customer_category_id\n"
+                    + "WHERE\n"
+                    + "    c.customer_name LIKE ? OR c.customer_phone LIKE ?";
+
+            try (PreparedStatement preparedStatement = DB.con().prepareStatement(sql)) {
+                preparedStatement.setString(1, "%" + searchTxt.getText() + "%");
+                preparedStatement.setString(2, "%" + searchTxt.getText() + "%");
+
+                ResultSet rs = preparedStatement.executeQuery();
+
+                // Process the resultSet as needed
+                while (rs.next()) {
+                    String customerId = String.valueOf(rs.getInt("customer_id"));
+                    String customerName = String.valueOf(rs.getString("customer_name"));
+                    String customerAddress = String.valueOf(rs.getString("customer_address"));
+                    String customerPhone = String.valueOf(rs.getString("customer_phone"));
+                    String customerCategoryId = String.valueOf(rs.getString("customer_type"));
+
+//                System.out.println("User ID" + userId);
+//                System.out.println("User Name" + userName);
+//                System.out.println("Full Name" + fullName);
+                    String table_data[] = {customerId, customerName, customerAddress, customerPhone, customerCategoryId};
+                    DefaultTableModel table = (DefaultTableModel) customerTbl.getModel();
+                    table.addRow(table_data);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+
     }
 }

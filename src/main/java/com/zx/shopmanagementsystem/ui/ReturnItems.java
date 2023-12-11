@@ -6,28 +6,50 @@ package com.zx.shopmanagementsystem.ui;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.assests.QtyCellEditor;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.notifications.ConfirmDialog;
 import com.zx.shopmanagementsystem.notifications.MessageDialog;
+import com.zx.shopmanagementsystem.print.ReportManager;
+import com.zx.shopmanagementsystem.print.ReportManagerReturn;
+import com.zx.shopmanagementsystem.print.model.FieldReportPayment;
+import com.zx.shopmanagementsystem.print.model.ParameterReportPayment;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.DefaultTableModel;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -41,6 +63,9 @@ public class ReturnItems extends javax.swing.JFrame {
     IconLocation il = new IconLocation();
     JDBC DB = new JDBC();
     ArrayList<Integer> customerIdArray = new ArrayList<>();
+    private int UseriD;
+    String returnDate;
+    String returnTime;
 
     public ReturnItems() {
         initComponents();
@@ -58,6 +83,7 @@ public class ReturnItems extends javax.swing.JFrame {
         });
         tableDataClear();
         tableDataClear2();
+        userInfo();
 
     }
 
@@ -160,6 +186,7 @@ public class ReturnItems extends javax.swing.JFrame {
         });
         getContentPane().add(forwardBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 330, 30, 20));
 
+        table2.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         table2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -183,6 +210,7 @@ public class ReturnItems extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(675, 232, 535, 302));
 
+        table1.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         table1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -289,8 +317,16 @@ public class ReturnItems extends javax.swing.JFrame {
 
     private void returnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_returnLblMouseClicked
         try {
-            // TODO add your handling code here:
-            updateSoldItemsTable();
+            ConfirmDialog confrim = new ConfirmDialog(this);
+            confrim.showMessage("Submit", "Do you want to Submit ?");
+            if (confrim.getMessageType() == ConfirmDialog.MessageType.YES) {
+                System.out.println("Yes");
+                insertReturnInvoice(totalReturnPrice);
+
+            } else {
+                System.out.println("No");
+            }
+
         } catch (Exception ex) {
             Logger.getLogger(ReturnItems.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -389,6 +425,11 @@ public class ReturnItems extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void dateComboLoader() {
+        try {
+            ReportManagerReturn.getInstance().compileReport();
+        } catch (Exception e) {
+            System.out.println("Report Manager Return Compile : " + e.getMessage());
+        }
         try {
             String sql = "SELECT DISTINCT date\n"
                     + "FROM sold_items;";
@@ -603,11 +644,11 @@ public class ReturnItems extends javax.swing.JFrame {
         }
 
     }
+    double totalReturnPrice;
 
     private void printTable2Data() {
         DefaultTableModel model2 = (DefaultTableModel) table2.getModel();
         Map<String, Double> productQuantities = new HashMap<>();
-        double totalReturnPrice = 0.0;
 
         // Iterate through each row in table2
         for (int i = 0; i < model2.getRowCount(); i++) {
@@ -679,48 +720,237 @@ public class ReturnItems extends javax.swing.JFrame {
         return -1; // Product not found in table1
     }
 
-    private void updateSoldItemsTable() throws Exception {
-        DefaultTableModel model2 = (DefaultTableModel) table2.getModel();
+    private void insertReturnInvoice(double totalReturnPrice) throws Exception {
+        MessageDialog DialogBox = new MessageDialog(this);
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+            Date currentDate = new Date();
 
+            // You need to calculate this based on your business logic
+            // Assuming you have an invoice_id variable (replace with your actual logic)
+            int invoiceId = getCashInvoiceId();
+            if (invoiceId == -1) {
+                System.out.println("Cash Invoice ID not found for the selected values.");
+                DialogBox.showMessage("ERROR!!!", "Cash Invoice not found for the selected values.", 3);
+            } else {
+                returnDate = dateFormat.format(currentDate);
+                returnTime = timeFormat.format(currentDate);
+                double preAmount = getPreAmount(invoiceId);
+                double currentAmount = preAmount - totalReturnPrice;
+                double returnBalance = totalReturnPrice;
+                String sql = "INSERT INTO shopdb.return_invoice "
+                        + "(return_time, return_date, return_amount, pre_amount, currunt_amount, return_balance, invoice_id) "
+                        + "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement preparedStatement = DB.con().prepareStatement(sql);
+                preparedStatement.setString(1, returnTime);
+                preparedStatement.setString(2, returnDate);
+                preparedStatement.setString(3, String.valueOf(totalReturnPrice));
+                preparedStatement.setString(4, String.valueOf(preAmount));
+                preparedStatement.setString(5, String.valueOf(currentAmount));
+                preparedStatement.setString(6, String.valueOf(returnBalance));
+                preparedStatement.setInt(7, invoiceId);
+
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("Return Invoice inserted successfully!");
+                    DialogBox.showMessage("Done!!!", "Return Invoice inserted successfully!", 1);
+                    insertExpenses(returnDate, 8, "Return : " + returnDate + ", " + returnTime, totalReturnPrice, 1, (String) customerNameCombo.getSelectedItem(), UseriD);
+                    generateBill(convertDataToJson());
+                } else {
+                    System.out.println("Failed to insert Return Invoice!");
+                    DialogBox.showMessage("ERROR!!!", "Failed to insert Return Invoice!", 3);
+                }
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private int getCashInvoiceId() throws Exception {
+        try {
+
+            String selectedDate = (String) dateCombo.getSelectedItem();
+            String selectedTime = (String) timeCombo.getSelectedItem();
+
+            String sql = "SELECT cash_invoice_id FROM shopdb.cash_payment "
+                    + "WHERE customer_id = ? AND date = ? AND time = ?";
+
+            // Assuming you have the customer ID for the selected customer name
+            int customerId = customerIdArray.get(customerNameCombo.getSelectedIndex());
+
+            PreparedStatement preparedStatement = DB.con().prepareStatement(sql);
+            preparedStatement.setInt(1, customerId);
+            preparedStatement.setString(2, selectedDate);
+            preparedStatement.setString(3, selectedTime);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                // Retrieve the cash_invoice_id from the result set
+                return resultSet.getInt("cash_invoice_id");
+            } else {
+
+                // You might want to handle this case according to your requirements
+                return -1;  // Return a default or sentinel value
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return -1;  // Return a default or sentinel value in case of an exception
+        }
+    }
+
+    private double getPreAmount(int invoiceId) throws SQLException, Exception {
+        try {
+            String sql = "SELECT price FROM shopdb.cash_payment WHERE cash_invoice_id = ?";
+
+            PreparedStatement preparedStatement = DB.con().prepareStatement(sql);
+            preparedStatement.setInt(1, invoiceId);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                // Retrieve the price from the result set
+                double invoicePrice = resultSet.getDouble("price");
+
+                // Replace this with your business logic to calculate pre_amount
+                // For example, you might want to subtract returned items' prices from the total invoice price
+                return invoicePrice;
+            } else {
+                // Handle the case where the invoiceId is not found
+                return 0.0;  // Return a default value, you may adjust based on your requirements
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw ex;  // Re-throw the exception to be handled by the caller
+        }
+    }
+
+    private void userInfo() {
+        Properties properties = new Properties();
+        Properties properties2 = new Properties();
+
+        // Load properties from the file
+        try (FileInputStream fileInputStream = new FileInputStream("user.properties")) {
+            properties.load(fileInputStream);
+            System.out.println("user loaded successfully.");
+
+            // Access individual properties
+            UseriD = Integer.parseInt(properties.getProperty("UserID"));
+
+            System.out.println("User ID: " + UseriD);
+
+        } catch (Exception eb) {
+            System.err.println("Dashboard Admin jsonRead UserId: " + eb);
+        }
+
+    }
+
+    private void insertExpenses(String returnDate, int expensesCategoryId, String description, double expensesAmount, int paymentMethod, String vendor, int userID) {
+        String sql = "INSERT INTO shopdb.expenses (expenses_date, expenses_category_id, expenses_description, expenses_amount, payment_method, vendor_supplier, user_id) VALUES "
+                + "('" + returnDate + "','" + expensesCategoryId + "','" + description + "','" + expensesAmount + "','" + paymentMethod + "','" + vendor + "','" + userID + "')";
+    }
+
+    private void generateBill(JSONObject invoiceData) {
+        JSONArray products = invoiceData.getJSONArray("products");
+        String Date = returnDate;
+        String Time = returnTime;
+        String CustomerName = (String) customerNameCombo.getSelectedItem();
+        try {
+            List<FieldReportPayment> fields = new ArrayList<>();
+            for (int i = 0; i < products.length(); i++) {
+                JSONObject item = products.getJSONObject(i);
+                String productName = item.getString("productName");
+                double quantity = item.getDouble("returnQuantity");
+                double returnPrice = item.getDouble("returnPrice");
+                fields.add(new FieldReportPayment(productName, quantity, returnPrice));
+            }
+            ParameterReportPayment dataPrint = new ParameterReportPayment(Date, Time, CustomerName, invoiceData.getString("totalReturnPrice"), getLogo(), getQrCode(Time, Date), fields);
+            ReportManagerReturn.getInstance().printReportPayment(dataPrint);
+        } catch (Exception e) {
+            System.out.println("Error : " + e);
+        }
+    }
+
+    private InputStream getQrCode(String Time, String Date) throws IOException, WriterException {
+        JSONObject qrData = new JSONObject();
+        qrData.put("Date", Date);
+        qrData.put("Time", Time);
+        qrData.put("CustomerID", customerIdArray.get(customerNameCombo.getSelectedIndex()));
+
+        Map<EncodeHintType, Object> hints = new HashMap<>();
+        hints.put(EncodeHintType.MARGIN, 0);
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(qrData.toString(), BarcodeFormat.QR_CODE, 80, 80, hints);
+        BufferedImage image = MatrixToImageWriter.toBufferedImage(bitMatrix);
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", outputStream);
+        return new ByteArrayInputStream(outputStream.toByteArray());
+
+    }
+
+    private InputStream getLogo() {
+        try {
+            String imageUrl = "file:" + il.logo_1;
+            URL url = new URL(imageUrl);
+            return url.openStream();
+        } catch (MalformedURLException e) {
+            e.printStackTrace(); // Handle the URL format exception
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the IO exception
+        }
+        return null;
+    }
+
+    private JSONObject convertDataToJson() {
+        DefaultTableModel model2 = (DefaultTableModel) table2.getModel();
+        Map<String, Double> productQuantities = new HashMap<>();
+
+        // Iterate through each row in table2
         for (int i = 0; i < model2.getRowCount(); i++) {
             String productName = (String) model2.getValueAt(i, 0);
             double returnQuantity = Double.parseDouble(model2.getValueAt(i, 1).toString());
+
+            // Update the quantity in the map
+            productQuantities.put(productName, productQuantities.getOrDefault(productName, 0.0) + returnQuantity);
+        }
+
+        // Create a JSON array to hold product information
+        JSONArray jsonArray = new JSONArray();
+
+        // Fetch product information from shopdb.product table and add to the JSON array
+        for (Map.Entry<String, Double> entry : productQuantities.entrySet()) {
+            String productName = entry.getKey();
+            double returnQuantity = entry.getValue();
 
             // Fetch product information from shopdb.product table
             ProductInfo productInfo = getProductInfo(productName);
 
             if (productInfo != null) {
-                // Calculate new quantities, prices, and profits
-                double sellingPrice = productInfo.getSellingPrice();
-                double returnPrice = sellingPrice * returnQuantity;
+                // Create a JSON object for each product
+                JSONObject productJson = new JSONObject();
+                productJson.put("productName", productName);
+                productJson.put("returnQuantity", returnQuantity);
+                productJson.put("sellingPrice", productInfo.getSellingPrice());
 
-                // Update the shopdb.sold_items table
-                try {
-                    String updateSql = "UPDATE shopdb.sold_items "
-                            + "SET quantity = quantity - ?, "
-                            + "price = price - ?, "
-                            + "profit = profit - ? "
-                            + "WHERE date = ? AND time = ? AND product_id = (SELECT product_id FROM shopdb.product WHERE product_name = ?)";
-                    PreparedStatement updateStatement = DB.con().prepareStatement(updateSql);
-                    updateStatement.setDouble(1, returnQuantity);
-                    updateStatement.setDouble(2, returnPrice);
-                    updateStatement.setDouble(3, returnPrice - (returnQuantity * productInfo.getReceivingPrice()));
-                    updateStatement.setString(4, (String) dateCombo.getSelectedItem());
-                    updateStatement.setString(5, (String) timeCombo.getSelectedItem());
-                    updateStatement.setString(6, productName);
+                // Calculate return price
+                double returnPrice = productInfo.getSellingPrice() * returnQuantity;
+                productJson.put("returnPrice", returnPrice);
 
-                    int rowsAffected = updateStatement.executeUpdate();
-
-                    if (rowsAffected > 0) {
-                        System.out.println("Table updated successfully.");
-                    } else {
-                        System.out.println("No rows updated.");
-                    }
-                } catch (SQLException ex) {
-                    Logger.getLogger(ReturnItems.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                // Add the JSON object to the array
+                jsonArray.put(productJson);
             }
         }
+
+        // Create a JSON object to hold the result
+        JSONObject resultJson = new JSONObject();
+        resultJson.put("products", jsonArray);
+        resultJson.put("totalReturnPrice", String.valueOf(totalReturnPrice));
+
+        // Convert the JSON object to a string
+        return resultJson;
     }
 
 }

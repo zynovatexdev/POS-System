@@ -240,6 +240,7 @@ public class NewDebt extends javax.swing.JFrame {
         });
         getContentPane().add(paymentBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(1020, 610, 200, 50));
 
+        invoiceTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         invoiceTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},

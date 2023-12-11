@@ -318,7 +318,7 @@ public class backUp {
         int paymentMethod;
         int customerId;
         String totalAmount;
-        String installmentPayment;
+        String status;
         String outstandingAmount;
         String lastPayAmount;
         String stratDate;
@@ -332,7 +332,7 @@ public class backUp {
                 paymentMethod = rs.getInt("payment_method");
                 customerId = rs.getInt("customer_id");
                 totalAmount = rs.getString("total_amount");
-                installmentPayment = rs.getString("installment_payment");
+                status = rs.getString("status");
                 outstandingAmount = rs.getString("outstanding_amount");
                 lastPayAmount = rs.getString("last_pay_amount");
                 stratDate = rs.getString("start_date");
@@ -343,7 +343,7 @@ public class backUp {
                 data.put("payment_method", paymentMethod);
                 data.put("customer_id", customerId);
                 data.put("total_amount", totalAmount);
-                data.put("installment_payment", installmentPayment);
+                data.put("status", status);
                 data.put("outstanding_amount", outstandingAmount);
                 data.put("last_pay_amount", lastPayAmount);
                 data.put("start_date", stratDate);
@@ -361,28 +361,40 @@ public class backUp {
 
     public void backUpDebtInvoice() {
         Map<String, Object> data = new HashMap<>();
-        int invoiceId;
-        int debtId;
-        int invoiceCategoryId;
-        String dateAndTime;
-        String note;
+        int invoice_id;
+        int debt_id;
+        int product_id;
+        int user_id;
+        int customer_id;
+        String date;
+        String time;
+        double price;
+        double quantity;
 
         try {
             ResultSet rs = DB.getdata("SELECT * FROM debt_invoice");
             while (rs.next()) {
-                invoiceId = rs.getInt("invoice_id");
-                debtId = rs.getInt("debt_id");
-                invoiceCategoryId = rs.getInt("invoice_category_id");
-                dateAndTime = rs.getString("date_and_time");
-                note = rs.getString("note");
+                invoice_id = rs.getInt("invoice_id");
+                debt_id = rs.getInt("debt_id");
+                product_id = rs.getInt("product_id");
+                customer_id = rs.getInt("customer_id");
+                date = rs.getString("date");
+                user_id = rs.getInt("user_id");
+                time = rs.getString("time");
+                price = Double.parseDouble(rs.getString("price"));
+                quantity = Double.parseDouble(rs.getString("quantity"));
 
-                data.put("invoice_id", invoiceId);
-                data.put("debt_id", debtId);
-                data.put("invoice_category_id", invoiceCategoryId);
-                data.put("date_and_time", dateAndTime);
-                data.put("note", note);
+                data.put("invoice_id", invoice_id);
+                data.put("debt_id", debt_id);
+                data.put("product_id", product_id);
+                data.put("user_id", user_id);
+                data.put("customer_id", customer_id);
+                data.put("date", date);
+                data.put("time", time);
+                data.put("price", price);
+                data.put("quantity", quantity);
 
-                backUp("Debt Invoice", String.valueOf(invoiceId), data);
+                backUp("Debt Invoice", String.valueOf(invoice_id), data);
 
             }
         } catch (Exception e) {
@@ -421,23 +433,31 @@ public class backUp {
         Map<String, Object> data = new HashMap<>();
         int id;
         String type;
-
+        String description;
+        String curruncyType;
+        String bankName;
         try {
             ResultSet rs = DB.getdata("SELECT * FROM payment_method");
             while (rs.next()) {
                 id = rs.getInt("payment_method_id");
                 type = rs.getString("payment_method_type");
+                description = rs.getString("description");
+                curruncyType = rs.getString("curruncyType");
+                bankName = rs.getString("bankName");
 
                 data.put("payment_method_id", id);
                 data.put("payment_method_type", type);
+                data.put("description", description);
+                data.put("curruncyType", curruncyType);
+                data.put("bankName", bankName);
 
                 backUp("Payment Method", String.valueOf(id), data);
 
             }
         } catch (Exception e) {
-            System.out.println("Backup Invoice Category : " + e.getMessage());
+            System.out.println("Backup Payment Method : " + e.getMessage());
         }
-        System.out.println("Invoice Category BackUp Run");
+        System.out.println("Payment Method BackUp Run");
     }
 
     public void backupReceipt() {
@@ -616,6 +636,114 @@ public class backUp {
         System.out.println("User Profile Backup Run");
     }
 
+    public void backupExpensesCategory() {
+        Map<String, Object> data = new HashMap<>();
+        int expenses_category_id;
+        String category_name;
+        String description;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM expense_category");
+            while (rs.next()) {
+                expenses_category_id = rs.getInt("expenses_category_id");
+                category_name = rs.getString("category_name");
+                description = rs.getString("description");
+
+                data.put("expenses_category_id", expenses_category_id);
+                data.put("category_name", category_name);
+                data.put("description", description);
+
+                backUp("Expenses Category", String.valueOf(expenses_category_id), data);
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Expenses Category: " + e.getMessage());
+        }
+        System.out.println("Expenses Category Backup Run");
+    }
+
+    public void backupExpenses() {
+        Map<String, Object> data = new HashMap<>();
+        int expense_id;
+        int expenses_category_id;
+        int payment_method;
+        int user_id;
+        String expenses_date;
+        String expenses_description;
+        String expenses_amount;
+        String vendor_supplier;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM expense_category");
+            while (rs.next()) {
+                expense_id = rs.getInt("expense_id");
+                expenses_category_id = rs.getInt("expenses_category_id");
+                payment_method = rs.getInt("payment_method");
+                user_id = rs.getInt("user_id");
+                expenses_date = rs.getString("expenses_date");
+                expenses_description = rs.getString("expenses_description");
+                expenses_amount = rs.getString("description");
+                vendor_supplier = rs.getString("vendor_supplier");
+
+                data.put("expense_id", expense_id);
+                data.put("expenses_category_id", expenses_category_id);
+                data.put("payment_method", payment_method);
+                data.put("user_id", user_id);
+                data.put("expenses_date", expenses_date);
+                data.put("expenses_description", expenses_description);
+                data.put("expenses_amount", expenses_amount);
+                data.put("vendor_supplier", vendor_supplier);
+
+                backUp("Expenses", String.valueOf(expense_id), data);
+            }
+        } catch (Exception e) {
+            System.out.println("Backup Expenses: " + e.getMessage());
+        }
+        System.out.println("Expenses Backup Run");
+    }
+
+    public void backupSoldItems() {
+        Map<String, Object> data = new HashMap<>();
+        int sold_item_id;
+        int product_id;
+        int user_id;
+        int customer_id;
+        String date;
+        String time;
+        String price;
+        String profit;
+        String quantity;
+
+        try {
+            ResultSet rs = DB.getdata("SELECT * FROM expense_category");
+            while (rs.next()) {
+                sold_item_id = rs.getInt("sold_item_id");
+                product_id = rs.getInt("product_id");
+                user_id = rs.getInt("user_id");
+                customer_id = rs.getInt("customer_id");
+                date = rs.getString("date");
+                time = rs.getString("time");
+                price = rs.getString("price");
+                profit = rs.getString("profit");
+                quantity = rs.getString("quantity");
+
+                data.put("sold_item_id", sold_item_id);
+                data.put("product_id", product_id);
+                data.put("user_id", user_id);
+                data.put("customer_id", customer_id);
+                data.put("date", date);
+                data.put("time", time);
+                data.put("price", price);
+                data.put("profit", profit);
+                data.put("quantity", quantity);
+
+                backUp("sold_items", String.valueOf(sold_item_id), data);
+            }
+        } catch (Exception e) {
+            System.out.println("Backup sold_items: " + e.getMessage());
+        }
+        System.out.println("sold_items Backup Run");
+    }
+
     public void backupAll() {
         backUpUserRole();
         backUpBarcode();
@@ -635,6 +763,10 @@ public class backUp {
         backupSupplier();
         backupUser();
         backupUserProfile();
+        backupExpensesCategory();
+        backupExpenses();
+        backupSoldItems();
+
         System.out.println("Backup All Runs");
     }
 

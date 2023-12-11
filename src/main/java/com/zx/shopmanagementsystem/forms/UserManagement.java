@@ -10,6 +10,11 @@ import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import com.zx.shopmanagementsystem.ui.UserDetails;
 import com.zx.shopmanagementsystem.ui.UserRegistration;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -31,6 +36,38 @@ public class UserManagement extends javax.swing.JPanel {
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
         tableDataClear();
         tableDataLoader();
+        searchTxt.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
     }
 
     /**
@@ -45,6 +82,7 @@ public class UserManagement extends javax.swing.JPanel {
         addUserBtnIcon = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         userTbl = new javax.swing.JTable();
+        searchTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1116, 718));
@@ -63,7 +101,7 @@ public class UserManagement extends javax.swing.JPanel {
         });
         add(addUserBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 90, 210, 40));
 
-        userTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        userTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         userTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -179,7 +217,16 @@ public class UserManagement extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(userTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 157, 1020, 520));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 207, 1020, 470));
+
+        searchTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        searchTxt.setHintText("User Name or User ID");
+        searchTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchTxtActionPerformed(evt);
+            }
+        });
+        add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(757, 160, 260, -1));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\UserManagement.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -211,10 +258,15 @@ public class UserManagement extends javax.swing.JPanel {
 
     }//GEN-LAST:event_userTblMouseClicked
 
+    private void searchTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchTxtActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addUserBtnIcon;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.zx.shopmanagementsystem.components.RoundedText searchTxt;
     private javax.swing.JTable userTbl;
     // End of variables declaration//GEN-END:variables
 
@@ -256,4 +308,42 @@ public class UserManagement extends javax.swing.JPanel {
         tableDataLoader();
     }
 
+    private void handleSearchTextUpdate() throws Exception {
+        if (searchTxt.getText().equals("")) {
+            tableDataClear();
+            tableDataLoader();
+        } else {
+
+            tableDataClear();
+            String sql = "SELECT * FROM user\n"
+                    + "WHERE user_id = ? OR user_name LIKE ?;";
+
+            try (PreparedStatement preparedStatement = DB.con().prepareStatement(sql)) {
+                preparedStatement.setString(2, "%" + searchTxt.getText() + "%");
+                preparedStatement.setString(1, searchTxt.getText());
+
+                ResultSet rs = preparedStatement.executeQuery();
+
+                // Process the resultSet as needed
+                while (rs.next()) {
+                    String userId = String.valueOf(rs.getInt("user_id"));
+                    String userName = String.valueOf(rs.getString("user_name"));
+                    String fullName = String.valueOf(rs.getString("full_name"));
+
+                    System.out.println("User ID" + userId);
+                    System.out.println("User Name" + userName);
+                    System.out.println("Full Name" + fullName);
+
+                    String table_data[] = {userId, userName, fullName};
+                    DefaultTableModel table = (DefaultTableModel) userTbl.getModel();
+                    table.addRow(table_data);
+
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+
+    }
 }

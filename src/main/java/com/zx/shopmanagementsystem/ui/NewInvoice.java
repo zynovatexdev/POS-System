@@ -354,6 +354,7 @@ public class NewInvoice extends javax.swing.JFrame {
         });
         getContentPane().add(selectBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, -1, 30));
 
+        invoiceTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         invoiceTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},

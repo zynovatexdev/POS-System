@@ -149,6 +149,7 @@ public class AllSales extends javax.swing.JFrame {
         jLabel1.setText("Total Sales");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 630, 90, -1));
 
+        allSalesTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         allSalesTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
