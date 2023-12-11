@@ -63,9 +63,9 @@ public class ExpensesCategory extends javax.swing.JFrame {
         head2.setOpaque(false);
         getContentPane().add(head2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, -1));
 
-        categoryNameTxt.setFont(new java.awt.Font("Poppins Medium", 1, 14)); // NOI18N
+        categoryNameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         categoryNameTxt.setHintText("Enter Category Name");
-        getContentPane().add(categoryNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 260, 40));
+        getContentPane().add(categoryNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 260, 45));
 
         saveBtbLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -98,7 +98,8 @@ public class ExpensesCategory extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 164, 635, 415));
 
-        descriptionTxt.setFont(new java.awt.Font("Poppins Medium", 1, 14)); // NOI18N
+        descriptionTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
+        descriptionTxt.setSelectionColor(new java.awt.Color(42, 44, 116));
         jScrollPane1.setViewportView(descriptionTxt);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 260, 170));

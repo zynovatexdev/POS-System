@@ -101,16 +101,16 @@ public class AllSales extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        toDateTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        toDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         toDateTxt.setHintText("Enter To Date");
         getContentPane().add(toDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 50, 190, 40));
 
-        fromDateTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        fromDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         fromDateTxt.setHintText("Enter From Date");
         getContentPane().add(fromDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 50, 190, 40));
 
         combo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select Value", "Daily", "Monthly" }));
-        combo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        combo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         combo.setMinimumSize(new java.awt.Dimension(185, 50));
         combo.setPreferredSize(new java.awt.Dimension(185, 50));
         combo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
@@ -133,19 +133,19 @@ public class AllSales extends javax.swing.JFrame {
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
-        totalProfitTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        totalProfitTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         totalProfitTxt.setText("sample");
         getContentPane().add(totalProfitTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 650, 150, -1));
 
-        totalSalesTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        totalSalesTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         totalSalesTxt.setText("sample");
         getContentPane().add(totalSalesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 630, 150, -1));
 
-        jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         jLabel2.setText("Total Profit");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 650, 90, -1));
 
-        jLabel1.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         jLabel1.setText("Total Sales");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(980, 630, 90, -1));
 

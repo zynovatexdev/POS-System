@@ -76,17 +76,18 @@ public class Debt extends javax.swing.JDialog {
         jLabel1.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\CalenderIcon.png")); // NOI18N
         panelBorder1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 86, 33, 33));
 
-        nextDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        nextDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         nextDateTxt.setHintText("Enter Date...");
         nextDateTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        panelBorder1.add(nextDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 250, -1));
+        panelBorder1.add(nextDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, 250, 45));
 
-        paymentTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        paymentTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         paymentTxt.setHintText("Enter Price...");
         paymentTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        panelBorder1.add(paymentTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 250, -1));
+        panelBorder1.add(paymentTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 160, 250, 45));
 
         yesLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\PayNow.png")); // NOI18N
+        yesLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         yesLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 yesLblMouseClicked(evt);
@@ -95,6 +96,7 @@ public class Debt extends javax.swing.JDialog {
         panelBorder1.add(yesLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 370, 113, 40));
 
         noLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\NoIcon.png")); // NOI18N
+        noLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         noLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 noLblMouseClicked(evt);
@@ -102,9 +104,9 @@ public class Debt extends javax.swing.JDialog {
         });
         panelBorder1.add(noLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 370, 112, 40));
 
-        paymentMethodCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        paymentMethodCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         paymentMethodCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        panelBorder1.add(paymentMethodCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 250, 50));
+        panelBorder1.add(paymentMethodCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 240, 250, 45));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\PayScreen_1.png")); // NOI18N
         panelBorder1.add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

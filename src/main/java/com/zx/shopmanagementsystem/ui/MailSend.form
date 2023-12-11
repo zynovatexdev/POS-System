@@ -32,21 +32,27 @@
   <SubComponents>
     <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="subjectMailtxt">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Poppins SemiBold" size="13" style="1"/>
+        </Property>
         <Property name="hintText" type="java.lang.String" value="Enter Mail Subject"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="90" y="275" width="260" height="40"/>
+          <AbsoluteConstraints x="90" y="275" width="280" height="45"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="toMailtxt">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Poppins SemiBold" size="13" style="1"/>
+        </Property>
         <Property name="hintText" type="java.lang.String" value="Enter Recipient Mail Address"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="390" y="190" width="260" height="40"/>
+          <AbsoluteConstraints x="390" y="190" width="280" height="45"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -54,11 +60,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="arunachinthaka99@gmail.com"/>
         <Property name="enabled" type="boolean" value="false"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Poppins SemiBold" size="13" style="1"/>
+        </Property>
         <Property name="hintText" type="java.lang.String" value="Enter From Mail"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="90" y="190" width="260" height="40"/>
+          <AbsoluteConstraints x="90" y="190" width="280" height="45"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -100,6 +109,14 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
         <Component class="javax.swing.JTextPane" name="messageMailTxt">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Poppins SemiBold" size="13" style="1"/>
+            </Property>
+            <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="74" green="2c" red="2a" type="rgb"/>
+            </Property>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

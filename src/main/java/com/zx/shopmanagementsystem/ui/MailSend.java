@@ -54,16 +54,19 @@ public class MailSend extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        subjectMailtxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         subjectMailtxt.setHintText("Enter Mail Subject");
-        getContentPane().add(subjectMailtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 275, 260, 40));
+        getContentPane().add(subjectMailtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 275, 280, 45));
 
+        toMailtxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         toMailtxt.setHintText("Enter Recipient Mail Address");
-        getContentPane().add(toMailtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 260, 40));
+        getContentPane().add(toMailtxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 280, 45));
 
         fromMailTxt.setText("arunachinthaka99@gmail.com");
         fromMailTxt.setEnabled(false);
+        fromMailTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         fromMailTxt.setHintText("Enter From Mail");
-        getContentPane().add(fromMailTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 260, 40));
+        getContentPane().add(fromMailTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 190, 280, 45));
 
         sendBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sendBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -76,6 +79,8 @@ public class MailSend extends javax.swing.JFrame {
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1100, -1));
 
+        messageMailTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
+        messageMailTxt.setSelectionColor(new java.awt.Color(42, 44, 116));
         jScrollPane1.setViewportView(messageMailTxt);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 360, 260, 140));

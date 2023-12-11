@@ -99,7 +99,7 @@ public class SupplierManagement extends javax.swing.JPanel {
                 addSupplierBtnLblMouseExited(evt);
             }
         });
-        add(addSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 90, 210, 40));
+        add(addSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 80, 210, 50));
 
         supllierTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         supllierTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -127,7 +127,7 @@ public class SupplierManagement extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 207, 1020, 470));
 
-        searchTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        searchTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         searchTxt.setHintText("Supplier Name or Supplier ID");
         searchTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

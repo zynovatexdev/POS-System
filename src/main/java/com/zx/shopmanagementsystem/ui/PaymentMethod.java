@@ -67,7 +67,7 @@ public class PaymentMethod extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        curruncyTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
+        curruncyTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 13)); // NOI18N
         curruncyTxt.setHintText("Enter Currency ");
         curruncyTxt.setPreferredSize(new java.awt.Dimension(129, 50));
         curruncyTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -75,9 +75,9 @@ public class PaymentMethod extends javax.swing.JFrame {
                 curruncyTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(curruncyTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 340, 40));
+        getContentPane().add(curruncyTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 470, 340, 45));
 
-        bankTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
+        bankTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 13)); // NOI18N
         bankTxt.setHintText("Enter Bank Name");
         bankTxt.setPreferredSize(new java.awt.Dimension(129, 50));
         bankTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -85,9 +85,9 @@ public class PaymentMethod extends javax.swing.JFrame {
                 bankTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(bankTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 340, 40));
+        getContentPane().add(bankTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 550, 340, 45));
 
-        paymentMethodTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
+        paymentMethodTxt.setFont(new java.awt.Font("Poppins SemiBold", 0, 13)); // NOI18N
         paymentMethodTxt.setHintText("Enter Payment Method");
         paymentMethodTxt.setPreferredSize(new java.awt.Dimension(129, 50));
         paymentMethodTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +95,7 @@ public class PaymentMethod extends javax.swing.JFrame {
                 paymentMethodTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(paymentMethodTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 340, 40));
+        getContentPane().add(paymentMethodTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 340, 45));
 
         saveBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -113,6 +113,8 @@ public class PaymentMethod extends javax.swing.JFrame {
         head1.setHeaderTitle("");
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
+
+        jScrollPane2.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
 
         paymentMethodTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         paymentMethodTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -139,8 +141,9 @@ public class PaymentMethod extends javax.swing.JFrame {
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(583, 164, 630, 425));
 
         description.setColumns(20);
-        description.setFont(new java.awt.Font("Poppins SemiBold", 0, 14)); // NOI18N
+        description.setFont(new java.awt.Font("Poppins SemiBold", 0, 13)); // NOI18N
         description.setRows(5);
+        description.setSelectionColor(new java.awt.Color(42, 44, 116));
         jScrollPane1.setViewportView(description);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 290, 340, 130));

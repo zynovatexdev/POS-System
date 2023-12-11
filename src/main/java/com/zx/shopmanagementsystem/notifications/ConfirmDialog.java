@@ -48,6 +48,7 @@ public class ConfirmDialog extends javax.swing.JDialog {
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
         noBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\NoIcon.png")); // NOI18N
+        noBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         noBtnLbl.setPreferredSize(new java.awt.Dimension(50, 50));
         noBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -56,6 +57,7 @@ public class ConfirmDialog extends javax.swing.JDialog {
         });
 
         yesBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\YesIcon.png")); // NOI18N
+        yesBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         yesBtnLbl.setPreferredSize(new java.awt.Dimension(50, 50));
         yesBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -63,11 +65,11 @@ public class ConfirmDialog extends javax.swing.JDialog {
             }
         });
 
-        titleLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        titleLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         titleLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        messageLbl.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        messageLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 12)); // NOI18N
         messageLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         messageLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 

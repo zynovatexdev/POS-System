@@ -65,8 +65,8 @@ public class Payment extends javax.swing.JDialog {
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
         panelBorder1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        priceLbl.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        priceLbl.setForeground(new java.awt.Color(153, 0, 153));
+        priceLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 18)); // NOI18N
+        priceLbl.setForeground(new java.awt.Color(42, 44, 116));
         panelBorder1.add(priceLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 60, 110, 30));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
@@ -74,10 +74,10 @@ public class Payment extends javax.swing.JDialog {
         jLabel3.setText("Total Price");
         panelBorder1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 60, 110, 30));
 
-        paymentTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        paymentTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         paymentTxt.setHintText("Enter Price...");
         paymentTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        panelBorder1.add(paymentTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 170, -1));
+        panelBorder1.add(paymentTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 100, 170, 45));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(153, 0, 153));
@@ -105,9 +105,9 @@ public class Payment extends javax.swing.JDialog {
         jLabel5.setText("Payment");
         panelBorder1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 90, 30));
 
-        paymentMethodCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        paymentMethodCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         paymentMethodCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        panelBorder1.add(paymentMethodCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 160, 170, 40));
+        panelBorder1.add(paymentMethodCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(233, 160, 170, 45));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\PayScreen.png")); // NOI18N
         panelBorder1.add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

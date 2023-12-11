@@ -44,9 +44,9 @@ public class PrintType extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(526, 296));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        noBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         noBtnLbl.setPreferredSize(new java.awt.Dimension(50, 50));
         noBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -55,6 +55,7 @@ public class PrintType extends javax.swing.JDialog {
         });
         getContentPane().add(noBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 150, 40));
 
+        yesBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         yesBtnLbl.setPreferredSize(new java.awt.Dimension(50, 50));
         yesBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -64,11 +65,10 @@ public class PrintType extends javax.swing.JDialog {
         getContentPane().add(yesBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 160, 40));
 
         typeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Excel", "PDF" }));
-        typeCombo.setFont(new java.awt.Font("Poppins Medium", 0, 14)); // NOI18N
+        typeCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         getContentPane().add(typeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 180, 45));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ReportType.png")); // NOI18N
-        iconLbl.setPreferredSize(new java.awt.Dimension(526, 296));
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 526, 296));
 
         pack();

@@ -89,21 +89,21 @@ public class ExpensesForm extends javax.swing.JFrame {
         head2.setOpaque(false);
         getContentPane().add(head2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1130, -1));
 
-        expensesAmountTxt.setFont(new java.awt.Font("Poppins Medium", 1, 14)); // NOI18N
+        expensesAmountTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         expensesAmountTxt.setHintText("Enter Amount");
         getContentPane().add(expensesAmountTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 220, 260, 40));
 
-        expensesDateTxt.setFont(new java.awt.Font("Poppins Medium", 1, 14)); // NOI18N
+        expensesDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         expensesDateTxt.setHintText("Enter Date");
         getContentPane().add(expensesDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 260, 40));
 
-        vendorCombo.setFont(new java.awt.Font("Poppins Medium", 1, 14)); // NOI18N
+        vendorCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         getContentPane().add(vendorCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 420, 260, 40));
 
-        paymentMethodCombo.setFont(new java.awt.Font("Poppins Medium", 1, 14)); // NOI18N
+        paymentMethodCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         getContentPane().add(paymentMethodCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 330, 260, 40));
 
-        expensesCategoryCombo.setFont(new java.awt.Font("Poppins Medium", 1, 14)); // NOI18N
+        expensesCategoryCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         expensesCategoryCombo.addPopupMenuListener(new javax.swing.event.PopupMenuListener() {
             public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt) {
             }
@@ -120,9 +120,10 @@ public class ExpensesForm extends javax.swing.JFrame {
                 saveBtnLblMouseClicked(evt);
             }
         });
-        getContentPane().add(saveBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 200, 40));
+        getContentPane().add(saveBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 600, 200, 50));
 
-        descriptionTxt.setFont(new java.awt.Font("Poppins Medium", 1, 14)); // NOI18N
+        descriptionTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
+        descriptionTxt.setSelectionColor(new java.awt.Color(42, 44, 116));
         jScrollPane1.setViewportView(descriptionTxt);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 260, 170));

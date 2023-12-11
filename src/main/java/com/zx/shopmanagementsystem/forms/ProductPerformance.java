@@ -58,7 +58,7 @@ public class ProductPerformance extends javax.swing.JPanel {
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tabPanal.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
-        tabPanal.setSelectedColor(new java.awt.Color(102, 204, 255));
+        tabPanal.setSelectedColor(new java.awt.Color(0, 153, 255));
         tabPanal.setUnselectedColor(new java.awt.Color(215, 215, 215));
         tabPanal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

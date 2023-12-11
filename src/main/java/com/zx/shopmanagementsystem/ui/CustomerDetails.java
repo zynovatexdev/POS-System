@@ -73,17 +73,17 @@ public class CustomerDetails extends javax.swing.JFrame {
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
-        customerNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        customerNameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         customerNameTxt.setHintText("Enter Customer Name");
-        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 310, 50));
+        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 310, 45));
 
-        customerAddressTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        customerAddressTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         customerAddressTxt.setHintText("Enter Customer Address");
-        getContentPane().add(customerAddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 310, 50));
+        getContentPane().add(customerAddressTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 310, 45));
 
-        customerNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        customerNumberTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         customerNumberTxt.setHintText("Enter Customer Number");
-        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 310, 50));
+        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 310, 45));
 
         deleteCustomerBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\delete.png")); // NOI18N
         deleteCustomerBtnLbl.setPreferredSize(new java.awt.Dimension(183, 54));
@@ -211,7 +211,7 @@ public class CustomerDetails extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -82,7 +82,8 @@ public class AddProductCategory extends javax.swing.JFrame {
         });
         getContentPane().add(addProCatBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
-        catIdLbl.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        catIdLbl.setFont(new java.awt.Font("Poppins SemiBold", 0, 13)); // NOI18N
+        catIdLbl.setForeground(new java.awt.Color(42, 44, 116));
         catIdLbl.setText("0");
         getContentPane().add(catIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 290, 20));
 
@@ -94,7 +95,7 @@ public class AddProductCategory extends javax.swing.JFrame {
                 cateNameTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(cateNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 460, -1));
+        getContentPane().add(cateNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 350, 460, 45));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Product_Category.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

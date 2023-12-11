@@ -54,7 +54,7 @@
     <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="toDateTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins Medium" size="13" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="hintText" type="java.lang.String" value="Enter To Date"/>
       </Properties>
@@ -67,7 +67,7 @@
     <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="fromDateTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins Medium" size="13" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="hintText" type="java.lang.String" value="Enter From Date"/>
       </Properties>
@@ -87,7 +87,7 @@
           </StringArray>
         </Property>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="14" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[185, 50]"/>
@@ -120,7 +120,7 @@
     <Component class="javax.swing.JLabel" name="totalProfitTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins SemiBold" size="14" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="sample"/>
       </Properties>
@@ -133,7 +133,7 @@
     <Component class="javax.swing.JLabel" name="totalSalesTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins SemiBold" size="14" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="sample"/>
       </Properties>
@@ -146,7 +146,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins SemiBold" size="14" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Total Profit"/>
       </Properties>
@@ -159,7 +159,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins SemiBold" size="14" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Total Sales"/>
       </Properties>

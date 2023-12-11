@@ -110,6 +110,7 @@ public class productDetails extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        updateProductBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateProductBtnLbl.setPreferredSize(new java.awt.Dimension(406, 56));
         updateProductBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -132,59 +133,59 @@ public class productDetails extends javax.swing.JFrame {
         productIdLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         productIdLbl.setForeground(new java.awt.Color(255, 255, 255));
         productIdLbl.setText("0");
-        getContentPane().add(productIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 102, 240, 20));
+        getContentPane().add(productIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 185, 240, 20));
 
-        sellingPriceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        sellingPriceTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         sellingPriceTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(sellingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 515, 190, -1));
+        getContentPane().add(sellingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 515, 190, 45));
 
-        dimentionTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        dimentionTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         dimentionTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(dimentionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, 290, -1));
+        getContentPane().add(dimentionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 620, 290, 45));
 
-        stockQuantityTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        stockQuantityTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         stockQuantityTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(stockQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 220, 250, -1));
+        getContentPane().add(stockQuantityTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 220, 250, 45));
 
-        productNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        productNameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         productNameTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 340, -1));
+        getContentPane().add(productNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 340, 45));
 
-        brandTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        brandTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         brandTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(brandTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 250, -1));
+        getContentPane().add(brandTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 250, 45));
 
-        manufactureDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        manufactureDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         manufactureDateTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(manufactureDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 250, -1));
+        getContentPane().add(manufactureDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 310, 250, 45));
 
-        expireDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        expireDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         expireDateTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(expireDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 310, 250, -1));
+        getContentPane().add(expireDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 310, 250, 45));
 
-        recivingPriceTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        recivingPriceTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         recivingPriceTxt.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(recivingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 515, 180, -1));
+        getContentPane().add(recivingPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 515, 180, 45));
 
-        productLocationIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        productLocationIdCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         productLocationIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 600, 250, -1));
+        getContentPane().add(productLocationIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 600, 250, 45));
 
-        productTypeIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        productTypeIdCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         productTypeIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(productTypeIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 510, 250, -1));
+        getContentPane().add(productTypeIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 510, 250, 45));
 
-        discountIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        discountIdCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         discountIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(discountIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, 250, -1));
+        getContentPane().add(discountIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 600, 250, 45));
 
-        categoryIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        categoryIdCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         categoryIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(categoryIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 510, 250, -1));
+        getContentPane().add(categoryIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 510, 250, 45));
 
-        supplierIdCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        supplierIdCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         supplierIdCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(supplierIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 410, 250, -1));
+        getContentPane().add(supplierIdCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 410, 250, 45));
 
         barcodeScannerLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
         barcodeScannerLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -192,18 +193,19 @@ public class productDetails extends javax.swing.JFrame {
                 barcodeScannerLblMouseClicked(evt);
             }
         });
-        getContentPane().add(barcodeScannerLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 410, 40, 40));
+        getContentPane().add(barcodeScannerLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 420, 40, 40));
 
-        barcodeCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        barcodeCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         barcodeCombo.setPreferredSize(new java.awt.Dimension(139, 50));
-        getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 410, 250, -1));
+        getContentPane().add(barcodeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 410, 250, 45));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
         productDescriptionTxt.setColumns(20);
-        productDescriptionTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        productDescriptionTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         productDescriptionTxt.setRows(5);
         productDescriptionTxt.setBorder(null);
+        productDescriptionTxt.setSelectionColor(new java.awt.Color(42, 44, 116));
         jScrollPane1.setViewportView(productDescriptionTxt);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);

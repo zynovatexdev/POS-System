@@ -118,7 +118,7 @@ public class CustomerManagement extends javax.swing.JPanel {
         });
         add(addCustomerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 90, 260, 36));
 
-        searchTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        searchTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         searchTxt.setHintText("EnteName or Phone Number");
         searchTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

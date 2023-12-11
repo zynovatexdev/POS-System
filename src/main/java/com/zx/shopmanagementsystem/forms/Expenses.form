@@ -70,7 +70,7 @@
     <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="to">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins Medium" size="13" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="hintText" type="java.lang.String" value="Enter Date"/>
       </Properties>
@@ -83,7 +83,7 @@
     <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="from">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins Medium" size="13" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="hintText" type="java.lang.String" value="Enter Date"/>
       </Properties>

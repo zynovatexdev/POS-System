@@ -72,13 +72,13 @@ public class CustomerRegistration extends javax.swing.JFrame {
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
-        customerNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        customerNameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         customerNameTxt.setHintText("Enter Customer Name");
-        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 280, 50));
+        getContentPane().add(customerNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 280, 45));
 
-        customerNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        customerNumberTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         customerNumberTxt.setHintText("Enter Customer Number");
-        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 280, 50));
+        getContentPane().add(customerNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 420, 280, 45));
 
         updateBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -94,12 +94,12 @@ public class CustomerRegistration extends javax.swing.JFrame {
         });
         getContentPane().add(updateBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
-        customerIdLbl.setFont(new java.awt.Font("Noto Sans", 1, 18)); // NOI18N
+        customerIdLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 18)); // NOI18N
         getContentPane().add(customerIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 170, 40));
 
-        customerCategoryCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        customerCategoryCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         customerCategoryCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 280, -1));
+        getContentPane().add(customerCategoryCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 230, 280, 45));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 

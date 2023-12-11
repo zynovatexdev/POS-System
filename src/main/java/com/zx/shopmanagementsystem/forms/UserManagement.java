@@ -99,7 +99,7 @@ public class UserManagement extends javax.swing.JPanel {
                 addUserBtnIconMouseExited(evt);
             }
         });
-        add(addUserBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 90, 210, 40));
+        add(addUserBtnIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(454, 80, 210, 50));
 
         userTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         userTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -219,7 +219,7 @@ public class UserManagement extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 207, 1020, 470));
 
-        searchTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        searchTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         searchTxt.setHintText("User Name or User ID");
         searchTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -67,20 +67,21 @@ public class SupplierRegistration extends javax.swing.JFrame {
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
         supplierNumberTxt.setToolTipText("");
-        supplierNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        supplierNumberTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         supplierNumberTxt.setHintText("Enter Supplier Contact Number");
-        getContentPane().add(supplierNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 380, 50));
+        getContentPane().add(supplierNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 330, 380, 45));
 
         supplierNameTxt.setToolTipText("");
-        supplierNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        supplierNameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         supplierNameTxt.setHintText("Enter Supplier Name");
         supplierNameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 supplierNameTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(supplierNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 380, 50));
+        getContentPane().add(supplierNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 380, 45));
 
+        registerBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 registerBtnLblMouseClicked(evt);
@@ -128,7 +129,7 @@ public class SupplierRegistration extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

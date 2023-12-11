@@ -30,13 +30,13 @@
     <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="typeTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="sansserif" size="14" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="hintText" type="java.lang.String" value="Enter Customer Category Type"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="110" y="220" width="440" height="50"/>
+          <AbsoluteConstraints x="110" y="220" width="440" height="45"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -84,9 +84,12 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="14" style="1"/>
+                  <Font name="Poppins SemiBold" size="13" style="1"/>
                 </Property>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="selectionColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="74" green="2c" red="2a" type="rgb"/>
+                </Property>
               </Properties>
             </Component>
           </SubComponents>

@@ -103,7 +103,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 createNewInvoiceMouseExited(evt);
             }
         });
-        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 260, 45));
+        add(createNewInvoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 80, 270, 45));
 
         paymentMethodBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -116,7 +116,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
                 paymentMethodBtnLblMouseExited(evt);
             }
         });
-        add(paymentMethodBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 80, 270, 45));
+        add(paymentMethodBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 80, 260, 45));
 
         jScrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
@@ -145,7 +145,7 @@ public class InvoiceCreation extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 207, 1020, 470));
 
-        searchTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        searchTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         searchTxt.setHintText("Customer Name or Invoice ID");
         searchTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

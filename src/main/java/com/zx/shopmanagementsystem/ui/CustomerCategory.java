@@ -62,15 +62,16 @@ public class CustomerCategory extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        typeTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        typeTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         typeTxt.setHintText("Enter Customer Category Type");
-        getContentPane().add(typeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 440, 50));
+        getContentPane().add(typeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 440, 45));
 
         panelBorder1.setBackground(new java.awt.Color(238, 238, 238));
 
         descriptionTxt.setColumns(20);
-        descriptionTxt.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        descriptionTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         descriptionTxt.setRows(5);
+        descriptionTxt.setSelectionColor(new java.awt.Color(42, 44, 116));
         jScrollPane1.setViewportView(descriptionTxt);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
@@ -140,7 +141,7 @@ public class CustomerCategory extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

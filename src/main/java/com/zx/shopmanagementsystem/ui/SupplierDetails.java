@@ -61,17 +61,18 @@ public class SupplierDetails extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        supplierNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        supplierNameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         supplierNameTxt.setHintText("Enter Customer Name");
         supplierNameTxt.setPreferredSize(new java.awt.Dimension(129, 40));
-        getContentPane().add(supplierNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 310, 50));
+        getContentPane().add(supplierNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 220, 310, 45));
 
-        supplierNumberTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        supplierNumberTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         supplierNumberTxt.setHintText("Enter Customer Number");
         supplierNumberTxt.setPreferredSize(new java.awt.Dimension(129, 40));
-        getContentPane().add(supplierNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 310, 50));
+        getContentPane().add(supplierNumberTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 330, 310, 45));
 
         editSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\edit.png")); // NOI18N
+        editSupplierBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editSupplierBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 editSupplierBtnLblMouseClicked(evt);
@@ -86,6 +87,7 @@ public class SupplierDetails extends javax.swing.JFrame {
         getContentPane().add(editSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 610, -1, -1));
 
         deleteSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\delete.png")); // NOI18N
+        deleteSupplierBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteSupplierBtnLbl.setPreferredSize(new java.awt.Dimension(183, 54));
         deleteSupplierBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -101,6 +103,7 @@ public class SupplierDetails extends javax.swing.JFrame {
         getContentPane().add(deleteSupplierBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 610, 210, 55));
 
         updateSupplierBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\update.png")); // NOI18N
+        updateSupplierBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateSupplierBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateSupplierBtnLblMouseClicked(evt);
@@ -197,7 +200,7 @@ public class SupplierDetails extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

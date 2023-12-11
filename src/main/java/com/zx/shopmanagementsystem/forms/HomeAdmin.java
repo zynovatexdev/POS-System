@@ -116,7 +116,7 @@ public class HomeAdmin extends javax.swing.JPanel {
         totalMonthSaleTxt.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         add(totalMonthSaleTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 155, 295, 80));
 
-        chart.setFont(new java.awt.Font("Poppins SemiBold", 0, 12)); // NOI18N
+        chart.setFont(new java.awt.Font("Poppins SemiBold", 1, 12)); // NOI18N
         chart.setOpaque(false);
         add(chart, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 360, 645, 315));
 

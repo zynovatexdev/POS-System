@@ -80,6 +80,7 @@ public class ForgotPassword extends javax.swing.JFrame {
         });
         getContentPane().add(searchIcon, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 297, 30, 30));
 
+        usernameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         usernameTxt.setHintText("Enter your username");
         getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 290, 370, 45));
 
@@ -113,11 +114,11 @@ public class ForgotPassword extends javax.swing.JFrame {
         });
         getContentPane().add(newPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1180, 373, -1, 30));
 
-        confirmPasswordTxt.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
+        confirmPasswordTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         confirmPasswordTxt.setHintText("Retype Password");
         getContentPane().add(confirmPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 445, 370, 45));
 
-        newPasswordTxt.setFont(new java.awt.Font("Poppins Medium", 0, 13)); // NOI18N
+        newPasswordTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         newPasswordTxt.setHintText("New Password");
         getContentPane().add(newPasswordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 365, 370, 45));
 

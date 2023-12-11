@@ -88,7 +88,7 @@
     <Component class="com.zx.shopmanagementsystem.components.RoundedText" name="usernameTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins SemiBold" size="12" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
         <Property name="hintText" type="java.lang.String" value="Enter Username"/>
       </Properties>
@@ -101,7 +101,7 @@
     <Component class="com.zx.shopmanagementsystem.components.RoundedPassword" name="passwordTxt">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Poppins SemiBold" size="12" style="1"/>
+          <Font name="Poppins SemiBold" size="13" style="1"/>
         </Property>
       </Properties>
       <Constraints>

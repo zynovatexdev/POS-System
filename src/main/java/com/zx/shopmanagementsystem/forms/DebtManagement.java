@@ -55,6 +55,7 @@ public class DebtManagement extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         debtTbl = new javax.swing.JTable();
         searchTxt = new com.zx.shopmanagementsystem.components.RoundedText();
+        scanLbl = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1015, 738));
@@ -115,6 +116,13 @@ public class DebtManagement extends javax.swing.JPanel {
             }
         });
         add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 320, 50));
+
+        scanLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                scanLblMouseClicked(evt);
+            }
+        });
+        add(scanLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(797, 90, 210, 40));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\DebtManagement.png")); // NOI18N
         iconLbl.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -188,6 +196,11 @@ public class DebtManagement extends javax.swing.JPanel {
 
     private void iconLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconLblMouseClicked
         // TODO add your handling code here:
+
+    }//GEN-LAST:event_iconLblMouseClicked
+
+    private void scanLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scanLblMouseClicked
+        // TODO add your handling code here:
         try {
             String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abcCopy.py";
             Process process = Runtime.getRuntime().exec("python " + pythonScript);
@@ -214,13 +227,14 @@ public class DebtManagement extends javax.swing.JPanel {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }//GEN-LAST:event_iconLblMouseClicked
+    }//GEN-LAST:event_scanLblMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable debtTbl;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel newDebtInvoiceBtnLbl;
+    private javax.swing.JLabel scanLbl;
     private com.zx.shopmanagementsystem.components.RoundedText searchTxt;
     // End of variables declaration//GEN-END:variables
     private void tableDataLoader() {

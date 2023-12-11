@@ -1,13 +1,11 @@
 package com.zx.shopmanagementsystem.assests;
 
-import com.zx.shopmanagementsystem.components.Spinner;
 import java.awt.Component;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JCheckBox;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.UIManager;
 import javax.swing.text.DefaultFormatter;
 
 public class QtyCellEditor extends DefaultCellEditor {
@@ -17,6 +15,7 @@ public class QtyCellEditor extends DefaultCellEditor {
     public QtyCellEditor() {
         super(new JCheckBox());
         input = new JSpinner();
+        input.setUI(new CustomSpinnerUI()); // Set the custom spinner UI
         SpinnerNumberModel numberModel = (SpinnerNumberModel) input.getModel();
         numberModel.setMinimum(0);
         JSpinner.NumberEditor editor = (JSpinner.NumberEditor) input.getEditor();
@@ -24,11 +23,6 @@ public class QtyCellEditor extends DefaultCellEditor {
         formatter.setCommitsOnValidEdit(true);
 
         // Set the UI to the system look and feel
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     @Override

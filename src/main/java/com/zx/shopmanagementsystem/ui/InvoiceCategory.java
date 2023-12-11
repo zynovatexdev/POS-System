@@ -70,9 +70,9 @@ public class InvoiceCategory extends javax.swing.JFrame {
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
-        invoiceCategoryTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        invoiceCategoryTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         invoiceCategoryTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        getContentPane().add(invoiceCategoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 350, -1));
+        getContentPane().add(invoiceCategoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 350, 45));
 
         saveBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         saveBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {

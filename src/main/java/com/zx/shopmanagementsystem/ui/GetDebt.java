@@ -106,18 +106,18 @@ public class GetDebt extends javax.swing.JFrame {
 
         nextDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         nextDateTxt.setHintText("Enter Next Date");
-        getContentPane().add(nextDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 300, -1));
+        getContentPane().add(nextDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 230, 300, 45));
 
         paymentTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         paymentTxt.setHintText("Enter Payment Amount");
-        getContentPane().add(paymentTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 300, -1));
+        getContentPane().add(paymentTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 540, 300, 45));
 
         statusCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pending", "Done" }));
         statusCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
-        getContentPane().add(statusCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 440, 300, -1));
+        getContentPane().add(statusCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 440, 300, 45));
 
         paymentMethodCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
-        getContentPane().add(paymentMethodCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 300, -1));
+        getContentPane().add(paymentMethodCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 330, 300, 45));
 
         saveBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {

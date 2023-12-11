@@ -86,7 +86,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 endPopLblMouseClicked(evt);
             }
         });
-        getContentPane().add(endPopLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 340, -1, -1));
+        getContentPane().add(endPopLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 336, -1, -1));
 
         startPopLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\CalenderIcon.png")); // NOI18N
         startPopLbl.setPreferredSize(new java.awt.Dimension(33, 33));
@@ -95,7 +95,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 startPopLblMouseClicked(evt);
             }
         });
-        getContentPane().add(startPopLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, -1, -1));
+        getContentPane().add(startPopLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 225, -1, -1));
 
         head1.setHeaderTextColor("#000000");
         head1.setHeaderTitle("");
@@ -123,7 +123,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 endDateTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(endDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 460, 50));
+        getContentPane().add(endDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 330, 460, 45));
 
         stratDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         stratDateTxt.setHintText("Enter Strat Date");
@@ -133,7 +133,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 stratDateTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(stratDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 460, 50));
+        getContentPane().add(stratDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 460, 45));
 
         discountTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         discountTxt.setHintText("Discount Presentage");
@@ -143,7 +143,7 @@ public class AddDiscount extends javax.swing.JFrame {
                 discountTxtActionPerformed(evt);
             }
         });
-        getContentPane().add(discountTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 460, 50));
+        getContentPane().add(discountTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 430, 460, 45));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Discount.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

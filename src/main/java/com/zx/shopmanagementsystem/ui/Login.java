@@ -98,11 +98,11 @@ public class Login extends javax.swing.JFrame {
         });
         getContentPane().add(forgotPasswordLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 490, 100, 20));
 
-        usernameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 12)); // NOI18N
+        usernameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         usernameTxt.setHintText("Enter Username");
         getContentPane().add(usernameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, 380, 45));
 
-        passwordTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 12)); // NOI18N
+        passwordTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 380, 45));
 
         head1.setHeaderTextColor("#FFFFFF");

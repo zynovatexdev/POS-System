@@ -78,11 +78,11 @@ public class Expenses extends javax.swing.JPanel {
         });
         add(expensesCategotyBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, 230, 50));
 
-        to.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        to.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         to.setHintText("Enter Date");
         add(to, new org.netbeans.lib.awtextra.AbsoluteConstraints(810, 87, 130, -1));
 
-        from.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        from.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         from.setHintText("Enter Date");
         add(from, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 87, 130, -1));
 

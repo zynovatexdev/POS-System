@@ -110,7 +110,7 @@ public class InventoryManagement extends javax.swing.JPanel {
 
         add(panelBorder2, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 136, 1070, 560));
 
-        searchTxt.setFont(new java.awt.Font("Poppins Medium", 1, 13)); // NOI18N
+        searchTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         searchTxt.setHintText("Barcode or Item Name");
         searchTxt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {

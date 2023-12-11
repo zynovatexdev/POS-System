@@ -80,18 +80,19 @@ public class AddStoreLocation extends javax.swing.JFrame {
         });
         getContentPane().add(addStoreLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
-        storeLocationTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        storeLocationTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         storeLocationTxt.setHintText("Enter Product Type");
         storeLocationTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        getContentPane().add(storeLocationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 340, -1));
+        getContentPane().add(storeLocationTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 220, 340, 45));
 
         panelBorder1.setBackground(new java.awt.Color(238, 238, 238));
 
         scrollPaneWin111.setBorder(null);
 
         storeLocationDescription.setColumns(20);
-        storeLocationDescription.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        storeLocationDescription.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         storeLocationDescription.setRows(5);
+        storeLocationDescription.setSelectionColor(new java.awt.Color(42, 44, 116));
         scrollPaneWin111.setViewportView(storeLocationDescription);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
@@ -171,7 +172,7 @@ public class AddStoreLocation extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

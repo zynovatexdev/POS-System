@@ -86,9 +86,9 @@ public class UserDetails extends javax.swing.JFrame {
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
 
-        fullNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        fullNameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         fullNameTxt.setHintText("Full Name");
-        getContentPane().add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 310, 50));
+        getContentPane().add(fullNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 320, 310, 45));
 
         hidePasswordLblBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\HidePassword.png")); // NOI18N
         hidePasswordLblBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -96,13 +96,14 @@ public class UserDetails extends javax.swing.JFrame {
                 hidePasswordLblBtnMouseClicked(evt);
             }
         });
-        getContentPane().add(hidePasswordLblBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 450, 35, 30));
+        getContentPane().add(hidePasswordLblBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 448, 35, 30));
 
-        userNameTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        userNameTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         userNameTxt.setHintText("User Name");
-        getContentPane().add(userNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 310, 50));
+        getContentPane().add(userNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, 310, 45));
 
         deleteBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\delete.png")); // NOI18N
+        deleteBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         deleteBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 deleteBtnLblMouseClicked(evt);
@@ -117,6 +118,7 @@ public class UserDetails extends javax.swing.JFrame {
         getContentPane().add(deleteBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 580, -1, 60));
 
         editBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\edit.png")); // NOI18N
+        editBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         editBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 editBtnLblMouseClicked(evt);
@@ -131,6 +133,7 @@ public class UserDetails extends javax.swing.JFrame {
         getContentPane().add(editBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 580, -1, 60));
 
         updateBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\update.png")); // NOI18N
+        updateBtnLbl.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateBtnLblMouseClicked(evt);
@@ -144,13 +147,14 @@ public class UserDetails extends javax.swing.JFrame {
         });
         getContentPane().add(updateBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 580, -1, -1));
 
-        passwordTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        passwordTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         passwordTxt.setPreferredSize(new java.awt.Dimension(157, 50));
-        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 310, -1));
+        getContentPane().add(passwordTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 440, 310, 45));
 
         imageAvatar.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\UserIcon.png")); // NOI18N
 
         updateImageIconBtn.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\EditImageIcon.png")); // NOI18N
+        updateImageIconBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateImageIconBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 updateImageIconBtnMouseClicked(evt);
@@ -161,10 +165,10 @@ public class UserDetails extends javax.swing.JFrame {
 
         getContentPane().add(imageAvatar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 180, 180));
 
-        roleCombo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        roleCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         roleCombo.setMinimumSize(new java.awt.Dimension(163, 50));
         roleCombo.setPreferredSize(new java.awt.Dimension(163, 50));
-        getContentPane().add(roleCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 310, -1));
+        getContentPane().add(roleCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 540, 310, 45));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\User_Details.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
@@ -289,7 +293,7 @@ public class UserDetails extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

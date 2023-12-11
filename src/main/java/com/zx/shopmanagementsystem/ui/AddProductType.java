@@ -81,7 +81,7 @@ public class AddProductType extends javax.swing.JFrame {
         productTypeTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         productTypeTxt.setHintText("Enter Product Type");
         productTypeTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        getContentPane().add(productTypeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 480, -1));
+        getContentPane().add(productTypeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 480, 45));
 
         panelBorder1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -89,6 +89,7 @@ public class AddProductType extends javax.swing.JFrame {
         productDescriptionTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         productDescriptionTxt.setRows(5);
         productDescriptionTxt.setBorder(null);
+        productDescriptionTxt.setSelectionColor(new java.awt.Color(42, 44, 116));
         jScrollPane1.setViewportView(productDescriptionTxt);
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);

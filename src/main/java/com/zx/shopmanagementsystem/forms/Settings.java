@@ -53,19 +53,19 @@ public class Settings extends javax.swing.JPanel {
 
         jLabel2.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         jLabel2.setText("Minute");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 280, 100, 20));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 285, 100, 20));
 
         jLabel1.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         jLabel1.setText("Items");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 170, 100, 20));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 175, 100, 20));
 
         lowStockCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "50", "100", "150", "200" }));
-        lowStockCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        lowStockCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         lowStockCombo.setPreferredSize(new java.awt.Dimension(163, 50));
         add(lowStockCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 160, 250, 50));
 
         backUpTimeCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "15", "20", "25", "30" }));
-        backUpTimeCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        backUpTimeCombo.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         backUpTimeCombo.setPreferredSize(new java.awt.Dimension(163, 50));
         add(backUpTimeCombo, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 250, 50));
 

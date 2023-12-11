@@ -101,11 +101,11 @@ public class ProfitReport extends javax.swing.JFrame {
         });
         getContentPane().add(generateReportBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 640, 155, 40));
 
-        fromDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        fromDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         fromDateTxt.setHintText("From Date");
-        getContentPane().add(fromDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 124, 190, 50));
+        getContentPane().add(fromDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 126, 190, 45));
 
-        toDateTxt.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
+        toDateTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         toDateTxt.setHintText("To Date");
         toDateTxt.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
@@ -124,7 +124,7 @@ public class ProfitReport extends javax.swing.JFrame {
                 toDateTxtPropertyChange(evt);
             }
         });
-        getContentPane().add(toDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 124, 190, 50));
+        getContentPane().add(toDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 126, 190, 45));
 
         salesTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         salesTbl.setModel(new javax.swing.table.DefaultTableModel(

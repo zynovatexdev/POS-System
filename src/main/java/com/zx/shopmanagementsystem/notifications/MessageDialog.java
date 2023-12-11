@@ -59,18 +59,17 @@ public class MessageDialog extends javax.swing.JDialog {
             }
         });
 
-        titleLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        titleLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         titleLbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLbl.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         messageLbl.setEditable(false);
         messageLbl.setBackground(new java.awt.Color(255, 255, 255));
         messageLbl.setColumns(20);
-        messageLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        messageLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
         messageLbl.setRows(3);
         messageLbl.setBorder(null);
         messageLbl.setOpaque(false);
-        messageLbl.setPreferredSize(new java.awt.Dimension(250, 60));
 
         javax.swing.GroupLayout panelBorder1Layout = new javax.swing.GroupLayout(panelBorder1);
         panelBorder1.setLayout(panelBorder1Layout);
@@ -84,7 +83,7 @@ public class MessageDialog extends javax.swing.JDialog {
                         .addComponent(icon, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(messageLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(panelBorder1Layout.createSequentialGroup()
                 .addGap(133, 133, 133)
@@ -101,7 +100,7 @@ public class MessageDialog extends javax.swing.JDialog {
                         .addComponent(icon, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
                         .addGap(54, 54, 54))
                     .addGroup(panelBorder1Layout.createSequentialGroup()
-                        .addComponent(messageLbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(messageLbl)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(okBtnLbl)
                         .addContainerGap())))

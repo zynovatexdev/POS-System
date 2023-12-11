@@ -81,7 +81,8 @@ public class AddBarcode extends javax.swing.JFrame {
         });
         getContentPane().add(addBarcodeBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 600, 200, 50));
 
-        barcodeIdLbl.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        barcodeIdLbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 14)); // NOI18N
+        barcodeIdLbl.setForeground(new java.awt.Color(42, 44, 116));
         getContentPane().add(barcodeIdLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 70, 20));
 
         barcodeDetectorBtnLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\icons\\SearchBardcodeIcon.png")); // NOI18N
@@ -96,7 +97,7 @@ public class AddBarcode extends javax.swing.JFrame {
         barcodeValueTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         barcodeValueTxt.setHintText("Enter Barcode Value");
         barcodeValueTxt.setPreferredSize(new java.awt.Dimension(129, 50));
-        getContentPane().add(barcodeValueTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 280, 50));
+        getContentPane().add(barcodeValueTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 230, 280, 45));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\Add_Barcode.png")); // NOI18N
         getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
