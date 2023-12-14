@@ -32,7 +32,7 @@ public class TableCustomCellRender extends DefaultTableCellRenderer {
                 if (row % 2 == 0) {
                     com.setBackground(Color.WHITE);
                 } else {
-                    com.setBackground(new Color(242, 242, 242));
+                    com.setBackground(Color.decode("#EEEEEE"));
                 }
             }
         }

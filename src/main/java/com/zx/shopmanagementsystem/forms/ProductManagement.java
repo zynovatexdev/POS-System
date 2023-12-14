@@ -4,8 +4,10 @@
  */
 package com.zx.shopmanagementsystem.forms;
 
+import com.zx.shopmanagementsystem.assests.DisplayFileExample;
 import com.zx.shopmanagementsystem.assests.Func;
 import com.zx.shopmanagementsystem.assests.IconLocation;
+import com.zx.shopmanagementsystem.table.TableCustom;
 import com.zx.shopmanagementsystem.ui.AddBarcode;
 import com.zx.shopmanagementsystem.ui.AddDiscount;
 import com.zx.shopmanagementsystem.ui.AddProduct;
@@ -13,6 +15,14 @@ import com.zx.shopmanagementsystem.ui.AddProductCategory;
 import com.zx.shopmanagementsystem.ui.AddProductType;
 import com.zx.shopmanagementsystem.ui.AddStoreLocation;
 import com.zx.shopmanagementsystem.ui.ReturnItems;
+import java.awt.Component;
+import java.awt.Image;
+import java.io.File;
+import javax.swing.ImageIcon;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 /**
  *
@@ -28,6 +38,11 @@ public class ProductManagement extends javax.swing.JPanel {
 
     public ProductManagement() {
         initComponents();
+        tableDataClear();
+        tableDataLoader();
+        TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
+        qrTbl.getColumnModel().getColumn(0).setCellRenderer(new ImageRenderer());
+        jScrollPane1.setViewportView(qrTbl);
     }
 
     /**
@@ -46,6 +61,8 @@ public class ProductManagement extends javax.swing.JPanel {
         addDiscountBrnLbl = new javax.swing.JLabel();
         addStoreLocationBtnLbl = new javax.swing.JLabel();
         returnItemsBtnLbl = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        qrTbl = new javax.swing.JTable();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1116, 718));
@@ -141,6 +158,33 @@ public class ProductManagement extends javax.swing.JPanel {
             }
         });
         add(returnItemsBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 170, 155, 60));
+
+        qrTbl.setFont(new java.awt.Font("Poppins ExtraBold", 1, 13)); // NOI18N
+        qrTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "", "Name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(qrTbl);
+        if (qrTbl.getColumnModel().getColumnCount() > 0) {
+            qrTbl.getColumnModel().getColumn(0).setPreferredWidth(100);
+        }
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 260, 1065, 432));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\ProductManagement.png")); // NOI18N
         add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1116, 718));
@@ -255,6 +299,92 @@ public class ProductManagement extends javax.swing.JPanel {
     private javax.swing.JLabel addProductTypeBtnLbl;
     private javax.swing.JLabel addStoreLocationBtnLbl;
     private javax.swing.JLabel iconLbl;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable qrTbl;
     private javax.swing.JLabel returnItemsBtnLbl;
     // End of variables declaration//GEN-END:variables
+
+    private void tableDataLoader() {
+        String path = "POS System QR";
+        // creating a file object
+        File directory = new File(path);
+
+        // creating an object of the class DisplayFileExample
+        DisplayFileExample obj = new DisplayFileExample();
+
+        // Clear existing data in the table
+        //tableDataClear();
+        // Check if the directory exists
+        if (directory.exists() && directory.isDirectory()) {
+            // Get all PNG files in the directory
+            File[] pngFiles = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".png"));
+
+            // Check if there are any PNG files
+            if (pngFiles != null && pngFiles.length > 0) {
+                // Assuming you have a DefaultTableModel for your table
+                DefaultTableModel model = (DefaultTableModel) qrTbl.getModel();
+
+                // Loop through each PNG file
+                for (File pngFile : pngFiles) {
+                    // Assuming you want to display the file name in the second column
+                    String fileName = pngFile.getName();
+
+                    // Create an ImageIcon from the PNG file
+                    ImageIcon imageIcon = new ImageIcon(pngFile.getPath());
+
+                    // Add a row with the image and file name to the table
+                    model.addRow(new Object[]{imageIcon, fileName});
+                }
+            }
+        }
+    }
+
+    private void tableDataClear() {
+        try {
+            while (0 <= qrTbl.getRowCount()) {
+                DefaultTableModel table = (DefaultTableModel) qrTbl.getModel();
+                table.removeRow(qrTbl.getRowCount() - 1);
+            }
+        } catch (Exception e) {
+            System.out.println("Customer Management Table Data Clear : " + e);
+        }
+    }
+
+}
+
+class ImageRenderer extends DefaultTableCellRenderer {
+
+    private final int ICON_WIDTH = 80; // Adjust the width as needed
+    private final int ICON_HEIGHT = 80; // Adjust the height as needed
+
+    @Override
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+        if (value instanceof ImageIcon) {
+            ImageIcon originalIcon = (ImageIcon) value;
+
+            // Get the original image
+            Image originalImage = originalIcon.getImage();
+
+            // Resize the image
+            Image scaledImage = originalImage.getScaledInstance(ICON_WIDTH, ICON_HEIGHT, Image.SCALE_SMOOTH);
+
+            // Create a new ImageIcon from the scaled image
+            ImageIcon scaledIcon = new ImageIcon(scaledImage);
+
+            setIcon(scaledIcon);
+
+            // Set row height and width for the image column
+            table.setRowHeight(row, ICON_HEIGHT);
+            TableColumnModel columnModel = table.getColumnModel();
+            columnModel.getColumn(column).setWidth(ICON_WIDTH);
+            columnModel.getColumn(column).setPreferredWidth(ICON_WIDTH);
+
+            // Adjust the first column width to match the image
+            columnModel.getColumn(0).setMinWidth(ICON_WIDTH);
+            columnModel.getColumn(0).setMaxWidth(ICON_WIDTH);
+        } else {
+            setIcon(null);
+        }
+        return this;
+    }
 }

@@ -10,29 +10,29 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class RoundedText extends JTextField {
-    
+
     public String getHintText() {
         return hintText;
     }
-    
+
     public void setHintText(String hintText) {
         this.hintText = hintText;
     }
-    
+
     private final Color backgroundColor = Color.WHITE;
-    
+
     private String hintText = "Enter Text...";
     private boolean show;
-    
+
     public RoundedText() {
         super.setBackground(new Color(255, 255, 255, 0)); //  Remove background
         setOpaque(false);
         setBorder(new EmptyBorder(10, 10, 10, 30)); //  Set Right border 50
-        setFont(new java.awt.Font("Poppins Medium", 0, 13));
+        setFont(new java.awt.Font("Poppins Semi Bold", 0, 13));
         setSelectionColor(Color.decode("#2a2c74"));
-        
+
     }
-    
+
     @Override
     protected void paintComponent(Graphics grphcs) {
         int width = getWidth();
@@ -43,9 +43,9 @@ public class RoundedText extends JTextField {
         g2.setColor(backgroundColor);
         g2.fillRoundRect(0, 0, width, height, height - 1, height - 1);
         super.paintComponent(grphcs);
-        
+
     }
-    
+
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -62,5 +62,5 @@ public class RoundedText extends JTextField {
             g.drawString(hintText, ins.left, h / 2 + fm.getAscent() / 2 - 2);
         }
     }
-    
+
 }

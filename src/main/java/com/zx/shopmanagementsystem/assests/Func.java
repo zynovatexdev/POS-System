@@ -203,7 +203,7 @@ public class Func {
         int qrCodeSize = 250;
 
         // Define the target folder path
-        String targetFolderPath = System.getProperty("user.home") + "/Pictures/POS System QR";
+        String targetFolderPath = "POS System QR";
 
         // Create the target folder if it doesn't exist
         File targetFolder = new File(targetFolderPath);

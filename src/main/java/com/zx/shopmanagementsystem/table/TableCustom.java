@@ -16,7 +16,7 @@ public class TableCustom {
 
     public static void apply(JScrollPane scroll, TableType type) {
         JTable table = (JTable) scroll.getViewport().getComponent(0);
-        table.setSelectionBackground(new Color(120, 174, 255));
+        table.setSelectionBackground(Color.decode("#E4E4E4"));
         table.getTableHeader().setReorderingAllowed(false);
         table.getTableHeader().setDefaultRenderer(new TableHeaderCustomCellRender(table));
         table.setRowHeight(30);

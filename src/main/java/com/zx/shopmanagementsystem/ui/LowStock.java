@@ -6,10 +6,20 @@ package com.zx.shopmanagementsystem.ui;
 
 import com.zx.shopmanagementsystem.assests.IconLocation;
 import com.zx.shopmanagementsystem.dbconnection.JDBC;
+import com.zx.shopmanagementsystem.forms.CustomerManagement;
 import com.zx.shopmanagementsystem.table.TableCustom;
 import java.awt.Toolkit;
+import java.io.BufferedReader;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -34,6 +44,39 @@ public class LowStock extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(il.logo));
         TableCustom.apply(jScrollPane1, TableCustom.TableType.MULTI_LINE);
         head1.setFrame(this);
+// Add a DocumentListener to the searchTxt
+        searchTxt.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void removeUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+            @Override
+            public void changedUpdate(javax.swing.event.DocumentEvent e) {
+                try {
+                    // Call your method to handle the text update
+                    handleSearchTextUpdate();
+                } catch (Exception ex) {
+                    Logger.getLogger(CustomerManagement.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+
+        });
     }
 
     /**
@@ -46,9 +89,11 @@ public class LowStock extends javax.swing.JFrame {
     private void initComponents() {
 
         head1 = new com.zx.shopmanagementsystem.components.Head();
+        searchTxt = new com.zx.shopmanagementsystem.components.RoundedText();
         jScrollPane1 = new javax.swing.JScrollPane();
         lowStockTbl = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
+        scannerBtnLbl = new javax.swing.JLabel();
+        iconLbl = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -58,6 +103,10 @@ public class LowStock extends javax.swing.JFrame {
         head1.setHeaderTitle("");
         head1.setOpaque(false);
         getContentPane().add(head1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1280, -1));
+
+        searchTxt.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
+        searchTxt.setHintText("Product Name, Barcode or QR");
+        getContentPane().add(searchTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 48, 320, 40));
 
         lowStockTbl.setFont(new java.awt.Font("Poppins SemiBold", 1, 13)); // NOI18N
         lowStockTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -86,12 +135,51 @@ public class LowStock extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 1180, 520));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\All Low Stocks.png")); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        scannerBtnLbl.setForeground(new java.awt.Color(255, 255, 255));
+        scannerBtnLbl.setText("Scan");
+        scannerBtnLbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                scannerBtnLblMouseClicked(evt);
+            }
+        });
+        getContentPane().add(scannerBtnLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(1160, 50, 50, 30));
+
+        iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\All Low Stocks.png")); // NOI18N
+        getContentPane().add(iconLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void scannerBtnLblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_scannerBtnLblMouseClicked
+        // TODO add your handling code here:
+        try {
+            String pythonScript = "C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\barcode_Python\\abcCopy.py";
+            Process process = Runtime.getRuntime().exec("python " + pythonScript);
+
+            InputStream inputStream = process.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String line;
+            String prv = "";
+
+            while ((line = reader.readLine()) != null) {
+                if (line.equals(prv)) {
+                    System.out.println("Same Value");
+                } else if (line.equals("Done")) {
+                    System.out.println("Done");
+                } else if (line.startsWith("QRCODE")) {
+                    System.out.println("it is a QR");
+                    //jsonRead2(line.substring(6));  // Remove "QRCODE" prefix and update text
+                } else {
+                    System.out.println("it is not a QR");
+                    searchTxt.setText(line);
+                }
+                prv = line;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_scannerBtnLblMouseClicked
 
     /**
      * @param args the command line arguments
@@ -130,9 +218,11 @@ public class LowStock extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.zx.shopmanagementsystem.components.Head head1;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel iconLbl;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable lowStockTbl;
+    private javax.swing.JLabel scannerBtnLbl;
+    private com.zx.shopmanagementsystem.components.RoundedText searchTxt;
     // End of variables declaration//GEN-END:variables
 
     private void tableDataLoader() {
@@ -181,5 +271,47 @@ public class LowStock extends javax.swing.JFrame {
         } catch (Exception en) {
             System.err.println("Home Admin LowStockAlert : " + en);
         }
+    }
+
+    private void handleSearchTextUpdate() throws Exception {
+        if (searchTxt.getText().equals("")) {
+            tableDataClear();
+            tableDataLoader();
+        } else {
+            tableDataClear();
+            String sql = "SELECT p.product_name, p.stock_quantity, s.store_location_name\n"
+                    + "FROM shopdb.product p\n"
+                    + "JOIN shopdb.store_location s ON p.store_location_id = s.store_location_id\n"
+                    + "JOIN shopdb.barcode b ON p.barcode_id = b.barcode_id\n"
+                    + "WHERE p.stock_quantity <= ? AND p.product_name LIKE ? OR b.barcode_value = ?;";
+
+            try (PreparedStatement preparedStatement = DB.con().prepareStatement(sql)) {
+
+                preparedStatement.setInt(1, period);
+                preparedStatement.setString(2, searchTxt.getText() + "%");
+                preparedStatement.setString(3, searchTxt.getText());
+
+                ResultSet rs = preparedStatement.executeQuery();
+
+                // Process the resultSet as needed
+                while (rs.next()) {
+                    String product_name = String.valueOf(rs.getString("product_name"));
+                    String stock_quantity = String.valueOf(rs.getString("stock_quantity"));
+                    String store_location_name = String.valueOf(rs.getString("store_location_name"));
+
+                    DefaultTableModel table = (DefaultTableModel) lowStockTbl.getModel();
+                    table.addRow(new Object[]{table.getRowCount() + 1, product_name, stock_quantity, store_location_name});
+
+                }
+            } catch (Exception ex) {
+                System.out.println("Expire Date Table Data Loader : " + ex);
+            }
+
+        }
+
+    }
+
+    private void jsonRead2(String substring) {
+
     }
 }

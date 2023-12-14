@@ -16,7 +16,7 @@ public class TableHeaderCustomCellRender extends DefaultTableCellRenderer {
     public TableHeaderCustomCellRender(JTable table) {
         this.table = table;
         setFont(new Font("Poppins Medium", Font.BOLD, 12));
-        setBackground(Color.decode("#2A2C74")); // Set the custom header color
+        setBackground(Color.decode("#015282")); // Set the custom header color
         setForeground(Color.WHITE); // Set the text color
     }
 
@@ -24,7 +24,7 @@ public class TableHeaderCustomCellRender extends DefaultTableCellRenderer {
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
         Component com = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
         setBorder(new EmptyBorder(8, 10, 8, 10));
-        com.setBackground(Color.decode("#2A2C74"));
+        com.setBackground(Color.decode("#015282"));
         return com;
     }
 

@@ -10,6 +10,7 @@ import com.zx.shopmanagementsystem.dbconnection.JDBC;
 import com.zx.shopmanagementsystem.piechart.ModelPieChart;
 import com.zx.shopmanagementsystem.ui.AllSales;
 import com.zx.shopmanagementsystem.ui.LowStock;
+import com.zx.shopmanagementsystem.ui.TopPerformingReport;
 import java.awt.Color;
 import java.io.FileInputStream;
 import java.sql.ResultSet;
@@ -68,6 +69,7 @@ public class HomeAdmin extends javax.swing.JPanel {
         totalMonthSaleTxt = new javax.swing.JLabel();
         chart = new com.zx.shopmanagementsystem.barchart.Chart();
         weekPieChat = new com.zx.shopmanagementsystem.piechart.PieChart();
+        jLabel1 = new javax.swing.JLabel();
         iconLbl = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1116, 718));
@@ -121,6 +123,16 @@ public class HomeAdmin extends javax.swing.JPanel {
         add(chart, new org.netbeans.lib.awtextra.AbsoluteConstraints(65, 360, 645, 315));
 
         weekPieChat.setFont(new java.awt.Font("Poppins SemiBold", 1, 12)); // NOI18N
+
+        jLabel1.setText("jLabel1");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        weekPieChat.add(jLabel1);
+        jLabel1.setBounds(37, 310, 290, 20);
+
         add(weekPieChat, new org.netbeans.lib.awtextra.AbsoluteConstraints(725, 337, 370, 360));
 
         iconLbl.setIcon(new javax.swing.ImageIcon("C:\\ShopManagementSystem\\src\\main\\java\\com\\zx\\shopmanagementsystem\\images\\AdminDashboard.png")); // NOI18N
@@ -145,6 +157,11 @@ public class HomeAdmin extends javax.swing.JPanel {
         as.setVisible(true);
     }//GEN-LAST:event_monthlySalseViewAllBtnLblMouseClicked
 
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        new TopPerformingReport().setVisible(true);
+    }//GEN-LAST:event_jLabel1MouseClicked
+
     class DisplayTask extends TimerTask {
 
         @Override
@@ -165,6 +182,7 @@ public class HomeAdmin extends javax.swing.JPanel {
     private com.zx.shopmanagementsystem.barchart.Chart chart;
     private javax.swing.JLabel iconLbl;
     private javax.swing.JLabel itemName;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lowStockBtnLbl;
     private javax.swing.JLabel monthlySalseViewAllBtnLbl;
     private javax.swing.JLabel store_Location;
@@ -352,7 +370,7 @@ public class HomeAdmin extends javax.swing.JPanel {
     }
 
     private Color getColor(int index) {
-        Color[] color = new Color[]{Color.decode("#d90f0f"), Color.decode("#d9b00b"), Color.decode("#2dd90b"), Color.decode("#0b6bd9"), Color.decode("#730fd1")};
+        Color[] color = new Color[]{Color.decode("#FFA84A"), Color.decode("#04BFDA"), Color.decode("#FB67CA"), Color.decode("#9B88ED"), Color.decode("#9bdfc4")};
         return color[index];
     }
 }
